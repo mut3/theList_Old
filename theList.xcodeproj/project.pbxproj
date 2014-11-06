@@ -14,6 +14,10 @@
 		ACC499AF1A0C3055000E5073 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACC499AE1A0C3055000E5073 /* Images.xcassets */; };
 		ACC499B21A0C3055000E5073 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACC499B01A0C3055000E5073 /* LaunchScreen.xib */; };
 		ACC499BE1A0C3056000E5073 /* theListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC499BD1A0C3056000E5073 /* theListTests.swift */; };
+		ACC499C91A0C3167000E5073 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACC499C81A0C3167000E5073 /* CloudKit.framework */; };
+		ACF384421A0C353F006CE905 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACF384411A0C353F006CE905 /* FacebookSDK.framework */; };
+		ACF384471A0C3710006CE905 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF384461A0C3710006CE905 /* LoginViewController.swift */; };
+		ACF384491A0C3A65006CE905 /* CreateUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF384481A0C3A65006CE905 /* CreateUserViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +42,12 @@
 		ACC499B71A0C3056000E5073 /* theListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = theListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACC499BC1A0C3056000E5073 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ACC499BD1A0C3056000E5073 /* theListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = theListTests.swift; sourceTree = "<group>"; };
+		ACC499C71A0C30E5000E5073 /* theList.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = theList.entitlements; sourceTree = "<group>"; };
+		ACC499C81A0C3167000E5073 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		ACF384411A0C353F006CE905 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
+		ACF384431A0C3554006CE905 /* Bridge-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridge-Header.h"; sourceTree = "<group>"; };
+		ACF384461A0C3710006CE905 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		ACF384481A0C3A65006CE905 /* CreateUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateUserViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +55,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACC499C91A0C3167000E5073 /* CloudKit.framework in Frameworks */,
+				ACF384421A0C353F006CE905 /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +73,8 @@
 		ACC499961A0C3055000E5073 = {
 			isa = PBXGroup;
 			children = (
+				ACF384411A0C353F006CE905 /* FacebookSDK.framework */,
+				ACC499C81A0C3167000E5073 /* CloudKit.framework */,
 				ACC499A11A0C3055000E5073 /* theList */,
 				ACC499BA1A0C3056000E5073 /* theListTests */,
 				ACC499A01A0C3055000E5073 /* Products */,
@@ -79,8 +93,12 @@
 		ACC499A11A0C3055000E5073 /* theList */ = {
 			isa = PBXGroup;
 			children = (
+				ACC499C71A0C30E5000E5073 /* theList.entitlements */,
 				ACC499A41A0C3055000E5073 /* AppDelegate.swift */,
 				ACC499A91A0C3055000E5073 /* ViewController.swift */,
+				ACF384481A0C3A65006CE905 /* CreateUserViewController.swift */,
+				ACF384461A0C3710006CE905 /* LoginViewController.swift */,
+				ACF384431A0C3554006CE905 /* Bridge-Header.h */,
 				ACC499AB1A0C3055000E5073 /* Main.storyboard */,
 				ACC499AE1A0C3055000E5073 /* Images.xcassets */,
 				ACC499B01A0C3055000E5073 /* LaunchScreen.xib */,
@@ -164,6 +182,12 @@
 				TargetAttributes = {
 					ACC4999E1A0C3055000E5073 = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = 78J97CLV67;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 					ACC499B61A0C3056000E5073 = {
 						CreatedOnToolsVersion = 6.1;
@@ -215,6 +239,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACF384471A0C3710006CE905 /* LoginViewController.swift in Sources */,
+				ACF384491A0C3A65006CE905 /* CreateUserViewController.swift in Sources */,
 				ACC499AA1A0C3055000E5073 /* ViewController.swift in Sources */,
 				ACC499A51A0C3055000E5073 /* AppDelegate.swift in Sources */,
 				ACC499A81A0C3055000E5073 /* theList.xcdatamodeld in Sources */,
@@ -340,9 +366,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = theList/theList.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/cscrew/Desktop/FacebookSDK,
+				);
 				INFOPLIST_FILE = theList/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "theList/Bridge-Header.h";
 			};
 			name = Debug;
 		};
@@ -350,9 +385,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = theList/theList.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/cscrew/Desktop/FacebookSDK,
+				);
 				INFOPLIST_FILE = theList/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "theList/Bridge-Header.h";
 			};
 			name = Release;
 		};
@@ -409,6 +453,7 @@
 				ACC499C31A0C3056000E5073 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		ACC499C41A0C3056000E5073 /* Build configuration list for PBXNativeTarget "theListTests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +462,7 @@
 				ACC499C61A0C3056000E5073 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
