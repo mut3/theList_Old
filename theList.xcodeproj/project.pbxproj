@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		429984D41A0C477A00B4FD7D /* testJAmes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429984D31A0C477A00B4FD7D /* testJAmes.swift */; };
 		ACC499A51A0C3055000E5073 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC499A41A0C3055000E5073 /* AppDelegate.swift */; };
 		ACC499A81A0C3055000E5073 /* theList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ACC499A61A0C3055000E5073 /* theList.xcdatamodeld */; };
 		ACC499AA1A0C3055000E5073 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC499A91A0C3055000E5073 /* ViewController.swift */; };
@@ -32,7 +31,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		429984D31A0C477A00B4FD7D /* testJAmes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = testJAmes.swift; sourceTree = "<group>"; };
 		ACC4999F1A0C3055000E5073 /* theList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = theList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACC499A31A0C3055000E5073 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ACC499A41A0C3055000E5073 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -98,7 +96,6 @@
 				ACC499C71A0C30E5000E5073 /* theList.entitlements */,
 				ACC499A41A0C3055000E5073 /* AppDelegate.swift */,
 				ACC499A91A0C3055000E5073 /* ViewController.swift */,
-				429984D31A0C477A00B4FD7D /* testJAmes.swift */,
 				ACF384481A0C3A65006CE905 /* CreateUserViewController.swift */,
 				ACF384461A0C3710006CE905 /* LoginViewController.swift */,
 				ACF384431A0C3554006CE905 /* Bridge-Header.h */,
@@ -244,7 +241,6 @@
 			files = (
 				ACF384471A0C3710006CE905 /* LoginViewController.swift in Sources */,
 				ACF384491A0C3A65006CE905 /* CreateUserViewController.swift in Sources */,
-				429984D41A0C477A00B4FD7D /* testJAmes.swift in Sources */,
 				ACC499AA1A0C3055000E5073 /* ViewController.swift in Sources */,
 				ACC499A51A0C3055000E5073 /* AppDelegate.swift in Sources */,
 				ACC499A81A0C3055000E5073 /* theList.xcdatamodeld in Sources */,
