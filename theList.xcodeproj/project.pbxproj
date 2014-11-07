@@ -15,9 +15,10 @@
 		ACC499B21A0C3055000E5073 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACC499B01A0C3055000E5073 /* LaunchScreen.xib */; };
 		ACC499BE1A0C3056000E5073 /* theListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC499BD1A0C3056000E5073 /* theListTests.swift */; };
 		ACC499C91A0C3167000E5073 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACC499C81A0C3167000E5073 /* CloudKit.framework */; };
-		ACF384421A0C353F006CE905 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACF384411A0C353F006CE905 /* FacebookSDK.framework */; };
 		ACF384471A0C3710006CE905 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF384461A0C3710006CE905 /* LoginViewController.swift */; };
 		ACF384491A0C3A65006CE905 /* CreateUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF384481A0C3A65006CE905 /* CreateUserViewController.swift */; };
+		C5AA58461A0C442300910EBD /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5AA58451A0C442300910EBD /* FacebookSDK.framework */; };
+		C5AA58481A0C449800910EBD /* TestingforGit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AA58471A0C449800910EBD /* TestingforGit.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,10 +45,11 @@
 		ACC499BD1A0C3056000E5073 /* theListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = theListTests.swift; sourceTree = "<group>"; };
 		ACC499C71A0C30E5000E5073 /* theList.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = theList.entitlements; sourceTree = "<group>"; };
 		ACC499C81A0C3167000E5073 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
-		ACF384411A0C353F006CE905 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		ACF384431A0C3554006CE905 /* Bridge-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridge-Header.h"; sourceTree = "<group>"; };
 		ACF384461A0C3710006CE905 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		ACF384481A0C3A65006CE905 /* CreateUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateUserViewController.swift; sourceTree = "<group>"; };
+		C5AA58451A0C442300910EBD /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../FacebookSDK.framework; sourceTree = "<group>"; };
+		C5AA58471A0C449800910EBD /* TestingforGit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestingforGit.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +58,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ACC499C91A0C3167000E5073 /* CloudKit.framework in Frameworks */,
-				ACF384421A0C353F006CE905 /* FacebookSDK.framework in Frameworks */,
+				C5AA58461A0C442300910EBD /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,7 +75,7 @@
 		ACC499961A0C3055000E5073 = {
 			isa = PBXGroup;
 			children = (
-				ACF384411A0C353F006CE905 /* FacebookSDK.framework */,
+				C5AA58451A0C442300910EBD /* FacebookSDK.framework */,
 				ACC499C81A0C3167000E5073 /* CloudKit.framework */,
 				ACC499A11A0C3055000E5073 /* theList */,
 				ACC499BA1A0C3056000E5073 /* theListTests */,
@@ -104,6 +106,7 @@
 				ACC499B01A0C3055000E5073 /* LaunchScreen.xib */,
 				ACC499A61A0C3055000E5073 /* theList.xcdatamodeld */,
 				ACC499A21A0C3055000E5073 /* Supporting Files */,
+				C5AA58471A0C449800910EBD /* TestingforGit.swift */,
 			);
 			path = theList;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ACF384471A0C3710006CE905 /* LoginViewController.swift in Sources */,
+				C5AA58481A0C449800910EBD /* TestingforGit.swift in Sources */,
 				ACF384491A0C3A65006CE905 /* CreateUserViewController.swift in Sources */,
 				ACC499AA1A0C3055000E5073 /* ViewController.swift in Sources */,
 				ACC499A51A0C3055000E5073 /* AppDelegate.swift in Sources */,
@@ -372,6 +376,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/cscrew/Desktop/FacebookSDK,
+					/Users/jdedward/Desktop,
 				);
 				INFOPLIST_FILE = theList/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -391,6 +396,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/cscrew/Desktop/FacebookSDK,
+					/Users/jdedward/Desktop,
 				);
 				INFOPLIST_FILE = theList/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
