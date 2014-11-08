@@ -88,6 +88,10 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
     
     func loginViewShowingLoggedOutUser(loginView : FBLoginView!) {
         println("User Logged Out")
+        profilePic.profileID=nil
+        userName = ""
+        userBirthday = ""
+        userFacebookID = "" 
     }
     
     func loginView(loginView : FBLoginView!, handleError:NSError) {
