@@ -38,8 +38,10 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         // Do any additional setup after loading the view.
         
         self.fbLoginView.delegate = self
+        
         self.fbLoginView.readPermissions = ["public_profile", "email", "user_friends", "user_birthday"]
         
+            
     }
     
     @IBAction func goToCreateProfile(sender: UIButton) {
@@ -62,6 +64,8 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
     
     func loginViewShowingLoggedInUser(loginView : FBLoginView!) {
         println("User Logged In")
+        
+        //this is where we segue 
     }
     
     func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser){
