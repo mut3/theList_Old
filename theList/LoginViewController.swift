@@ -27,8 +27,10 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         // Do any additional setup after loading the view.
         
         self.fbLoginView.delegate = self
+        
         self.fbLoginView.readPermissions = ["public_profile", "email", "user_friends", "user_birthday"]
         
+            
     }
     
     //delegate methods 
