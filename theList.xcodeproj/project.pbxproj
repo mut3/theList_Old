@@ -22,6 +22,7 @@
 		ACC499C91A0C3167000E5073 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACC499C81A0C3167000E5073 /* CloudKit.framework */; };
 		ACF384471A0C3710006CE905 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF384461A0C3710006CE905 /* LoginViewController.swift */; };
 		ACF384491A0C3A65006CE905 /* CreateUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF384481A0C3A65006CE905 /* CreateUserViewController.swift */; };
+		C5AA584A1A0C48C000910EBD /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5AA58491A0C48C000910EBD /* FacebookSDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		ACF384431A0C3554006CE905 /* Bridge-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridge-Header.h"; sourceTree = "<group>"; };
 		ACF384461A0C3710006CE905 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		ACF384481A0C3A65006CE905 /* CreateUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateUserViewController.swift; sourceTree = "<group>"; };
+		C5AA58491A0C48C000910EBD /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../FacebookSDK.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,7 +66,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ACC499C91A0C3167000E5073 /* CloudKit.framework in Frameworks */,
-				42BD9EB61A0C46500000B77A /* FacebookSDK.framework in Frameworks */,
+				C5AA584A1A0C48C000910EBD /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,7 +107,6 @@
 				ACC499C71A0C30E5000E5073 /* theList.entitlements */,
 				ACC499A41A0C3055000E5073 /* AppDelegate.swift */,
 				ACC499A91A0C3055000E5073 /* ViewController.swift */,
-				429984D31A0C477A00B4FD7D /* testJAmes.swift */,
 				ACF384481A0C3A65006CE905 /* CreateUserViewController.swift */,
 				ACF384461A0C3710006CE905 /* LoginViewController.swift */,
 				ACF384431A0C3554006CE905 /* Bridge-Header.h */,
@@ -254,7 +255,6 @@
 			files = (
 				ACF384471A0C3710006CE905 /* LoginViewController.swift in Sources */,
 				ACF384491A0C3A65006CE905 /* CreateUserViewController.swift in Sources */,
-				429984D41A0C477A00B4FD7D /* testJAmes.swift in Sources */,
 				ACC499AA1A0C3055000E5073 /* ViewController.swift in Sources */,
 				ACC499A51A0C3055000E5073 /* AppDelegate.swift in Sources */,
 				ACC499A81A0C3055000E5073 /* theList.xcdatamodeld in Sources */,
@@ -389,6 +389,7 @@
 					"$(inherited)",
 					/Users/cscrew/Desktop/FacebookSDK,
 					/Users/wakeson/Desktop/facebookPhotos/FacebookSDK,
+					/Users/jdedward/Desktop,
 				);
 				INFOPLIST_FILE = theList/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -410,6 +411,7 @@
 					"$(inherited)",
 					/Users/cscrew/Desktop/FacebookSDK,
 					/Users/wakeson/Desktop/facebookPhotos/FacebookSDK,
+					/Users/jdedward/Desktop,
 				);
 				INFOPLIST_FILE = theList/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
