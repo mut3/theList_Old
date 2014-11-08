@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="vNg-CW-unj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="vNg-CW-unj">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
-        <!--Login View Controller-->
+        <!--Facebook Login-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="LoginViewController" customModule="theList" customModuleProvider="target" sceneMemberID="viewController">
@@ -24,13 +24,20 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="scs-RN-GTC" kind="push" id="Sx3-c1-uhW"/>
+                                    <action selector="goToCreateProfile:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="oi7-WZ-FsD"/>
+                                    <segue destination="scs-RN-GTC" kind="push" identifier="mySegue2" id="Xlp-md-Q5H"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="28O-jV-fym"/>
+                    <navigationItem key="navigationItem" title="Facebook Login" id="28O-jV-fym">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="VoD-aZ-CZx">
+                            <connections>
+                                <segue destination="scs-RN-GTC" kind="push" identifier="mySegue" id="gG2-ac-fEf"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="fbLoginView" destination="dx9-7i-YhW" id="bv2-0i-IvX"/>
                         <outlet property="profilePic" destination="fmI-9e-JcJ" id="fLM-Sg-GvP"/>
@@ -40,7 +47,7 @@
             </objects>
             <point key="canvasLocation" x="516" y="406"/>
         </scene>
-        <!--Create User View Controller-->
+        <!--Create Profile-->
         <scene sceneID="8u4-yZ-Pp4">
             <objects>
                 <viewController id="scs-RN-GTC" customClass="CreateUserViewController" customModule="theList" customModuleProvider="target" sceneMemberID="viewController">
@@ -60,10 +67,10 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BzB-VA-QL2">
-                                <rect key="frame" x="187" y="364" width="89" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MTz-b5-vNh">
+                                <rect key="frame" x="179" y="363" width="108" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -71,14 +78,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="zhC-qe-U1X"/>
+                    <navigationItem key="navigationItem" title="Create Profile" id="zhC-qe-U1X"/>
                     <connections>
-                        <outlet property="userNameOutlet" destination="BzB-VA-QL2" id="eUo-gq-IX2"/>
+                        <outlet property="userNameOutlet" destination="MTz-b5-vNh" id="c7I-73-Zfd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iN4-4N-igR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1046" y="406"/>
+            <point key="canvasLocation" x="923" y="406"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="H3w-WC-LaS">
@@ -104,4 +111,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="Xlp-md-Q5H"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -7,6 +7,13 @@
 //
 
 import UIKit
+import CloudKit
+import Foundation
+
+protocol UserFacebookInfoDelegate{
+    func passFacebookInfoToCreatePage(controller : LoginViewController,name : String, age : Int)
+}
+
 
 class LoginViewController: UIViewController, FBLoginViewDelegate {
     
@@ -15,10 +22,14 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
     
     @IBOutlet var profilePic: FBProfilePictureView!
     
+    
+    var userFbDelegate: UserFacebookInfoDelegate?
+    
     /*
         facebook info variables
     */
     var userName : String!
+    var userBirthday : String!
     
 
     override func viewDidLoad() {
@@ -31,17 +42,33 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         
     }
     
-    //delegate methods 
+    @IBAction func goToCreateProfile(sender: UIButton) {
+        
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "mySegue2"{
+            println("where are we?")
+            let createUserVC : CreateUserViewController = segue.destinationViewController as CreateUserViewController
+            println(userName)
+            createUserVC.userNameStr = userName
+        }
+    }
+    
+    
+    
+    
     
     
     func loginViewShowingLoggedInUser(loginView : FBLoginView!) {
         println("User Logged In")
-        println("This is where you perform a segue.")
     }
     
     func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser){
-        println("User Name: \(user.name)")
+        //println("User Name: \(user.name)")
         userName = user.name
+        userBirthday = user.birthday
+        //println(userBirthday)
         
     }
     
