@@ -8,13 +8,15 @@
 
 import UIKit
 
-class CreateUserViewController: UIViewController{
+class CreateUserViewController: UIViewController {
     
     @IBOutlet var userNameOutlet: UILabel!
     
     @IBOutlet var userAgeOutlet: UILabel!
     
     @IBOutlet var userDescriptionOutlet: UITextView!
+    
+
     
     var userNameStr : String = ""
     
@@ -32,11 +34,11 @@ class CreateUserViewController: UIViewController{
         userDescriptionOutlet.text = ""
         
         // Do any additional setup after loading the view.
-    }
-    
-    func uploadUserInfo(){
         
-    
+
     }
+    
+    
+   
 
 }

@@ -21,6 +21,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
     @IBOutlet var fbLoginView : FBLoginView!
     
     @IBOutlet var profilePic: FBProfilePictureView!
+
     
     
     var userFbDelegate: UserFacebookInfoDelegate?
@@ -77,6 +78,11 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         userBirthday = user.birthday
         userFacebookID = user.objectID
         //println(userBirthday)
+        
+        
+        profilePic.profileID=user.objectID
+
+
         
     }
     
