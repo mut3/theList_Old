@@ -64,6 +64,8 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
     
     func loginViewShowingLoggedInUser(loginView : FBLoginView!) {
         println("User Logged In")
+        
+        //this is where we segue 
     }
     
     func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser){
