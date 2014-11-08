@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		429984D71A0C4A1100B4FD7D /* testing in Resources */ = {isa = PBXBuildFile; fileRef = 429984D51A0C4A1100B4FD7D /* testing */; };
+		4209318C1A0EB2210071231D /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4209318B1A0EB2210071231D /* FacebookSDK.framework */; };
 		429984DA1A0C7A1700B4FD7D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429984D91A0C7A1700B4FD7D /* User.swift */; };
 		429984DC1A0C7F8A00B4FD7D /* createUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429984DB1A0C7F8A00B4FD7D /* createUser.swift */; };
 		ACC499A51A0C3055000E5073 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC499A41A0C3055000E5073 /* AppDelegate.swift */; };
@@ -21,7 +21,6 @@
 		ACF384471A0C3710006CE905 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF384461A0C3710006CE905 /* LoginViewController.swift */; };
 		ACF384491A0C3A65006CE905 /* CreateUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF384481A0C3A65006CE905 /* CreateUserViewController.swift */; };
 		C5AA584A1A0C48C000910EBD /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5AA58491A0C48C000910EBD /* FacebookSDK.framework */; };
-		D1F195351A0EAE0900D24CF1 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1F195341A0EAE0900D24CF1 /* FacebookSDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +34,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4209318B1A0EB2210071231D /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../goBetweenDifferentPages/goBetweenDifferentPages/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		429984D51A0C4A1100B4FD7D /* testing */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testing; sourceTree = "<group>"; };
 		429984D91A0C7A1700B4FD7D /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		429984DB1A0C7F8A00B4FD7D /* createUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = createUser.swift; sourceTree = "<group>"; };
@@ -55,7 +55,6 @@
 		ACF384461A0C3710006CE905 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		ACF384481A0C3A65006CE905 /* CreateUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateUserViewController.swift; sourceTree = "<group>"; };
 		C5AA58491A0C48C000910EBD /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../FacebookSDK.framework; sourceTree = "<group>"; };
-		D1F195341A0EAE0900D24CF1 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,7 +64,7 @@
 			files = (
 				ACC499C91A0C3167000E5073 /* CloudKit.framework in Frameworks */,
 				C5AA584A1A0C48C000910EBD /* FacebookSDK.framework in Frameworks */,
-				D1F195351A0EAE0900D24CF1 /* FacebookSDK.framework in Frameworks */,
+				4209318C1A0EB2210071231D /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,7 +81,7 @@
 		ACC499961A0C3055000E5073 = {
 			isa = PBXGroup;
 			children = (
-				D1F195341A0EAE0900D24CF1 /* FacebookSDK.framework */,
+				4209318B1A0EB2210071231D /* FacebookSDK.framework */,
 				429984D51A0C4A1100B4FD7D /* testing */,
 				ACC499C81A0C3167000E5073 /* CloudKit.framework */,
 				ACC499A11A0C3055000E5073 /* theList */,
@@ -389,6 +388,7 @@
 					/Users/wakeson/Desktop/facebookPhotos/FacebookSDK,
 					/Users/jdedward/Desktop,
 					/Users/joeyanetsberger/Documents/FacebookSDK,
+					/Users/wakeson/Desktop/goBetweenDifferentPages/goBetweenDifferentPages/FacebookSDK,
 				);
 				INFOPLIST_FILE = theList/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -412,6 +412,7 @@
 					/Users/wakeson/Desktop/facebookPhotos/FacebookSDK,
 					/Users/jdedward/Desktop,
 					/Users/joeyanetsberger/Documents/FacebookSDK,
+					/Users/wakeson/Desktop/goBetweenDifferentPages/goBetweenDifferentPages/FacebookSDK,
 				);
 				INFOPLIST_FILE = theList/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
