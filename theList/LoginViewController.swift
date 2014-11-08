@@ -30,6 +30,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
     */
     var userName : String!
     var userBirthday : String!
+    var userFacebookID : String!
     
 
     override func viewDidLoad() {
@@ -52,6 +53,8 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
             let createUserVC : CreateUserViewController = segue.destinationViewController as CreateUserViewController
             println(userName)
             createUserVC.userNameStr = userName
+            createUserVC.userFBID = userFacebookID
+            createUserVC.userAgeInt = 22
         }
     }
     
@@ -68,6 +71,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         //println("User Name: \(user.name)")
         userName = user.name
         userBirthday = user.birthday
+        userFacebookID = user.objectID
         //println(userBirthday)
         
     }
