@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="vNg-CW-unj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="vNg-CW-unj">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
         <!--Facebook Login-->
@@ -26,6 +26,16 @@
                                 <connections>
                                     <action selector="goToCreateProfile:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="oi7-WZ-FsD"/>
                                     <segue destination="scs-RN-GTC" kind="push" identifier="mySegue2" id="Xlp-md-Q5H"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="z7T-pQ-dIN">
+                                <rect key="frame" x="188" y="90" width="99" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Move to home">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="sTD-Y3-VLK" kind="push" id="PXO-eb-9MD"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -85,7 +95,111 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iN4-4N-igR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="923" y="406"/>
+            <point key="canvasLocation" x="942" y="406"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="YEJ-qc-55Y">
+            <objects>
+                <tableViewController id="rQI-6f-vp7" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="van-Z5-Rru">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="gLz-kD-m1o">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gLz-kD-m1o" id="szy-V9-Zb1">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="rQI-6f-vp7" id="rIC-OS-Scl"/>
+                            <outlet property="delegate" destination="rQI-6f-vp7" id="Osh-au-VuL"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="Vpu-Ub-Teo"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="R8s-ex-tQL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1401" y="406"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="iIE-Ee-GMF">
+            <objects>
+                <viewController id="AWw-ND-8lX" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="srM-EM-bCh">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="YDQ-YE-Hhu"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Szs-7S-W7W" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="516" y="1136"/>
+        </scene>
+        <!--Home Screen-->
+        <scene sceneID="Z72-3U-Q4U">
+            <objects>
+                <viewController id="sTD-Y3-VLK" userLabel="Home Screen" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yAi-ge-cZu">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="TZz-7f-yda">
+                                <rect key="frame" x="112" y="135" width="97" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Host an Event">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="rQI-6f-vp7" kind="push" id="9Js-Pn-IFB"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="lNJ-Bc-AAy">
+                                <rect key="frame" x="124" y="224" width="73" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Find Event">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="QyU-8V-eYf" kind="push" id="fMH-8C-Mav"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="LHj-LA-rRR">
+                                <rect key="frame" x="138" y="318" width="44" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Profile">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="AWw-ND-8lX" kind="push" id="GtU-53-Wyk"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="zEz-Ry-SVn"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mPN-uh-G6p" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="942" y="1136"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="wKs-Sb-0MZ">
+            <objects>
+                <viewController id="QyU-8V-eYf" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="UB9-9h-00E">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="id6-Bb-g0H"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dX9-aZ-Y3P" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1401" y="1136"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="H3w-WC-LaS">
