@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>96EBDC1C-4A3A-47FD-AC06-E7E2238B699F</string>
+	<key>IDESourceControlProjectName</key>
+	<string>theList</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>0B45CD84BE55E3D3A21C84D591F531CEBA4E38CE</key>
+		<string>ssh://github.com/mut3/theList.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>theList.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>0B45CD84BE55E3D3A21C84D591F531CEBA4E38CE</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/mut3/theList.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>0B45CD84BE55E3D3A21C84D591F531CEBA4E38CE</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>0B45CD84BE55E3D3A21C84D591F531CEBA4E38CE</string>
+			<key>IDESourceControlWCCName</key>
+			<string>theList</string>
+		</dict>
+	</array>
+</dict>
+</plist>
