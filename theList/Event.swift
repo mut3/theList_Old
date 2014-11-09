@@ -33,7 +33,7 @@ class Event : NSObject{
         self.eventLocation = record.objectForKey("EventLocation") as CLLocation!
         self.eventName = record.objectForKey("EventName") as String!
         self.hostID = record.objectForKey("HostID") as String!
-        self.photos = record.objectForKey("Photos") as [String]!
+        //self.photos = record.objectForKey("Photos") as [String]!
         self.tags = record.objectForKey("tags") as [String]!
         self.eventCapacity = record.objectForKey("EventCapacity") as Int!
         self.eventAddress  = record.objectForKey("EventAddress") as String!

@@ -100,7 +100,7 @@
         <!--Host Event Page-->
         <scene sceneID="YEJ-qc-55Y">
             <objects>
-                <tableViewController id="rQI-6f-vp7" userLabel="Host Event Page" sceneMemberID="viewController">
+                <tableViewController id="rQI-6f-vp7" userLabel="Host Event Page" customClass="EventsListTableViewController" customModule="theList" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="van-Z5-Rru">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
