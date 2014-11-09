@@ -10,9 +10,6 @@ import UIKit
 import CloudKit
 import Foundation
 
-protocol UserFacebookInfoDelegate{
-    func passFacebookInfoToCreatePage(controller : LoginViewController,name : String, age : Int)
-}
 
 
 class LoginViewController: UIViewController, FBLoginViewDelegate {
@@ -21,14 +18,13 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
     @IBOutlet var fbLoginView : FBLoginView!
     
     @IBOutlet var profilePic: FBProfilePictureView!
-    
-    
-    var userFbDelegate: UserFacebookInfoDelegate?
+
     
     /*
         facebook info variables
     */
-    var userName : String!
+    var userFirstName : String!
+    var userLastName : String!
     var userBirthday : String!
     var userFacebookID : String!
     
@@ -53,16 +49,14 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         if segue.identifier == "mySegue2"{
             println("where are we?")
             let createUserVC : CreateUserViewController = segue.destinationViewController as CreateUserViewController
-            println(userName)
-            createUserVC.userNameStr = userName
+            createUserVC.userFirstNameStr = userFirstName
+            createUserVC.userLastNameStr = userLastName
             createUserVC.userFBID = userFacebookID
             createUserVC.userAgeInt = 22
+            createUserVC.userGuestID = "\(userFacebookID)_1"
+            createUserVC.userHostID = "\(userFacebookID)_0"
         }
     }
-    
-    
-    
-    
     
     
     func loginViewShowingLoggedInUser(loginView : FBLoginView!) {
@@ -73,15 +67,25 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
     
     func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser){
         //println("User Name: \(user.name)")
-        userName = user.name
+        userFirstName = user.first_name
+        userLastName = user.last_name
         userBirthday = user.birthday
         userFacebookID = user.objectID
         //println(userBirthday)
+        
+        
+        profilePic.profileID=user.objectID
+
+
         
     }
     
     func loginViewShowingLoggedOutUser(loginView : FBLoginView!) {
         println("User Logged Out")
+        profilePic.profileID=nil
+        userName = ""
+        userBirthday = ""
+        userFacebookID = "" 
     }
     
     func loginView(loginView : FBLoginView!, handleError:NSError) {

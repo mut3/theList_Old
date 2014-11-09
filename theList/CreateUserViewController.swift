@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreateUserViewController: UIViewController{
+class CreateUserViewController: UIViewController {
     
     @IBOutlet var userNameOutlet: UILabel!
     
@@ -16,7 +16,9 @@ class CreateUserViewController: UIViewController{
     
     @IBOutlet var userDescriptionOutlet: UITextView!
     
-    var userNameStr : String = ""
+    var userFirstNameStr : String = ""
+    
+    var userLastNameStr : String = ""
     
     var userAgeInt : Int = 0
     
@@ -24,19 +26,30 @@ class CreateUserViewController: UIViewController{
     
     var userFBID : String = ""
     
+    var userDeviceID : String = ("\(UIDevice.currentDevice())")
+    
+    var userGuestID : String = ""
+    
+    var userHostID : String = ""
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        userNameOutlet.text = userNameStr
+        userNameOutlet.text = userFirstNameStr
         userAgeOutlet.text = "\(userAgeInt)"
         userDescriptionOutlet.text = ""
+        println(userFBID)
         
         // Do any additional setup after loading the view.
+        
+
     }
     
-    func uploadUserInfo(){
-        
     
+    @IBAction func submitUser(sender: AnyObject) {
+        userDescript = userDescriptionOutlet.text
+        databaseWork.uploadUser(userAgeInt, userDescript: userDescript, userFBID: userFBID, userFirstName: userFirstNameStr, userLastName: userLastNameStr, deviceID: userDeviceID, userGuestID: userGuestID, userHostID: userHostID)
     }
 
 }
