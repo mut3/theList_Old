@@ -44,6 +44,31 @@ class DatabaseWork {
                 NSLog("We are saving stuff")
             })
     }
+    /*
+        takes the current user's hostID and retreive all of his past events created.
+        pre: hostID of currentUser
+        post: nothing but when the function is called a completion function needs to written.
+    */
+    
+    func fetchUserEvents(hostID : String, completion: (results: [Event]!, error:NSError!)->())
+    {
+        let userRecord = CKRecord(recordType: "Event")
+        let getCurrentUserPredicate = NSPredicate(format: "HostID = %@",hostID)
+        let query = CKQuery(recordType: "Event", predicate: getCurrentUserPredicate)
+        publicDB.performQuery(query, inZoneWithID: nil) {
+            results, error in
+            var eventInfoNew = [Event]()
+            for record in results{
+                let eventOfUser = Event(record: record as CKRecord, database: self.publicDB)
+                eventInfoNew.append(eventOfUser)
+            }
+            dispatch_async(dispatch_get_main_queue()){
+                completion(results: eventInfoNew, error : error)
+            }
+        
+        }
+    }
+        
 
 
 }

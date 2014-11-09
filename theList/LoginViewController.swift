@@ -59,10 +59,6 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
     }
     
     
-    
-    
-    
-    
     func loginViewShowingLoggedInUser(loginView : FBLoginView!) {
         println("User Logged In")
         

@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4209318C1A0EB2210071231D /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4209318B1A0EB2210071231D /* FacebookSDK.framework */; };
 		4209318E1A0EB7570071231D /* DatabaseWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4209318D1A0EB7570071231D /* DatabaseWork.swift */; };
+		42255F141A0FD5DD00567334 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42255F131A0FD5DD00567334 /* Event.swift */; };
+		42255F161A0FE0AA00567334 /* ScottsTempSwiftFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42255F151A0FE0AA00567334 /* ScottsTempSwiftFunc.swift */; };
 		429984DA1A0C7A1700B4FD7D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429984D91A0C7A1700B4FD7D /* User.swift */; };
 		429984DC1A0C7F8A00B4FD7D /* DatabaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429984DB1A0C7F8A00B4FD7D /* DatabaseModel.swift */; };
 		ACC499A51A0C3055000E5073 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC499A41A0C3055000E5073 /* AppDelegate.swift */; };
@@ -38,6 +39,8 @@
 /* Begin PBXFileReference section */
 		4209318B1A0EB2210071231D /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../goBetweenDifferentPages/goBetweenDifferentPages/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		4209318D1A0EB7570071231D /* DatabaseWork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseWork.swift; sourceTree = "<group>"; };
+		42255F131A0FD5DD00567334 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		42255F151A0FE0AA00567334 /* ScottsTempSwiftFunc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScottsTempSwiftFunc.swift; sourceTree = "<group>"; };
 		429984D91A0C7A1700B4FD7D /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		429984DB1A0C7F8A00B4FD7D /* DatabaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseModel.swift; sourceTree = "<group>"; };
 		ACC4999F1A0C3055000E5073 /* theList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = theList.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -125,8 +128,10 @@
 			children = (
 				ACC499A31A0C3055000E5073 /* Info.plist */,
 				429984D91A0C7A1700B4FD7D /* User.swift */,
+				42255F131A0FD5DD00567334 /* Event.swift */,
 				429984DB1A0C7F8A00B4FD7D /* DatabaseModel.swift */,
 				4209318D1A0EB7570071231D /* DatabaseWork.swift */,
+				42255F151A0FE0AA00567334 /* ScottsTempSwiftFunc.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -255,11 +260,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				ACF384471A0C3710006CE905 /* LoginViewController.swift in Sources */,
+				42255F141A0FD5DD00567334 /* Event.swift in Sources */,
 				ACF384491A0C3A65006CE905 /* CreateUserViewController.swift in Sources */,
 				ACC499AA1A0C3055000E5073 /* ViewController.swift in Sources */,
 				ACC499A51A0C3055000E5073 /* AppDelegate.swift in Sources */,
 				ACC499A81A0C3055000E5073 /* theList.xcdatamodeld in Sources */,
 				4209318E1A0EB7570071231D /* DatabaseWork.swift in Sources */,
+				42255F161A0FE0AA00567334 /* ScottsTempSwiftFunc.swift in Sources */,
 				429984DC1A0C7F8A00B4FD7D /* DatabaseModel.swift in Sources */,
 				429984DA1A0C7A1700B4FD7D /* User.swift in Sources */,
 			);
