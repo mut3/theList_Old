@@ -56,7 +56,7 @@ class DatabaseWork {
         //eventRecord.setValue(photoList, forKey: "Photos")
         eventRecord.setValue(eventTags, forKey: "tags")
         eventRecord.setValue(eventLocation, forKey: "EventLocation")
-        eventRecord.setValue(writtenLocation, forKey: "locationWritten")
+        eventRecord.setValue(writtenLocation, forKey: "EventAddress")
         
         publicDB.saveRecord(eventRecord, completionHandler: {(results,error) -> Void in
             if (error != nil){
