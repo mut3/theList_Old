@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreateUserViewController: UIViewController{
+class CreateUserViewController: UIViewController {
     
     @IBOutlet var userNameOutlet: UILabel!
     
@@ -42,6 +42,8 @@ class CreateUserViewController: UIViewController{
         println(userFBID)
         
         // Do any additional setup after loading the view.
+        
+
     }
     
     

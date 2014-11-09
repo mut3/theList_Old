@@ -18,6 +18,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
     @IBOutlet var fbLoginView : FBLoginView!
     
     @IBOutlet var profilePic: FBProfilePictureView!
+
     
     /*
         facebook info variables
@@ -76,10 +77,19 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         userFacebookID = user.objectID
         //println(userBirthday)
         
+        
+        profilePic.profileID=user.objectID
+
+
+        
     }
     
     func loginViewShowingLoggedOutUser(loginView : FBLoginView!) {
         println("User Logged Out")
+        profilePic.profileID=nil
+        userName = ""
+        userBirthday = ""
+        userFacebookID = "" 
     }
     
     func loginView(loginView : FBLoginView!, handleError:NSError) {
