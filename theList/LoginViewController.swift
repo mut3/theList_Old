@@ -55,6 +55,9 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
             println(userName)
             createUserVC.userNameStr = userName
         }
+        else if segue.identifier == "homeSegue"{
+            println("fuck are we?")
+        }
     }
     
     
