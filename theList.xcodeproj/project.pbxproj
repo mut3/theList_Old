@@ -8,8 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		4209318C1A0EB2210071231D /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4209318B1A0EB2210071231D /* FacebookSDK.framework */; };
+		4209318E1A0EB7570071231D /* DatabaseWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4209318D1A0EB7570071231D /* DatabaseWork.swift */; };
 		429984DA1A0C7A1700B4FD7D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429984D91A0C7A1700B4FD7D /* User.swift */; };
-		429984DC1A0C7F8A00B4FD7D /* createUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429984DB1A0C7F8A00B4FD7D /* createUser.swift */; };
+		429984DC1A0C7F8A00B4FD7D /* DatabaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429984DB1A0C7F8A00B4FD7D /* DatabaseModel.swift */; };
 		ACC499A51A0C3055000E5073 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC499A41A0C3055000E5073 /* AppDelegate.swift */; };
 		ACC499A81A0C3055000E5073 /* theList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ACC499A61A0C3055000E5073 /* theList.xcdatamodeld */; };
 		ACC499AA1A0C3055000E5073 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC499A91A0C3055000E5073 /* ViewController.swift */; };
@@ -35,9 +36,9 @@
 
 /* Begin PBXFileReference section */
 		4209318B1A0EB2210071231D /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../goBetweenDifferentPages/goBetweenDifferentPages/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
-		429984D51A0C4A1100B4FD7D /* testing */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testing; sourceTree = "<group>"; };
+		4209318D1A0EB7570071231D /* DatabaseWork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseWork.swift; sourceTree = "<group>"; };
 		429984D91A0C7A1700B4FD7D /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		429984DB1A0C7F8A00B4FD7D /* createUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = createUser.swift; sourceTree = "<group>"; };
+		429984DB1A0C7F8A00B4FD7D /* DatabaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseModel.swift; sourceTree = "<group>"; };
 		ACC4999F1A0C3055000E5073 /* theList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = theList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACC499A31A0C3055000E5073 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ACC499A41A0C3055000E5073 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -82,7 +83,6 @@
 			isa = PBXGroup;
 			children = (
 				4209318B1A0EB2210071231D /* FacebookSDK.framework */,
-				429984D51A0C4A1100B4FD7D /* testing */,
 				ACC499C81A0C3167000E5073 /* CloudKit.framework */,
 				ACC499A11A0C3055000E5073 /* theList */,
 				ACC499BA1A0C3056000E5073 /* theListTests */,
@@ -122,7 +122,8 @@
 			children = (
 				ACC499A31A0C3055000E5073 /* Info.plist */,
 				429984D91A0C7A1700B4FD7D /* User.swift */,
-				429984DB1A0C7F8A00B4FD7D /* createUser.swift */,
+				429984DB1A0C7F8A00B4FD7D /* DatabaseModel.swift */,
+				4209318D1A0EB7570071231D /* DatabaseWork.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -255,7 +256,8 @@
 				ACC499AA1A0C3055000E5073 /* ViewController.swift in Sources */,
 				ACC499A51A0C3055000E5073 /* AppDelegate.swift in Sources */,
 				ACC499A81A0C3055000E5073 /* theList.xcdatamodeld in Sources */,
-				429984DC1A0C7F8A00B4FD7D /* createUser.swift in Sources */,
+				4209318E1A0EB7570071231D /* DatabaseWork.swift in Sources */,
+				429984DC1A0C7F8A00B4FD7D /* DatabaseModel.swift in Sources */,
 				429984DA1A0C7A1700B4FD7D /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

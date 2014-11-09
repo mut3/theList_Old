@@ -9,7 +9,7 @@
 import Foundation
 import CloudKit
 
-class CreateUser {
+class DatabaseModel{
     var container : CKContainer
     var publicDB : CKDatabase
     let privateDB : CKDatabase
