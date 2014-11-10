@@ -8,12 +8,23 @@
 
 import UIKit
 
-class EventsListTableViewController: UITableViewController {
+class EventsListTableViewController: UITableViewController, EventsDelegate {
 
+    let givenEvents : DatabaseWork = DatabaseWork.sharedInstanceOfTheList()
+    
     var eventsCount : Int!
+    var userPastEvents = [Event]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        givenEvents.delegate = self;
+        givenEvents.fetchUserEventsWithDelegate("12314")
+        
+        println(givenEvents.events.count)
+        
+        /*
         databaseWork.fetchUserEvents("12314")
             { results, error in
                 if let err = error {
@@ -22,14 +33,14 @@ class EventsListTableViewController: UITableViewController {
                 else {
                     self.eventsCount = 0
                     for result in results {
+                        self.userPastEvents.append(result)
                         self.eventsCount = self.eventsCount + 1
-                        println("event \(self.eventsCount)")
-                        println(result.eventName)
-                        println(result.eventCapacity)
-                        
                     }
                 }
         }
+        */
+        
+        
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -43,74 +54,33 @@ class EventsListTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    // MARK: - Table view data source
-
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
-        // Return the number of sections.
-        return 0
+        return 1
     }
-
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
-        return 0
+        return DatabaseWork.sharedInstanceOfTheList().events.count
     }
-
-    /*
-    override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as UITableViewCell
-
-        // Configure the cell...
-
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var cell = self.tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
+        let object = DatabaseWork.sharedInstanceOfTheList().events[indexPath.row]
+        cell.textLabel?.text = object.eventName
         return cell
     }
-    */
-
+    
+    
     /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView!, canEditRowAtIndexPath indexPath: NSIndexPath!) -> Bool {
-        // Return NO if you do not want the specified item to be editable.
-        return true
-    }
+        database delegate
     */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView!, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath!) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    func eventsUpdated() {
+        refreshControl?.endRefreshing()
+        tableView.reloadData()
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView!, moveRowAtIndexPath fromIndexPath: NSIndexPath!, toIndexPath: NSIndexPath!) {
-
+    
+    func errorUpdate(error: NSError) {
+        let message = error.localizedDescription
+        let alert = UIAlertView(title: "error loading past events", message: message, delegate: nil, cancelButtonTitle: "ok")
+        alert.show()
     }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView!, canMoveRowAtIndexPath indexPath: NSIndexPath!) -> Bool {
-        // Return NO if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

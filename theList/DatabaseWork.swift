@@ -9,8 +9,16 @@
 import Foundation
 import CloudKit
 
+protocol EventsDelegate{
+    func eventsUpdated()
+    func errorUpdate(error:NSError)
+}
+
 
 class DatabaseWork {
+    
+    var delegate : EventsDelegate?
+    
     var container : CKContainer
     var publicDB : CKDatabase
     let privateDB : CKDatabase
@@ -19,6 +27,8 @@ class DatabaseWork {
     class func sharedInstanceOfTheList() -> DatabaseWork{
         return databaseWork
     }
+    
+    var events = [Event]()
     
     init(){
         container = CKContainer.defaultContainer()
@@ -70,7 +80,6 @@ class DatabaseWork {
     pre: hostID of currentUser
     post: nothing but when the function is called a completion function needs to written.
     */
-    
     func fetchUserEvents(hostID : String, completion: (results: [Event]!, error:NSError!)->())
     {
         let userRecord = CKRecord(recordType: "Event")
@@ -78,15 +87,40 @@ class DatabaseWork {
         let query = CKQuery(recordType: "Event", predicate: getCurrentUserPredicate)
         publicDB.performQuery(query, inZoneWithID: nil) {
             results, error in
-            var eventInfoNew = [Event]()
+            self.events.removeAll(keepCapacity: true)
             for record in results{
                 let eventOfUser = Event(record: record as CKRecord, database: self.publicDB)
-                eventInfoNew.append(eventOfUser)
+                self.events.append(eventOfUser)
             }
             dispatch_async(dispatch_get_main_queue()){
-                completion(results: eventInfoNew, error : error)
+                completion(results: self.events, error : error)
             }
             
+        }
+    }
+    
+    func fetchUserEventsWithDelegate(hostID : String){
+        let eventRecord = CKRecord(recordType: "Event")
+        let getCurrentUserPredicate = NSPredicate(format: "HostID = %@",hostID)
+        let query = CKQuery(recordType: "Event", predicate: getCurrentUserPredicate)
+        publicDB.performQuery(query, inZoneWithID: nil) {
+            results, error in
+            if error != nil {
+                dispatch_async(dispatch_get_main_queue()){
+                    self.delegate?.errorUpdate(error)
+                    return
+                }
+            }else{
+                self.events.removeAll(keepCapacity: true)
+                for record in results{
+                    let eventOfUser = Event(record: record as CKRecord, database: self.publicDB)
+                    self.events.append(eventOfUser)
+                }
+                dispatch_async(dispatch_get_main_queue()){
+                    self.delegate?.eventsUpdated()
+                    return
+                }
+            }
         }
     }
     
