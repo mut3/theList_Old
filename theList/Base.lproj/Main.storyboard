@@ -261,7 +261,7 @@
                                 </state>
                                 <connections>
                                     <action selector="createEventButtonPressed:" destination="pYW-I4-UpB" eventType="touchUpInside" id="aj7-tn-x1h"/>
-                                    <segue destination="csJ-U0-C19" kind="push" id="mNI-cc-8vp"/>
+                                    <segue destination="csJ-U0-C19" kind="push" identifier="goToEventSegue" id="mNI-cc-8vp"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="QPC-GV-kCP" userLabel="Image +">
@@ -459,16 +459,94 @@
             </objects>
             <point key="canvasLocation" x="1401" y="1136"/>
         </scene>
-        <!--Event-->
+        <!--Events-->
         <scene sceneID="Df5-Hf-nEb">
             <objects>
-                <viewController id="csJ-U0-C19" sceneMemberID="viewController">
+                <viewController id="csJ-U0-C19" customClass="EventViewController" customModule="theList" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="d4Y-FY-xEd">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="1WN-rF-YQq">
+                                <rect key="frame" x="87" y="159" width="146" height="121"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Hello World" selectable="NO" id="ym8-Rp-om8">
+                                <rect key="frame" x="26" y="304" width="173" height="107"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="QXr-8R-8sn">
+                                <rect key="frame" x="51" y="462" width="77" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.64835258152173914" green="0.16610049100234331" blue="0.1133376108385041" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="No Go">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="doNotAttendEventAction:" destination="csJ-U0-C19" eventType="touchUpInside" id="GUc-IG-dX5"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" alpha="0.84999999999999987" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="eX7-hS-t5B">
+                                <rect key="frame" x="0.0" y="84" width="76" height="49"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.41405870432785163" green="0.78020974864130432" blue="0.5644097094838878" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Host">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="goToHostScreen:" destination="csJ-U0-C19" eventType="touchUpInside" id="Y2U-nP-FNw"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999964" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cap" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="69z-bT-Asx">
+                                <rect key="frame" x="239" y="84" width="81" height="49"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.41405870430000002" green="0.78020974860000003" blue="0.56440970950000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="lQq-Sg-eiM">
+                                <rect key="frame" x="239" y="304" width="58" height="107"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="separatorColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <sections/>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Mzh-J9-BA7">
+                                <rect key="frame" x="210" y="462" width="77" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.20916914539434706" green="0.50046705163043481" blue="0.27258847787184587" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Go">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="attendEventAction:" destination="csJ-U0-C19" eventType="touchUpInside" id="WUm-oE-qqb"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vfQ-gN-QTl">
+                                <rect key="frame" x="69" y="90" width="182" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.3466583130172714" green="0.64833135190217384" blue="0.47294587659031417" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Event" id="G3g-G0-X8y"/>
+                    <navigationItem key="navigationItem" title="Events" id="G3g-G0-X8y"/>
+                    <connections>
+                        <outlet property="eventCapacityOutlet" destination="69z-bT-Asx" id="evI-Y6-iJR"/>
+                        <outlet property="eventDescriptionOutlet" destination="ym8-Rp-om8" id="5fy-zh-N1A"/>
+                        <outlet property="eventPictureOutlet" destination="1WN-rF-YQq" id="moi-BM-8Ca"/>
+                        <outlet property="eventTagsOutlet" destination="lQq-Sg-eiM" id="NWG-9F-qVg"/>
+                        <outlet property="eventTitleOutlet" destination="vfQ-gN-QTl" id="RhD-D0-MRd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DUw-bA-vzO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -24,23 +24,6 @@ class EventsListTableViewController: UITableViewController, EventsDelegate {
         
         println(givenEvents.events.count)
         
-        /*
-        databaseWork.fetchUserEvents("12314")
-            { results, error in
-                if let err = error {
-                    println(err)
-                }
-                else {
-                    self.eventsCount = 0
-                    for result in results {
-                        self.userPastEvents.append(result)
-                        self.eventsCount = self.eventsCount + 1
-                    }
-                }
-        }
-        */
-        
-        
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -73,7 +56,7 @@ class EventsListTableViewController: UITableViewController, EventsDelegate {
     /*
         database delegate
     */
-    func eventsUpdated() {
+    func pastEventsListUpdated() {
         refreshControl?.endRefreshing()
         tableView.reloadData()
     }

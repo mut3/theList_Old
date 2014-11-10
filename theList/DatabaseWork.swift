@@ -10,7 +10,7 @@ import Foundation
 import CloudKit
 
 protocol EventsDelegate{
-    func eventsUpdated()
+    func pastEventsListUpdated()
     func errorUpdate(error:NSError)
 }
 
@@ -117,7 +117,7 @@ class DatabaseWork {
                     self.events.append(eventOfUser)
                 }
                 dispatch_async(dispatch_get_main_queue()){
-                    self.delegate?.eventsUpdated()
+                    self.delegate?.pastEventsListUpdated()
                     return
                 }
             }

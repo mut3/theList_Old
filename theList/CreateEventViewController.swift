@@ -158,6 +158,19 @@ class CreateEventViewController: UIViewController, CLLocationManagerDelegate {
         })
     }
     
+    /*
+        the next function prepares for a segue to the event page
+    */
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "goToEventSegue"{
+            println("we are preparing to go the event screen")
+            let eventMadeVC : EventViewController = segue.destinationViewController as EventViewController
+            eventMadeVC.eventDescriptStr = descriptionTextArea.text
+            eventMadeVC.eventTitleStr = eventNameField.text
+            eventMadeVC.eventCapStr = capacityTextField.text
+        }
+    }
+    
     
     
     
@@ -294,6 +307,8 @@ class CreateEventViewController: UIViewController, CLLocationManagerDelegate {
         locationZipField.placeholder = "Zip"
         locationStateField.placeholder = "State"
     }
+    
+    
     
     
     
