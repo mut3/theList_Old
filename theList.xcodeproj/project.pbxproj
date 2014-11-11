@@ -11,7 +11,6 @@
 		42255F141A0FD5DD00567334 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42255F131A0FD5DD00567334 /* Event.swift */; };
 		42255F161A0FE0AA00567334 /* ScottsTempSwiftFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42255F151A0FE0AA00567334 /* ScottsTempSwiftFunc.swift */; };
 		429984DA1A0C7A1700B4FD7D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429984D91A0C7A1700B4FD7D /* User.swift */; };
-		429984DC1A0C7F8A00B4FD7D /* DatabaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429984DB1A0C7F8A00B4FD7D /* DatabaseModel.swift */; };
 		ACC499A51A0C3055000E5073 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC499A41A0C3055000E5073 /* AppDelegate.swift */; };
 		ACC499A81A0C3055000E5073 /* theList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ACC499A61A0C3055000E5073 /* theList.xcdatamodeld */; };
 		ACC499AA1A0C3055000E5073 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC499A91A0C3055000E5073 /* ViewController.swift */; };
@@ -23,7 +22,6 @@
 		ACF384471A0C3710006CE905 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF384461A0C3710006CE905 /* LoginViewController.swift */; };
 		ACF384491A0C3A65006CE905 /* CreateUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF384481A0C3A65006CE905 /* CreateUserViewController.swift */; };
 		C5AA584A1A0C48C000910EBD /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5AA58491A0C48C000910EBD /* FacebookSDK.framework */; };
-		C5ADE4F81A0EC89E00CAE6DF /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5ADE4F71A0EC89E00CAE6DF /* FacebookSDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,7 +40,6 @@
 		42255F131A0FD5DD00567334 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		42255F151A0FE0AA00567334 /* ScottsTempSwiftFunc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScottsTempSwiftFunc.swift; sourceTree = "<group>"; };
 		429984D91A0C7A1700B4FD7D /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		429984DB1A0C7F8A00B4FD7D /* DatabaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseModel.swift; sourceTree = "<group>"; };
 		ACC4999F1A0C3055000E5073 /* theList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = theList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACC499A31A0C3055000E5073 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ACC499A41A0C3055000E5073 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -60,7 +57,6 @@
 		ACF384461A0C3710006CE905 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		ACF384481A0C3A65006CE905 /* CreateUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateUserViewController.swift; sourceTree = "<group>"; };
 		C5AA58491A0C48C000910EBD /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../FacebookSDK.framework; sourceTree = "<group>"; };
-		C5ADE4F71A0EC89E00CAE6DF /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../FacebookSDK.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,7 +66,6 @@
 			files = (
 				ACC499C91A0C3167000E5073 /* CloudKit.framework in Frameworks */,
 				C5AA584A1A0C48C000910EBD /* FacebookSDK.framework in Frameworks */,
-				C5ADE4F81A0EC89E00CAE6DF /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,7 +87,6 @@
 				ACC499A11A0C3055000E5073 /* theList */,
 				ACC499BA1A0C3056000E5073 /* theListTests */,
 				ACC499A01A0C3055000E5073 /* Products */,
-				C5ADE4F71A0EC89E00CAE6DF /* FacebookSDK.framework */,
 			);
 			sourceTree = "<group>";
 		};
@@ -129,7 +123,6 @@
 				ACC499A31A0C3055000E5073 /* Info.plist */,
 				429984D91A0C7A1700B4FD7D /* User.swift */,
 				42255F131A0FD5DD00567334 /* Event.swift */,
-				429984DB1A0C7F8A00B4FD7D /* DatabaseModel.swift */,
 				4209318D1A0EB7570071231D /* DatabaseWork.swift */,
 				42255F151A0FE0AA00567334 /* ScottsTempSwiftFunc.swift */,
 			);
@@ -267,7 +260,6 @@
 				ACC499A81A0C3055000E5073 /* theList.xcdatamodeld in Sources */,
 				4209318E1A0EB7570071231D /* DatabaseWork.swift in Sources */,
 				42255F161A0FE0AA00567334 /* ScottsTempSwiftFunc.swift in Sources */,
-				429984DC1A0C7F8A00B4FD7D /* DatabaseModel.swift in Sources */,
 				429984DA1A0C7A1700B4FD7D /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
