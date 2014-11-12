@@ -28,10 +28,11 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
     /*
         facebook info variables
     */
-    var userName : String!
+    var userFirstName : String!
     var userBirthday : String!
+    var userFacebookID : String!
+    var userLastName : String!
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -52,8 +53,13 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         if segue.identifier == "mySegue2"{
             println("where are we?")
             let createUserVC : CreateUserViewController = segue.destinationViewController as CreateUserViewController
-            println(userName)
-            createUserVC.userNameStr = userName
+            println(userFirstName)
+            createUserVC.userFirstNameStr = userFirstName
+            createUserVC.userLastNameStr = userLastName
+            createUserVC.userFBID = userFacebookID
+            createUserVC.userAgeInt = 22
+            createUserVC.userGuestID = "\(userFacebookID)_1"
+            createUserVC.userHostID = "\(userFacebookID)_0"
         }
         else if segue.identifier == "homeSegue"{
             println("fuck are we?")
@@ -73,14 +79,23 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
     
     func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser){
         //println("User Name: \(user.name)")
-        userName = user.name
+        userFirstName = user.first_name
+        userLastName = user.last_name
         userBirthday = user.birthday
+        userFacebookID = user.objectID
+
+        //profilePic.profileID=user.objectID
+        
         //println(userBirthday)
         
     }
     
     func loginViewShowingLoggedOutUser(loginView : FBLoginView!) {
         println("User Logged Out")
+        userFirstName = ""
+        userLastName = ""
+        userBirthday = ""
+        userFacebookID = ""
     }
     
     func loginView(loginView : FBLoginView!, handleError:NSError) {

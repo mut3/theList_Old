@@ -51,6 +51,9 @@ class DatabaseWork {
         //userRecord.setValue(photoList, forkey: "Photos")
             
             publicDB.saveRecord(userRecord, completionHandler: {(record, error)-> Void in
+                if error != nil {
+                    println("\(error)")
+                }
                 NSLog("We are saving stuff")
             })
     }
