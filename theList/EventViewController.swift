@@ -27,10 +27,14 @@ class EventViewController: UIViewController {
     //var eventTagsList : [String]
     
     
+    @IBOutlet var eventCurrNumGuestOutlet: UILabel!
+    var eventCurrNumGuest : Int = 0
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         eventTitleOutlet.text = eventTitleStr
+        eventCurrNumGuestOutlet.text = "\(eventCurrNumGuest)"
         eventCapacityOutlet.text = eventCapStr
         eventDescriptionOutlet.text = eventDescriptStr
 
