@@ -60,20 +60,20 @@ class DatabaseWork {
     
     func uploadEvent(cap : Int,eventDescript:String,eventEndtime : NSDate, eventStartTime: NSDate, eventName : String, hostID : String, eventTags : [String], photoList : [String],eventLocation : CLLocation, writtenLocation : String){
         let eventRecord = CKRecord(recordType: "Event")
-        eventRecord.setValue(cap, forKey: "EventCapacity")
-        eventRecord.setValue(eventDescript, forKey: "EventDescription")
-        eventRecord.setValue(eventName, forKey: "EventName")
-        eventRecord.setValue(eventEndtime, forKey: "EventEndTime")
-        eventRecord.setValue(eventStartTime, forKey: "EventStartTime")
-        eventRecord.setValue(hostID, forKey: "HostID")
-        //eventRecord.setValue(photoList, forKey: "Photos")
-        eventRecord.setValue(eventTags, forKey: "tags")
-        eventRecord.setValue(eventLocation, forKey: "EventLocation")
-        eventRecord.setValue(writtenLocation, forKey: "EventAddress")
         
-        publicDB.saveRecord(eventRecord, completionHandler: {(results,error) -> Void in
-            if (error != nil){
-                NSLog("\(error)")}
+            eventRecord.setValue(cap, forKey: "EventCapacity")
+            eventRecord.setValue(eventDescript, forKey: "EventDescription")
+            eventRecord.setValue(eventName, forKey: "EventName")
+            eventRecord.setValue(eventEndtime, forKey: "EventEndTime")
+            eventRecord.setValue(eventStartTime, forKey: "EventStartTime")
+            eventRecord.setValue(hostID, forKey: "HostID")
+            //eventRecord.setValue(photoList, forKey: "Photos")
+            eventRecord.setValue(eventTags, forKey: "tags")
+            eventRecord.setValue(eventLocation, forKey: "EventLocation")
+            eventRecord.setValue(writtenLocation, forKey: "EventAddress")
+            publicDB.saveRecord(eventRecord, completionHandler: {(results,error) -> Void in
+                if (error != nil){
+                    NSLog("\(error)")}
         })
         
     }
@@ -101,7 +101,9 @@ class DatabaseWork {
             
         }
     }
-    
+    /*
+    takes the host id ( uses it as a predicate) and returns the events of the given user
+    */
     func fetchUserEventsWithDelegate(hostID : String){
         let eventRecord = CKRecord(recordType: "Event")
         let getCurrentUserPredicate = NSPredicate(format: "HostID = %@",hostID)
@@ -125,6 +127,36 @@ class DatabaseWork {
                 }
             }
         }
+    }
+    
+    /*
+        takes the current user's location, the radius he is using, and returns all the events within 
+        the given radius
+    */
+    func fetchEventsWithRadius(currentUserLocation : CLLocation, setRadius : int){
+        let eventRecord = CKRecord(recordType: "Event")
+        let getAllEventInsideRadius = NSPredicate(format: "")
+        let query = CKQuery(recordType: "Event", predicate: getAllEventInsideRadius)
+        publicDB.performQuery(query, inZoneWithID: nil){
+            results, error in
+            if error != nil {
+            
+            
+            }else{
+                self.events.removeAll(keepCapacity: true)
+                for record in results{
+                    let eventInRadius = Event(record: record as CKRecord, database: self.publicDB)
+                    self.events.append(eventInRadius)
+                }
+                dispatch_async(dispatch_get_main_queue()){
+                    self.delegate?.currentEventsInRadius()
+                    return
+                }
+            
+            }
+        
+        }
+    
     }
     
 

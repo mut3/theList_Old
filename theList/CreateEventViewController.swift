@@ -329,7 +329,7 @@ class CreateEventViewController: UIViewController, CLLocationManagerDelegate, UI
         eventTimeStart = timeStartTextField.text
         eventTimeEnd = timeEndTextField.text
         eventDate = dateTextField.text
-        eventTag = tagsTextField.text
+        //eventTag = tagsTextField.text
         eventCapacity = capacityTextField.text.toInt()
         eventDescription = descriptionTextArea.text
         
@@ -340,6 +340,7 @@ class CreateEventViewController: UIViewController, CLLocationManagerDelegate, UI
 
         let eventStartTimeObject = dateFromString(eventDate, time: eventTimeStart)
         let eventEndTimeObject = dateFromString(eventDate, time: eventTimeEnd)
+        
         
         databaseWork.uploadEvent(eventCapacity, eventDescript: eventDescription, eventEndtime: eventEndTimeObject, eventStartTime: eventStartTimeObject, eventName: eventName, hostID: "12314", eventTags: eventTags, photoList: photos, eventLocation: eventLocation, writtenLocation: eventLocationWritten)
     }
