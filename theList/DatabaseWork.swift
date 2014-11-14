@@ -133,28 +133,23 @@ class DatabaseWork {
         takes the current user's location, the radius he is using, and returns all the events within 
         the given radius
     */
-    func fetchEventsWithRadius(currentUserLocation : CLLocation, setRadius : int){
+    func fetchEventsWithRadius(currentUserLocation : CLLocation, setRadius : CLLocationDistance, completion : (results: [Event]!, error:NSError!)-> ()){
         let eventRecord = CKRecord(recordType: "Event")
-        let getAllEventInsideRadius = NSPredicate(format: "")
+        let getAllEventInsideRadius = NSPredicate(format: "distanceToLocation:fromLocation:(%K,%@) < %f","EventLocation",currentUserLocation,setRadius)
         let query = CKQuery(recordType: "Event", predicate: getAllEventInsideRadius)
         publicDB.performQuery(query, inZoneWithID: nil){
             results, error in
-            if error != nil {
-            
-            
-            }else{
-                self.events.removeAll(keepCapacity: true)
-                for record in results{
+            var correctEvents = [Event]()
+            if let records = results{
+                for record in records{
                     let eventInRadius = Event(record: record as CKRecord, database: self.publicDB)
-                    self.events.append(eventInRadius)
+                    correctEvents.append(eventInRadius)
                 }
-                dispatch_async(dispatch_get_main_queue()){
-                    self.delegate?.currentEventsInRadius()
-                    return
-                }
-            
             }
-        
+            dispatch_async(dispatch_get_main_queue()){
+                completion(results: correctEvents, error: error)
+            }
+            
         }
     
     }
