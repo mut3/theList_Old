@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="vNg-CW-unj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="vNg-CW-unj">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
         <!--Facebook Login-->
@@ -54,8 +54,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="fbLoginView" destination="dx9-7i-YhW" id="bv2-0i-IvX"/>
-                        <outlet property="profilePic" destination="fmI-9e-JcJ" id="fLM-Sg-GvP"/>
+                        <outlet property="fbLoginView" destination="dx9-7i-YhW" id="t2V-De-Eeg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -174,7 +173,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iN4-4N-igR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="942" y="406"/>
+            <point key="canvasLocation" x="894" y="406"/>
         </scene>
         <!--Host Event Page-->
         <scene sceneID="YEJ-qc-55Y">

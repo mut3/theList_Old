@@ -45,7 +45,7 @@ class EventsListTableViewController: UITableViewController, EventsDelegate {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return DatabaseWork.sharedInstanceOfTheList().events.count
     }
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+   /* override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = self.tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
         let object = DatabaseWork.sharedInstanceOfTheList().events[indexPath.row]
         // changed textLabel? to textLabel so it would build

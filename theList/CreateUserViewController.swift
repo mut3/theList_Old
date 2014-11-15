@@ -35,6 +35,8 @@ class CreateUserViewController: UIViewController, FBLoginViewDelegate{
     var userGuestID : String = ""
     
     var userHostID : String = ""
+  
+    var profileID : String = ""
     
     var userPicture : FBProfilePictureView!
     
@@ -51,9 +53,20 @@ class CreateUserViewController: UIViewController, FBLoginViewDelegate{
         
         println(userPictureLocation.profileID)
         // Do any additional setup after loading the view.
+    /*
+    func loginViewShowingLoggedInUser(loginView : FBLoginView!) {
+        println("User Logged In")
         
+        //this is where we segue
+    }
+    */
+    func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser){
+      
+        profilePic.profileID = user.objectID
+      
         
     }
+  
     
     
     @IBAction func submitUser(sender: AnyObject) {
