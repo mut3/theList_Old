@@ -10,7 +10,7 @@ import UIKit
 import CoreLocation
 import Foundation
 
-class NewEventViewController: UITableViewController, CLLocationManagerDelegate, UIPickerViewDataSource,UIPickerViewDelegate{
+class NewEventViewController: UITableViewController, CLLocationManagerDelegate /*UIPickerViewDataSource,UIPickerViewDelegate*/{
     var eventName : String!
     var eventLocation : CLLocation!
     var eventLocationWritten : String!
@@ -39,9 +39,9 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tagsPickerOutlet.hidden = true
-        tagsPickerOutlet.delegate = self
-        tagsPickerOutlet.dataSource = self
+//        tagsPickerOutlet.hidden = true
+//        tagsPickerOutlet.delegate = self
+//        tagsPickerOutlet.dataSource = self
         
         // Do any additional setup after loading the view, typically from a nib.
         //        let geocoder = LocationsModel()
@@ -215,7 +215,7 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
     @IBOutlet var pictureImageView : UIImageView!
     
     
-    @IBOutlet weak var tagsPickerOutlet: UIPickerView!
+//    @IBOutlet weak var tagsPickerOutlet: UIPickerView!
     
     
     @IBAction func locationTypeSwitched(sender : AnyObject) {
@@ -271,18 +271,18 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
         }
     }
     
+//    
+//    @IBAction func addTagBtnAction(sender: AnyObject) {
+//        tagsPickerOutlet.hidden = false
     
-    @IBAction func addTagBtnAction(sender: AnyObject) {
-        tagsPickerOutlet.hidden = false
         
-        
-        
-        if (tagPicked){
-            println("hello people of the world")
-            
-            tagsPickerOutlet.hidden = true
-        }
-    }
+//        
+//        if (tagPicked){
+//            println("hello people of the world")
+//            
+//            tagsPickerOutlet.hidden = true
+//        }
+//    }
     /*
     addTagWheel adds a picker view for adding tags to the event
     */
@@ -336,6 +336,7 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
         
         let eventStartTimeObject = dateFromString(eventDate, time: eventTimeStart)
         let eventEndTimeObject = dateFromString(eventDate, time: eventTimeEnd)
+        eventTags = (tagsTextField.text).componentsSeparatedByString(", ")
         
         
         databaseWork.uploadEvent(eventCapacity, eventDescript: eventDescription, eventEndtime: eventEndTimeObject, eventStartTime: eventStartTimeObject, eventName: eventName, hostID: "12314", eventTags: eventTags, photoList: photos, eventLocation: eventLocation, writtenLocation: eventLocationWritten)
@@ -373,42 +374,42 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
     THE SET OF FUNCTIONS DEAL WITH PICKERVIEW DELEGATES AND DATA SOURCES
     */
     //  DATA SOURCES
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return eventTagChoices.count
-    }
+//    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+//        return 1
+//    }
+//    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+//        return eventTagChoices.count
+//    }
     // DELEGATES
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
-        return eventTagChoices[row]
-    }
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        addTagsCounter = addTagsCounter + 1
-        self.eventTags.append(eventTagChoices[tagsPickerOutlet.selectedRowInComponent(0)])
-        var tagLabel = createTagLabel(eventTagChoices[tagsPickerOutlet.selectedRowInComponent(0)],tagNumber: addTagsCounter)
-        self.view.addSubview(tagLabel)
-        tagsPickerOutlet.hidden = true
-    }
-    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView!) -> UIView {
-        var pickerLabel = view as UILabel!
-        if view == nil {
-            pickerLabel = UILabel()
-            let hueBase = CGFloat(0.4)
-            let hueChange : CGFloat = CGFloat(1.0) / CGFloat(eventTagChoices.count)
-            let hue = hueBase + (hueChange * CGFloat(row) * CGFloat(hueBase))
-            pickerLabel.backgroundColor = UIColor(hue: hue, saturation: 0.8, brightness: 1.0, alpha: 1.0)
-            pickerLabel.textAlignment = .Center
-        }
-        let tagOption = eventTagChoices[row]
-        println(tagOption);
-        //Commented the below two lines out to build
-        //var tagTitle = NSAttributedString(string: tagOption, attributes: [NSFontAttributeName:UIFont(name: "Arial", size: 26.0),NSForegroundColorAttributeName:UIColor.blackColor()])
-        //pickerLabel!.attributedText = tagTitle
-        
-        return pickerLabel
-    }
-    
+//    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+//        return eventTagChoices[row]
+//    }
+//    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+//        addTagsCounter = addTagsCounter + 1
+//        self.eventTags.append(eventTagChoices[tagsPickerOutlet.selectedRowInComponent(0)])
+//        var tagLabel = createTagLabel(eventTagChoices[tagsPickerOutlet.selectedRowInComponent(0)],tagNumber: addTagsCounter)
+//        self.view.addSubview(tagLabel)
+//        tagsPickerOutlet.hidden = true
+//    }
+//    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView!) -> UIView {
+//        var pickerLabel = view as UILabel!
+//        if view == nil {
+//            pickerLabel = UILabel()
+//            let hueBase = CGFloat(0.4)
+//            let hueChange : CGFloat = CGFloat(1.0) / CGFloat(eventTagChoices.count)
+//            let hue = hueBase + (hueChange * CGFloat(row) * CGFloat(hueBase))
+//            pickerLabel.backgroundColor = UIColor(hue: hue, saturation: 0.8, brightness: 1.0, alpha: 1.0)
+//            pickerLabel.textAlignment = .Center
+//        }
+//        let tagOption = eventTagChoices[row]
+//        println(tagOption);
+//        //Commented the below two lines out to build
+//        //var tagTitle = NSAttributedString(string: tagOption, attributes: [NSFontAttributeName:UIFont(name: "Arial", size: 26.0),NSForegroundColorAttributeName:UIColor.blackColor()])
+//        //pickerLabel!.attributedText = tagTitle
+//        
+//        return pickerLabel
+//    }
+//    
     
     
 
