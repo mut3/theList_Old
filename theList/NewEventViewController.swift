@@ -1,8 +1,8 @@
 //
-//  CreateNewEventViewController.swift
+//  NewEventViewController.swift
 //  theList
 //
-//  Created by Joey Anetsberger on 11/8/14.
+//  Created by Joey Anetsberger on 11/15/14.
 //  Copyright (c) 2014 Abeba Lab. All rights reserved.
 //
 
@@ -10,11 +10,7 @@ import UIKit
 import CoreLocation
 import Foundation
 
-class CreateEventViewController: UIViewController, CLLocationManagerDelegate, UIPickerViewDataSource,UIPickerViewDelegate {
-    
-    
-    
-    
+class NewEventViewController: UITableViewController, CLLocationManagerDelegate, UIPickerViewDataSource,UIPickerViewDelegate{
     var eventName : String!
     var eventLocation : CLLocation!
     var eventLocationWritten : String!
@@ -33,7 +29,7 @@ class CreateEventViewController: UIViewController, CLLocationManagerDelegate, UI
     var eventDescription : String!
     
     /*
-        the adding text shift constant
+    the adding text shift constant
     */
     let AddTagsShifter = 40
     var addTagsCounter = 0
@@ -181,7 +177,7 @@ class CreateEventViewController: UIViewController, CLLocationManagerDelegate, UI
     }
     
     /*
-        the next function prepares for a segue to the event page
+    the next function prepares for a segue to the event page
     */
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "goToEventSegue"{
@@ -288,14 +284,14 @@ class CreateEventViewController: UIViewController, CLLocationManagerDelegate, UI
         }
     }
     /*
-        addTagWheel adds a picker view for adding tags to the event
+    addTagWheel adds a picker view for adding tags to the event
     */
     
     
     /*
-        createTagLabel function creates a label programmatically using the a certain position on the screen
-        it allows from multiple instances of itself to be called so a counter is passed and shifter constant 
-        is used to push over the text so no overlap occurs.
+    createTagLabel function creates a label programmatically using the a certain position on the screen
+    it allows from multiple instances of itself to be called so a counter is passed and shifter constant
+    is used to push over the text so no overlap occurs.
     */
     func createTagLabel(tagName : String, tagNumber : Int) -> UILabel{
         let screenSize : CGRect = UIScreen.mainScreen().bounds
@@ -308,21 +304,21 @@ class CreateEventViewController: UIViewController, CLLocationManagerDelegate, UI
         label.text = tagName
         label.font = UIFont(name : label.font.fontName, size : 14)
         return label
-    
+        
     }
     
     
     @IBAction func createEventButtonPressed(sender : AnyObject) {
         
-//        var eventName : String!
-//        var eventLocation : CLLocation!
-//        var eventLocationWritten : String!
-//        var eventTimeStart : String!
-//        var eventTimeEnd : String!
-//        var eventDate : String!
-//        var eventCapacity : Int!
-//        var eventTag : String!
-//        var eventDescription : String!
+        //        var eventName : String!
+        //        var eventLocation : CLLocation!
+        //        var eventLocationWritten : String!
+        //        var eventTimeStart : String!
+        //        var eventTimeEnd : String!
+        //        var eventDate : String!
+        //        var eventCapacity : Int!
+        //        var eventTag : String!
+        //        var eventDescription : String!
         
         eventName = eventNameField.text
         eventLocationWritten = locationAddressField.text  + ", " + locationCityField.text + ", " + locationStateField.text + " " + locationZipField.text
@@ -337,7 +333,7 @@ class CreateEventViewController: UIViewController, CLLocationManagerDelegate, UI
         
         //var tempEventTagArray : [String] = [eventTag, ""]
         var photos : [String] = ["dd","aa"]
-
+        
         let eventStartTimeObject = dateFromString(eventDate, time: eventTimeStart)
         let eventEndTimeObject = dateFromString(eventDate, time: eventTimeEnd)
         
@@ -374,7 +370,7 @@ class CreateEventViewController: UIViewController, CLLocationManagerDelegate, UI
     
     
     /*
-            THE SET OF FUNCTIONS DEAL WITH PICKERVIEW DELEGATES AND DATA SOURCES
+    THE SET OF FUNCTIONS DEAL WITH PICKERVIEW DELEGATES AND DATA SOURCES
     */
     //  DATA SOURCES
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
@@ -415,4 +411,6 @@ class CreateEventViewController: UIViewController, CLLocationManagerDelegate, UI
     
     
     
+
+
 }
