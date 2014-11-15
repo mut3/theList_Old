@@ -8,13 +8,22 @@
 
 import UIKit
 
-class CreateUserViewController: UIViewController{
+class CreateUserViewController: UIViewController, FBLoginViewDelegate{
     
     @IBOutlet var userNameOutlet: UILabel!
     
     @IBOutlet var userAgeOutlet: UILabel!
     
     @IBOutlet var userDescriptionOutlet: UITextView!
+    
+    @IBOutlet var profilePic: FBProfilePictureView!
+    
+  
+    @IBOutlet var fbLoginView : FBLoginView!
+
+
+    
+
     
     var userFirstNameStr : String = ""
     
@@ -31,8 +40,11 @@ class CreateUserViewController: UIViewController{
     var userGuestID : String = ""
     
     var userHostID : String = ""
+  
+    var profileID : String = ""
     
-    
+
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,10 +53,32 @@ class CreateUserViewController: UIViewController{
         userDescriptionOutlet.text = ""
         println(userFBID)
         
-        // Do any additional setup after loading the view.
         
+        self.fbLoginView.delegate = self
+        
+        
+        self.fbLoginView.readPermissions = ["public_profile", "email", "user_friends", "user_birthday"]
+
+        
+        }
+      
+
+        
+        // Do any additional setup after loading the view.
+    /*
+    func loginViewShowingLoggedInUser(loginView : FBLoginView!) {
+        println("User Logged In")
+        
+        //this is where we segue
+    }
+    */
+    func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser){
+      
+        profilePic.profileID = user.objectID
+      
         
     }
+  
     
     
     @IBAction func submitUser(sender: AnyObject) {

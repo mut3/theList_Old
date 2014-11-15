@@ -20,8 +20,6 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
     
     @IBOutlet var fbLoginView : FBLoginView!
     
-    @IBOutlet var profilePic: FBProfilePictureView!
-    
     
     var userFbDelegate: UserFacebookInfoDelegate?
     
@@ -32,6 +30,8 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
     var userBirthday : String!
     var userFacebookID : String!
     var userLastName : String!
+   
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +39,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         // Do any additional setup after loading the view.
         
         self.fbLoginView.delegate = self
+        
         
         self.fbLoginView.readPermissions = ["public_profile", "email", "user_friends", "user_birthday"]
         
@@ -66,9 +67,10 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         }
     }
     
+
     
-    
-    
+   
+
     
     
     func loginViewShowingLoggedInUser(loginView : FBLoginView!) {
@@ -83,9 +85,8 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         userLastName = user.last_name
         userBirthday = user.birthday
         userFacebookID = user.objectID
+        println(userFacebookID)
 
-        //profilePic.profileID=user.objectID
-        
         //println(userBirthday)
         
     }
