@@ -9,6 +9,10 @@
 import UIKit
 
 class CorrectEventsViewController: UIViewController {
+    
+    var setRadius : CLLocationDistance = CLLocationDistance()
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
