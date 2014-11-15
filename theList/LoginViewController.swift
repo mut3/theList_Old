@@ -22,6 +22,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
     
     
     
+    
     var userFbDelegate: UserFacebookInfoDelegate?
     
     /*
@@ -32,7 +33,6 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
     var userFacebookID : String!
     var userLastName : String!
    
-    
     
     
     override func viewDidLoad() {

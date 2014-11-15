@@ -16,9 +16,14 @@ class CreateUserViewController: UIViewController, FBLoginViewDelegate{
     
     @IBOutlet var userDescriptionOutlet: UITextView!
     
-    @IBOutlet var userPictureLocation: FBProfilePictureView!
+    @IBOutlet var profilePic: FBProfilePictureView!
+    
+  
+    @IBOutlet var fbLoginView : FBLoginView!
+
 
     
+
     
     var userFirstNameStr : String = ""
     
@@ -38,7 +43,8 @@ class CreateUserViewController: UIViewController, FBLoginViewDelegate{
   
     var profileID : String = ""
     
-    var userPicture : FBProfilePictureView!
+
+
     
     
     
@@ -50,8 +56,16 @@ class CreateUserViewController: UIViewController, FBLoginViewDelegate{
         
         userPictureLocation = userPicture
         
+        self.fbLoginView.delegate = self
         
-        println(userPictureLocation.profileID)
+        
+        self.fbLoginView.readPermissions = ["public_profile", "email", "user_friends", "user_birthday"]
+
+        
+        }
+      
+
+        
         // Do any additional setup after loading the view.
     /*
     func loginViewShowingLoggedInUser(loginView : FBLoginView!) {

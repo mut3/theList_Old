@@ -138,33 +138,23 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" id="KX4-Gm-saQ" customClass="FBProfilePictureView">
-                                <rect key="frame" x="90" y="101" width="160" height="131"/>
+                            <view contentMode="scaleToFill" id="fmI-9e-JcJ" customClass="FBProfilePictureView">
+                                <rect key="frame" x="67" y="92" width="200" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UlX-hI-E6y">
-                                <rect key="frame" x="16" y="478" width="42" height="21"/>
+                            <view hidden="YES" contentMode="scaleToFill" id="uGS-SH-TDb" customClass="FBLoginView">
+                                <rect key="frame" x="29" y="92" width="17" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="BB3-3f-GhX">
-                                <rect key="frame" x="134" y="476" width="22" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="+"/>
-                                <connections>
-                                    <segue destination="IJL-Ee-4qQ" kind="push" id="eRs-uT-26A"/>
-                                </connections>
-                            </button>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Create Profile" id="zhC-qe-U1X"/>
                     <connections>
-                        <outlet property="profilePic" destination="fmI-9e-JcJ" id="7aH-Xe-NMd"/>
+                        <outlet property="fbLoginView" destination="uGS-SH-TDb" id="Y3P-yd-Y96"/>
+                        <outlet property="profilePic" destination="fmI-9e-JcJ" id="AKi-Oo-OW6"/>
                         <outlet property="userAgeOutlet" destination="AI8-Yc-S5S" id="7DJ-ex-Kmz"/>
                         <outlet property="userDescriptionOutlet" destination="Cvh-7N-fLd" id="QIt-jC-33r"/>
                         <outlet property="userNameOutlet" destination="MTz-b5-vNh" id="c7I-73-Zfd"/>
