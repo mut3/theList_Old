@@ -405,8 +405,9 @@ class CreateEventViewController: UIViewController, CLLocationManagerDelegate, UI
             pickerLabel.textAlignment = .Center
         }
         let tagOption = eventTagChoices[row]
-        let tagTitle = NSAttributedString(string: tagOption, attributes: [NSFontAttributeName:UIFont(name: "Georgia", size: 26.0),NSForegroundColorAttributeName:UIColor.blackColor()])
-        pickerLabel!.attributedText = tagTitle
+        //Commented the below two lines out to build
+        //let tagTitle = NSAttributedString(string: tagOption, attributes: [NSFontAttributeName:UIFont(name: "Georgia", size: 26.0),NSForegroundColorAttributeName:UIColor.blackColor()])
+        //pickerLabel!.attributedText = tagTitle
         
         return pickerLabel
     }

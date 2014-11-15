@@ -48,7 +48,8 @@ class EventsListTableViewController: UITableViewController, EventsDelegate {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = self.tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
         let object = DatabaseWork.sharedInstanceOfTheList().events[indexPath.row]
-        cell.textLabel?.text = object.eventName
+        // changed textLabel? to textLabel so it would build
+        cell.textLabel.text = object.eventName
         return cell
     }
     
