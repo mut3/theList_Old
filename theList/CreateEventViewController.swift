@@ -406,8 +406,8 @@ class CreateEventViewController: UIViewController, CLLocationManagerDelegate, UI
         }
         let tagOption = eventTagChoices[row]
         //Commented the below two lines out to build
-        //let tagTitle = NSAttributedString(string: tagOption, attributes: [NSFontAttributeName:UIFont(name: "Georgia", size: 26.0),NSForegroundColorAttributeName:UIColor.blackColor()])
-        //pickerLabel!.attributedText = tagTitle
+        let tagTitle = NSAttributedString(string: tagOption, attributes: [NSFontAttributeName:UIFont(name: "Georgia", size: 26.0),NSForegroundColorAttributeName:UIColor.blackColor()])
+        pickerLabel!.attributedText = tagTitle
         
         return pickerLabel
     }

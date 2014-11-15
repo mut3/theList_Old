@@ -8,13 +8,17 @@
 
 import UIKit
 
-class CreateUserViewController: UIViewController{
+class CreateUserViewController: UIViewController, FBLoginViewDelegate{
     
     @IBOutlet var userNameOutlet: UILabel!
     
     @IBOutlet var userAgeOutlet: UILabel!
     
     @IBOutlet var userDescriptionOutlet: UITextView!
+    
+    @IBOutlet var userPictureLocation: FBProfilePictureView!
+
+    
     
     var userFirstNameStr : String = ""
     
@@ -32,6 +36,8 @@ class CreateUserViewController: UIViewController{
     
     var userHostID : String = ""
     
+    var userPicture : FBProfilePictureView!
+    
     
     
     override func viewDidLoad() {
@@ -39,8 +45,11 @@ class CreateUserViewController: UIViewController{
         userNameOutlet.text = userFirstNameStr
         userAgeOutlet.text = "\(userAgeInt)"
         userDescriptionOutlet.text = ""
-        println(userFBID)
         
+        userPictureLocation = userPicture
+        
+        
+        println(userPictureLocation.profileID)
         // Do any additional setup after loading the view.
         
         
@@ -52,4 +61,6 @@ class CreateUserViewController: UIViewController{
         databaseWork.uploadUser(userAgeInt, userDescript: userDescript, userFBID: userFBID, userFirstName: userFirstNameStr, userLastName: userLastNameStr, deviceID: userDeviceID, userGuestID: userGuestID, userHostID: userHostID)
     }
 
+    
+    
 }

@@ -23,6 +23,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
     @IBOutlet var profilePic: FBProfilePictureView!
     
     
+    
     var userFbDelegate: UserFacebookInfoDelegate?
     
     /*
@@ -32,6 +33,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
     var userBirthday : String!
     var userFacebookID : String!
     var userLastName : String!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +62,8 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
             createUserVC.userAgeInt = 22
             createUserVC.userGuestID = "\(userFacebookID)_1"
             createUserVC.userHostID = "\(userFacebookID)_0"
+            createUserVC.userPicture = profilePic
+            
         }
         else if segue.identifier == "homeSegue"{
             println("fuck are we?")
@@ -84,7 +88,9 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         userBirthday = user.birthday
         userFacebookID = user.objectID
 
-        //profilePic.profileID=user.objectID
+        profilePic.profileID = user.objectID
+        
+        //println("\(profilePic)")
         
         //println(userBirthday)
         
