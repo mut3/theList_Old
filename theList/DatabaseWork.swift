@@ -58,7 +58,7 @@ class DatabaseWork {
             })
     }
     
-    func uploadEvent(cap : Int,eventDescript:String,eventEndtime : NSDate, eventStartTime: NSDate, eventName : String, hostID : String, eventTags : [String], photoList : [String],eventLocation : CLLocation, writtenLocation : String){
+    func uploadEvent(cap : Int,eventDescript:String,eventEndtime : NSDate, eventStartTime: NSDate, eventName : String, hostID : String, eventTags : [String], photoList : [CKAsset],eventLocation : CLLocation, writtenLocation : String){
         let eventRecord = CKRecord(recordType: "Event")
         
             eventRecord.setValue(cap, forKey: "EventCapacity")
@@ -67,7 +67,7 @@ class DatabaseWork {
             eventRecord.setValue(eventEndtime, forKey: "EventEndTime")
             eventRecord.setValue(eventStartTime, forKey: "EventStartTime")
             eventRecord.setValue(hostID, forKey: "HostID")
-            //eventRecord.setValue(photoList, forKey: "Photos")
+            eventRecord.setValue(photoList, forKey: "Photos")
             eventRecord.setValue(eventTags, forKey: "tags")
             eventRecord.setValue(eventLocation, forKey: "EventLocation")
             eventRecord.setValue(writtenLocation, forKey: "EventAddress")

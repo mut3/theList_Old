@@ -34,8 +34,8 @@ class EventViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         eventTitleOutlet.text = eventTitleStr
-        eventCurrNumGuestOutlet.text = "\(eventCurrNumGuest)"
-        eventCapacityOutlet.text = eventCapStr
+        //eventCurrNumGuestOutlet.text = "\(eventCurrNumGuest)"
+//        eventCapacityOutlet.text = eventCapStr
         eventDescriptionOutlet.text = eventDescriptStr
 
         // Do any additional setup after loading the view.

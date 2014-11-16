@@ -17,7 +17,7 @@ class Event : NSObject{
     var eventLocation : CLLocation!
     var eventName : String!
     var hostID : String!
-    var photos : [String]!
+    var photos : [CKAsset]!
     var tags : [String]!
     var eventCapacity : Int!
     var eventAddress : String!
@@ -33,7 +33,7 @@ class Event : NSObject{
         self.eventLocation = record.objectForKey("EventLocation") as CLLocation!
         self.eventName = record.objectForKey("EventName") as String!
         self.hostID = record.objectForKey("HostID") as String!
-        //self.photos = record.objectForKey("Photos") as [String]!
+        self.photos = record.objectForKey("Photos") as [CKAsset]!
         self.tags = record.objectForKey("tags") as [String]!
         self.eventCapacity = record.objectForKey("EventCapacity") as Int!
         self.eventAddress  = record.objectForKey("EventAddress") as String!

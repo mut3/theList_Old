@@ -9,8 +9,9 @@
 import UIKit
 import CoreLocation
 import Foundation
+import CloudKit
 
-class NewEventViewController: UITableViewController, CLLocationManagerDelegate /*UIPickerViewDataSource,UIPickerViewDelegate*/{
+class NewEventViewController: UITableViewController, CLLocationManagerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate /*UIPickerViewDataSource,UIPickerViewDelegate*/{
     var eventName : String!
     var eventLocation : CLLocation!
     var eventLocationWritten : String!
@@ -18,6 +19,8 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate /
     var eventTimeEnd : String!
     var eventDate : String!
     var eventCapacity : Int!
+    
+    var eventImages : [CKAsset] = []
     
     // EVENT TAGS VARIABLES
     var eventTag : String!
@@ -242,8 +245,47 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate /
     
     
     @IBAction func addPictureButtonPressed(sender : AnyObject) {
-        let imagePicker : UIImagePickerController = UIImagePickerController()
-        self.presentViewController(imagePicker, animated: true, completion: nil)
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary){
+            println("Button capture")
+            var imag = UIImagePickerController()
+            imag.delegate = self
+            imag.sourceType = UIImagePickerControllerSourceType.PhotoLibrary;
+            //imag.mediaTypes = [kUTTypeImage];
+            imag.allowsEditing = false
+            self.presentViewController(imag, animated: true, completion: nil)
+        }
+    }
+    
+    func imagePickerController(picker: UIImagePickerController!, didFinishPickingImage image: UIImage!, editingInfo: NSDictionary!) {
+        let selectedImage : UIImage = image
+
+//        eventImages.append(UIImageJPEGRepresentation(selectedImage, 90))
+//        println(eventImages[eventImages.count - 1])
+//        //var tempImage:UIImage = editingInfo[UIImagePickerControllerOriginalImage] as UIImage
+        pictureImageView.image=selectedImage
+//        println(pictureImageView.image)
+        
+        let imageData = UIImageJPEGRepresentation(selectedImage, 90)
+        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+        let documentDirectory = paths[0] as String
+//        println(documentDirectory)
+        let myFilePath = documentDirectory.stringByAppendingPathComponent("eventImage \(numberOfImages)")
+        imageData.writeToFile(myFilePath, atomically: true)
+        let url = NSURL(fileURLWithPath: myFilePath)
+        let asset = CKAsset(fileURL: url)
+        for element in eventImages {
+            println(element)
+        }
+        numberOfImages += 1
+        eventImages.append(asset)
+        
+
+        
+        
+        
+        
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     
@@ -344,7 +386,7 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate /
         eventTags = (tagsTextField.text).componentsSeparatedByString(", ")
         
         
-        databaseWork.uploadEvent(eventCapacity, eventDescript: eventDescription, eventEndtime: eventEndTimeObject, eventStartTime: eventStartTimeObject, eventName: eventName, hostID: "12314", eventTags: eventTags, photoList: photos, eventLocation: eventLocation, writtenLocation: eventLocationWritten)
+        databaseWork.uploadEvent(eventCapacity, eventDescript: eventDescription, eventEndtime: eventEndTimeObject, eventStartTime: eventStartTimeObject, eventName: eventName, hostID: "12314", eventTags: eventTags, photoList: eventImages, eventLocation: eventLocation, writtenLocation: eventLocationWritten)
     }
     
     
@@ -373,7 +415,7 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate /
     }
     
     
-    
+}
     
     /*
     THE SET OF FUNCTIONS DEAL WITH PICKERVIEW DELEGATES AND DATA SOURCES
@@ -419,4 +461,4 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate /
     
 
 
-}
+
