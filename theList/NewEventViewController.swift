@@ -44,8 +44,7 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate /
 //        tagsPickerOutlet.dataSource = self
         
         // Do any additional setup after loading the view, typically from a nib.
-        //        let geocoder = LocationsModel()
-        //geocoder.getCurrentLocation()
+
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
@@ -53,6 +52,7 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate /
         println((CLLocationManager.locationServicesEnabled()))
         
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        getCurrentLocation(locationManager)
     }
     
     
@@ -103,10 +103,9 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate /
     }
     
     
-    func getCurrentLocation(/*manager: CLLocationManager!*/ location : String) {
+    func getCurrentLocation(manager: CLLocationManager!) {
         //Gets location to apple's server, which processes and returns location.
-        /*CLGeocoder().reverseGeocodeLocation(manager.location
-        */      geocoder.geocodeAddressString(self.currentLocName, completionHandler: { (placemarks, error) -> Void in
+        CLGeocoder().reverseGeocodeLocation(manager.location, completionHandler: { (placemarks, error) -> Void in
             println(self.locationManager.location)
             
             if (error != nil) {
@@ -148,6 +147,7 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate /
         
         println(address)
     }
+    
     
     func forwardGeocode(loc: String) {
         var placemark: CLPlacemark!
@@ -225,7 +225,10 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate /
         locationTypeLabel.text = locationTypeSwitch.on ? "Current Location" : "Enter Address"
         locationAddressField.enabled = !locationTypeSwitch.on
         if(locationTypeSwitch.on) {
-            getCurrentLocation(/*locationManager*/currentLocName)
+            getCurrentLocation(locationManager)
+        }
+        else {
+            clearAllAddressFields()
         }
         //        locationZipField.enabled = !locationTypeSwitch.on
         //        locationCityField.enabled = !locationTypeSwitch.on
