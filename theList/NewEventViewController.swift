@@ -51,6 +51,8 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate /
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
         println((CLLocationManager.locationServicesEnabled()))
+        
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
     }
     
     

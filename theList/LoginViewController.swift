@@ -62,7 +62,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
             createUserVC.userHostID = "\(userFacebookID)_0"
         }
         else if segue.identifier == "homeSegue"{
-            println("fuck are we?")
+            println("Home segue")
         }
     }
     

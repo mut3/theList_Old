@@ -309,7 +309,7 @@
             </objects>
             <point key="canvasLocation" x="1899" y="1136"/>
         </scene>
-        <!--New Event View Controller-->
+        <!--Create New Event-->
         <scene sceneID="teY-kH-mx0">
             <objects>
                 <tableViewController id="48W-zr-XEe" customClass="NewEventViewController" customModule="theList" customModuleProvider="target" sceneMemberID="viewController">
@@ -421,7 +421,7 @@
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.16765309343434343" green="0.11038585982252024" blue="0.11556779584044587" alpha="0.64000000000000001" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         </tableViewCellContentView>
                                         <gestureRecognizers/>
                                         <connections>
@@ -492,7 +492,7 @@
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.16765309343434343" green="0.11038585982252024" blue="0.11556779584044587" alpha="0.64000000000000001" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         </tableViewCellContentView>
                                         <gestureRecognizers/>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -522,7 +522,7 @@
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.16765309343434343" green="0.11038585982252024" blue="0.11556779584044587" alpha="0.64000000000000001" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -532,7 +532,7 @@
                             <outlet property="delegate" destination="48W-zr-XEe" id="dQi-6b-jC1"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="ZUv-Zk-QdO"/>
+                    <navigationItem key="navigationItem" title="Create New Event" id="ZUv-Zk-QdO"/>
                     <connections>
                         <outlet property="capacityTextField" destination="JGZ-jD-tEN" id="VqA-JA-Le1"/>
                         <outlet property="dateTextField" destination="zDK-5F-o3z" id="0HK-gZ-2OQ"/>
@@ -561,9 +561,9 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1873" y="413"/>
+            <point key="canvasLocation" x="1871" y="406"/>
         </scene>
-        <!--Events-->
+        <!--Event-->
         <scene sceneID="Df5-Hf-nEb">
             <objects>
                 <viewController id="csJ-U0-C19" customClass="EventViewController" customModule="theList" customModuleProvider="target" sceneMemberID="viewController">
@@ -633,7 +633,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vfQ-gN-QTl">
-                                <rect key="frame" x="69" y="90" width="182" height="37"/>
+                                <rect key="frame" x="69" y="75" width="182" height="52"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.3466583130172714" green="0.64833135190217384" blue="0.47294587659031417" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -661,8 +661,8 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="...." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6IK-00-UTz">
-                                <rect key="frame" x="252" y="100" width="32" height="18"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="..." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6IK-00-UTz">
+                                <rect key="frame" x="252" y="100" width="32" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -671,7 +671,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Events" id="G3g-G0-X8y"/>
+                    <navigationItem key="navigationItem" title="Event" id="G3g-G0-X8y"/>
                     <connections>
                         <outlet property="eventCapacityOutlet" destination="oyh-v3-MTq" id="PPX-xb-tbk"/>
                         <outlet property="eventCurrNumGuestOutlet" destination="6IK-00-UTz" id="z1p-6Q-i38"/>
