@@ -57,6 +57,30 @@ class DatabaseWork {
                 NSLog("We are saving stuff")
             })
     }
+    /*
+    -----------
+    use the next call to return the created events recordID in the database
+    
+                        eventOfUser.record.recordID.recordName
+    
+    */
+    
+    func addUserToGuestList(eventName : String, eventID : String, guestID : String, hostID : String){
+        let guestListRecord = CKRecord(recordType: "GuestList")
+        guestListRecord.setValue(eventName, forKey: "EventName")
+        guestListRecord.setValue(eventID, forKey: "EventID")
+        guestListRecord.setValue(guestID, forKey: "GuestID")
+        guestListRecord.setValue(hostID, forKey: "HostID")
+        guestListRecord.setValue(0, forKey: "Status")
+        
+        
+        publicDB.saveRecord(guestListRecord, completionHandler: {(record,error)-> Void in
+            if error != nil {
+                println("\(error)")
+            }
+            NSLog("we are adding User To Guest List")
+        })
+    }
     
     func uploadEvent(cap : Int,eventDescript:String,eventEndtime : NSDate, eventStartTime: NSDate, eventName : String, hostID : String, eventTags : [String], photoList : [String],eventLocation : CLLocation, writtenLocation : String){
         let eventRecord = CKRecord(recordType: "Event")
@@ -93,6 +117,7 @@ class DatabaseWork {
             self.events.removeAll(keepCapacity: true)
             for record in results{
                 let eventOfUser = Event(record: record as CKRecord, database: self.publicDB)
+                
                 self.events.append(eventOfUser)
             }
             dispatch_async(dispatch_get_main_queue()){
@@ -153,6 +178,8 @@ class DatabaseWork {
         }
     
     }
+    
+    
     
 
 }

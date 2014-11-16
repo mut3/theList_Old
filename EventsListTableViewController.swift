@@ -22,7 +22,6 @@ class EventsListTableViewController: UITableViewController, EventsDelegate {
         givenEvents.delegate = self;
         givenEvents.fetchUserEventsWithDelegate("12314")
         
-        println(givenEvents.events.count)
         
 
         // Uncomment the following line to preserve selection between presentations
@@ -45,12 +44,12 @@ class EventsListTableViewController: UITableViewController, EventsDelegate {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return DatabaseWork.sharedInstanceOfTheList().events.count
     }
-   /* override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = self.tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
         let object = DatabaseWork.sharedInstanceOfTheList().events[indexPath.row]
-        //cell.textLabel?.text = object.eventName
-        //return cell
-    }*/
+        cell.textLabel?.text = object.eventName
+        return cell
+    }
     
     
     /*
