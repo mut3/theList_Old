@@ -20,14 +20,14 @@
 		ACC499AF1A0C3055000E5073 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACC499AE1A0C3055000E5073 /* Images.xcassets */; };
 		ACC499B21A0C3055000E5073 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACC499B01A0C3055000E5073 /* LaunchScreen.xib */; };
 		ACC499BE1A0C3056000E5073 /* theListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC499BD1A0C3056000E5073 /* theListTests.swift */; };
-		ACC499C91A0C3167000E5073 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACC499C81A0C3167000E5073 /* CloudKit.framework */; };
 		ACF384471A0C3710006CE905 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF384461A0C3710006CE905 /* LoginViewController.swift */; };
 		ACF384491A0C3A65006CE905 /* CreateUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF384481A0C3A65006CE905 /* CreateUserViewController.swift */; };
 		C5AA584A1A0C48C000910EBD /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5AA58491A0C48C000910EBD /* FacebookSDK.framework */; };
 		D101048E1A180330004ECDA0 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D101048D1A180330004ECDA0 /* FacebookSDK.framework */; };
 		D10104901A18088B004ECDA0 /* NewEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D101048F1A18088B004ECDA0 /* NewEventViewController.swift */; };
+		D125669A1A192FC500F5D2DB /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D12566991A192FC500F5D2DB /* CloudKit.framework */; };
 		D14F5D901A0EC49A0037FF78 /* DatabaseWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14F5D8F1A0EC49A0037FF78 /* DatabaseWork.swift */; };
-		D1F195371A0EBB8400D24CF1 /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F195361A0EBB8400D24CF1 /* CreateEventViewController.swift */; };
+		D1C1FA5F1A19287500B80F6B /* FindEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C1FA5E1A19287500B80F6B /* FindEventViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,15 +59,15 @@
 		ACC499BC1A0C3056000E5073 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ACC499BD1A0C3056000E5073 /* theListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = theListTests.swift; sourceTree = "<group>"; };
 		ACC499C71A0C30E5000E5073 /* theList.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = theList.entitlements; sourceTree = "<group>"; };
-		ACC499C81A0C3167000E5073 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		ACF384431A0C3554006CE905 /* Bridge-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridge-Header.h"; sourceTree = "<group>"; };
 		ACF384461A0C3710006CE905 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		ACF384481A0C3A65006CE905 /* CreateUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateUserViewController.swift; sourceTree = "<group>"; };
 		C5AA58491A0C48C000910EBD /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../FacebookSDK.framework; sourceTree = "<group>"; };
 		D101048D1A180330004ECDA0 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		D101048F1A18088B004ECDA0 /* NewEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewEventViewController.swift; sourceTree = "<group>"; };
+		D12566991A192FC500F5D2DB /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		D14F5D8F1A0EC49A0037FF78 /* DatabaseWork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseWork.swift; sourceTree = "<group>"; };
-		D1F195361A0EBB8400D24CF1 /* CreateEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
+		D1C1FA5E1A19287500B80F6B /* FindEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindEventViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,7 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ACC499C91A0C3167000E5073 /* CloudKit.framework in Frameworks */,
+				D125669A1A192FC500F5D2DB /* CloudKit.framework in Frameworks */,
 				D101048E1A180330004ECDA0 /* FacebookSDK.framework in Frameworks */,
 				C5AA584A1A0C48C000910EBD /* FacebookSDK.framework in Frameworks */,
 			);
@@ -94,8 +94,8 @@
 		ACC499961A0C3055000E5073 = {
 			isa = PBXGroup;
 			children = (
+				D12566991A192FC500F5D2DB /* CloudKit.framework */,
 				D101048D1A180330004ECDA0 /* FacebookSDK.framework */,
-				ACC499C81A0C3167000E5073 /* CloudKit.framework */,
 				ACC499A11A0C3055000E5073 /* theList */,
 				ACC499BA1A0C3056000E5073 /* theListTests */,
 				ACC499A01A0C3055000E5073 /* Products */,
@@ -167,10 +167,10 @@
 		D14F5D921A0EC4BB0037FF78 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D1C1FA5E1A19287500B80F6B /* FindEventViewController.swift */,
 				ACF384481A0C3A65006CE905 /* CreateUserViewController.swift */,
 				42255F1F1A101BD100567334 /* EventsListTableViewController.swift */,
 				ACF384461A0C3710006CE905 /* LoginViewController.swift */,
-				D1F195361A0EBB8400D24CF1 /* CreateEventViewController.swift */,
 				D101048F1A18088B004ECDA0 /* NewEventViewController.swift */,
 				ACC499A91A0C3055000E5073 /* ViewController.swift */,
 				42255F211A11491000567334 /* EventViewController.swift */,
@@ -293,9 +293,9 @@
 				42255F181A10003800567334 /* Event.swift in Sources */,
 				42255F221A11491000567334 /* EventViewController.swift in Sources */,
 				ACC499A51A0C3055000E5073 /* AppDelegate.swift in Sources */,
-				D1F195371A0EBB8400D24CF1 /* CreateEventViewController.swift in Sources */,
 				ACC499A81A0C3055000E5073 /* theList.xcdatamodeld in Sources */,
 				429984DC1A0C7F8A00B4FD7D /* createUser.swift in Sources */,
+				D1C1FA5F1A19287500B80F6B /* FindEventViewController.swift in Sources */,
 				429984DA1A0C7A1700B4FD7D /* User.swift in Sources */,
 				424E4D021A1662D00066032E /* CorrectEventsViewController.swift in Sources */,
 				42255F201A101BD100567334 /* EventsListTableViewController.swift in Sources */,
