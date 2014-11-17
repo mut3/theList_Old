@@ -45,16 +45,20 @@ class EventViewController: UIViewController, MadeEventDelegate{
     func showLoadedEvent(){
         print("EVENT: ")
         println(event)
-        var photoAssetURL = event.photos
-        var err : NSError?
-        println(" IMAGE FILES IN THE THINg ------------- ")
-        println(photoAssetURL)
-        //var imageData : NSData = NSData(contentsOfURL: photoAssetURL)
-//        photoImage = UIImage(named: "\(photoAssetURL)")
-//
-//        eventImageView.image = photoImage
+        if(event.photos.count != 0) {
+            var photoAssetURL = event.photos[0].fileURL
+            println(" IMAGE FILES IN THE THINg ------------- ")
+            println(photoAssetURL)
+            
+            var imageData = NSData(contentsOfURL: photoAssetURL)
+            photoImage = UIImage(data: imageData!)
+            eventImageView.image = photoImage
+        }
+    
         
         eventNameLabel.text = event.name
+        
+        
         hostNameButton.titleLabel!.text = " "
         hostRatingLabel.text = "★★★☆☆"
         capacityLabel.text = "0 / \(event.capacity)"
