@@ -101,6 +101,11 @@ class DatabaseWork {
         })
         
     }
+    /*
+        featchUserProfile will retreive the current user's name, age and description from the 
+        the server. 
+    */
+    
     
     /*
     takes the current user's hostID and retreive all of his past events created.

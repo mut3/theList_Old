@@ -11,6 +11,7 @@
 		42255F201A101BD100567334 /* EventsListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42255F1F1A101BD100567334 /* EventsListTableViewController.swift */; };
 		42255F221A11491000567334 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42255F211A11491000567334 /* EventViewController.swift */; };
 		423FD96C1A181C540050CDCD /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 423FD96B1A181C540050CDCD /* FacebookSDK.framework */; };
+		423FD96E1A195AFB0050CDCD /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423FD96D1A195AFB0050CDCD /* ProfileViewController.swift */; };
 		424E4D021A1662D00066032E /* CorrectEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424E4D011A1662D00066032E /* CorrectEventsViewController.swift */; };
 		429984DA1A0C7A1700B4FD7D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429984D91A0C7A1700B4FD7D /* User.swift */; };
 		429984DC1A0C7F8A00B4FD7D /* createUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429984DB1A0C7F8A00B4FD7D /* createUser.swift */; };
@@ -44,6 +45,7 @@
 		42255F1F1A101BD100567334 /* EventsListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventsListTableViewController.swift; path = ../EventsListTableViewController.swift; sourceTree = "<group>"; };
 		42255F211A11491000567334 /* EventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
 		423FD96B1A181C540050CDCD /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = "../ORGANIZE THIS FOLDER YOU PLEB/facebookPhotos/FacebookSDK/FacebookSDK.framework"; sourceTree = "<group>"; };
+		423FD96D1A195AFB0050CDCD /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		424E4D011A1662D00066032E /* CorrectEventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CorrectEventsViewController.swift; sourceTree = "<group>"; };
 		429984D91A0C7A1700B4FD7D /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		429984DB1A0C7F8A00B4FD7D /* createUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = createUser.swift; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 		D14F5D921A0EC4BB0037FF78 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				423FD96D1A195AFB0050CDCD /* ProfileViewController.swift */,
 				ACF384481A0C3A65006CE905 /* CreateUserViewController.swift */,
 				ACF384461A0C3710006CE905 /* LoginViewController.swift */,
 				42255F1F1A101BD100567334 /* EventsListTableViewController.swift */,
@@ -286,6 +289,7 @@
 				ACF384491A0C3A65006CE905 /* CreateUserViewController.swift in Sources */,
 				D14F5D901A0EC49A0037FF78 /* DatabaseWork.swift in Sources */,
 				ACC499AA1A0C3055000E5073 /* ViewController.swift in Sources */,
+				423FD96E1A195AFB0050CDCD /* ProfileViewController.swift in Sources */,
 				42255F181A10003800567334 /* Event.swift in Sources */,
 				42255F221A11491000567334 /* EventViewController.swift in Sources */,
 				ACC499A51A0C3055000E5073 /* AppDelegate.swift in Sources */,
