@@ -627,13 +627,6 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="lQq-Sg-eiM" userLabel="Tags">
-                                <rect key="frame" x="239" y="304" width="58" height="107"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="separatorColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <sections/>
-                            </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Mzh-J9-BA7">
                                 <rect key="frame" x="210" y="462" width="77" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -644,6 +637,7 @@
                                 </state>
                                 <connections>
                                     <action selector="attendEventAction:" destination="csJ-U0-C19" eventType="touchUpInside" id="WUm-oE-qqb"/>
+                                    <action selector="testingForImage" destination="csJ-U0-C19" eventType="touchUpInside" id="t4w-3T-Wv2"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vfQ-gN-QTl">
@@ -668,6 +662,13 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" id="EaT-iE-F6s">
+                                <rect key="frame" x="239" y="304" width="65" height="107"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -678,7 +679,7 @@
                         <outlet property="eventDescriptionText" destination="ym8-Rp-om8" id="IEs-RC-ILB"/>
                         <outlet property="eventImageView" destination="1WN-rF-YQq" id="Szv-IU-mXm"/>
                         <outlet property="eventNameLabel" destination="vfQ-gN-QTl" id="RPa-nW-90y"/>
-                        <outlet property="eventTagsView" destination="lQq-Sg-eiM" id="Wka-xG-lYz"/>
+                        <outlet property="eventTagsField" destination="EaT-iE-F6s" id="DDS-t8-nf0"/>
                         <outlet property="hostNameButton" destination="eX7-hS-t5B" id="PX2-cU-ZDP"/>
                         <outlet property="hostRatingLabel" destination="Jar-8N-RPS" id="o4e-3P-Ksx"/>
                     </connections>

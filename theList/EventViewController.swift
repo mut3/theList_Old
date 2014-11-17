@@ -9,7 +9,7 @@
 import UIKit
 import CloudKit
 
-class EventViewController: UIViewController, MadeEventDelegate {
+class EventViewController: UIViewController, MadeEventDelegate{
     
     //Event checks current USER ID vs event loaded ID. If same, show host options, else show eventGoer options
     
@@ -17,6 +17,7 @@ class EventViewController: UIViewController, MadeEventDelegate {
     
     var event : Event!
     
+    @IBOutlet var eventTagsField: UITextView!
     @IBOutlet var eventNameLabel : UILabel!
     @IBOutlet var hostNameButton : UIButton!
     @IBOutlet var hostRatingLabel : UILabel!
@@ -24,7 +25,8 @@ class EventViewController: UIViewController, MadeEventDelegate {
     @IBOutlet var capacityLabel : UILabel!
     @IBOutlet var eventImageView : UIImageView!
     @IBOutlet var eventDescriptionText : UITextView!
-    @IBOutlet var eventTagsView : UITableView!
+    
+    var photoImage : UIImage!
     
     var eventRecord : CKRecord!
 
@@ -43,18 +45,31 @@ class EventViewController: UIViewController, MadeEventDelegate {
     func showLoadedEvent(){
         print("EVENT: ")
         println(event)
+        var photoAssetURL = event.photos
+        var err : NSError?
+        println(" IMAGE FILES IN THE THINg ------------- ")
+        println(photoAssetURL)
+        //var imageData : NSData = NSData(contentsOfURL: photoAssetURL)
+//        photoImage = UIImage(named: "\(photoAssetURL)")
+//
+//        eventImageView.image = photoImage
+        
         eventNameLabel.text = event.name
         hostNameButton.titleLabel!.text = " "
         hostRatingLabel.text = "★★★☆☆"
         capacityLabel.text = "0 / \(event.capacity)"
         for tag in event.tags {
+            eventTagsField.text = "\(eventTagsField.text) \(tag)\n"
             println(tag)
         }
         eventDescriptionText.text = event.descript
-        
     }
     
-   
+ 
+    @IBAction func testingForImage() {
+        println(photoImage)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -89,6 +104,7 @@ class EventViewController: UIViewController, MadeEventDelegate {
         let alert = UIAlertView(title: "error loading created event", message: message, delegate: nil, cancelButtonTitle: "ok")
         alert.show()
     }
+    /* tag table view */
     
     
     /*
