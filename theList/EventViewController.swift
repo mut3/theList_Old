@@ -7,40 +7,54 @@
 //
 
 import UIKit
+import CloudKit
 
-class EventViewController: UIViewController {
+class EventViewController: UIViewController, MadeEventDelegate {
     
-    @IBOutlet var eventTitleOutlet: UILabel!
-    var eventTitleStr : String = ""
+    //Event checks current USER ID vs event loaded ID. If same, show host options, else show eventGoer options
     
-    @IBOutlet var eventCapacityOutlet: UILabel!
-    var eventCapStr : String = ""
+    let sharedEvent : DatabaseWork = DatabaseWork.sharedInstanceOfTheList()
+    
+    var event : Event!
+    
+    @IBOutlet var eventNameLabel : UILabel!
+    @IBOutlet var hostNameButton : UIButton!
+    @IBOutlet var hostRatingLabel : UILabel!
+    @IBOutlet var capacityButton : UIButton!
+    @IBOutlet var capacityLabel : UILabel!
+    @IBOutlet var eventImageView : UIImageView!
+    @IBOutlet var eventDescriptionText : UITextView!
+    @IBOutlet var eventTagsView : UITableView!
+    
+    var eventRecord : CKRecord!
 
-    @IBOutlet var eventPictureOutlet: UIImageView!
-    //var eventPicture : UIImage
-    
-    @IBOutlet var eventDescriptionOutlet: UITextView!
-    var eventDescriptStr : String = ""
-    
-    
-    @IBOutlet var eventTagsOutlet: UITableView!
-    //var eventTagsList : [String]
-    
-    
-    @IBOutlet var eventCurrNumGuestOutlet: UILabel!
-    var eventCurrNumGuest : Int = 0
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        eventTitleOutlet.text = eventTitleStr
-        //eventCurrNumGuestOutlet.text = "\(eventCurrNumGuest)"
-//        eventCapacityOutlet.text = eventCapStr
-        eventDescriptionOutlet.text = eventDescriptStr
+        
+        sleep(1)
+        sharedEvent.madeEventDelegate = self;
+        
+        sharedEvent.getEventWithID(eventRecord)
+        
 
         // Do any additional setup after loading the view.
     }
 
+    func showLoadedEvent(){
+        print("EVENT: ")
+        println(event)
+        eventNameLabel.text = event.name
+        hostNameButton.titleLabel!.text = " "
+        hostRatingLabel.text = "★★★☆☆"
+        capacityLabel.text = "0 / \(event.capacity)"
+        for tag in event.tags {
+            println(tag)
+        }
+        eventDescriptionText.text = event.descript
+        
+    }
+    
+   
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -62,6 +76,19 @@ class EventViewController: UIViewController {
     }
     
     
+    /* Events Delegate */
+    func madeEventsUpdated(event : Event) {
+        self.event = event
+        showLoadedEvent()
+        print("FIRST EVEN TEST:")
+        println(event)
+    }
+    
+    func errorMadeUpdate(error: NSError) {
+        let message = error.localizedDescription
+        let alert = UIAlertView(title: "error loading created event", message: message, delegate: nil, cancelButtonTitle: "ok")
+        alert.show()
+    }
     
     
     /*

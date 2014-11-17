@@ -10,14 +10,20 @@ import Foundation
 import CloudKit
 
 protocol EventsDelegate{
-    func pastEventsListUpdated()
     func errorUpdate(error:NSError)
+    func pastEventsListUpdated()
+}
+
+protocol MadeEventDelegate{
+    func madeEventsUpdated(event : Event)
+    func errorMadeUpdate(error:NSError)
 }
 
 
 class DatabaseWork {
     
     var delegate : EventsDelegate?
+    var madeEventDelegate : MadeEventDelegate?
     
     var container : CKContainer
     var publicDB : CKDatabase
@@ -29,6 +35,8 @@ class DatabaseWork {
     }
     
     var events = [Event]()
+    
+    var madeEvents = [Event]()
     
     init(){
         container = CKContainer.defaultContainer()
@@ -58,24 +66,27 @@ class DatabaseWork {
             })
     }
     
-    func uploadEvent(cap : Int,eventDescript:String,eventEndtime : NSDate, eventStartTime: NSDate, eventName : String, hostID : String, eventTags : [String], photoList : [CKAsset],eventLocation : CLLocation, writtenLocation : String){
+    func uploadEvent(cap : Int,eventDescript:String,eventEndtime : NSDate, eventStartTime: NSDate, eventName : String, hostID : String, eventTags : [String], photoList : [CKAsset],eventLocation : CLLocation, writtenLocation : String)-> CKRecord{
         let eventRecord = CKRecord(recordType: "Event")
         
-            eventRecord.setValue(cap, forKey: "EventCapacity")
-            eventRecord.setValue(eventDescript, forKey: "EventDescription")
-            eventRecord.setValue(eventName, forKey: "EventName")
-            eventRecord.setValue(eventEndtime, forKey: "EventEndTime")
-            eventRecord.setValue(eventStartTime, forKey: "EventStartTime")
-            eventRecord.setValue(hostID, forKey: "HostID")
-            eventRecord.setValue(photoList, forKey: "Photos")
-            eventRecord.setValue(eventTags, forKey: "tags")
-            eventRecord.setValue(eventLocation, forKey: "EventLocation")
-            eventRecord.setValue(writtenLocation, forKey: "EventAddress")
-            publicDB.saveRecord(eventRecord, completionHandler: {(results,error) -> Void in
-                if (error != nil){
-                    NSLog("\(error)")}
+        eventRecord.setValue(cap, forKey: "EventCapacity")
+        eventRecord.setValue(eventDescript, forKey: "EventDescription")
+        eventRecord.setValue(eventName, forKey: "EventName")
+        eventRecord.setValue(eventEndtime, forKey: "EventEndTime")
+        eventRecord.setValue(eventStartTime, forKey: "EventStartTime")
+        eventRecord.setValue(hostID, forKey: "HostID")
+        eventRecord.setValue(photoList, forKey: "Photos")
+        eventRecord.setValue(eventTags, forKey: "tags")
+        eventRecord.setValue(eventLocation, forKey: "EventLocation")
+        eventRecord.setValue(writtenLocation, forKey: "EventAddress")
+        println(" event ID : \(eventRecord.recordID)")
+        publicDB.saveRecord(eventRecord, completionHandler: {(results,error) -> Void in
+            println(eventRecord.recordID.recordName)
+            if (error != nil){
+                NSLog("\(error)")}
         })
-        
+        println(" event ID : \(eventRecord.recordID.recordName)")
+        return eventRecord
     }
     
     /*
@@ -152,6 +163,44 @@ class DatabaseWork {
             
         }
     
+    }
+    
+    
+    /*
+    get the created event by using the recordName from the record id
+    */
+    func getEventWithID(eventID : CKRecord){
+        println("event id which is a record is : \(eventID)")
+        
+        let eventRecord = CKRecord(recordType: "Event")
+        let getMadeEvent = NSPredicate(format: "recordID = %@",CKRecordID(recordName : eventID.recordID.recordName))
+        
+        print("hello predicate ")
+        println(getMadeEvent)
+        let query = CKQuery(recordType: "Event", predicate: getMadeEvent)
+        println(query)
+        publicDB.performQuery(query, inZoneWithID: nil){
+            results, error in
+            println(results)
+            if error != nil {
+                dispatch_async(dispatch_get_main_queue()){
+                    self.madeEventDelegate?.errorMadeUpdate(error)
+                    return
+                }
+            }else{
+                self.madeEvents.removeAll(keepCapacity: true)
+                println("inside the database call")
+                for record in results{
+                    println("inside the database call part 2")
+                    let eventOfUser = Event(record: record as CKRecord, database: self.publicDB)
+                    self.madeEvents.append(eventOfUser)
+                }
+                dispatch_async(dispatch_get_main_queue()){
+                    self.madeEventDelegate?.madeEventsUpdated(self.madeEvents[0])
+                    return
+                }
+            }
+        }
     }
     
 

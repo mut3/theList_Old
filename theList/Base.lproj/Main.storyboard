@@ -518,7 +518,17 @@
                                                     </state>
                                                     <connections>
                                                         <action selector="createEventButtonPressed:" destination="48W-zr-XEe" eventType="touchUpInside" id="Wnh-Eu-IJI"/>
-                                                        <segue destination="csJ-U0-C19" kind="push" id="ggx-TV-SSW"/>
+                                                        <segue destination="csJ-U0-C19" kind="push" identifier="goToEventSegue" id="ggx-TV-SSW"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="vG1-pF-SNt">
+                                                    <rect key="frame" x="245" y="27" width="71" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Test Event">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="hitTestEntry:" destination="48W-zr-XEe" eventType="touchUpInside" id="n9e-Xk-pCU"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -577,13 +587,6 @@
                                 <rect key="frame" x="87" y="159" width="146" height="121"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" id="ym8-Rp-om8" userLabel="Description">
-                                <rect key="frame" x="26" y="304" width="173" height="107"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="QXr-8R-8sn">
                                 <rect key="frame" x="51" y="462" width="77" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -600,9 +603,8 @@
                                 <rect key="frame" x="0.0" y="84" width="81" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="Host">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="Host"/>
                                 <connections>
                                     <action selector="goToHostScreen:" destination="csJ-U0-C19" eventType="touchUpInside" id="Y2U-nP-FNw"/>
                                 </connections>
@@ -659,20 +661,31 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" id="ym8-Rp-om8" userLabel="Description">
+                                <rect key="frame" x="26" y="304" width="173" height="107"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Event" id="G3g-G0-X8y"/>
                     <connections>
-                        <outlet property="eventDescriptionOutlet" destination="ym8-Rp-om8" id="5fy-zh-N1A"/>
-                        <outlet property="eventPictureOutlet" destination="1WN-rF-YQq" id="moi-BM-8Ca"/>
-                        <outlet property="eventTagsOutlet" destination="lQq-Sg-eiM" id="NWG-9F-qVg"/>
-                        <outlet property="eventTitleOutlet" destination="vfQ-gN-QTl" id="RhD-D0-MRd"/>
+                        <outlet property="capacityButton" destination="8xU-Bg-ZXK" id="q5r-3X-Pxy"/>
+                        <outlet property="capacityLabel" destination="VGW-aI-ohM" id="kEA-QG-chf"/>
+                        <outlet property="eventDescriptionText" destination="ym8-Rp-om8" id="IEs-RC-ILB"/>
+                        <outlet property="eventImageView" destination="1WN-rF-YQq" id="Szv-IU-mXm"/>
+                        <outlet property="eventNameLabel" destination="vfQ-gN-QTl" id="RPa-nW-90y"/>
+                        <outlet property="eventTagsView" destination="lQq-Sg-eiM" id="Wka-xG-lYz"/>
+                        <outlet property="hostNameButton" destination="eX7-hS-t5B" id="PX2-cU-ZDP"/>
+                        <outlet property="hostRatingLabel" destination="Jar-8N-RPS" id="o4e-3P-Ksx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DUw-bA-vzO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2325" y="406"/>
+            <point key="canvasLocation" x="2556" y="406"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="H3w-WC-LaS">

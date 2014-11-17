@@ -11,32 +11,32 @@ import CloudKit
 
 class Event : NSObject{
     var record : CKRecord!
-    var eventDescript : String!
-    var eventEndTime : NSDate!
-    var eventStartTime : NSDate!
-    var eventLocation : CLLocation!
-    var eventName : String!
+    var descript : String!
+    var endTime : NSDate!
+    var startTime : NSDate!
+    var location : CLLocation!
+    var name : String!
     var hostID : String!
     var photos : [CKAsset]!
     var tags : [String]!
-    var eventCapacity : Int!
-    var eventAddress : String!
+    var capacity : Int!
+    var address : String!
     var database : CKDatabase!
     
     
     init(record : CKRecord, database : CKDatabase){
         self.record = record
         self.database = database
-        self.eventDescript = record.objectForKey("EventDescription") as String!
-        self.eventStartTime = record.objectForKey("EventStartTime") as NSDate!
-        self.eventEndTime = record.objectForKey("EventEndTime") as NSDate!
-        self.eventLocation = record.objectForKey("EventLocation") as CLLocation!
-        self.eventName = record.objectForKey("EventName") as String!
+        self.descript = record.objectForKey("EventDescription") as String!
+        self.startTime = record.objectForKey("EventStartTime") as NSDate!
+        self.endTime = record.objectForKey("EventEndTime") as NSDate!
+        self.location = record.objectForKey("EventLocation") as CLLocation!
+        self.name = record.objectForKey("EventName") as String!
         self.hostID = record.objectForKey("HostID") as String!
         self.photos = record.objectForKey("Photos") as [CKAsset]!
         self.tags = record.objectForKey("tags") as [String]!
-        self.eventCapacity = record.objectForKey("EventCapacity") as Int!
-        self.eventAddress  = record.objectForKey("EventAddress") as String!
+        self.capacity = record.objectForKey("EventCapacity") as Int!
+        self.address  = record.objectForKey("EventAddress") as String!
         
     }
     

@@ -19,8 +19,10 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
     var eventTimeEnd : String!
     var eventDate : String!
     var eventCapacity : Int!
+    var eventRecord : CKRecord!
     
     var eventImages : [CKAsset] = []
+    var numberOfImages : Int = 0
     
     // EVENT TAGS VARIABLES
     var eventTag : String!
@@ -52,7 +54,7 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
-        println((CLLocationManager.locationServicesEnabled()))
+        //println((CLLocationManager.locationServicesEnabled()))
         
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         getCurrentLocation(locationManager)
@@ -188,9 +190,7 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
         if segue.identifier == "goToEventSegue"{
             println("we are preparing to go the event screen")
             let eventMadeVC : EventViewController = segue.destinationViewController as EventViewController
-            eventMadeVC.eventDescriptStr = descriptionTextArea.text
-            eventMadeVC.eventTitleStr = eventNameField.text
-            eventMadeVC.eventCapStr = capacityTextField.text
+            eventMadeVC.eventRecord = eventRecord
         }
     }
     
@@ -244,9 +244,36 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
     }
     
     
+    /* ********************************* TEST BUTTON ***/
+    
+    
+    @IBAction func hitTestEntry(sender : AnyObject) {
+        
+        let numberModifier = Int(NSDate.timeIntervalSinceReferenceDate() % 100000)
+        eventNameField.text = "Test Event #\(numberModifier)"
+
+        locationAddressField.text = "33 colchester ave."
+        locationCityField.text = "Burlington"
+        locationZipField.text = "05401"
+        locationStateField.text = "VT"
+   
+        forwardGeocode(locationAddressField.text + ", " + locationZipField.text)
+        
+        timeStartTextField.text = "12:00"
+        timeEndTextField.text = "1:00"
+        dateTextField.text = "01/01/2015"
+        
+        capacityTextField.text = "10"
+        tagsTextField.text = "Test01, test02, test03"
+        descriptionTextArea.text = "This is a test event."
+    }
+    
+    
+    /* *************************************************/
+    
     @IBAction func addPictureButtonPressed(sender : AnyObject) {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary){
-            println("Button capture")
+            //println("Button capture")
             var imag = UIImagePickerController()
             imag.delegate = self
             imag.sourceType = UIImagePickerControllerSourceType.PhotoLibrary;
@@ -273,9 +300,10 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
         imageData.writeToFile(myFilePath, atomically: true)
         let url = NSURL(fileURLWithPath: myFilePath)
         let asset = CKAsset(fileURL: url)
-        for element in eventImages {
-            println(element)
-        }
+        
+//        for element in eventImages {
+//            println(element)
+//        }
         numberOfImages += 1
         eventImages.append(asset)
         
@@ -376,7 +404,7 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
         eventCapacity = capacityTextField.text.toInt()
         eventDescription = descriptionTextArea.text
         
-        println(eventLocation)
+        //println(eventLocation)
         
         //var tempEventTagArray : [String] = [eventTag, ""]
         var photos : [String] = ["dd","aa"]
@@ -386,7 +414,7 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
         eventTags = (tagsTextField.text).componentsSeparatedByString(", ")
         
         
-        databaseWork.uploadEvent(eventCapacity, eventDescript: eventDescription, eventEndtime: eventEndTimeObject, eventStartTime: eventStartTimeObject, eventName: eventName, hostID: "12314", eventTags: eventTags, photoList: eventImages, eventLocation: eventLocation, writtenLocation: eventLocationWritten)
+        eventRecord = databaseWork.uploadEvent(eventCapacity, eventDescript: eventDescription, eventEndtime: eventEndTimeObject, eventStartTime: eventStartTimeObject, eventName: eventName, hostID: "12314", eventTags: eventTags, photoList: eventImages, eventLocation: eventLocation, writtenLocation: eventLocationWritten)
     }
     
     
