@@ -45,14 +45,14 @@ class EventViewController: UIViewController, MadeEventDelegate{
     func showLoadedEvent(){
         print("EVENT: ")
         println(event)
-        var photoAssetURL = event.photos
-        var err : NSError?
+        var photoAssetURL = event.photos[0].fileURL
         println(" IMAGE FILES IN THE THINg ------------- ")
         println(photoAssetURL)
-        //var imageData : NSData = NSData(contentsOfURL: photoAssetURL)
-//        photoImage = UIImage(named: "\(photoAssetURL)")
-//
-//        eventImageView.image = photoImage
+        
+        var imageData = NSData(contentsOfURL: photoAssetURL)
+        photoImage = UIImage(data: imageData)
+
+        eventImageView.image = photoImage
         
         eventNameLabel.text = event.name
         hostNameButton.titleLabel!.text = " "
@@ -60,7 +60,7 @@ class EventViewController: UIViewController, MadeEventDelegate{
         capacityLabel.text = "0 / \(event.capacity)"
         for tag in event.tags {
             eventTagsField.text = "\(eventTagsField.text) \(tag)\n"
-            println(tag)
+            //println(tag)
         }
         eventDescriptionText.text = event.descript
     }

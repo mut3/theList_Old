@@ -17,10 +17,11 @@ class EventsListTableViewController: UITableViewController, EventsDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        println("we load this past events list")
         
         givenEvents.delegate = self;
         givenEvents.fetchUserEventsWithDelegate("12314")
+        
         
         println(givenEvents.events.count)
         
@@ -43,13 +44,14 @@ class EventsListTableViewController: UITableViewController, EventsDelegate {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
         return DatabaseWork.sharedInstanceOfTheList().events.count
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = self.tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
         let object = DatabaseWork.sharedInstanceOfTheList().events[indexPath.row]
         // changed textLabel? to textLabel so it would build
-        cell.textLabel.text = object.name
+        cell.textLabel?.text = object.name
         return cell
     }
     
@@ -57,7 +59,7 @@ class EventsListTableViewController: UITableViewController, EventsDelegate {
     /*
         database delegate
     */
-    func pastEventsListUpdated() {
+    func pastEventsListUpdated(userEvents : [Event]) {
         refreshControl?.endRefreshing()
         tableView.reloadData()
     }
