@@ -33,6 +33,11 @@ protocol UploadingEventDelegate{
     func doneUploading(eventID : String)
 }
 
+protocol GuestsDelegate{
+    func errorUpdate(error:NSError)
+    func guestListUpdated()
+}
+
 class DatabaseWork {
     
     var delegate : EventsDelegate?

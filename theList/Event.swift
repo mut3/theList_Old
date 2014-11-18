@@ -22,6 +22,10 @@ class Event : NSObject{
     var capacity : Int!
     var address : String!
     var database : CKDatabase!
+    var acceptedGuests : [String]!
+    var confirmedGuests : [String]!
+    var pendingGuests : [String]!
+    
     
     
     init(record : CKRecord, database : CKDatabase){
@@ -37,6 +41,9 @@ class Event : NSObject{
         self.tags = record.objectForKey("tags") as [String]!
         self.capacity = record.objectForKey("EventCapacity") as Int!
         self.address  = record.objectForKey("EventAddress") as String!
+        self.acceptedGuests = record.objectForKey("AcceptedGuests") as [String]!
+        self.confirmedGuests = record.objectForKey("ConfirmedGuests") as [String]!
+        self.pendingGuests = record.objectForKey("PendingGuests") as [String]!
         
     }
     
