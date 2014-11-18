@@ -29,12 +29,17 @@ protocol FoundEventCondenseDelegate{
     func errorFindingCondensedEvents(error:NSError)
 }
 
+protocol UploadingEventDelegate{
+    func doneUploading(eventID : String)
+}
+
 class DatabaseWork {
     
     var delegate : EventsDelegate?
     var madeEventDelegate : MadeEventDelegate?
     var foundEventsDelegate : FoundEventsDelegate?
     var foundCondensedEventsDelegate : FoundEventCondenseDelegate?
+    var uploadEventDelegate :UploadingEventDelegate?
     
     var container : CKContainer
     var publicDB : CKDatabase
@@ -94,7 +99,12 @@ class DatabaseWork {
         publicDB.saveRecord(eventRecord, completionHandler: {(results,error) -> Void in
             println(eventRecord.recordID.recordName)
             if (error != nil){
-                NSLog("\(error)")}
+                NSLog("\(error)")
+            }
+            dispatch_async(dispatch_get_main_queue()){
+                self.uploadEventDelegate?.doneUploading("\(eventRecord.recordID.recordName)")
+                return
+            }
         })
         println(" event ID : \(eventRecord.recordID.recordName)")
         return eventRecord

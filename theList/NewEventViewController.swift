@@ -11,7 +11,7 @@ import CoreLocation
 import Foundation
 import CloudKit
 
-class NewEventViewController: UITableViewController, CLLocationManagerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate /*UIPickerViewDataSource,UIPickerViewDelegate*/{
+class NewEventViewController: UITableViewController, CLLocationManagerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UploadingEventDelegate /*UIPickerViewDataSource,UIPickerViewDelegate*/{
     var eventName : String!
     var eventLocation : CLLocation!
     var eventLocationWritten : String!
@@ -39,11 +39,12 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
     let AddTagsShifter = 40
     var addTagsCounter = 0
     
-    
+    let databaseThing : DatabaseWork = DatabaseWork.sharedInstanceOfTheList()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        databaseThing.uploadEventDelegate = self
 //        tagsPickerOutlet.hidden = true
 //        tagsPickerOutlet.delegate = self
 //        tagsPickerOutlet.dataSource = self
@@ -405,6 +406,11 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
         eventRecord = databaseWork.uploadEvent(eventCapacity, eventDescript: eventDescription, eventEndtime: eventEndTimeObject, eventStartTime: eventStartTimeObject, eventName: eventName, hostID: "2", eventTags: eventTags, photoList: eventImages, eventLocation: eventLocation, writtenLocation: eventLocationWritten)
         
     }
+    
+    func doneUploading(eventID: String) {
+        println("the thing work so well #######################")
+    }
+    
     
     
     func dateFromString(date : String, time : String) -> NSDate {

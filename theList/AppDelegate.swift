@@ -69,7 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
         let modelURL = NSBundle.mainBundle().URLForResource("theList", withExtension: "momd")!
         //strapped a ! onto the end of the next line to make it build
-        return NSManagedObjectModel(contentsOfURL: modelURL)
+        return NSManagedObjectModel(contentsOfURL: modelURL)!
     }()
 
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {

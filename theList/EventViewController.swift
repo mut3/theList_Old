@@ -70,7 +70,7 @@ class EventViewController: UIViewController, MadeEventDelegate{
             println(photoAssetURL)
             
             var imageData = NSData(contentsOfURL: photoAssetURL)
-            photoImage = UIImage(data: imageData)
+            photoImage = UIImage(data: imageData!)
             eventImageView.image = photoImage
         }
     
