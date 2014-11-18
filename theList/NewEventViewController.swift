@@ -191,6 +191,7 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
             println("we are preparing to go the event screen")
             let eventMadeVC : EventViewController = segue.destinationViewController as EventViewController
             eventMadeVC.eventRecord = eventRecord
+            eventMadeVC.segueIdentity = "goToEventSegue"
         }
     }
     
@@ -384,16 +385,7 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
     
     
     @IBAction func createEventButtonPressed(sender : AnyObject) {
-        
-        //        var eventName : String!
-        //        var eventLocation : CLLocation!
-        //        var eventLocationWritten : String!
-        //        var eventTimeStart : String!
-        //        var eventTimeEnd : String!
-        //        var eventDate : String!
-        //        var eventCapacity : Int!
-        //        var eventTag : String!
-        //        var eventDescription : String!
+
         
         eventName = eventNameField.text
         eventLocationWritten = locationAddressField.text  + ", " + locationCityField.text + ", " + locationStateField.text + " " + locationZipField.text
@@ -403,11 +395,7 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
         //eventTag = tagsTextField.text
         eventCapacity = capacityTextField.text.toInt()
         eventDescription = descriptionTextArea.text
-        
-        //println(eventLocation)
-        
-        //var tempEventTagArray : [String] = [eventTag, ""]
-        var photos : [String] = ["dd","aa"]
+
         
         let eventStartTimeObject = dateFromString(eventDate, time: eventTimeStart)
         let eventEndTimeObject = dateFromString(eventDate, time: eventTimeEnd)
@@ -415,6 +403,7 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
         
         
         eventRecord = databaseWork.uploadEvent(eventCapacity, eventDescript: eventDescription, eventEndtime: eventEndTimeObject, eventStartTime: eventStartTimeObject, eventName: eventName, hostID: "2", eventTags: eventTags, photoList: eventImages, eventLocation: eventLocation, writtenLocation: eventLocationWritten)
+        
     }
     
     

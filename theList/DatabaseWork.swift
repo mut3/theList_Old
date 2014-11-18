@@ -19,11 +19,17 @@ protocol MadeEventDelegate{
     func errorMadeUpdate(error:NSError)
 }
 
+protocol FoundEventsDelegate{
+    func foundEventsUpdate(events : [Event])
+    func errorFindingEvents(error:NSError)
+}
+
 
 class DatabaseWork {
     
     var delegate : EventsDelegate?
     var madeEventDelegate : MadeEventDelegate?
+    var foundEventsDelegate : FoundEventsDelegate?
     
     var container : CKContainer
     var publicDB : CKDatabase
@@ -144,13 +150,18 @@ class DatabaseWork {
         takes the current user's location, the radius he is using, and returns all the events within 
         the given radius
     */
-    func fetchEventsWithRadius(currentUserLocation : CLLocation, setRadius : CLLocationDistance, completion : (results: [Event]!, error:NSError!)-> ()){
+    func fetchEventsWithRadius(currentUserLocation : CLLocation, setRadius : CLLocationDistance){
+//        println("\(currentUserLocation)")
         let eventRecord = CKRecord(recordType: "Event")
         let getAllEventInsideRadius = NSPredicate(format: "distanceToLocation:fromLocation:(%K,%@) < %f","EventLocation",currentUserLocation,setRadius)
         let query = CKQuery(recordType: "Event", predicate: getAllEventInsideRadius)
         publicDB.performQuery(query, inZoneWithID: nil){
             results, error in
             var correctEvents = [Event]()
+            if error != nil {
+                self.foundEventsDelegate?.errorFindingEvents(error)
+                return
+            }
             if let records = results{
                 for record in records{
                     let eventInRadius = Event(record: record as CKRecord, database: self.publicDB)
@@ -158,7 +169,8 @@ class DatabaseWork {
                 }
             }
             dispatch_async(dispatch_get_main_queue()){
-                completion(results: correctEvents, error: error)
+                self.foundEventsDelegate?.foundEventsUpdate(correctEvents)
+                return
             }
             
         }
@@ -170,18 +182,11 @@ class DatabaseWork {
     get the created event by using the recordName from the record id
     */
     func getEventWithID(eventID : CKRecord){
-        println("event id which is a record is : \(eventID)")
-        
         let eventRecord = CKRecord(recordType: "Event")
         let getMadeEvent = NSPredicate(format: "recordID = %@",CKRecordID(recordName : eventID.recordID.recordName))
-        
-        print("hello predicate ")
-        println(getMadeEvent)
         let query = CKQuery(recordType: "Event", predicate: getMadeEvent)
-        println(query)
         publicDB.performQuery(query, inZoneWithID: nil){
             results, error in
-            println(results)
             if error != nil {
                 dispatch_async(dispatch_get_main_queue()){
                     self.madeEventDelegate?.errorMadeUpdate(error)
@@ -189,9 +194,7 @@ class DatabaseWork {
                 }
             }else{
                 self.madeEvents.removeAll(keepCapacity: true)
-                println("inside the database call")
                 for record in results{
-                    println("inside the database call part 2")
                     let eventOfUser = Event(record: record as CKRecord, database: self.publicDB)
                     self.madeEvents.append(eventOfUser)
                 }

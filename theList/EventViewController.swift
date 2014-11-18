@@ -29,14 +29,22 @@ class EventViewController: UIViewController, MadeEventDelegate{
     var photoImage : UIImage!
     
     var eventRecord : CKRecord!
+    
+    var segueIdentity : String!
+    
+    var searchData = Dictionary<String, [String]>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        sleep(1)
+//        sleep(1)
         sharedEvent.madeEventDelegate = self;
         
-        sharedEvent.getEventWithID(eventRecord)
+        if(segueIdentity == "goToEventSegue"){
+            sharedEvent.getEventWithID(eventRecord)
+        }else if (segueIdentity == "foundEvent"){
+            println(searchData)
+        }
         
 
         // Do any additional setup after loading the view.
