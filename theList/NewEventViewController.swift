@@ -187,11 +187,11 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
     the next function prepares for a segue to the event page
     */
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "goToEventSegue"{
+        if segue.identifier == "fromCreate" {
             println("we are preparing to go the event screen")
             let eventMadeVC : EventViewController = segue.destinationViewController as EventViewController
-            eventMadeVC.eventRecord = eventRecord
-            eventMadeVC.segueIdentity = "goToEventSegue"
+            eventMadeVC.eventID = eventRecord.recordID.recordName
+            eventMadeVC.segueIdentity = "fromCreate"
         }
     }
     

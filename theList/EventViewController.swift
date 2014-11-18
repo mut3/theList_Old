@@ -25,10 +25,13 @@ class EventViewController: UIViewController, MadeEventDelegate{
     @IBOutlet var capacityLabel : UILabel!
     @IBOutlet var eventImageView : UIImageView!
     @IBOutlet var eventDescriptionText : UITextView!
+    @IBOutlet var goButton : UIButton!
+    @IBOutlet var noGoButton : UIButton!
+    
     
     var photoImage : UIImage!
     
-    var eventRecord : CKRecord!
+    var eventID : String!
     
     var segueIdentity : String!
     
@@ -40,9 +43,14 @@ class EventViewController: UIViewController, MadeEventDelegate{
 //        sleep(1)
         sharedEvent.madeEventDelegate = self;
         
-        if(segueIdentity == "goToEventSegue"){
-            sharedEvent.getEventWithID(eventRecord)
-        }else if (segueIdentity == "foundEvent"){
+        if(segueIdentity == "fromCreate"){
+            sleep(1)
+            sharedEvent.getEventWithID(eventID)
+        }else if (segueIdentity == "fromSearch"){
+            let eventsList = searchData["eventIDs"]!
+            let recordName = eventsList[0]
+            sharedEvent.getEventWithID(recordName)
+                
             println(searchData)
         }
         
@@ -95,13 +103,25 @@ class EventViewController: UIViewController, MadeEventDelegate{
 
     
     
-    @IBAction func doNotAttendEventAction(sender: AnyObject) {
+    @IBAction func noGoPressed(sender: AnyObject) {
+        
     }
 
     
-    @IBAction func attendEventAction(sender: AnyObject) {
+    @IBAction func goPressed(sender: AnyObject) {
+        performSegueWithIdentifier("popEvent", sender: self)
     }
     
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if(segue.identifier == "popEvent") {
+            let foundEventsVC : EventViewController = segue.destinationViewController as EventViewController
+            foundEventsVC.searchData = searchData
+            foundEventsVC.segueIdentity = segue.identifier
+        }
+    }
+    
+
     
     /* Events Delegate */
     func madeEventsUpdated(event : Event) {
@@ -116,6 +136,7 @@ class EventViewController: UIViewController, MadeEventDelegate{
         let alert = UIAlertView(title: "error loading created event", message: message, delegate: nil, cancelButtonTitle: "ok")
         alert.show()
     }
+    
     /* tag table view */
     
     

@@ -306,7 +306,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="csJ-U0-C19" kind="push" identifier="foundEvent" id="GEe-Be-QQh"/>
+                                    <segue destination="csJ-U0-C19" kind="push" identifier="fromSearch" id="GEe-Be-QQh"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="PXn-1T-YU9">
@@ -545,7 +545,7 @@
                                                     </state>
                                                     <connections>
                                                         <action selector="createEventButtonPressed:" destination="48W-zr-XEe" eventType="touchUpInside" id="Wnh-Eu-IJI"/>
-                                                        <segue destination="csJ-U0-C19" kind="push" identifier="goToEventSegue" id="ggx-TV-SSW"/>
+                                                        <segue destination="csJ-U0-C19" kind="push" identifier="fromCreate" id="ggx-TV-SSW"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="vG1-pF-SNt">
@@ -600,7 +600,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1871" y="406"/>
+            <point key="canvasLocation" x="1833" y="406"/>
         </scene>
         <!--Event-->
         <scene sceneID="Df5-Hf-nEb">
@@ -614,18 +614,6 @@
                                 <rect key="frame" x="87" y="159" width="146" height="121"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="QXr-8R-8sn">
-                                <rect key="frame" x="51" y="462" width="77" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.64835258152173914" green="0.16610049100234331" blue="0.1133376108385041" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="No Go">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="doNotAttendEventAction:" destination="csJ-U0-C19" eventType="touchUpInside" id="GUc-IG-dX5"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" alpha="0.84999999999999987" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="middleTruncation" id="eX7-hS-t5B">
                                 <rect key="frame" x="0.0" y="84" width="81" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -647,8 +635,8 @@
                                     <action selector="goToHostScreen:" destination="csJ-U0-C19" eventType="touchUpInside" id="mqK-1O-Ibq"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="... / ..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VGW-aI-ohM">
-                                <rect key="frame" x="255" y="106" width="49" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="... / ..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VGW-aI-ohM">
+                                <rect key="frame" x="250" y="106" width="62" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -663,12 +651,12 @@
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="attendEventAction:" destination="csJ-U0-C19" eventType="touchUpInside" id="WUm-oE-qqb"/>
+                                    <action selector="goPressed:" destination="csJ-U0-C19" eventType="touchUpInside" id="BvA-Hv-UUo"/>
                                     <action selector="testingForImage" destination="csJ-U0-C19" eventType="touchUpInside" id="t4w-3T-Wv2"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vfQ-gN-QTl">
-                                <rect key="frame" x="73" y="75" width="174" height="46"/>
+                                <rect key="frame" x="78" y="84" width="164" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.3466583130172714" green="0.64833135190217384" blue="0.47294587659031417" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -696,6 +684,28 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mCL-wp-KHE">
+                                <rect key="frame" x="151" y="518" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="csJ-U0-C19" kind="push" identifier="popEvent" id="77z-cn-QYF"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="QXr-8R-8sn">
+                                <rect key="frame" x="41" y="462" width="77" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.64835258152173914" green="0.16610049100234331" blue="0.1133376108385041" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="No Go">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="noGoPressed:" destination="csJ-U0-C19" eventType="touchUpInside" id="I6E-MK-yXM"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -707,13 +717,15 @@
                         <outlet property="eventImageView" destination="1WN-rF-YQq" id="Szv-IU-mXm"/>
                         <outlet property="eventNameLabel" destination="vfQ-gN-QTl" id="RPa-nW-90y"/>
                         <outlet property="eventTagsField" destination="EaT-iE-F6s" id="DDS-t8-nf0"/>
+                        <outlet property="goButton" destination="Mzh-J9-BA7" id="muz-2o-a6c"/>
                         <outlet property="hostNameButton" destination="eX7-hS-t5B" id="PX2-cU-ZDP"/>
                         <outlet property="hostRatingLabel" destination="Jar-8N-RPS" id="o4e-3P-Ksx"/>
+                        <outlet property="noGoButton" destination="QXr-8R-8sn" id="WDH-XJ-7qr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DUw-bA-vzO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1793" y="1136"/>
+            <point key="canvasLocation" x="1833" y="1136"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="H3w-WC-LaS">
@@ -741,6 +753,6 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="Xlp-md-Q5H"/>
-        <segue reference="GEe-Be-QQh"/>
+        <segue reference="ggx-TV-SSW"/>
     </inferredMetricsTieBreakers>
 </document>

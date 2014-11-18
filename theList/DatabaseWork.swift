@@ -181,9 +181,9 @@ class DatabaseWork {
     /*
     get the created event by using the recordName from the record id
     */
-    func getEventWithID(eventID : CKRecord){
-        let eventRecord = CKRecord(recordType: "Event")
-        let getMadeEvent = NSPredicate(format: "recordID = %@",CKRecordID(recordName : eventID.recordID.recordName))
+    func getEventWithID(eventID : String){
+//        let eventRecord = CKRecord(recordType: "Event")
+        let getMadeEvent = NSPredicate(format: "recordID = %@",CKRecordID(recordName : eventID))
         let query = CKQuery(recordType: "Event", predicate: getMadeEvent)
         publicDB.performQuery(query, inZoneWithID: nil){
             results, error in
@@ -199,7 +199,9 @@ class DatabaseWork {
                     self.madeEvents.append(eventOfUser)
                 }
                 dispatch_async(dispatch_get_main_queue()){
-                    self.madeEventDelegate?.madeEventsUpdated(self.madeEvents[0])
+                    if(self.madeEvents.count > 0) {
+                        self.madeEventDelegate?.madeEventsUpdated(self.madeEvents[0])
+                    }
                     return
                 }
             }

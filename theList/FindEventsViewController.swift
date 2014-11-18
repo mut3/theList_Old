@@ -84,7 +84,7 @@ class FindEventsViewController: UIViewController, FoundEventsDelegate {
         navigationController?.pushViewController(foundEventsVC, animated: true)
   */
         
-        performSegueWithIdentifier("foundEvent", sender : self)
+        performSegueWithIdentifier("fromSearch", sender : self)
     }
     
     
@@ -93,10 +93,10 @@ class FindEventsViewController: UIViewController, FoundEventsDelegate {
     the next function prepares for a segue to the event page
     */
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if(segue.identifier == "foundEvent") {
+        if(segue.identifier == "fromSearch") {
             let foundEventsVC : EventViewController = segue.destinationViewController as EventViewController
             foundEventsVC.searchData = searchData
-            foundEventsVC.segueIdentity = "foundEvent"
+            foundEventsVC.segueIdentity = "fromSearch"
         }
     }
 
