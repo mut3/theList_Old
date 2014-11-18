@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import CoreLocation
 
-class FindEventsViewController: UIViewController, FoundEventsDelegate {
+class FindEventsViewController: UIViewController, FoundEventsDelegate /*FoundEventCondenseDelegate*/ {
     
     @IBOutlet var distanceLabel : UILabel!
     @IBOutlet var distanceSlider : UISlider!
@@ -26,6 +26,7 @@ class FindEventsViewController: UIViewController, FoundEventsDelegate {
     
     var eventFoundIDs : [String] = []
     var searchData = Dictionary<String, [String]>()
+    
     
     
     let databaseDevil : DatabaseWork = DatabaseWork.sharedInstanceOfTheList()

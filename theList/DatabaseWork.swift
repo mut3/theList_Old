@@ -24,12 +24,17 @@ protocol FoundEventsDelegate{
     func errorFindingEvents(error:NSError)
 }
 
+protocol FoundEventCondenseDelegate{
+    func foundCondensedEvents(eventsDict : Dictionary<String,String>)
+    func errorFindingCondensedEvents(error:NSError)
+}
 
 class DatabaseWork {
     
     var delegate : EventsDelegate?
     var madeEventDelegate : MadeEventDelegate?
     var foundEventsDelegate : FoundEventsDelegate?
+    var foundCondensedEventsDelegate : FoundEventCondenseDelegate?
     
     var container : CKContainer
     var publicDB : CKDatabase
@@ -158,6 +163,7 @@ class DatabaseWork {
         publicDB.performQuery(query, inZoneWithID: nil){
             results, error in
             var correctEvents = [Event]()
+            var correctEventsDict = Dictionary<String,String>()
             if error != nil {
                 self.foundEventsDelegate?.errorFindingEvents(error)
                 return
@@ -165,6 +171,12 @@ class DatabaseWork {
             if let records = results{
                 for record in records{
                     let eventInRadius = Event(record: record as CKRecord, database: self.publicDB)
+                    let eventRecordID = Event(record: record as CKRecord, database: self.publicDB).record.recordID.recordName
+                    let eventStartTime = Event(record: record as CKRecord, database: self.publicDB).startTime
+                    let eventTags = Event(record: record as CKRecord, database: self.publicDB).tags
+                    correctEventsDict["RecordID"]="\(eventRecordID)"
+                    correctEventsDict["StartTime"]="\(eventStartTime)"
+                    //correctEventsDict["eventTags"]="\"eventTags
                     correctEvents.append(eventInRadius)
                 }
             }
@@ -177,6 +189,39 @@ class DatabaseWork {
     
     }
     
+    func fetchEventsWithRadiusSmaller(currentUserLocation : CLLocation, setRadius : CLLocationDistance){
+        //        println("\(currentUserLocation)")
+        let eventRecord = CKRecord(recordType: "Event")
+        let getAllEventInsideRadius = NSPredicate(format: "distanceToLocation:fromLocation:(%K,%@) < %f","EventLocation",currentUserLocation,setRadius)
+        let query = CKQuery(recordType: "Event", predicate: getAllEventInsideRadius)
+        publicDB.performQuery(query, inZoneWithID: nil){
+            results, error in
+            var correctEvents = [Event]()
+            var correctEventsDict = Dictionary<String,String>()
+            if error != nil {
+                self.foundEventsDelegate?.errorFindingEvents(error)
+                return
+            }
+            if let records = results{
+                for record in records{
+                    //let eventInRadius = Event(record: record as CKRecord, database: self.publicDB)
+                    let eventRecordID = Event(record: record as CKRecord, database: self.publicDB).record.recordID.recordName
+                    let eventStartTime = Event(record: record as CKRecord, database: self.publicDB).startTime
+                    let eventTags = Event(record: record as CKRecord, database: self.publicDB).tags
+                    correctEventsDict["RecordID"]="\(eventRecordID)"
+                    correctEventsDict["StartTime"]="\(eventStartTime)"
+                    correctEventsDict["eventTags"]="\(eventTags)"
+                    //correctEvents.append(eventInRadius)
+                }
+            }
+            dispatch_async(dispatch_get_main_queue()){
+                self.foundCondensedEventsDelegate?.foundCondensedEvents(correctEventsDict)
+                return
+            }
+            
+        }
+        
+    }
     
     /*
     get the created event by using the recordName from the record id

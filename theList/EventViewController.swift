@@ -46,11 +46,14 @@ class EventViewController: UIViewController, MadeEventDelegate{
         if(segueIdentity == "fromCreate"){
             sleep(1)
             sharedEvent.getEventWithID(eventID)
-        }else if (segueIdentity == "fromSearch"){
-            let eventsList = searchData["eventIDs"]!
-            let recordName = eventsList[0]
+        }else if (segueIdentity == "fromSearch" || segueIdentity == "popEvent"){
+            var eventsList = searchData["eventIDs"]!
+            println(searchData)
+            let recordName = eventsList.removeAtIndex(0)
+            println("##############################################")
+            //println(eventsList)
+            searchData["eventIDs"] = eventsList
             sharedEvent.getEventWithID(recordName)
-                
             println(searchData)
         }
         
@@ -67,7 +70,7 @@ class EventViewController: UIViewController, MadeEventDelegate{
             println(photoAssetURL)
             
             var imageData = NSData(contentsOfURL: photoAssetURL)
-            photoImage = UIImage(data: imageData!)
+            photoImage = UIImage(data: imageData)
             eventImageView.image = photoImage
         }
     
