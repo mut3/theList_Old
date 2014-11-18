@@ -12,6 +12,8 @@ class EventsListTableViewController: UITableViewController, EventsDelegate {
 
     let givenEvents : DatabaseWork = DatabaseWork.sharedInstanceOfTheList()
     
+    var localPastEvents = Dictionary<String,String>()
+    
     var eventsCount : Int!
     var userPastEvents = [Event]()
     
@@ -45,19 +47,21 @@ class EventsListTableViewController: UITableViewController, EventsDelegate {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return DatabaseWork.sharedInstanceOfTheList().events.count
     }
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = self.tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
         let object = DatabaseWork.sharedInstanceOfTheList().events[indexPath.row]
-        // changed textLabel? to textLabel so it would build
+        //changed textLabel? to textLabel so it would build
         cell.textLabel.text = object.name
         return cell
     }
-    
     
     /*
         database delegate
     */
     func pastEventsListUpdated() {
+        //localPastEvents = pastEvents
+        //println(localPastEvents)
         refreshControl?.endRefreshing()
         tableView.reloadData()
     }

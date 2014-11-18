@@ -25,12 +25,17 @@ protocol FoundEventsDelegate{
 }
 
 protocol FoundEventCondenseDelegate{
-    func foundCondensedEvents(eventsDict : Dictionary<String,String>)
+    func foundCondensedEvents()
     func errorFindingCondensedEvents(error:NSError)
 }
 
 protocol UploadingEventDelegate{
     func doneUploading(eventID : String)
+}
+
+protocol GetUserWithIdDelegate{
+    func retreivedUserWithID(user : User)
+    func failedToRetreiveUser(error : NSError)
 }
 
 class DatabaseWork {
@@ -39,7 +44,8 @@ class DatabaseWork {
     var madeEventDelegate : MadeEventDelegate?
     var foundEventsDelegate : FoundEventsDelegate?
     var foundCondensedEventsDelegate : FoundEventCondenseDelegate?
-    var uploadEventDelegate :UploadingEventDelegate?
+    var uploadEventDelegate : UploadingEventDelegate?
+    var getUserWithIdDelegate : GetUserWithIdDelegate?
     
     var container : CKContainer
     var publicDB : CKDatabase
@@ -53,6 +59,8 @@ class DatabaseWork {
     var events = [Event]()
     
     var madeEvents = [Event]()
+    
+    var retreivedUser : User!
     
     init(){
         container = CKContainer.defaultContainer()
@@ -142,6 +150,7 @@ class DatabaseWork {
         let query = CKQuery(recordType: "Event", predicate: getCurrentUserPredicate)
         publicDB.performQuery(query, inZoneWithID: nil) {
             results, error in
+            var pastEvents = Dictionary<String,String>()
             if error != nil {
                 dispatch_async(dispatch_get_main_queue()){
                     self.delegate?.errorUpdate(error)
@@ -151,10 +160,13 @@ class DatabaseWork {
                 self.events.removeAll(keepCapacity: true)
                 for record in results{
                     let eventOfUser = Event(record: record as CKRecord, database: self.publicDB)
+                    let eventOfUserName = Event(record: record as CKRecord, database: self.publicDB).name
+                    let eventIDOfUser = Event(record: record as CKRecord, database: self.publicDB).record.recordID.recordName
+                    pastEvents[eventIDOfUser] = eventOfUserName
                     self.events.append(eventOfUser)
                 }
                 dispatch_async(dispatch_get_main_queue()){
-                    self.delegate?.pastEventsListUpdated()
+                    self.delegate?.pastEventsListUpdated(pastEvents)
                     return
                 }
             }
@@ -214,18 +226,18 @@ class DatabaseWork {
             }
             if let records = results{
                 for record in records{
-                    //let eventInRadius = Event(record: record as CKRecord, database: self.publicDB)
+                    let eventInRadius = Event(record: record as CKRecord, database: self.publicDB)
                     let eventRecordID = Event(record: record as CKRecord, database: self.publicDB).record.recordID.recordName
                     let eventStartTime = Event(record: record as CKRecord, database: self.publicDB).startTime
                     let eventTags = Event(record: record as CKRecord, database: self.publicDB).tags
                     correctEventsDict["RecordID"]="\(eventRecordID)"
                     correctEventsDict["StartTime"]="\(eventStartTime)"
                     correctEventsDict["eventTags"]="\(eventTags)"
-                    //correctEvents.append(eventInRadius)
+                    correctEvents.append(eventInRadius)
                 }
             }
             dispatch_async(dispatch_get_main_queue()){
-                self.foundCondensedEventsDelegate?.foundCondensedEvents(correctEventsDict)
+                self.foundCondensedEventsDelegate?.foundCondensedEvents()
                 return
             }
             
@@ -237,7 +249,7 @@ class DatabaseWork {
     get the created event by using the recordName from the record id
     */
     func getEventWithID(eventID : String){
-//        let eventRecord = CKRecord(recordType: "Event")
+        let eventRecord = CKRecord(recordType: "Event")
         let getMadeEvent = NSPredicate(format: "recordID = %@",CKRecordID(recordName : eventID))
         let query = CKQuery(recordType: "Event", predicate: getMadeEvent)
         publicDB.performQuery(query, inZoneWithID: nil){
@@ -262,6 +274,33 @@ class DatabaseWork {
             }
         }
     }
+    /*
+    this function requires you to get the id of the user and to tell the function whether the user is a host or a guest
+    */
+    func getUserWithID(userID : String){
+        let eventRecord = CKRecord(recordType: "Event")
+        let getMadeEvent = NSPredicate(format: "HostID = %@",userID)
+        let query = CKQuery(recordType: "User", predicate: getMadeEvent)
+        publicDB.performQuery(query, inZoneWithID: nil){
+            results, error in
+            if error != nil {
+                dispatch_async(dispatch_get_main_queue()){
+                    self.getUserWithIdDelegate?.failedToRetreiveUser(error)
+                    return
+                }
+            }else{
+                for record in results{
+                    self.retreivedUser = User(record: record as CKRecord, database: self.publicDB)
+                }
+                dispatch_async(dispatch_get_main_queue()){
+                    self.getUserWithIdDelegate?.retreivedUserWithID(self.retreivedUser)
+                    return
+                }
+            }
+        }
+    }
+    
+   
     
 
 }
