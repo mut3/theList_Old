@@ -166,7 +166,7 @@ class DatabaseWork {
                     self.events.append(eventOfUser)
                 }
                 dispatch_async(dispatch_get_main_queue()){
-                    self.delegate?.pastEventsListUpdated(pastEvents)
+                    self.delegate?.pastEventsListUpdated()
                     return
                 }
             }
