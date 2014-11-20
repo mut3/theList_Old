@@ -419,7 +419,7 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
         formatter.dateFormat = "MM/dd/yyyy hh:mm"
         var gmt = NSTimeZone(abbreviation: "GMT-5")
         formatter.timeZone = gmt
-        //This command is not very well caught for different date styles
+// This command is not very well caught for different date styles
         var date : NSDate = formatter.dateFromString(string)!
         return date
     }

@@ -10,6 +10,17 @@ import UIKit
 
 class GuestListViewController: UITableViewController, EventsDelegate {
     
+    //This needs to take in the EventID passed to it and grab all the guests from that Event
+    /*
+    From each Guest it has to be determined if  they are:
+        Pending(Waiting Host Approval)
+        Accepted (Waiting for guest confirmation)
+        Confirmed(Ready to Party)
+    Then They are placed in individual subcatagories within a TableView. Same order as above
+    Pending on Top, Confirmed at the bottom (<Stretch have a toggle for order>)
+    */
+    
+    
     let givenEvents : DatabaseWork = DatabaseWork.sharedInstanceOfTheList()
     
     var eventsCount : Int!
