@@ -37,6 +37,9 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
     the adding text shift constant
     */
     let AddTagsShifter = 40
+    
+    let validator : InputValidator = InputValidator()
+    
     var addTagsCounter = 0
     
     let databaseThing : DatabaseWork = DatabaseWork.sharedInstanceOfTheList()
@@ -320,15 +323,41 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
     
     
     @IBAction func enteringStreetAddress(sender : AnyObject) {
-        if(countElements(locationAddressField.text) > 5 && !(locationTypeSwitch.on)) {
+        if(validator.isAddressFormat(locationAddressField.text) && !(locationTypeSwitch.on)) {
             locationZipField.enabled = true
             locationCityField.enabled = true
+        }
+        else {
+            locationZipField.enabled = false
+            locationCityField.enabled = false
+        }
+    }
+    
+    
+    @IBAction func enteringZip(sender : AnyObject) {
+        let fieldContents = locationZipField.text
+//        let fieldTokens = Array(fieldContents)
+//        println(fieldTokens)
+//        if(fieldTokens.count > 0) {
+//            var highestDigitIndex = 0
+//            for i in 0...(fieldTokens.count - 1) {
+//                if(validator.isDigit(String(fieldTokens[i]))){
+//                    highestDigitIndex = i
+//                }
+//            
+//            }
+//            locationZipField.text = fieldContents.substringToIndex(advance(fieldContents.startIndex, highestDigitIndex))
+// 
+//        }
+//        
+        if(countElements(fieldContents) > 5) {
+            locationZipField.text = fieldContents.substringToIndex(advance(fieldContents.startIndex, 5))
         }
     }
     
     
     @IBAction func doneEnteringZip(sender : AnyObject) {
-        if(countElements(locationZipField.text) == 5) {
+        if(validator.isZipFormat(locationZipField.text)) {
             forwardGeocode(locationAddressField.text + ", " + locationZipField.text)
         }
     }
@@ -341,11 +370,49 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
     }
     
     
+    @IBAction func enteringState(sender: AnyObject) {
+        let fieldContents = locationStateField.text
+        if(countElements(locationStateField.text) > 2) {
+            locationStateField.text = fieldContents.substringToIndex(advance(fieldContents.startIndex, 2))
+        }
+    }
     @IBAction func doneEnteringState(sender: AnyObject) {
-        let enteredLocation = (locationAddressField.text + ", " + locationCityField.text + ", " + locationStateField.text)
-        if(countElements(locationStateField.text) == 2){
+        if(validator.isValidState(locationStateField.text)){
+            let enteredLocation = (locationAddressField.text + ", " + locationCityField.text + ", " + locationStateField.text)
             forwardGeocode(enteredLocation)
         }
+    }
+    
+    @IBAction func enteringDate(sender: AnyObject) {
+//        let fieldContents = dateTextField.text
+//        let fieldTokens = fieldContents.componentsSeparatedByString("/")
+//        println(fieldTokens)
+//        if(fieldTokens.count == 1) {
+//            if(!validator.isDigit(fieldTokens[0])) {
+//                dateTextField.text = ""
+//            }
+//        }
+//        else if(fieldTokens.count == 2) {
+//            if(!validator.isValidMonth(fieldTokens[0])) {
+//                println("got here")
+//                dateTextField.text = "\(fieldTokens[0])"
+//            }
+//            if(!validator.isDigit(fieldTokens[1])) {
+//                dateTextField.text = "\(fieldTokens[0])/"
+//            }
+//        }
+//        else if(fieldTokens.count == 3) {
+//            if(!validator.isDigit(fieldTokens[2])) {
+//                dateTextField.text = "\(fieldTokens[0])/\(fieldTokens[1])/"
+//                println(dateTextField.text)
+//            }
+//        }
+        return
+    }
+    
+    @IBAction func doneEnteringDate(sender : AnyObject) {
+        let fieldContents = dateTextField.text
+        println(validator.isDateFormat(fieldContents))
     }
     
 //    
