@@ -318,7 +318,7 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% THIS CODE IS MAD BUGGY AND COULD BE DONE WITH BETTER LOGIC
     @IBAction func enteringStreetAddress(sender : AnyObject) {
         if(countElements(locationAddressField.text) > 5 && !(locationTypeSwitch.on)) {
             locationZipField.enabled = true
@@ -347,7 +347,7 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
             forwardGeocode(enteredLocation)
         }
     }
-    
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 //    
 //    @IBAction func addTagBtnAction(sender: AnyObject) {
 //        tagsPickerOutlet.hidden = false
@@ -419,6 +419,7 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
         formatter.dateFormat = "MM/dd/yyyy hh:mm"
         var gmt = NSTimeZone(abbreviation: "GMT-5")
         formatter.timeZone = gmt
+        //This command is not very well caught for different date styles
         var date : NSDate = formatter.dateFromString(string)!
         return date
     }
