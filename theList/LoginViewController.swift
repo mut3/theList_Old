@@ -51,14 +51,6 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "createProfileSegue"{
             println("where are we?")
-            let createUserVC : CreateUserViewController = segue.destinationViewController as CreateUserViewController
-            println(userFirstName)
-            createUserVC.userFirstNameStr = userFirstName
-            createUserVC.userLastNameStr = userLastName
-            //createUserVC.userFBID = userFacebookID
-            //createUserVC.userAgeInt =
-            createUserVC.userGuestID = "\(userFacebookID)_1"
-            createUserVC.userHostID = "\(userFacebookID)_0"
         }
         else if segue.identifier == "homeSegue"{
             println("Home segue")

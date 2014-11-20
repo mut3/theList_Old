@@ -15,7 +15,8 @@ class User: NSObject{
     var descript : String!
     var guestID : String!
     var hostID : String!
-    var name : String
+    var firstName : String!
+    var lastName : String!
     var userID : String!
     var photos : [String]!
     weak var database : CKDatabase!
@@ -30,7 +31,8 @@ class User: NSObject{
         self.descript = record.objectForKey("Description") as String!
         self.guestID = record.objectForKey("GuestID") as String!
         self.hostID = record.objectForKey("HostID") as String!
-        self.name = record.objectForKey("Name") as String!
+        self.firstName = record.objectForKey("FirstName") as String!
+        self.lastName = record.objectForKey("LastName") as String!
         self.userID = record.objectForKey("PhoneNumber") as String!
         self.photos = record.objectForKey("Photos") as [String]!
         self.date = record.creationDate

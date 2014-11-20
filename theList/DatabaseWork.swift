@@ -35,6 +35,7 @@ protocol UploadingEventDelegate{
 
 protocol GetUserWithIdDelegate{
     func retreivedUserWithID(user : User)
+    func tryingShitOut()
     func failedToRetreiveUser(error : NSError)
 }
 
@@ -60,7 +61,7 @@ class DatabaseWork {
     
     var madeEvents = [Event]()
     
-    var retreivedUser : User!
+    var retreivedUser = [User]()
     
     init(){
         container = CKContainer.defaultContainer()
@@ -279,8 +280,8 @@ class DatabaseWork {
     */
     func getUserWithID(userID : String){
         let eventRecord = CKRecord(recordType: "Event")
-        let getMadeEvent = NSPredicate(format: "HostID = %@",userID)
-        let query = CKQuery(recordType: "User", predicate: getMadeEvent)
+        let getCurrentUser = NSPredicate(format: "FacebookID = %@",userID)
+        let query = CKQuery(recordType: "User", predicate: getCurrentUser)
         publicDB.performQuery(query, inZoneWithID: nil){
             results, error in
             if error != nil {
@@ -289,19 +290,22 @@ class DatabaseWork {
                     return
                 }
             }else{
+                self.retreivedUser.removeAll(keepCapacity: true)
                 for record in results{
-                    self.retreivedUser = User(record: record as CKRecord, database: self.publicDB)
+                    let retreivedCurrentUser = User(record: record as CKRecord, database: self.publicDB)
+                    self.retreivedUser.append(retreivedCurrentUser)
                 }
-                dispatch_async(dispatch_get_main_queue()){
-                    self.getUserWithIdDelegate?.retreivedUserWithID(self.retreivedUser)
-                    return
                 }
+            dispatch_async(dispatch_get_main_queue()){
+                if (self.retreivedUser.count > 0){
+                    self.getUserWithIdDelegate?.retreivedUserWithID(self.retreivedUser[0])
+                    self.getUserWithIdDelegate?.tryingShitOut()
+                    println("here is the cluck")
+                }
+                return
             }
         }
     }
-    
-   
-    
 
 }
 let databaseWork = DatabaseWork()

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreateUserViewController: UIViewController, FBLoginViewDelegate{
+class CreateUserViewController: UIViewController, FBLoginViewDelegate, GetUserWithIdDelegate{
     
     @IBOutlet var userNameOutlet: UILabel!
     
@@ -39,7 +39,7 @@ class CreateUserViewController: UIViewController, FBLoginViewDelegate{
     
     var userHostID : String = ""
     
-
+    let databaseDevil = DatabaseWork.sharedInstanceOfTheList()
     
     
     
@@ -47,9 +47,9 @@ class CreateUserViewController: UIViewController, FBLoginViewDelegate{
         super.viewDidLoad()
         
         self.fbLogin.delegate = self
+        databaseDevil.getUserWithIdDelegate? = self
         
-        userNameOutlet.text = userFirstNameStr
-        userAgeOutlet.text = "\(userAgeInt)"
+        
         userDescriptionOutlet.text = ""
         println(userFBID)
         
@@ -62,14 +62,37 @@ class CreateUserViewController: UIViewController, FBLoginViewDelegate{
     
     @IBAction func submitUser(sender: AnyObject) {
         userDescript = userDescriptionOutlet.text
-        databaseWork.uploadUser(userAgeInt, userDescript: userDescript, userFBID: userFBID, userFirstName: userFirstNameStr, userLastName: userLastNameStr, deviceID: userDeviceID, userGuestID: userGuestID, userHostID: userHostID)
+        userGuestID = "\(userFBID)_1"
+        userHostID = "\(userFBID)_0"
+        userDeviceID = "\(UIDevice.currentDevice())"
+        databaseWork.uploadUser(userAgeInt, userDescript: userDescript, userFBID: userFBID, userFirstName: userNameOutlet.text!, userLastName: userLastNameStr, deviceID: userDeviceID, userGuestID: userGuestID, userHostID: userHostID)
     }
     
+    @IBAction func viewTapped(sender : AnyObject) {
+        view.endEditing(true)
+    }
+    
+    @IBAction func testUserInfo(sender : AnyObject){
+        databaseDevil.getUserWithID(userFBID)
+        println("end of button press")
+    
+    }
+    /*  Current User Delegates */
+    func retreivedUserWithID(currentUser: User) {
+        println("hello")
+        println(currentUser.firstName)
+    }
+    func failedToRetreiveUser(error: NSError) {
+        println(error)
+    }
+    func tryingShitOut() {
+        println(" trying shit out")
+    }
     
     func dateFromString(date : String) -> NSDate {
         var string : NSString =  NSString(string: (date)) as NSString
         var formatter = NSDateFormatter()
-        formatter.dateFormat = "MM/dd/yyyy"
+        formatter.dateFormat = "mm/dd/yyyy"
         var date : NSDate = formatter.dateFromString(string)!
         return date
     }
@@ -77,11 +100,12 @@ class CreateUserViewController: UIViewController, FBLoginViewDelegate{
     /*facebook delegates*/
     
     func loginViewFetchedUserInfo(loginView: FBLoginView!, user: FBGraphUser!) {
-        var calendar : NSCalendar = NSCalendar.currentCalendar()
-        var ageInSecond = NSDate.timeIntervalSinceDate(dateFromString(user.birthday))
+        userNameOutlet.text = user.first_name
+        userLastNameStr = user.last_name
+        userAgeInt = Int((dateFromString(user.birthday).timeIntervalSinceNow)/(-31557600))
+        userAgeOutlet.text = "\(userAgeInt)"
         userFBID = user.objectID
-        println(user.birthday)
-        println("\(ageInSecond)")
+        println(userFBID)
         profilePic.profileID = userFBID
     }
     

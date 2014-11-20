@@ -17,13 +17,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="z7T-pQ-dIN">
-                                <rect key="frame" x="188" y="90" width="99" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Move to home">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pXi-Hi-2hV">
                                 <rect key="frame" x="294" y="545" width="20" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -33,6 +26,16 @@
                                 <connections>
                                     <action selector="goToCreateProfile:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="oi7-WZ-FsD"/>
                                     <segue destination="scs-RN-GTC" kind="push" identifier="createProfileSegue" id="Xlp-md-Q5H"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="z7T-pQ-dIN">
+                                <rect key="frame" x="205" y="372" width="99" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Move to home">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="sTD-Y3-VLK" kind="push" id="GQM-fk-Hkj"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -126,8 +129,22 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="6TT-wQ-izl">
+                                <rect key="frame" x="27" y="475" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Test">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="testUserInfo:" destination="scs-RN-GTC" eventType="touchUpInside" id="HzJ-sW-QYh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="us9-jw-1Rc" appends="YES" id="a8G-nt-RbM"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Create Profile" id="zhC-qe-U1X"/>
                     <connections>
@@ -139,6 +156,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iN4-4N-igR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="us9-jw-1Rc">
+                    <connections>
+                        <action selector="viewTapped:" destination="scs-RN-GTC" id="7Qx-jV-J2k"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="942" y="406"/>
         </scene>
@@ -756,7 +778,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Xlp-md-Q5H"/>
         <segue reference="ggx-TV-SSW"/>
+        <segue reference="gG2-ac-fEf"/>
     </inferredMetricsTieBreakers>
 </document>
