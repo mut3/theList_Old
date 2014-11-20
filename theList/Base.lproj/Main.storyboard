@@ -363,7 +363,7 @@
                                                     <rect key="frame" x="135" y="119" width="90" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     <connections>
                                                         <action selector="doneEnteringZip:" destination="48W-zr-XEe" eventType="editingDidEnd" id="Gy7-4E-QqY"/>
                                                         <action selector="enteringZip:" destination="48W-zr-XEe" eventType="editingChanged" id="ZKa-Yc-dee"/>

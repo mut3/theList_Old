@@ -336,18 +336,20 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
     
     @IBAction func enteringZip(sender : AnyObject) {
         let fieldContents = locationZipField.text
-        let fieldTokens = Array(fieldContents)
-        println(fieldTokens)
-        
-        var highestDigitIndex = 0
-        for i in 0...(fieldTokens.count - 1) {
-            if(validator.isDigit(String(fieldTokens[i]))){
-                highestDigitIndex = i
-            }
-            
-        }
-        locationZipField.text = fieldContents.substringToIndex(advance(fieldContents.startIndex, highestDigitIndex + 1))
-        
+//        let fieldTokens = Array(fieldContents)
+//        println(fieldTokens)
+//        if(fieldTokens.count > 0) {
+//            var highestDigitIndex = 0
+//            for i in 0...(fieldTokens.count - 1) {
+//                if(validator.isDigit(String(fieldTokens[i]))){
+//                    highestDigitIndex = i
+//                }
+//            
+//            }
+//            locationZipField.text = fieldContents.substringToIndex(advance(fieldContents.startIndex, highestDigitIndex))
+// 
+//        }
+//        
         if(countElements(fieldContents) > 5) {
             locationZipField.text = fieldContents.substringToIndex(advance(fieldContents.startIndex, 5))
         }
@@ -355,7 +357,7 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
     
     
     @IBAction func doneEnteringZip(sender : AnyObject) {
-        if(countElements(locationZipField.text) == 5) {
+        if(validator.isZipFormat(locationZipField.text)) {
             forwardGeocode(locationAddressField.text + ", " + locationZipField.text)
         }
     }

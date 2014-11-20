@@ -64,6 +64,16 @@ class InputValidator {
     }
     
     
+    func isZipFormat(value : String) -> Bool {
+        var isZip = true
+        if(!isDigit(value) || countElements(value) != 5) {
+            isZip = false
+        }
+        return isZip
+    }
+
+    
+    
     func isValidMonth(value : String) -> Bool {
         var isMonth = false
         if(isDigit(value)) {
