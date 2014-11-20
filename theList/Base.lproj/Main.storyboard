@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
-        <!--Facebook Login-->
+        <!--Login View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="LoginViewController" customModule="theList" customModuleProvider="target" sceneMemberID="viewController">
@@ -28,6 +28,13 @@
                                     <segue destination="scs-RN-GTC" kind="push" identifier="createProfileSegue" id="Xlp-md-Q5H"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to theList" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fix-p4-koU">
+                                <rect key="frame" x="43" y="155" width="223" height="150"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="z7T-pQ-dIN">
                                 <rect key="frame" x="205" y="372" width="99" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -35,13 +42,13 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="sTD-Y3-VLK" kind="push" id="GQM-fk-Hkj"/>
+                                    <segue destination="sTD-Y3-VLK" kind="push" identifier="startToHome" id="GQM-fk-Hkj"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Facebook Login" id="28O-jV-fym">
+                    <navigationItem key="navigationItem" id="28O-jV-fym">
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="VoD-aZ-CZx">
                             <connections>
                                 <segue destination="scs-RN-GTC" kind="push" identifier="mySegue" id="gG2-ac-fEf"/>
@@ -100,6 +107,7 @@
                                 </state>
                                 <connections>
                                     <action selector="submitUser:" destination="scs-RN-GTC" eventType="touchUpInside" id="OSy-P6-n4b"/>
+                                    <segue destination="sTD-Y3-VLK" kind="push" identifier="moveToHomeScreenSegue" id="rW8-cX-Taj"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zOG-c3-r6Z">
@@ -778,7 +786,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="ggx-TV-SSW"/>
+        <segue reference="GQM-fk-Hkj"/>
         <segue reference="gG2-ac-fEf"/>
+        <segue reference="ggx-TV-SSW"/>
     </inferredMetricsTieBreakers>
 </document>

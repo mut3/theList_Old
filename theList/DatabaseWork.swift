@@ -35,9 +35,13 @@ protocol UploadingEventDelegate{
 
 protocol GetUserWithIdDelegate{
     func retreivedUserWithID(user : User)
-    func tryingShitOut()
     func failedToRetreiveUser(error : NSError)
 }
+protocol CheckIfUserExistDelegate{
+    func failedToCheckUser(error : NSError)
+    func checkIfUser(checkUser : Bool)
+}
+
 
 class DatabaseWork {
     
@@ -47,6 +51,7 @@ class DatabaseWork {
     var foundCondensedEventsDelegate : FoundEventCondenseDelegate?
     var uploadEventDelegate : UploadingEventDelegate?
     var getUserWithIdDelegate : GetUserWithIdDelegate?
+    var checkIfUserExistDelegate : CheckIfUserExistDelegate?
     
     var container : CKContainer
     var publicDB : CKDatabase
@@ -62,6 +67,8 @@ class DatabaseWork {
     var madeEvents = [Event]()
     
     var retreivedUser = [User]()
+    
+    var userExist : Bool!
     
     init(){
         container = CKContainer.defaultContainer()
@@ -303,6 +310,31 @@ class DatabaseWork {
                 return
             }
         }
+    }
+    
+    func checkToSeeIfUserExist(userID : String){
+        let eventRecord = CKRecord(recordType: "Event")
+        let getCurrentUser = NSPredicate(format: "FacebookID = %@",userID)
+        let query = CKQuery(recordType: "User", predicate: getCurrentUser)
+        publicDB.performQuery(query, inZoneWithID: nil){
+            results, error in
+            if error != nil {
+                dispatch_async(dispatch_get_main_queue()){
+                    self.checkIfUserExistDelegate?.failedToCheckUser(error)
+                    return
+                }
+            }else{
+                self.userExist = false
+                for record in results{
+                    self.userExist = true
+                }
+            }
+            dispatch_async(dispatch_get_main_queue()){
+                self.checkIfUserExistDelegate?.checkIfUser(self.userExist)
+                return
+            }
+        }
+    
     }
 
 }

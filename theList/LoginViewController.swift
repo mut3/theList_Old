@@ -15,11 +15,13 @@ protocol UserFacebookInfoDelegate{
 }
 
 
-class LoginViewController: UIViewController, FBLoginViewDelegate {
+class LoginViewController: UIViewController, FBLoginViewDelegate,CheckIfUserExistDelegate {
     
     
     @IBOutlet var fbLoginView : FBLoginView!
     
+    
+    let databaseDevil = DatabaseWork.sharedInstanceOfTheList()
     
     
     var userFbDelegate: UserFacebookInfoDelegate?
@@ -32,12 +34,17 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
     var userFacebookID : String!
     var userLastName : String!
     
+    /* 
+    */
+    var goToCreatePage : Bool = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
         self.fbLoginView.delegate = self
+        databaseDevil.checkIfUserExistDelegate = self
         
         self.fbLoginView.readPermissions = ["public_profile", "email", "user_friends", "user_birthday"]
         
@@ -64,9 +71,13 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
     
     func loginViewShowingLoggedInUser(loginView : FBLoginView!) {
         println("User Logged In")
+        loginView.hidden = true
         //println(userFacebookID)
-        performSegueWithIdentifier("createProfileSegue", sender: self)
-        
+        /*
+        if (goToCreatePage){
+            performSegueWithIdentifier("createProfileSegue", sender: self)
+        }
+        */
     }
     
     func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser){
@@ -75,9 +86,9 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         userLastName = user.last_name
         userBirthday = user.birthday
         userFacebookID = user.objectID
+        databaseDevil.checkToSeeIfUserExist(userFacebookID)
 
         //profilePic.profileID=user.objectID
-        
         //println(userBirthday)
         
     }
@@ -101,6 +112,20 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    /* checking user delegates */
+    func checkIfUser(checkUser: Bool) {
+        if (checkUser){
+            self.goToCreatePage = false
+            performSegueWithIdentifier("startToHome", sender: self)
+        }
+        else{
+            self.goToCreatePage = true
+        }
+    }
+    func failedToCheckUser(error: NSError) {
+        println(error)
+    }
 
     /*
     // MARK: - Navigation

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreateUserViewController: UIViewController, FBLoginViewDelegate, GetUserWithIdDelegate{
+class CreateUserViewController: UIViewController, FBLoginViewDelegate, GetUserWithIdDelegate, CheckIfUserExistDelegate{
     
     @IBOutlet var userNameOutlet: UILabel!
     
@@ -41,6 +41,8 @@ class CreateUserViewController: UIViewController, FBLoginViewDelegate, GetUserWi
     
     let databaseDevil = DatabaseWork.sharedInstanceOfTheList()
     
+    var goToCreatePage : Bool!
+    
     
     
     override func viewDidLoad() {
@@ -48,6 +50,7 @@ class CreateUserViewController: UIViewController, FBLoginViewDelegate, GetUserWi
         
         self.fbLogin.delegate = self
         databaseDevil.getUserWithIdDelegate = self
+        databaseDevil.checkIfUserExistDelegate  = self
         
         
         userDescriptionOutlet.text = ""
@@ -74,6 +77,11 @@ class CreateUserViewController: UIViewController, FBLoginViewDelegate, GetUserWi
     
     @IBAction func testUserInfo(sender : AnyObject){
         println("end of button press")
+        /*
+        if(true){
+            performSegueWithIdentifier("moveToHomeScreenSegue", sender: self)
+        }
+        */
     
     }
     /*  Current User Delegates */
@@ -83,8 +91,19 @@ class CreateUserViewController: UIViewController, FBLoginViewDelegate, GetUserWi
     func failedToRetreiveUser(error: NSError) {
         println(error)
     }
-    func tryingShitOut() {
-        println(" trying shit out")
+    /* checking user delegates */
+    func checkIfUser(checkUser: Bool) {
+        if (checkUser){
+            self.goToCreatePage = false
+            performSegueWithIdentifier("moveToHomeScreenSegue", sender: self)
+        }
+        else{
+            self.goToCreatePage = true
+        }
+    }
+
+    func failedToCheckUser(error: NSError) {
+        println(error)
     }
     
     func dateFromString(date : String) -> NSDate {
@@ -98,13 +117,16 @@ class CreateUserViewController: UIViewController, FBLoginViewDelegate, GetUserWi
     /*facebook delegates*/
     
     func loginViewFetchedUserInfo(loginView: FBLoginView!, user: FBGraphUser!) {
+        
         userNameOutlet.text = user.first_name
         userLastNameStr = user.last_name
         userAgeInt = Int((dateFromString(user.birthday).timeIntervalSinceNow)/(-31557600))
         userAgeOutlet.text = "\(userAgeInt)"
         userFBID = user.objectID
+        //databaseDevil.checkToSeeIfUserExist(userFBID)
         println(userFBID)
         profilePic.profileID = userFBID
+        
     }
     
     
