@@ -20,7 +20,6 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
     
     @IBOutlet var fbLoginView : FBLoginView!
     
-    @IBOutlet var profilePic: FBProfilePictureView!
     
     
     var userFbDelegate: UserFacebookInfoDelegate?
@@ -50,14 +49,14 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "mySegue2"{
+        if segue.identifier == "createProfileSegue"{
             println("where are we?")
             let createUserVC : CreateUserViewController = segue.destinationViewController as CreateUserViewController
             println(userFirstName)
             createUserVC.userFirstNameStr = userFirstName
             createUserVC.userLastNameStr = userLastName
-            createUserVC.userFBID = userFacebookID
-            createUserVC.userAgeInt = 22
+            //createUserVC.userFBID = userFacebookID
+            //createUserVC.userAgeInt =
             createUserVC.userGuestID = "\(userFacebookID)_1"
             createUserVC.userHostID = "\(userFacebookID)_0"
         }
@@ -73,8 +72,9 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
     
     func loginViewShowingLoggedInUser(loginView : FBLoginView!) {
         println("User Logged In")
+        //println(userFacebookID)
+        performSegueWithIdentifier("createProfileSegue", sender: self)
         
-        //this is where we segue 
     }
     
     func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser){

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="vNg-CW-unj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="vNg-CW-unj">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
@@ -17,25 +17,22 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pXi-Hi-2hV">
-                                <rect key="frame" x="129" y="218" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Profile">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="goToCreateProfile:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="oi7-WZ-FsD"/>
-                                    <segue destination="scs-RN-GTC" kind="push" identifier="mySegue2" id="Xlp-md-Q5H"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="z7T-pQ-dIN">
                                 <rect key="frame" x="188" y="90" width="99" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Move to home">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pXi-Hi-2hV">
+                                <rect key="frame" x="294" y="545" width="20" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
-                                    <segue destination="sTD-Y3-VLK" kind="push" identifier="homeSegue" id="PXO-eb-9MD"/>
+                                    <action selector="goToCreateProfile:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="oi7-WZ-FsD"/>
+                                    <segue destination="scs-RN-GTC" kind="push" identifier="createProfileSegue" id="Xlp-md-Q5H"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -124,11 +121,18 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view hidden="YES" contentMode="scaleToFill" id="J31-5V-j0f" customClass="FBLoginView">
+                                <rect key="frame" x="0.0" y="70" width="27" height="29"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Create Profile" id="zhC-qe-U1X"/>
                     <connections>
+                        <outlet property="fbLogin" destination="J31-5V-j0f" id="PvR-Ub-ert"/>
+                        <outlet property="profilePic" destination="fmI-9e-JcJ" id="OWa-Lj-iza"/>
                         <outlet property="userAgeOutlet" destination="AI8-Yc-S5S" id="7DJ-ex-Kmz"/>
                         <outlet property="userDescriptionOutlet" destination="Cvh-7N-fLd" id="QIt-jC-33r"/>
                         <outlet property="userNameOutlet" destination="MTz-b5-vNh" id="c7I-73-Zfd"/>
