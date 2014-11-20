@@ -37,6 +37,9 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
     the adding text shift constant
     */
     let AddTagsShifter = 40
+    
+    let validator : InputValidator = InputValidator()
+    
     var addTagsCounter = 0
     
     let databaseThing : DatabaseWork = DatabaseWork.sharedInstanceOfTheList()
@@ -320,13 +323,23 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
     
     
     @IBAction func enteringStreetAddress(sender : AnyObject) {
-        if(countElements(locationAddressField.text) > 5 && !(locationTypeSwitch.on)) {
+        if(validator.isAddressFormat(locationAddressField.text) && !(locationTypeSwitch.on)) {
             locationZipField.enabled = true
             locationCityField.enabled = true
+        }
+        else {
+            locationZipField.enabled = false
+            locationCityField.enabled = false
         }
     }
     
     
+    @IBAction func enteringZip(sender : AnyObject) {
+        let fieldContents = locationZipField.text
+        if(countElements(fieldContents) > 5) {
+            locationZipField.text = fieldContents.substringToIndex(advance(fieldContents.startIndex, 5))
+        }
+    }
     @IBAction func doneEnteringZip(sender : AnyObject) {
         if(countElements(locationZipField.text) == 5) {
             forwardGeocode(locationAddressField.text + ", " + locationZipField.text)
@@ -341,11 +354,31 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
     }
     
     
+    @IBAction func enteringState(sender: AnyObject) {
+        let fieldContents = locationStateField.text
+        if(countElements(locationStateField.text) > 2) {
+            locationStateField.text = fieldContents.substringToIndex(advance(fieldContents.startIndex, 2))
+        }
+    }
     @IBAction func doneEnteringState(sender: AnyObject) {
-        let enteredLocation = (locationAddressField.text + ", " + locationCityField.text + ", " + locationStateField.text)
-        if(countElements(locationStateField.text) == 2){
+        if(validator.isValidState(locationStateField.text)){
+            let enteredLocation = (locationAddressField.text + ", " + locationCityField.text + ", " + locationStateField.text)
             forwardGeocode(enteredLocation)
         }
+    }
+    
+    @IBAction func enteringDate(sender: AnyObject) {
+        let fieldContents = dateTextField.text
+        let fieldTokens = fieldContents.componentsSeparatedByString("/")
+        if(validator.areAllDigits(fieldTokens)) {
+        
+        }
+        
+    }
+    
+    @IBAction func doneEnteringDate(sender : AnyObject) {
+        let fieldContents = dateTextField.text
+        println(validator.isDateFormat(fieldContents))
     }
     
 //    

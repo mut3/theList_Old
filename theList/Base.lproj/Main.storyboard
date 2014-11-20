@@ -376,6 +376,7 @@
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
                                                         <action selector="doneEnteringZip:" destination="48W-zr-XEe" eventType="editingDidEnd" id="Gy7-4E-QqY"/>
+                                                        <action selector="enteringZip:" destination="48W-zr-XEe" eventType="editingChanged" id="ZKa-Yc-dee"/>
                                                     </connections>
                                                 </textField>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="State" minimumFontSize="17" id="bMQ-dO-pKM" userLabel="State">
@@ -385,6 +386,7 @@
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
                                                         <action selector="doneEnteringState:" destination="48W-zr-XEe" eventType="editingDidEnd" id="gCG-EJ-H4p"/>
+                                                        <action selector="enteringState:" destination="48W-zr-XEe" eventType="editingChanged" id="p8N-ET-FH2"/>
                                                     </connections>
                                                 </textField>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="EA7-nz-qKY" userLabel="Switch Loc Type">
@@ -436,6 +438,10 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="doneEnteringDate:" destination="48W-zr-XEe" eventType="editingDidEnd" id="wIi-oP-Zsi"/>
+                                                        <action selector="enteringDate:" destination="48W-zr-XEe" eventType="editingChanged" id="7K0-7P-GaC"/>
+                                                    </connections>
                                                 </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YHW-3e-Dko">
                                                     <rect key="frame" x="85" y="153" width="36" height="21"/>
