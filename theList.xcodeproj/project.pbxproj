@@ -15,7 +15,6 @@
 		429984DC1A0C7F8A00B4FD7D /* createUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429984DB1A0C7F8A00B4FD7D /* createUser.swift */; };
 		AC7FB2451A1BA74E00CF4312 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC7FB2441A1BA74E00CF4312 /* FacebookSDK.framework */; };
 		AC7FB2471A1BAA7600CF4312 /* GuestListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7FB2461A1BAA7600CF4312 /* GuestListViewController.swift */; };
-		AC7FB2491A1BB01500CF4312 /* GuestList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7FB2481A1BB01500CF4312 /* GuestList.swift */; };
 		ACC499A51A0C3055000E5073 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC499A41A0C3055000E5073 /* AppDelegate.swift */; };
 		ACC499A81A0C3055000E5073 /* theList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ACC499A61A0C3055000E5073 /* theList.xcdatamodeld */; };
 		ACC499AA1A0C3055000E5073 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC499A91A0C3055000E5073 /* ViewController.swift */; };
@@ -51,7 +50,6 @@
 		429984DB1A0C7F8A00B4FD7D /* createUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = createUser.swift; sourceTree = "<group>"; };
 		AC7FB2441A1BA74E00CF4312 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = SOURCE_ROOT; };
 		AC7FB2461A1BAA7600CF4312 /* GuestListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuestListViewController.swift; sourceTree = "<group>"; };
-		AC7FB2481A1BB01500CF4312 /* GuestList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuestList.swift; sourceTree = "<group>"; };
 		ACC4999F1A0C3055000E5073 /* theList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = theList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACC499A31A0C3055000E5073 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ACC499A41A0C3055000E5073 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -162,7 +160,6 @@
 			isa = PBXGroup;
 			children = (
 				42255F171A10003800567334 /* Event.swift */,
-				AC7FB2481A1BB01500CF4312 /* GuestList.swift */,
 				429984D91A0C7A1700B4FD7D /* User.swift */,
 				D14F5D8F1A0EC49A0037FF78 /* DatabaseWork.swift */,
 			);
@@ -305,7 +302,6 @@
 				D1C1FA5F1A19287500B80F6B /* FindEventsViewController.swift in Sources */,
 				429984DA1A0C7A1700B4FD7D /* User.swift in Sources */,
 				424E4D021A1662D00066032E /* CorrectEventsViewController.swift in Sources */,
-				AC7FB2491A1BB01500CF4312 /* GuestList.swift in Sources */,
 				42255F201A101BD100567334 /* EventsListTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

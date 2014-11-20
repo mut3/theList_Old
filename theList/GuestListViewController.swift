@@ -8,20 +8,21 @@
 
 import UIKit
 
-class GuestListViewController: UITableViewController, GuestsDelegate {
+class GuestListViewController: UITableViewController, EventsDelegate {
     
-    let givenGuests : DatabaseWork = DatabaseWork.sharedInstanceOfTheList()
+    let givenEvents : DatabaseWork = DatabaseWork.sharedInstanceOfTheList()
     
-    var guestCount : Int!
-    var guests = [GuestList]()
+    var eventsCount : Int!
+    var userPastEvents = [Event]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
-        givenGuests.delegate = self;
-        givenGuests.fetchUserEventsWithDelegate("12314")
+        givenEvents.delegate = self;
+        givenEvents.fetchUserEventsWithDelegate("12314")
         
-        println(givenGuests.events.count)
+        println(givenEvents.events.count)
         
         
         // Uncomment the following line to preserve selection between presentations
@@ -38,7 +39,7 @@ class GuestListViewController: UITableViewController, GuestsDelegate {
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 3 //i believe this mean three sections
+        return 1
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -56,14 +57,14 @@ class GuestListViewController: UITableViewController, GuestsDelegate {
     /*
     database delegate
     */
-    func guestListUpdated() {
+    func pastEventsListUpdated() {
         refreshControl?.endRefreshing()
         tableView.reloadData()
     }
     
     func errorUpdate(error: NSError) {
         let message = error.localizedDescription
-        let alert = UIAlertView(title: "error loading guest list", message: message, delegate: nil, cancelButtonTitle: "ok")
+        let alert = UIAlertView(title: "error loading past events", message: message, delegate: nil, cancelButtonTitle: "ok")
         alert.show()
     }
 }
