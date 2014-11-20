@@ -336,10 +336,24 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
     
     @IBAction func enteringZip(sender : AnyObject) {
         let fieldContents = locationZipField.text
+        let fieldTokens = Array(fieldContents)
+        println(fieldTokens)
+        
+        var highestDigitIndex = 0
+        for i in 0...(fieldTokens.count - 1) {
+            if(validator.isDigit(String(fieldTokens[i]))){
+                highestDigitIndex = i
+            }
+            
+        }
+        locationZipField.text = fieldContents.substringToIndex(advance(fieldContents.startIndex, highestDigitIndex + 1))
+        
         if(countElements(fieldContents) > 5) {
             locationZipField.text = fieldContents.substringToIndex(advance(fieldContents.startIndex, 5))
         }
     }
+    
+    
     @IBAction func doneEnteringZip(sender : AnyObject) {
         if(countElements(locationZipField.text) == 5) {
             forwardGeocode(locationAddressField.text + ", " + locationZipField.text)
@@ -368,12 +382,30 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
     }
     
     @IBAction func enteringDate(sender: AnyObject) {
-        let fieldContents = dateTextField.text
-        let fieldTokens = fieldContents.componentsSeparatedByString("/")
-        if(validator.areAllDigits(fieldTokens)) {
-        
-        }
-        
+//        let fieldContents = dateTextField.text
+//        let fieldTokens = fieldContents.componentsSeparatedByString("/")
+//        println(fieldTokens)
+//        if(fieldTokens.count == 1) {
+//            if(!validator.isDigit(fieldTokens[0])) {
+//                dateTextField.text = ""
+//            }
+//        }
+//        else if(fieldTokens.count == 2) {
+//            if(!validator.isValidMonth(fieldTokens[0])) {
+//                println("got here")
+//                dateTextField.text = "\(fieldTokens[0])"
+//            }
+//            if(!validator.isDigit(fieldTokens[1])) {
+//                dateTextField.text = "\(fieldTokens[0])/"
+//            }
+//        }
+//        else if(fieldTokens.count == 3) {
+//            if(!validator.isDigit(fieldTokens[2])) {
+//                dateTextField.text = "\(fieldTokens[0])/\(fieldTokens[1])/"
+//                println(dateTextField.text)
+//            }
+//        }
+        return
     }
     
     @IBAction func doneEnteringDate(sender : AnyObject) {
