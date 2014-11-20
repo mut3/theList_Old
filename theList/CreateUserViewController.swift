@@ -47,7 +47,7 @@ class CreateUserViewController: UIViewController, FBLoginViewDelegate, GetUserWi
         super.viewDidLoad()
         
         self.fbLogin.delegate = self
-        databaseDevil.getUserWithIdDelegate? = self
+        databaseDevil.getUserWithIdDelegate = self
         
         
         userDescriptionOutlet.text = ""
@@ -73,13 +73,11 @@ class CreateUserViewController: UIViewController, FBLoginViewDelegate, GetUserWi
     }
     
     @IBAction func testUserInfo(sender : AnyObject){
-        databaseDevil.getUserWithID(userFBID)
         println("end of button press")
     
     }
     /*  Current User Delegates */
     func retreivedUserWithID(currentUser: User) {
-        println("hello")
         println(currentUser.firstName)
     }
     func failedToRetreiveUser(error: NSError) {

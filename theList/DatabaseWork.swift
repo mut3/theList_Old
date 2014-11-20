@@ -299,8 +299,6 @@ class DatabaseWork {
             dispatch_async(dispatch_get_main_queue()){
                 if (self.retreivedUser.count > 0){
                     self.getUserWithIdDelegate?.retreivedUserWithID(self.retreivedUser[0])
-                    self.getUserWithIdDelegate?.tryingShitOut()
-                    println("here is the cluck")
                 }
                 return
             }
