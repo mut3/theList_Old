@@ -797,7 +797,7 @@
         <!--User's Profile-->
         <scene sceneID="SCa-GC-UyW">
             <objects>
-                <viewController id="Ycg-UA-9No" sceneMemberID="viewController">
+                <viewController id="Ycg-UA-9No" customClass="ProfileViewController" customModule="theList" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CB0-b7-WBo">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
