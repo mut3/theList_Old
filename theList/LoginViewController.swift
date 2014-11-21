@@ -55,18 +55,20 @@ class LoginViewController: UIViewController, FBLoginViewDelegate,CheckIfUserExis
         
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "createProfileSegue"{
+            println("where are we?")
+        }
+        else if segue.identifier == "homeSegue"{
+            println("Home segue")
+        }
+    }
     
     
     
     func loginViewShowingLoggedInUser(loginView : FBLoginView!) {
         println("User Logged In")
-//        loginView.hidden = true
-        //println(userFacebookID)
-        /*
-        if (goToCreatePage){
-            performSegueWithIdentifier("createProfileSegue", sender: self)
-        }
-        */
+        loginView.hidden = true;
     }
     
     func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser){
