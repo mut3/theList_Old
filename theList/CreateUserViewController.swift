@@ -14,6 +14,8 @@ class CreateUserViewController: UIViewController, FBLoginViewDelegate, GetUserWi
     
     @IBOutlet var userAgeOutlet: UILabel!
     
+    @IBOutlet var userGenderOutlet: UITextField!
+    
     @IBOutlet var userDescriptionOutlet: UITextView!
     
     

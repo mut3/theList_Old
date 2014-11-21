@@ -28,6 +28,8 @@
 		D125669A1A192FC500F5D2DB /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D12566991A192FC500F5D2DB /* CloudKit.framework */; };
 		D14F5D901A0EC49A0037FF78 /* DatabaseWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14F5D8F1A0EC49A0037FF78 /* DatabaseWork.swift */; };
 		D1C1FA5F1A19287500B80F6B /* FindEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C1FA5E1A19287500B80F6B /* FindEventsViewController.swift */; };
+		D1E697ED1A1D32E000CBA46C /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1E697EC1A1D32E000CBA46C /* FacebookSDK.framework */; };
+		D1E697EF1A1D33FF00CBA46C /* InputValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E697EE1A1D33FF00CBA46C /* InputValidator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +70,8 @@
 		D12566991A192FC500F5D2DB /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		D14F5D8F1A0EC49A0037FF78 /* DatabaseWork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseWork.swift; sourceTree = "<group>"; };
 		D1C1FA5E1A19287500B80F6B /* FindEventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindEventsViewController.swift; sourceTree = "<group>"; };
+		D1E697EC1A1D32E000CBA46C /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		D1E697EE1A1D33FF00CBA46C /* InputValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputValidator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +118,8 @@
 		ACC499A11A0C3055000E5073 /* theList */ = {
 			isa = PBXGroup;
 			children = (
+				D1E697EE1A1D33FF00CBA46C /* InputValidator.swift */,
+				D1E697EC1A1D32E000CBA46C /* FacebookSDK.framework */,
 				D14F5D921A0EC4BB0037FF78 /* View Controllers */,
 				D14F5D911A0EC4AB0037FF78 /* Database Classes */,
 				ACC499C71A0C30E5000E5073 /* theList.entitlements */,
@@ -295,6 +301,7 @@
 				ACC499A51A0C3055000E5073 /* AppDelegate.swift in Sources */,
 				ACC499A81A0C3055000E5073 /* theList.xcdatamodeld in Sources */,
 				429984DC1A0C7F8A00B4FD7D /* createUser.swift in Sources */,
+				D1E697EF1A1D33FF00CBA46C /* InputValidator.swift in Sources */,
 				D1C1FA5F1A19287500B80F6B /* FindEventsViewController.swift in Sources */,
 				429984DA1A0C7A1700B4FD7D /* User.swift in Sources */,
 				424E4D021A1662D00066032E /* CorrectEventsViewController.swift in Sources */,
