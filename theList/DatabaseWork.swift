@@ -70,7 +70,7 @@ class DatabaseWork {
     }
     
     func uploadUser(age: Int, userDescript : String, userFBID : String, userFirstName: String,
-        userLastName : String , deviceID : String , userGuestID : String, userHostID : String){
+        userLastName : String , deviceID : String , userGuestID : String, userHostID : String, gender : String){
         let userRecord = CKRecord(recordType: "User")
         userRecord.setValue(age, forKey: "Age")
         userRecord.setValue(userDescript, forKey: "Description")
@@ -80,6 +80,7 @@ class DatabaseWork {
         userRecord.setValue(userLastName, forKey: "LastName")
         userRecord.setValue(userGuestID, forKey: "GuestID")
         userRecord.setValue(userHostID, forKey: "HostID")
+        userRecord.setValue(gender, forKey: "Gender")
         //userRecord.setValue(photoList, forkey: "Photos")
             
             publicDB.saveRecord(userRecord, completionHandler: {(record, error)-> Void in

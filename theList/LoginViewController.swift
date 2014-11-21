@@ -83,7 +83,6 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         userLastName = user.last_name
         userBirthday = user.birthday
         userFacebookID = user.objectID
-
         //profilePic.profileID=user.objectID
         
         //println(userBirthday)

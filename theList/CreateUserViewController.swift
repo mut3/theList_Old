@@ -14,6 +14,8 @@ class CreateUserViewController: UIViewController{
     
     @IBOutlet var userAgeOutlet: UILabel!
     
+    @IBOutlet var userGenderOutlet: UITextField!
+    
     @IBOutlet var userDescriptionOutlet: UITextView!
     
     var userFirstNameStr : String = ""
@@ -32,6 +34,8 @@ class CreateUserViewController: UIViewController{
     
     var userHostID : String = ""
     
+    var userGender : String = ""
+    
     
     
     override func viewDidLoad() {
@@ -49,7 +53,8 @@ class CreateUserViewController: UIViewController{
     
     @IBAction func submitUser(sender: AnyObject) {
         userDescript = userDescriptionOutlet.text
-        databaseWork.uploadUser(userAgeInt, userDescript: userDescript, userFBID: userFBID, userFirstName: userFirstNameStr, userLastName: userLastNameStr, deviceID: userDeviceID, userGuestID: userGuestID, userHostID: userHostID)
+        userGender = userGenderOutlet.text 
+        databaseWork.uploadUser(userAgeInt, userDescript: userDescript, userFBID: userFBID, userFirstName: userFirstNameStr, userLastName: userLastNameStr, deviceID: userDeviceID, userGuestID: userGuestID, userHostID: userHostID, gender : userGender)
     }
 
 }
