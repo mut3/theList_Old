@@ -71,7 +71,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate,CheckIfUserExis
     
     func loginViewShowingLoggedInUser(loginView : FBLoginView!) {
         println("User Logged In")
-        loginView.hidden = true;
+        loginView.hidden = false;
         //println(userFacebookID)
         /*
         if (goToCreatePage){
@@ -115,6 +115,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate,CheckIfUserExis
     
     /* checking user delegates */
     func checkIfUser(checkUser: Bool) {
+        println(checkUser)
         if (checkUser){
             self.goToCreatePage = false
             performSegueWithIdentifier("startToHome", sender: self)

@@ -314,9 +314,11 @@ class DatabaseWork {
     }
     
     func checkToSeeIfUserExist(userID : String){
+        println(userID)
         let eventRecord = CKRecord(recordType: "Event")
         let getCurrentUser = NSPredicate(format: "FacebookID = %@",userID)
         let query = CKQuery(recordType: "User", predicate: getCurrentUser)
+        self.userExist = false
         publicDB.performQuery(query, inZoneWithID: nil){
             results, error in
             if error != nil {
@@ -325,11 +327,13 @@ class DatabaseWork {
                     return
                 }
             }else{
-                self.userExist = false
-                for record in results{
+                
+                println("we have results")
+                if (results.count > 0){
                     self.userExist = true
                 }
             }
+            println(self.userExist)
             dispatch_async(dispatch_get_main_queue()){
                 self.checkIfUserExistDelegate?.checkIfUser(self.userExist)
                 return

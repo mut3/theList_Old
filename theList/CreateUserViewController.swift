@@ -70,7 +70,7 @@ class CreateUserViewController: UIViewController, FBLoginViewDelegate, GetUserWi
         userGuestID = "\(userFBID)_1"
         userHostID = "\(userFBID)_0"
         userDeviceID = "\(UIDevice.currentDevice())"
-        databaseWork.uploadUser(userAgeInt, userDescript: userDescript, userFBID: userFBID, userFirstName: userNameOutlet.text!, userLastName: userLastNameStr, deviceID: userDeviceID, userGuestID: userGuestID, userHostID: userHostID)
+        databaseWork.uploadUser(userAgeInt, userDescript: userDescript, userFBID: userFBID, userFirstName: userNameOutlet.text!, userLastName: userLastNameStr, deviceID: userDeviceID, userGuestID: userGuestID, userHostID: userHostID, gender: userGenderOutlet.text)
     }
     
     @IBAction func viewTapped(sender : AnyObject) {
