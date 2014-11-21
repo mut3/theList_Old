@@ -85,7 +85,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AI8-Yc-S5S">
-                                <rect key="frame" x="134" y="350" width="186" height="21"/>
+                                <rect key="frame" x="134" y="338" width="57" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -93,7 +93,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Age" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hyh-co-wGk">
-                                <rect key="frame" x="16" y="355" width="42" height="21"/>
+                                <rect key="frame" x="16" y="338" width="42" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -118,14 +118,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Cvh-7N-fLd">
-                                <rect key="frame" x="134" y="407" width="186" height="98"/>
+                                <rect key="frame" x="134" y="407" width="170" height="98"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MTz-b5-vNh">
-                                <rect key="frame" x="134" y="300" width="186" height="21"/>
+                                <rect key="frame" x="134" y="300" width="121" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -147,6 +147,23 @@
                                     <action selector="testUserInfo:" destination="scs-RN-GTC" eventType="touchUpInside" id="HzJ-sW-QYh"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gender" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uQF-RW-BQt">
+                                <rect key="frame" x="16" y="373" width="85" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="ej7-yq-xZA">
+                                <rect key="frame" x="134" y="369" width="48" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="viewTapped:" destination="scs-RN-GTC" eventType="editingDidEnd" id="lA4-Dd-h8M"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -160,6 +177,7 @@
                         <outlet property="profilePic" destination="fmI-9e-JcJ" id="OWa-Lj-iza"/>
                         <outlet property="userAgeOutlet" destination="AI8-Yc-S5S" id="7DJ-ex-Kmz"/>
                         <outlet property="userDescriptionOutlet" destination="Cvh-7N-fLd" id="QIt-jC-33r"/>
+                        <outlet property="userGenderOutlet" destination="ej7-yq-xZA" id="UQg-1c-Dux"/>
                         <outlet property="userNameOutlet" destination="MTz-b5-vNh" id="c7I-73-Zfd"/>
                     </connections>
                 </viewController>
@@ -204,7 +222,7 @@
                     <navigationItem key="navigationItem" title="Host an Event" id="Vpu-Ub-Teo">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="lZn-TP-CgR">
                             <connections>
-                                <segue destination="48W-zr-XEe" kind="push" id="bV7-Hp-DPh"/>
+                                <segue destination="48W-zr-XEe" kind="push" identifier="makeNewEvent" id="bV7-Hp-DPh"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -231,7 +249,7 @@
         <!--Home Screen-->
         <scene sceneID="Z72-3U-Q4U">
             <objects>
-                <viewController id="sTD-Y3-VLK" userLabel="Home Screen" sceneMemberID="viewController">
+                <viewController id="sTD-Y3-VLK" userLabel="Home Screen" customClass="HomeViewController" customModule="theList" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yAi-ge-cZu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -243,7 +261,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="rQI-6f-vp7" kind="push" id="9Js-Pn-IFB"/>
+                                    <segue destination="rQI-6f-vp7" kind="push" identifier="goToPastEvents" id="9Js-Pn-IFB"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="lNJ-Bc-AAy">
@@ -253,7 +271,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="QyU-8V-eYf" kind="push" id="fMH-8C-Mav"/>
+                                    <segue destination="QyU-8V-eYf" kind="push" identifier="goToFindEvents" id="fMH-8C-Mav"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -652,7 +670,7 @@
                                 <state key="normal" title="Host"/>
                                 <connections>
                                     <action selector="goToHostScreen:" destination="csJ-U0-C19" eventType="touchUpInside" id="Y2U-nP-FNw"/>
-                                    <segue destination="Ycg-UA-9No" kind="push" id="Te7-DU-tfT"/>
+                                    <segue destination="Ycg-UA-9No" kind="push" identifier="goToHostProfile" id="Te7-DU-tfT"/>
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.85000002384185791" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8xU-Bg-ZXK">
@@ -779,7 +797,7 @@
         <!--User's Profile-->
         <scene sceneID="SCa-GC-UyW">
             <objects>
-                <viewController id="Ycg-UA-9No" sceneMemberID="viewController">
+                <viewController id="Ycg-UA-9No" customClass="ProfileViewController" customModule="theList" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CB0-b7-WBo">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -798,10 +816,6 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="6QW-as-Wrj">
-                                <rect key="frame" x="152" y="79" width="152" height="174"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Age:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nME-MB-wiV">
                                 <rect key="frame" x="55" y="135" width="35" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -844,10 +858,28 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" id="KcF-od-qf2" customClass="FBLoginView">
+                                <rect key="frame" x="6" y="520" width="38" height="41"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="gT0-9I-k91" customClass="FBProfilePictureView">
+                                <rect key="frame" x="151" y="79" width="153" height="195"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="User's Profile" id="FQj-sO-JWm"/>
+                    <connections>
+                        <outlet property="aboutMeOutlet" destination="eLH-Ib-C0h" id="ZqS-Gz-lbE"/>
+                        <outlet property="ageOutlet" destination="a2M-LC-Nkb" id="Xow-BY-dPL"/>
+                        <outlet property="fbLogin" destination="KcF-od-qf2" id="Kpj-RJ-83k"/>
+                        <outlet property="genderOutlet" destination="UBW-D5-cDS" id="SgL-8N-f4U"/>
+                        <outlet property="profilePic" destination="gT0-9I-k91" id="xmF-ev-rEi"/>
+                        <outlet property="ratingOutlet" destination="mwf-Op-Tud" id="NaZ-7V-R9n"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="axL-dL-NKV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -862,6 +894,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="GQM-fk-Hkj"/>
         <segue reference="gG2-ac-fEf"/>
-        <segue reference="ggx-TV-SSW"/>
+        <segue reference="GEe-Be-QQh"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -7,12 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		42161F3A1A1FD8AC001235B6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42161F391A1FD8AC001235B6 /* HomeViewController.swift */; };
+		42161F3C1A1FDFAE001235B6 /* CurrentUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42161F3B1A1FDFAE001235B6 /* CurrentUserData.swift */; };
 		42255F181A10003800567334 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42255F171A10003800567334 /* Event.swift */; };
 		42255F201A101BD100567334 /* EventsListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42255F1F1A101BD100567334 /* EventsListTableViewController.swift */; };
 		42255F221A11491000567334 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42255F211A11491000567334 /* EventViewController.swift */; };
 		424E4D021A1662D00066032E /* CorrectEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424E4D011A1662D00066032E /* CorrectEventsViewController.swift */; };
 		429984DA1A0C7A1700B4FD7D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429984D91A0C7A1700B4FD7D /* User.swift */; };
 		429984DC1A0C7F8A00B4FD7D /* createUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429984DB1A0C7F8A00B4FD7D /* createUser.swift */; };
+		42EE44A01A1FD41800644A22 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42EE449F1A1FD41800644A22 /* ProfileViewController.swift */; };
 		ACC499A51A0C3055000E5073 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC499A41A0C3055000E5073 /* AppDelegate.swift */; };
 		ACC499A81A0C3055000E5073 /* theList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ACC499A61A0C3055000E5073 /* theList.xcdatamodeld */; };
 		ACC499AA1A0C3055000E5073 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC499A91A0C3055000E5073 /* ViewController.swift */; };
@@ -42,12 +45,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		42161F391A1FD8AC001235B6 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		42161F3B1A1FDFAE001235B6 /* CurrentUserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentUserData.swift; sourceTree = "<group>"; };
 		42255F171A10003800567334 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		42255F1F1A101BD100567334 /* EventsListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventsListTableViewController.swift; path = ../EventsListTableViewController.swift; sourceTree = "<group>"; };
 		42255F211A11491000567334 /* EventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
 		424E4D011A1662D00066032E /* CorrectEventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CorrectEventsViewController.swift; sourceTree = "<group>"; };
 		429984D91A0C7A1700B4FD7D /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		429984DB1A0C7F8A00B4FD7D /* createUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = createUser.swift; sourceTree = "<group>"; };
+		42EE449F1A1FD41800644A22 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		ACC4999F1A0C3055000E5073 /* theList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = theList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACC499A31A0C3055000E5073 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ACC499A41A0C3055000E5073 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -160,6 +166,7 @@
 		D14F5D911A0EC4AB0037FF78 /* Database Classes */ = {
 			isa = PBXGroup;
 			children = (
+				42161F3B1A1FDFAE001235B6 /* CurrentUserData.swift */,
 				42255F171A10003800567334 /* Event.swift */,
 				429984D91A0C7A1700B4FD7D /* User.swift */,
 				D14F5D8F1A0EC49A0037FF78 /* DatabaseWork.swift */,
@@ -170,6 +177,7 @@
 		D14F5D921A0EC4BB0037FF78 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				42161F391A1FD8AC001235B6 /* HomeViewController.swift */,
 				D1C1FA5E1A19287500B80F6B /* FindEventsViewController.swift */,
 				ACF384481A0C3A65006CE905 /* CreateUserViewController.swift */,
 				42255F1F1A101BD100567334 /* EventsListTableViewController.swift */,
@@ -178,6 +186,7 @@
 				ACC499A91A0C3055000E5073 /* ViewController.swift */,
 				42255F211A11491000567334 /* EventViewController.swift */,
 				424E4D011A1662D00066032E /* CorrectEventsViewController.swift */,
+				42EE449F1A1FD41800644A22 /* ProfileViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -291,9 +300,12 @@
 				ACF384471A0C3710006CE905 /* LoginViewController.swift in Sources */,
 				ACF384491A0C3A65006CE905 /* CreateUserViewController.swift in Sources */,
 				D14F5D901A0EC49A0037FF78 /* DatabaseWork.swift in Sources */,
+				42161F3A1A1FD8AC001235B6 /* HomeViewController.swift in Sources */,
+				42161F3C1A1FDFAE001235B6 /* CurrentUserData.swift in Sources */,
 				ACC499AA1A0C3055000E5073 /* ViewController.swift in Sources */,
 				D10104901A18088B004ECDA0 /* NewEventViewController.swift in Sources */,
 				42255F181A10003800567334 /* Event.swift in Sources */,
+				42EE44A01A1FD41800644A22 /* ProfileViewController.swift in Sources */,
 				42255F221A11491000567334 /* EventViewController.swift in Sources */,
 				ACC499A51A0C3055000E5073 /* AppDelegate.swift in Sources */,
 				ACC499A81A0C3055000E5073 /* theList.xcdatamodeld in Sources */,

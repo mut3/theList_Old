@@ -58,7 +58,7 @@ class DatabaseWork {
     let privateDB : CKDatabase
     
     
-    class func sharedInstanceOfTheList() -> DatabaseWork{
+    class func sharedInstanceOfDatabase() -> DatabaseWork{
         return databaseWork
     }
     
@@ -78,7 +78,7 @@ class DatabaseWork {
     }
     
     func uploadUser(age: Int, userDescript : String, userFBID : String, userFirstName: String,
-        userLastName : String , deviceID : String , userGuestID : String, userHostID : String){
+        userLastName : String , deviceID : String , userGuestID : String, userHostID : String, gender : String){
         let userRecord = CKRecord(recordType: "User")
         userRecord.setValue(age, forKey: "Age")
         userRecord.setValue(userDescript, forKey: "Description")
@@ -88,6 +88,7 @@ class DatabaseWork {
         userRecord.setValue(userLastName, forKey: "LastName")
         userRecord.setValue(userGuestID, forKey: "GuestID")
         userRecord.setValue(userHostID, forKey: "HostID")
+        userRecord.setValue(gender, forKey: "Gender")
         //userRecord.setValue(photoList, forkey: "Photos")
             
             publicDB.saveRecord(userRecord, completionHandler: {(record, error)-> Void in
@@ -316,6 +317,7 @@ class DatabaseWork {
         let eventRecord = CKRecord(recordType: "Event")
         let getCurrentUser = NSPredicate(format: "FacebookID = %@",userID)
         let query = CKQuery(recordType: "User", predicate: getCurrentUser)
+        self.userExist = false
         publicDB.performQuery(query, inZoneWithID: nil){
             results, error in
             if error != nil {
@@ -324,8 +326,7 @@ class DatabaseWork {
                     return
                 }
             }else{
-                self.userExist = false
-                for record in results{
+                if (results.count > 0){
                     self.userExist = true
                 }
             }
