@@ -331,7 +331,6 @@ class DatabaseWork {
                     self.userExist = true
                 }
             }
-            println(self.userExist)
             dispatch_async(dispatch_get_main_queue()){
                 self.checkIfUserExistDelegate?.checkIfUser(self.userExist)
                 return

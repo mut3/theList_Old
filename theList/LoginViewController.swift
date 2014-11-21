@@ -112,6 +112,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate,CheckIfUserExis
     func checkIfUser(checkUser: Bool) {
         println(checkUser)
         if (checkUser){
+            sleep(1)
             performSegueWithIdentifier("startToHome", sender: self)
         }
         else{
