@@ -327,9 +327,8 @@ class DatabaseWork {
                     return
                 }
             }else{
-                
-                println("we have results")
                 if (results.count > 0){
+                    println(results)
                     self.userExist = true
                 }
             }

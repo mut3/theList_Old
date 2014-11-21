@@ -71,13 +71,8 @@ class LoginViewController: UIViewController, FBLoginViewDelegate,CheckIfUserExis
     
     func loginViewShowingLoggedInUser(loginView : FBLoginView!) {
         println("User Logged In")
-        loginView.hidden = false;
+        loginView.hidden = true;
         //println(userFacebookID)
-        /*
-        if (goToCreatePage){
-            performSegueWithIdentifier("createProfileSegue", sender: self)
-        }
-        */
     }
     
     func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser){
@@ -117,11 +112,10 @@ class LoginViewController: UIViewController, FBLoginViewDelegate,CheckIfUserExis
     func checkIfUser(checkUser: Bool) {
         println(checkUser)
         if (checkUser){
-            self.goToCreatePage = false
             performSegueWithIdentifier("startToHome", sender: self)
         }
         else{
-            self.goToCreatePage = true
+            performSegueWithIdentifier("createProfileSegue", sender: self)
         }
     }
     func failedToCheckUser(error: NSError) {

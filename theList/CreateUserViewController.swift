@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreateUserViewController: UIViewController, FBLoginViewDelegate, GetUserWithIdDelegate, CheckIfUserExistDelegate{
+class CreateUserViewController: UIViewController, FBLoginViewDelegate, GetUserWithIdDelegate{
     
     @IBOutlet var userNameOutlet: UILabel!
     
@@ -52,7 +52,6 @@ class CreateUserViewController: UIViewController, FBLoginViewDelegate, GetUserWi
         
         self.fbLogin.delegate = self
         databaseDevil.getUserWithIdDelegate = self
-        databaseDevil.checkIfUserExistDelegate  = self
         
         
         userDescriptionOutlet.text = ""
@@ -91,20 +90,6 @@ class CreateUserViewController: UIViewController, FBLoginViewDelegate, GetUserWi
         println(currentUser.firstName)
     }
     func failedToRetreiveUser(error: NSError) {
-        println(error)
-    }
-    /* checking user delegates */
-    func checkIfUser(checkUser: Bool) {
-        if (checkUser){
-            self.goToCreatePage = false
-            performSegueWithIdentifier("moveToHomeScreenSegue", sender: self)
-        }
-        else{
-            self.goToCreatePage = true
-        }
-    }
-
-    func failedToCheckUser(error: NSError) {
         println(error)
     }
     
