@@ -10,9 +10,11 @@ import UIKit
 
 class EventsListTableViewController: UITableViewController, EventsDelegate {
 
-    let givenEvents : DatabaseWork = DatabaseWork.sharedInstanceOfTheList()
+    let givenEvents : DatabaseWork = DatabaseWork.sharedInstanceOfDatabase()
     
     var localPastEvents = Dictionary<String,String>()
+    
+    var userID : String = ""
     
     var eventsCount : Int!
     var userPastEvents = [Event]()
@@ -22,7 +24,7 @@ class EventsListTableViewController: UITableViewController, EventsDelegate {
         
         
         givenEvents.delegate = self;
-        givenEvents.fetchUserEventsWithDelegate("12314")
+        givenEvents.fetchUserEventsWithDelegate("\(userID)_0")
         
         println(givenEvents.events.count)
         
@@ -45,16 +47,17 @@ class EventsListTableViewController: UITableViewController, EventsDelegate {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return DatabaseWork.sharedInstanceOfTheList().events.count
+        return DatabaseWork.sharedInstanceOfDatabase().events.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = self.tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
-        let object = DatabaseWork.sharedInstanceOfTheList().events[indexPath.row].name
+        let object = DatabaseWork.sharedInstanceOfDatabase().events[indexPath.row].name
         //changed textLabel? to textLabel so it would build
         cell.textLabel.text = object
         return cell
     }
+    
     
     /*
         database delegate

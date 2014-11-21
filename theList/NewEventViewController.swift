@@ -33,6 +33,10 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
     let eventTagChoices = ["PreGame","Dance","Cocktail","Sports","AfterParty","420","BYOB","Cover"]
     var eventDescription : String!
     
+    
+    // user ID that is pasted through
+    var userID : String = ""
+    
     /*
     the adding text shift constant
     */
@@ -42,7 +46,7 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
     
     var addTagsCounter = 0
     
-    let databaseThing : DatabaseWork = DatabaseWork.sharedInstanceOfTheList()
+    let databaseThing : DatabaseWork = DatabaseWork.sharedInstanceOfDatabase()
     
     
     override func viewDidLoad() {

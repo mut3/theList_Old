@@ -13,7 +13,7 @@ class EventViewController: UIViewController, MadeEventDelegate{
     
     //Event checks current USER ID vs event loaded ID. If same, show host options, else show eventGoer options
     
-    let sharedEvent : DatabaseWork = DatabaseWork.sharedInstanceOfTheList()
+    let sharedEvent : DatabaseWork = DatabaseWork.sharedInstanceOfDatabase()
     
     var event : Event!
     
@@ -121,6 +121,8 @@ class EventViewController: UIViewController, MadeEventDelegate{
             let foundEventsVC : EventViewController = segue.destinationViewController as EventViewController
             foundEventsVC.searchData = searchData
             foundEventsVC.segueIdentity = segue.identifier
+        }else if (segue.identifier == "goToHostProfile"){
+            
         }
     }
     

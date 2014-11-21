@@ -58,7 +58,7 @@ class DatabaseWork {
     let privateDB : CKDatabase
     
     
-    class func sharedInstanceOfTheList() -> DatabaseWork{
+    class func sharedInstanceOfDatabase() -> DatabaseWork{
         return databaseWork
     }
     
@@ -314,7 +314,6 @@ class DatabaseWork {
     }
     
     func checkToSeeIfUserExist(userID : String){
-        println(userID)
         let eventRecord = CKRecord(recordType: "Event")
         let getCurrentUser = NSPredicate(format: "FacebookID = %@",userID)
         let query = CKQuery(recordType: "User", predicate: getCurrentUser)

@@ -1,5 +1,5 @@
 //
-//  ProfileViewController.swift
+//  HomeViewController.swift
 //  theList
 //
 //  Created by William Akeson on 11/21/14.
@@ -7,49 +7,24 @@
 //
 
 import UIKit
+import Foundation
 
-class ProfileViewController: UIViewController, FBLoginViewDelegate{
-    
-    
-    @IBOutlet var ratingOutlet: UILabel!
-    
-    
-    @IBOutlet var ageOutlet: UILabel!
-    
-    
-    @IBOutlet var genderOutlet: UILabel!
-    
-    
-    @IBOutlet var aboutMeOutlet: UITextView!
-    
-    @IBOutlet var fbLogin: FBLoginView!
-    
-    @IBOutlet var profilePic: FBProfilePictureView!
-    
-    let databaseDevil = DatabaseWork.sharedInstanceOfDatabase()
-    
-    var userID : String = ""
+class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.fbLogin.delegate = self
+        println(CurrentUserData.getSharedInstanceOfUserData().getFacebookID())
         
         
-
         // Do any additional setup after loading the view.
     }
 
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    func loginViewFetchedUserInfo(loginView: FBLoginView!, user: FBGraphUser!) {
-        profilePic.profileID = user.objectID
-        self.title = "Hello World"
-        //databaseDevil.getUserWithIdDelegate(userID)
-        
-    }
 
     /*
     // MARK: - Navigation

@@ -41,7 +41,7 @@ class CreateUserViewController: UIViewController, FBLoginViewDelegate, GetUserWi
     
     var userHostID : String = ""
     
-    let databaseDevil = DatabaseWork.sharedInstanceOfTheList()
+    let databaseDevil = DatabaseWork.sharedInstanceOfDatabase()
     
     var goToCreatePage : Bool!
     

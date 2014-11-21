@@ -21,7 +21,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate,CheckIfUserExis
     @IBOutlet var fbLoginView : FBLoginView!
     
     
-    let databaseDevil = DatabaseWork.sharedInstanceOfTheList()
+    let databaseDevil = DatabaseWork.sharedInstanceOfDatabase()
     
     
     var userFbDelegate: UserFacebookInfoDelegate?
@@ -55,32 +55,21 @@ class LoginViewController: UIViewController, FBLoginViewDelegate,CheckIfUserExis
         
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "createProfileSegue"{
-            println("where are we?")
-        }
-        else if segue.identifier == "homeSegue"{
-            println("Home segue")
-        }
-    }
-    
-    
-    
     
     
     
     func loginViewShowingLoggedInUser(loginView : FBLoginView!) {
         println("User Logged In")
         loginView.hidden = true;
-        //println(userFacebookID)
     }
     
     func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser){
-        //println("User Name: \(user.name)")
         userFirstName = user.first_name
         userLastName = user.last_name
         userBirthday = user.birthday
         userFacebookID = user.objectID
+        CurrentUserData.getSharedInstanceOfUserData().setFacebookID(userFacebookID)
+        
         databaseDevil.checkToSeeIfUserExist(userFacebookID)
 
         //profilePic.profileID=user.objectID
@@ -110,7 +99,6 @@ class LoginViewController: UIViewController, FBLoginViewDelegate,CheckIfUserExis
     
     /* checking user delegates */
     func checkIfUser(checkUser: Bool) {
-        println(checkUser)
         if (checkUser){
             sleep(1)
             performSegueWithIdentifier("startToHome", sender: self)

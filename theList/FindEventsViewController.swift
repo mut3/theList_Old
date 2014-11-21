@@ -27,9 +27,10 @@ class FindEventsViewController: UIViewController, FoundEventsDelegate /*FoundEve
     var eventFoundIDs : [String] = []
     var searchData = Dictionary<String, [String]>()
     
+    var userID : String = ""
     
     
-    let databaseDevil : DatabaseWork = DatabaseWork.sharedInstanceOfTheList()
+    let databaseDevil : DatabaseWork = DatabaseWork.sharedInstanceOfDatabase()
 
     
     override func viewDidLoad() {
