@@ -71,7 +71,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate,CheckIfUserExis
     
     func loginViewShowingLoggedInUser(loginView : FBLoginView!) {
         println("User Logged In")
-        loginView.hidden = true
+        loginView.hidden = true;
         //println(userFacebookID)
         /*
         if (goToCreatePage){
