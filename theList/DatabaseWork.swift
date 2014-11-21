@@ -328,7 +328,6 @@ class DatabaseWork {
                 }
             }else{
                 if (results.count > 0){
-                    println(results)
                     self.userExist = true
                 }
             }
