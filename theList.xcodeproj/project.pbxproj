@@ -461,6 +461,7 @@
 					FOLDER,
 					YOU,
 					PLEB/goBetweenDifferentPages/goBetweenDifferentPages/FacebookSDK,
+					/Users/wakeson/Documents/FacebookSDK,
 				);
 				INFOPLIST_FILE = theList/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -515,6 +516,7 @@
 					FOLDER,
 					YOU,
 					PLEB/goBetweenDifferentPages/goBetweenDifferentPages/FacebookSDK,
+					/Users/wakeson/Documents/FacebookSDK,
 				);
 				INFOPLIST_FILE = theList/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
