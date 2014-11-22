@@ -52,7 +52,7 @@ class CreateUserViewController: UIViewController, FBLoginViewDelegate, GetUserWi
         
         self.fbLogin.delegate = self
         databaseDevil.getUserWithIdDelegate = self
-        databaseDevil.checkIfUserExistDelegate  = self
+//        databaseDevil.checkIfUserExistDelegate  = self
         
         
         userDescriptionOutlet.text = ""
@@ -123,30 +123,30 @@ class CreateUserViewController: UIViewController, FBLoginViewDelegate, GetUserWi
     func failedToCheckUser(error: NSError) {
         println(error)
     }
-    
-    func dateFromString(date : String) -> NSDate {
-        var string : NSString =  NSString(string: (date)) as NSString
-        var formatter = NSDateFormatter()
-        formatter.dateFormat = "mm/dd/yyyy"
-        var date : NSDate = formatter.dateFromString(string)!
-        return date
-    }
-    
-    /*facebook delegates*/
-    
-    func loginViewFetchedUserInfo(loginView: FBLoginView!, user: FBGraphUser!) {
-        
-        userNameOutlet.text = user.first_name
-        userLastNameStr = user.last_name
-        userAgeInt = Int((dateFromString(user.birthday).timeIntervalSinceNow)/(-31557600))
-        userAgeOutlet.text = "\(userAgeInt)"
-        userFBID = user.objectID
-        //databaseDevil.checkToSeeIfUserExist(userFBID)
-        println(userFBID)
-        profilePic.profileID = userFBID
-        
-    }
-    
+//    
+//    func dateFromString(date : String) -> NSDate {
+//        var string : NSString =  NSString(string: (date)) as NSString
+//        var formatter = NSDateFormatter()
+//        formatter.dateFormat = "mm/dd/yyyy"
+//        var date : NSDate = formatter.dateFromString(string)!
+//        return date
+//    }
+//    
+//    /*facebook delegates*/
+//    
+//    func loginViewFetchedUserInfo(loginView: FBLoginView!, user: FBGraphUser!) {
+//        
+//        userNameOutlet.text = user.first_name
+//        userLastNameStr = user.last_name
+//        userAgeInt = Int((dateFromString(user.birthday).timeIntervalSinceNow)/(-31557600))
+//        userAgeOutlet.text = "\(userAgeInt)"
+//        userFBID = user.objectID
+//        //databaseDevil.checkToSeeIfUserExist(userFBID)
+//        println(userFBID)
+//        profilePic.profileID = userFBID
+//        
+//    }
+//    
     
     
 
