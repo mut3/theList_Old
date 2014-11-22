@@ -45,8 +45,9 @@ class ProfileViewController: UIViewController, FBLoginViewDelegate{
     }
     
     func loginViewFetchedUserInfo(loginView: FBLoginView!, user: FBGraphUser!) {
-        profilePic.profileID = user.objectID
-        self.title = "Hello World"
+        println(userID)
+        profilePic.profileID = userID
+        self.title = ""
         //databaseDevil.getUserWithIdDelegate(userID)
         
     }

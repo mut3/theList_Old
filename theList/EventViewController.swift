@@ -122,7 +122,8 @@ class EventViewController: UIViewController, MadeEventDelegate{
             foundEventsVC.searchData = searchData
             foundEventsVC.segueIdentity = segue.identifier
         }else if (segue.identifier == "goToHostProfile"){
-            
+            let hostProfileVC : ProfileViewController = segue.destinationViewController as ProfileViewController
+            hostProfileVC.userID = event.hostID
         }
     }
     
