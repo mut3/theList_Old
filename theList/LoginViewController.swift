@@ -87,7 +87,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate,CheckIfUserExis
     
     func loginViewShowingLoggedOutUser(loginView : FBLoginView!) {
         loginView.hidden = false
-        println("User Logged Out")
+//        println("User Logged Out")
         userFirstName = ""
         userLastName = ""
         userBirthday = ""
@@ -95,7 +95,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate,CheckIfUserExis
     }
     
     func loginView(loginView : FBLoginView!, handleError:NSError) {
-        println("Error: \(handleError.localizedDescription)")
+//        println("Error: \(handleError.localizedDescription)")
     }
     
     
@@ -117,7 +117,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate,CheckIfUserExis
         }
     }
     func failedToCheckUser(error: NSError) {
-        println(error)
+//        println(error)
     }
 
     /*

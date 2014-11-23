@@ -26,7 +26,7 @@ class EventsListTableViewController: UITableViewController, EventsDelegate {
         givenEvents.delegate = self;
         givenEvents.fetchUserEventsWithDelegate("\(userID)_0")
         
-        println(givenEvents.events.count)
+//        println(givenEvents.events.count)
         
 
         // Uncomment the following line to preserve selection between presentations

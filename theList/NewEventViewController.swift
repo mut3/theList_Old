@@ -18,8 +18,8 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
     var eventCity : String = ""
     var eventZip : String = ""
     var eventState : String = ""
-    var currentLocationObject : CLLocation!
-    var enteredLocationObject : CLLocation!
+    var currentLocation : CLLocation!
+    var enteredLocation : CLLocation!
     var eventLocation : CLLocation!
     var eventLocationWritten : String = ""
     var eventTimeStart : String = ""
@@ -70,7 +70,6 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
 
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
         //println((CLLocationManager.locationServicesEnabled()))
         
@@ -87,8 +86,8 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
     
     /* Geocoding **********************************************************/
     
-    let currentLocation =  "44.479239, -73.198286"
-    let currentLocName = "192 pine st burlington vt"
+//    let currentLocation =  "44.479239, -73.198286"
+//    let currentLocName = "192 pine st burlington vt"
     
     var myLocation = ""
     
@@ -129,7 +128,7 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
     func getCurrentLocation(manager: CLLocationManager!) {
         //Gets location to apple's server, which processes and returns location.
         CLGeocoder().reverseGeocodeLocation(manager.location, completionHandler: { (placemarks, error) -> Void in
-            println(self.locationManager.location)
+//            println(self.locationManager.location)
             
             if (error != nil) {
                 let errorString = "Error" + error.localizedDescription
@@ -139,14 +138,14 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
             }
             if placemarks.count > 0 {
                 let pm = placemarks[0] as CLPlacemark
-                println("LOCATION")
-                self.displayLocationInfo(pm)
+//                println("LOCATION")
+//                self.displayLocationInfo(pm)
                 self.locationAddressField.text = pm.thoroughfare
                 self.locationCityField.text = pm.locality
                 self.locationZipField.text = pm.postalCode
                 self.locationStateField.text = pm.administrativeArea
                 self.locationAddressField.enabled = true
-                self.eventLocation = pm.location
+                self.currentLocation = pm.location
             }
             else {
                 println("Error with data")
@@ -185,8 +184,8 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
             }
             if placemarks.count > 0 {
                 let pm = placemarks[0] as CLPlacemark
-                self.eventLocation = pm.location
-                println(self.eventLocation)
+                self.enteredLocation = pm.location
+//                println(self.eventLocation)
                 if(self.locationCityField.text == ""){
                     self.locationCityField.text = pm.locality
                     self.locationStateField.text = pm.administrativeArea
@@ -243,7 +242,7 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
     
     @IBAction func locationTypeSwitched(sender : AnyObject) {
         //locationTypeSwitch.setOn(!locationTypeSwitch.on, animated: true)
-        locationTypeLabel.text = locationTypeSwitch.on ? "Current Location" : "Enter Address"
+        locationTypeLabel.text = locationTypeSwitch.on ? "Current Location" : "Enter location"
         locationAddressField.enabled = !locationTypeSwitch.on
         if(locationTypeSwitch.on) {
             getCurrentLocation(locationManager)
@@ -298,21 +297,18 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
     
     
     @IBAction func enteringStreetAddress(sender : AnyObject) {
-        if(validator.isAddressFormat(locationAddressField.text) && !(locationTypeSwitch.on)) {
-            locationZipField.enabled = true
-            locationCityField.enabled = true
-        }
-        else {
-            locationZipField.enabled = false
-            locationCityField.enabled = false
-        }
+
     }
     @IBAction func doneEnteringStreetAddress(sender : AnyObject) {
+        println("done entering address")
         eventStreetAddress = locationAddressField.text
+        if(locationTypeSwitch.on) {
+            forwardGeocode(locationAddressField.text + ", " + locationZipField.text)
+        }
     }
     
     @IBAction func restoreDefaultColor(sender : UITextField) {
-        println("Inside default color restore")
+//        println("Inside default color restore")
         sender.backgroundColor = defaultFieldColor
         
     }
@@ -404,7 +400,14 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
 
     @IBAction func createEventButtonPressed(sender : AnyObject) {
         
-        if(areAllValidFields()) {
+        if(haveConsistentLocation() && areAllValidFields()) {
+            
+            if(locationTypeSwitch.on) {
+                eventLocation = currentLocation
+            }
+            else {
+                eventLocation = enteredLocation
+            }
             
             println("create event pressed, valid fields")
             
@@ -421,7 +424,7 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
             let eventStartTimeObject = dateFromString(eventDate, time: eventTimeStart)
             let eventEndTimeObject = dateFromString(eventDate, time: eventTimeEnd)
             eventTags = (tagsTextField.text).componentsSeparatedByString(", ")
-            let hostID = CurrentUserData.getSharedInstanceOfUserData().getFacebookID() + "_1"
+            let hostID = CurrentUserData.getSharedInstanceOfUserData().getFacebookID()
             
             eventRecord = databaseWork.uploadEvent(eventCapacity, eventDescript: eventDescription, eventEndtime: eventEndTimeObject, eventStartTime: eventStartTimeObject, eventName: eventName, hostID: hostID, eventTags: eventTags, photoList: eventImages, eventLocation: eventLocation, writtenLocation: eventLocationWritten)
     
@@ -447,6 +450,25 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
         
     }
     
+    func haveConsistentLocation() -> Bool {
+        var isConsistent = true
+        println("Entered location: ")
+        println(enteredLocation)
+        
+        if(locationTypeSwitch.on) {
+            println("Current Location: ")
+            println(currentLocation)
+            let distance = currentLocation.distanceFromLocation(enteredLocation)
+            println(distance)
+            if(!(distance < 100)) {
+                isConsistent = false
+                
+            }
+        }
+        return isConsistent
+    }
+    
+        
     func doneUploading(eventID: String) {
         println("the things work so well #######################")
     }
@@ -563,9 +585,6 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
         locationCityField.text = ""
         locationZipField.text = ""
         locationStateField.text = ""
-        locationZipField.enabled = false
-        locationStateField.enabled = false
-        locationCityField.enabled = false
         locationAddressField.placeholder = "Address"
         locationCityField.placeholder = "City"
         locationZipField.placeholder = "Zip"

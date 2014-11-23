@@ -414,7 +414,7 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Zip" minimumFontSize="17" id="7AO-MS-cWT" userLabel="Zip">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Zip" minimumFontSize="17" id="7AO-MS-cWT" userLabel="Zip">
                                                     <rect key="frame" x="135" y="119" width="90" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -425,7 +425,7 @@
                                                         <action selector="restoreDefaultColor:" destination="48W-zr-XEe" eventType="editingDidBegin" id="MgD-nM-Eue"/>
                                                     </connections>
                                                 </textField>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="State" minimumFontSize="17" id="bMQ-dO-pKM" userLabel="State">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="State" minimumFontSize="17" id="bMQ-dO-pKM" userLabel="State">
                                                     <rect key="frame" x="135" y="90" width="51" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -443,7 +443,7 @@
                                                         <action selector="locationTypeSwitched:" destination="48W-zr-XEe" eventType="touchUpInside" id="fn9-cg-Coy"/>
                                                     </connections>
                                                 </switch>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="City" minimumFontSize="17" id="7sB-yD-sEp">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="City" minimumFontSize="17" id="7sB-yD-sEp">
                                                     <rect key="frame" x="135" y="61" width="180" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -502,6 +502,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
+                                                        <action selector="doneEnteringStreetAddress:" destination="48W-zr-XEe" eventType="editingDidEnd" id="bN4-5K-VBS"/>
                                                         <action selector="enteringStreetAddress:" destination="48W-zr-XEe" eventType="editingChanged" id="sKD-ZL-8RH"/>
                                                         <action selector="restoreDefaultColor:" destination="48W-zr-XEe" eventType="editingDidBegin" id="ahF-pg-WKa"/>
                                                     </connections>
