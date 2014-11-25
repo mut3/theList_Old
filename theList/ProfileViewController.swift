@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController, FBLoginViewDelegate{
+class ProfileViewController: UIViewController, FBLoginViewDelegate, GetUserWithIdDelegate{
     
     
     @IBOutlet var ratingOutlet: UILabel!
@@ -33,6 +33,7 @@ class ProfileViewController: UIViewController, FBLoginViewDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.fbLogin.delegate = self
+        databaseDevil.getUserWithIdDelegate = self
         
         
 
@@ -47,10 +48,22 @@ class ProfileViewController: UIViewController, FBLoginViewDelegate{
     func loginViewFetchedUserInfo(loginView: FBLoginView!, user: FBGraphUser!) {
         println(userID)
         profilePic.profileID = userID
-        self.title = ""
-        //databaseDevil.getUserWithIdDelegate(userID)
+        databaseDevil.getUserWithID(userID)
         
     }
+    
+    func retreivedUserWithID(user: User) {
+        self.title = user.firstName
+        self.ageOutlet.text = "\(user.age)"
+        self.aboutMeOutlet.text = user.descript
+        self.genderOutlet.text = user.gender
+    }
+    
+    func failedToRetreiveUser(error: NSError){
+        println(error)
+    }
+    
+    
 
     /*
     // MARK: - Navigation

@@ -21,6 +21,7 @@ class User: NSObject{
     var photos : [String]!
     weak var database : CKDatabase!
     var date: NSDate
+    var gender : String!
     
     
     init( record : CKRecord, database: CKDatabase){
@@ -32,6 +33,7 @@ class User: NSObject{
         self.guestID = record.objectForKey("GuestID") as String!
         self.hostID = record.objectForKey("HostID") as String!
         self.firstName = record.objectForKey("FirstName") as String!
+        self.gender = record.objectForKey("Gender") as String!
         self.lastName = record.objectForKey("LastName") as String!
         self.userID = record.objectForKey("PhoneNumber") as String!
         self.photos = record.objectForKey("Photos") as [String]!
