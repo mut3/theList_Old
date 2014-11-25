@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EventsListTableViewController: UITableViewController, EventsDelegate {
+class EventsListTableViewController: UITableViewController,PastEventsDelegate {
 
     let givenEvents : DatabaseWork = DatabaseWork.sharedInstanceOfDatabase()
     
@@ -19,14 +19,18 @@ class EventsListTableViewController: UITableViewController, EventsDelegate {
     var eventsCount : Int!
     var userPastEvents = [Event]()
     
+    // database transfer over
+    var currentUserPastEvents : [[String]] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        givenEvents.pastEventsDelegate = self
         
-        givenEvents.delegate = self;
-        givenEvents.fetchUserEventsWithDelegate("\(userID)_0")
+        givenEvents.getCurrentUserPastEvents()
         
-        println(givenEvents.events.count)
+        
+        //givenEvents.fetchUserEventsWithDelegate("\(userID)_0")
         
 
         // Uncomment the following line to preserve selection between presentations
@@ -47,14 +51,15 @@ class EventsListTableViewController: UITableViewController, EventsDelegate {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return DatabaseWork.sharedInstanceOfDatabase().events.count
+        return currentUserPastEvents.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = self.tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
-        let object = DatabaseWork.sharedInstanceOfDatabase().events[indexPath.row].name
-        //changed textLabel? to textLabel so it would build
-        cell.textLabel.text = object
+        var givenEvent = currentUserPastEvents[indexPath.row]
+        var eventName = givenEvent[1]
+        println(eventName)
+        cell.textLabel.text = eventName
         return cell
     }
     
@@ -62,16 +67,17 @@ class EventsListTableViewController: UITableViewController, EventsDelegate {
     /*
         database delegate
     */
-    func pastEventsListUpdated() {
-        //localPastEvents = pastEvents
-        //println(localPastEvents)
+    func pastEventsList(pastEvents: [[String]]) {
+        println(pastEvents)
+        self.currentUserPastEvents = pastEvents
         refreshControl?.endRefreshing()
         tableView.reloadData()
     }
     
-    func errorUpdate(error: NSError) {
+    func errorWithPastEvents(error: NSError){
         let message = error.localizedDescription
         let alert = UIAlertView(title: "error loading past events", message: message, delegate: nil, cancelButtonTitle: "ok")
         alert.show()
     }
+    
 }

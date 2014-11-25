@@ -41,7 +41,11 @@ protocol CheckIfUserExistDelegate{
     func failedToCheckUser(error : NSError)
     func checkIfUser(checkUser : Bool)
 }
+protocol PastEventsDelegate{
+    func pastEventsList(pastEvents : [[String]])
+    func errorWithPastEvents(error : NSError)
 
+}
 
 class DatabaseWork {
     
@@ -52,6 +56,7 @@ class DatabaseWork {
     var uploadEventDelegate : UploadingEventDelegate?
     var getUserWithIdDelegate : GetUserWithIdDelegate?
     var checkIfUserExistDelegate : CheckIfUserExistDelegate?
+    var pastEventsDelegate : PastEventsDelegate?
     
     var container : CKContainer
     var publicDB : CKDatabase
@@ -150,6 +155,45 @@ class DatabaseWork {
             
         }
     }
+    /*
+        a better way to get the list of past events of the current user. will use a predicate with the 
+        format of FacebookID = the currentUserData facebook ID.
+    */
+    func getCurrentUserPastEvents(){
+        let userID = CurrentUserData.getSharedInstanceOfUserData().getFacebookID()
+        let currentUserPredicate = NSPredicate(format: "HostID = %@", userID)
+        let query = CKQuery(recordType: "Event", predicate: currentUserPredicate)
+        publicDB.performQuery(query, inZoneWithID : nil){
+            results, error in
+            var onePastEvent : [String] = []
+            var pastEvents : [[String]] = []
+            if (error != nil) {
+                dispatch_async(dispatch_get_main_queue()){
+                    self.pastEventsDelegate?.errorWithPastEvents(error)
+                    return
+                }
+            }else{
+                for record in results{
+                    if (onePastEvent.count > 0){
+                        onePastEvent.removeAll(keepCapacity: true)
+                    }
+                    let eventName = Event(record : record as CKRecord, database: self.publicDB).name
+                    let eventID = Event(record : record as CKRecord, database: self.publicDB).record.recordID.recordName
+                    onePastEvent.append(eventID)
+                    onePastEvent.append(eventName)
+                    pastEvents.append(onePastEvent)
+                }
+                dispatch_async(dispatch_get_main_queue()){
+                    self.pastEventsDelegate?.pastEventsList(pastEvents)
+                    return
+                }
+            }
+        
+        }
+    }
+    
+    
+    
     /*
     takes the host id ( uses it as a predicate) and returns the events of the given user
     */
