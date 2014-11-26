@@ -67,7 +67,7 @@ class EventViewController: UIViewController, MadeEventDelegate{
         if(event.photos.count != 0) {
             var photoAssetURL = event.photos[0].fileURL
 //            println(" IMAGE FILES IN THE THINg ------------- ")
-//            println(photoAssetURL)
+            println(photoAssetURL)
             
             var imageData = NSData(contentsOfURL: photoAssetURL)
             photoImage = UIImage(data: imageData!)

@@ -283,6 +283,7 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
         let myFilePath = documentDirectory.stringByAppendingPathComponent("eventImage \(numberOfImages)")
         imageData.writeToFile(myFilePath, atomically: true)
         let url = NSURL(fileURLWithPath: myFilePath)
+        println(url)
         let asset = CKAsset(fileURL: url)
         numberOfImages += 1
         eventImages.append(asset)
@@ -485,13 +486,13 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
         }
         if(!validator.isAddressFormat(locationAddressField.text)) {
             locationAddressField.backgroundColor = invalidFieldColor
-            eventNameField.text = ""
+            locationAddressField.text = ""
             areValid = false
         }
         if(countElements(locationCityField.text) < 3) {
             locationCityField.backgroundColor = invalidFieldColor
             locationCityField.placeholder = "City Required"
-            eventNameField.text = ""
+            locationCityField.text = ""
             areValid = false
         }
         if(!validator.isValidState(locationStateField.text)) {
@@ -530,7 +531,7 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
         if(tagsTextField.text.componentsSeparatedByString(", ").count < 2) {
             tagsTextField.backgroundColor = invalidFieldColor
             tagsTextField.text = ""
-            tagsTextField.placeholder = "Make at least one tag"
+            tagsTextField.placeholder = "Add at least one tag."
             areValid = false
         }
         //if(countElements(descriptionTextArea.text) < 80) {
@@ -557,10 +558,18 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
         
         forwardGeocode(locationAddressField.text + ", " + locationZipField.text)
         
+        locationTypeSwitch.on = false
+        
+        timeStartTextField.text = "1:00"
+        timeEndTextField.text = "2:00"
+        dateTextField.text = "05/05/2015"
 
         capacityTextField.text = "10"
         tagsTextField.text = "Test01, test02, test03"
         descriptionTextArea.text = "This is a test event."
+        
+        
+        
     }
     
     

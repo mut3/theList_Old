@@ -105,7 +105,7 @@ class FindEventsViewController: UIViewController, FoundEventsDelegate /*FoundEve
     
     
     func errorFindingEvents(error: NSError){
-//        println(error)
+//        println(error)
     }
 }
 

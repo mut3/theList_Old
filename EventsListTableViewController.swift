@@ -58,7 +58,7 @@ class EventsListTableViewController: UITableViewController,PastEventsDelegate {
         var cell = self.tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
         var givenEvent = currentUserPastEvents[indexPath.row]
         var eventName = givenEvent[1]
-        println(eventName)
+//        println(eventName)
         cell.textLabel.text = eventName
         return cell
     }
@@ -68,7 +68,7 @@ class EventsListTableViewController: UITableViewController,PastEventsDelegate {
         database delegate
     */
     func pastEventsList(pastEvents: [[String]]) {
-        println(pastEvents)
+//        println(pastEvents)
         self.currentUserPastEvents = pastEvents
         refreshControl?.endRefreshing()
         tableView.reloadData()
