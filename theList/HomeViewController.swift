@@ -13,7 +13,7 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        println(CurrentUserData.getSharedInstanceOfUserData().getFacebookID())
+//        println(CurrentUserData.getSharedInstanceOfUserData().getFacebookID())
         
         
         // Do any additional setup after loading the view.

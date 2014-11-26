@@ -12,17 +12,27 @@ import Foundation
 import CloudKit
 
 class NewEventViewController: UITableViewController, CLLocationManagerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UploadingEventDelegate /*UIPickerViewDataSource,UIPickerViewDelegate*/{
-    var eventName : String!
+    
+    var eventName : String = ""
+    var eventStreetAddress : String = ""
+    var eventCity : String = ""
+    var eventZip : String = ""
+    var eventState : String = ""
+    var currentLocation : CLLocation!
+    var enteredLocation : CLLocation!
     var eventLocation : CLLocation!
-    var eventLocationWritten : String!
-    var eventTimeStart : String!
-    var eventTimeEnd : String!
-    var eventDate : String!
+    var eventLocationWritten : String = ""
+    var eventTimeStart : String = ""
+    var eventTimeEnd : String = ""
+    var eventDate : String = ""
     var eventCapacity : Int!
     var eventRecord : CKRecord!
     
     var eventImages : [CKAsset] = []
     var numberOfImages : Int = 0
+    
+    let invalidFieldColor : UIColor = UIColor(red: CGFloat(0.90), green: CGFloat(0.824), blue: CGFloat(0.824), alpha: CGFloat(1))
+    let defaultFieldColor : UIColor = UIColor(red: CGFloat(1.0), green: CGFloat(1.0), blue: CGFloat(1.0), alpha: CGFloat(1))
     
     // EVENT TAGS VARIABLES
     var eventTag : String!
@@ -60,7 +70,6 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
 
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
         //println((CLLocationManager.locationServicesEnabled()))
         
@@ -77,8 +86,8 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
     
     /* Geocoding **********************************************************/
     
-    let currentLocation =  "44.479239, -73.198286"
-    let currentLocName = "192 pine st burlington vt"
+//    let currentLocation =  "44.479239, -73.198286"
+//    let currentLocName = "192 pine st burlington vt"
     
     var myLocation = ""
     
@@ -119,7 +128,7 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
     func getCurrentLocation(manager: CLLocationManager!) {
         //Gets location to apple's server, which processes and returns location.
         CLGeocoder().reverseGeocodeLocation(manager.location, completionHandler: { (placemarks, error) -> Void in
-            println(self.locationManager.location)
+//            println(self.locationManager.location)
             
             if (error != nil) {
                 let errorString = "Error" + error.localizedDescription
@@ -129,14 +138,14 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
             }
             if placemarks.count > 0 {
                 let pm = placemarks[0] as CLPlacemark
-                println("LOCATION")
-                self.displayLocationInfo(pm)
+//                println("LOCATION")
+//                self.displayLocationInfo(pm)
                 self.locationAddressField.text = pm.thoroughfare
                 self.locationCityField.text = pm.locality
                 self.locationZipField.text = pm.postalCode
                 self.locationStateField.text = pm.administrativeArea
                 self.locationAddressField.enabled = true
-                self.eventLocation = pm.location
+                self.currentLocation = pm.location
             }
             else {
                 println("Error with data")
@@ -175,8 +184,8 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
             }
             if placemarks.count > 0 {
                 let pm = placemarks[0] as CLPlacemark
-                self.eventLocation = pm.location
-                println(self.eventLocation)
+                self.enteredLocation = pm.location
+//                println(self.eventLocation)
                 if(self.locationCityField.text == ""){
                     self.locationCityField.text = pm.locality
                     self.locationStateField.text = pm.administrativeArea
@@ -229,12 +238,11 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
     @IBOutlet var pictureImageView : UIImageView!
     
     
-//    @IBOutlet weak var tagsPickerOutlet: UIPickerView!
     
     
     @IBAction func locationTypeSwitched(sender : AnyObject) {
         //locationTypeSwitch.setOn(!locationTypeSwitch.on, animated: true)
-        locationTypeLabel.text = locationTypeSwitch.on ? "Current Location" : "Enter Address"
+        locationTypeLabel.text = locationTypeSwitch.on ? "Current Location" : "Enter location"
         locationAddressField.enabled = !locationTypeSwitch.on
         if(locationTypeSwitch.on) {
             getCurrentLocation(locationManager)
@@ -242,9 +250,6 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
         else {
             clearAllAddressFields()
         }
-        //        locationZipField.enabled = !locationTypeSwitch.on
-        //        locationCityField.enabled = !locationTypeSwitch.on
-        //        locationStateField.enabled = !locationTypeSwitch.on
     }
     
     
@@ -252,33 +257,6 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
         view.endEditing(true)
     }
     
-    
-    /* ********************************* TEST BUTTON ***/
-    
-    
-    @IBAction func hitTestEntry(sender : AnyObject) {
-        
-        let numberModifier = Int(NSDate.timeIntervalSinceReferenceDate() % 100000)
-        eventNameField.text = "Test Event #\(numberModifier)"
-
-        locationAddressField.text = "33 colchester ave."
-        locationCityField.text = "Burlington"
-        locationZipField.text = "05401"
-        locationStateField.text = "VT"
-   
-        forwardGeocode(locationAddressField.text + ", " + locationZipField.text)
-        
-        timeStartTextField.text = "12:00"
-        timeEndTextField.text = "1:00"
-        dateTextField.text = "01/01/2015"
-        
-        capacityTextField.text = "10"
-        tagsTextField.text = "Test01, test02, test03"
-        descriptionTextArea.text = "This is a test event."
-    }
-    
-    
-    /* *************************************************/
     
     @IBAction func addPictureButtonPressed(sender : AnyObject) {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary){
@@ -292,78 +270,47 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
         }
     }
     
+    
     func imagePickerController(picker: UIImagePickerController!, didFinishPickingImage image: UIImage!, editingInfo: NSDictionary!) {
         let selectedImage : UIImage = image
 
-//        eventImages.append(UIImageJPEGRepresentation(selectedImage, 90))
-//        println(eventImages[eventImages.count - 1])
-//        //var tempImage:UIImage = editingInfo[UIImagePickerControllerOriginalImage] as UIImage
+
         pictureImageView.image=selectedImage
-//        println(pictureImageView.image)
         
         let imageData = UIImageJPEGRepresentation(selectedImage, 90)
         let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
         let documentDirectory = paths[0] as String
-//        println(documentDirectory)
         let myFilePath = documentDirectory.stringByAppendingPathComponent("eventImage \(numberOfImages)")
         imageData.writeToFile(myFilePath, atomically: true)
         let url = NSURL(fileURLWithPath: myFilePath)
         let asset = CKAsset(fileURL: url)
-        
-//        for element in eventImages {
-//            println(element)
-//        }
         numberOfImages += 1
         eventImages.append(asset)
-        
-
-        
-        
-        
-        
-        
         self.dismissViewControllerAnimated(true, completion: nil)
+        
+    }
+    
+    
+    @IBAction func doneEnteringEventName(sender : AnyObject) {
+        eventName = eventNameField.text
     }
     
     
     @IBAction func enteringStreetAddress(sender : AnyObject) {
-        if(validator.isAddressFormat(locationAddressField.text) && !(locationTypeSwitch.on)) {
-            locationZipField.enabled = true
-            locationCityField.enabled = true
-        }
-        else {
-            locationZipField.enabled = false
-            locationCityField.enabled = false
-        }
+
     }
-    
-    
-    @IBAction func enteringZip(sender : AnyObject) {
-        let fieldContents = locationZipField.text
-//        let fieldTokens = Array(fieldContents)
-//        println(fieldTokens)
-//        if(fieldTokens.count > 0) {
-//            var highestDigitIndex = 0
-//            for i in 0...(fieldTokens.count - 1) {
-//                if(validator.isDigit(String(fieldTokens[i]))){
-//                    highestDigitIndex = i
-//                }
-//            
-//            }
-//            locationZipField.text = fieldContents.substringToIndex(advance(fieldContents.startIndex, highestDigitIndex))
-// 
-//        }
-//        
-        if(countElements(fieldContents) > 5) {
-            locationZipField.text = fieldContents.substringToIndex(advance(fieldContents.startIndex, 5))
-        }
-    }
-    
-    
-    @IBAction func doneEnteringZip(sender : AnyObject) {
-        if(validator.isZipFormat(locationZipField.text)) {
+    @IBAction func doneEnteringStreetAddress(sender : AnyObject) {
+        println("done entering address")
+        eventStreetAddress = locationAddressField.text
+        if(locationTypeSwitch.on) {
             forwardGeocode(locationAddressField.text + ", " + locationZipField.text)
         }
+    }
+    
+    @IBAction func restoreDefaultColor(sender : UITextField) {
+//        println("Inside default color restore")
+        sender.backgroundColor = defaultFieldColor
+        
     }
     
     
@@ -371,6 +318,24 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
         if(countElements(locationCityField.text) > 3) {
             locationStateField.enabled = true
         }
+    }
+    @IBAction func doneEnteringCity(sender : AnyObject) {
+        eventCity = locationCityField.text
+    }
+    
+    
+    @IBAction func enteringZip(sender : AnyObject) {
+        let fieldContents = locationZipField.text
+
+        if(countElements(fieldContents) > 5) {
+            locationZipField.text = fieldContents.substringToIndex(advance(fieldContents.startIndex, 5))
+        }
+    }
+    @IBAction func doneEnteringZip(sender : AnyObject) {
+        if(validator.isZipFormat(locationZipField.text)) {
+            forwardGeocode(locationAddressField.text + ", " + locationZipField.text)
+        }
+        eventZip = locationZipField.text
     }
     
     
@@ -385,6 +350,16 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
             let enteredLocation = (locationAddressField.text + ", " + locationCityField.text + ", " + locationStateField.text)
             forwardGeocode(enteredLocation)
         }
+        locationStateField.text = locationStateField.text.uppercaseString
+        eventState = locationStateField.text
+    }
+    
+    @IBAction func hitDescriptionArea(sender : UITextView) {
+        if(descriptionTextArea.text == "Must enter a description of at least 80 characters.") {
+            descriptionTextArea.text = ""
+        }
+        descriptionTextArea.backgroundColor = defaultFieldColor
+    
     }
     
     @IBAction func enteringDate(sender: AnyObject) {
@@ -415,74 +390,183 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
     }
     
     @IBAction func doneEnteringDate(sender : AnyObject) {
-        let fieldContents = dateTextField.text
-        println(validator.isDateFormat(fieldContents))
+        if(validator.isDateFormat(dateTextField.text)) {
+            eventDate = dateTextField.text
+        }
+        else {
+            //make field red.
+        }
     }
-    
-//    
-//    @IBAction func addTagBtnAction(sender: AnyObject) {
-//        tagsPickerOutlet.hidden = false
-    
-        
-//        
-//        if (tagPicked){
-//            println("hello people of the world")
-//            
-//            tagsPickerOutlet.hidden = true
-//        }
-//    }
-    /*
-    addTagWheel adds a picker view for adding tags to the event
-    */
-    
-    
-    /*
-    createTagLabel function creates a label programmatically using the a certain position on the screen
-    it allows from multiple instances of itself to be called so a counter is passed and shifter constant
-    is used to push over the text so no overlap occurs.
-    */
-    func createTagLabel(tagName : String, tagNumber : Int) -> UILabel{
-        let screenSize : CGRect = UIScreen.mainScreen().bounds
-        var label = UILabel(frame: CGRectMake(0, 0, 200, 21))
-        var shiftAmount : CGFloat = 190 - CGFloat(AddTagsShifter*addTagsCounter)
-        let screenWidth = screenSize.width - shiftAmount;
-        let screenHeight = screenSize.height - 230;
-        label.center = CGPointMake(screenWidth,screenHeight)
-        label.textAlignment = NSTextAlignment.Center
-        label.text = tagName
-        label.font = UIFont(name : label.font.fontName, size : 14)
-        return label
-        
-    }
-    
-    
+
     @IBAction func createEventButtonPressed(sender : AnyObject) {
-
         
-        eventName = eventNameField.text
-        eventLocationWritten = locationAddressField.text  + ", " + locationCityField.text + ", " + locationStateField.text + " " + locationZipField.text
-        eventTimeStart = timeStartTextField.text
-        eventTimeEnd = timeEndTextField.text
-        eventDate = dateTextField.text
-        //eventTag = tagsTextField.text
-        eventCapacity = capacityTextField.text.toInt()
-        eventDescription = descriptionTextArea.text
-
+        if(haveConsistentLocation() && areAllValidFields()) {
+            
+            if(locationTypeSwitch.on) {
+                eventLocation = currentLocation
+            }
+            else {
+                eventLocation = enteredLocation
+            }
+            
+            println("create event pressed, valid fields")
+            
+            eventName = eventNameField.text
+            eventLocationWritten = locationAddressField.text  + ", " + locationCityField.text + ", " + locationStateField.text + " " + locationZipField.text
+            eventTimeStart = timeStartTextField.text
+            eventTimeEnd = timeEndTextField.text
+            eventDate = dateTextField.text
+            //eventTag = tagsTextField.text
+            eventCapacity = capacityTextField.text.toInt()
+            eventDescription = descriptionTextArea.text
+            
+            
+            let eventStartTimeObject = dateFromString(eventDate, time: eventTimeStart)
+            let eventEndTimeObject = dateFromString(eventDate, time: eventTimeEnd)
+            eventTags = (tagsTextField.text).componentsSeparatedByString(", ")
+            let hostID = CurrentUserData.getSharedInstanceOfUserData().getFacebookID()
+            
+            eventRecord = databaseWork.uploadEvent(eventCapacity, eventDescript: eventDescription, eventEndtime: eventEndTimeObject, eventStartTime: eventStartTimeObject, eventName: eventName, hostID: hostID, eventTags: eventTags, photoList: eventImages, eventLocation: eventLocation, writtenLocation: eventLocationWritten)
+    
+            performSegueWithIdentifier("fromCreate", sender : self)
+        }
+//        
+//        eventName = eventNameField.text
+//        eventLocationWritten = locationAddressField.text  + ", " + locationCityField.text + ", " + locationStateField.text + " " + locationZipField.text
+//        eventTimeStart = timeStartTextField.text
+//        eventTimeEnd = timeEndTextField.text
+//        eventDate = dateTextField.text
+//        //eventTag = tagsTextField.text
+//        eventCapacity = capacityTextField.text.toInt()
+//        eventDescription = descriptionTextArea.text
+//
+//        
+//        let eventStartTimeObject = dateFromString(eventDate, time: eventTimeStart)
+//        let eventEndTimeObject = dateFromString(eventDate, time: eventTimeEnd)
+//        eventTags = (tagsTextField.text).componentsSeparatedByString(", ")
+//        
+//        
+//        eventRecord = databaseWork.uploadEvent(eventCapacity, eventDescript: eventDescription, eventEndtime: eventEndTimeObject, eventStartTime: eventStartTimeObject, eventName: eventName, hostID: "2", eventTags: eventTags, photoList: eventImages, eventLocation: eventLocation, writtenLocation: eventLocationWritten)
         
-        let eventStartTimeObject = dateFromString(eventDate, time: eventTimeStart)
-        let eventEndTimeObject = dateFromString(eventDate, time: eventTimeEnd)
-        eventTags = (tagsTextField.text).componentsSeparatedByString(", ")
+    }
+    
+    func haveConsistentLocation() -> Bool {
+        var isConsistent = true
+        println("Entered location: ")
+        println(enteredLocation)
         
+        if(locationTypeSwitch.on) {
+            println("Current Location: ")
+            println(currentLocation)
+            let distance = currentLocation.distanceFromLocation(enteredLocation)
+            println(distance)
+            if(!(distance < 100)) {
+                isConsistent = false
+                
+            }
+        }
+        return isConsistent
+    }
+    
+        
+    func doneUploading(eventID: String) {
+        println("the things work so well #######################")
+    }
+    
+    
+    func areAllValidFields() -> Bool {
+        var areValid = true
+        
+        if(countElements(eventNameField.text) < 5) {
+            eventNameField.backgroundColor = invalidFieldColor
+            eventNameField.placeholder = "Must be 5+ characters"
+            eventNameField.text = ""
+            areValid = false
+        }
+        if(!validator.isAddressFormat(locationAddressField.text)) {
+            locationAddressField.backgroundColor = invalidFieldColor
+            eventNameField.text = ""
+            areValid = false
+        }
+        if(countElements(locationCityField.text) < 3) {
+            locationCityField.backgroundColor = invalidFieldColor
+            locationCityField.placeholder = "City Required"
+            eventNameField.text = ""
+            areValid = false
+        }
+        if(!validator.isValidState(locationStateField.text)) {
+            locationStateField.backgroundColor = invalidFieldColor
+            locationStateField.text = ""
+            areValid = false
+        }
+        if(!validator.isZipFormat(locationZipField.text)) {
+            locationZipField.backgroundColor = invalidFieldColor
+            locationZipField.text = ""
+            areValid = false
+        }
+        if(!validator.isDateFormat(dateTextField.text)) {
+            dateTextField.backgroundColor = invalidFieldColor
+            dateTextField.text = ""
+            areValid = false
+        }
+        if(!validator.isTimeFormat(timeStartTextField.text)) {
+            timeStartTextField.backgroundColor = invalidFieldColor
+            timeStartTextField.text = ""
+            timeStartTextField.placeholder = "00:00"
+            areValid = false
+        }
+        if(!validator.isTimeFormat(timeEndTextField.text)) {
+            timeEndTextField.backgroundColor = invalidFieldColor
+            timeEndTextField.text = ""
+            timeEndTextField.placeholder = "00:00"
+            areValid = false
+        }
+        if(!validator.isDigit(capacityTextField.text) || capacityTextField.text.toInt() < 0) {
+            capacityTextField.backgroundColor = invalidFieldColor
+            capacityTextField.text = ""
+            capacityTextField.placeholder = "0-200"
+            areValid = false
+        }
+        if(tagsTextField.text.componentsSeparatedByString(", ").count < 2) {
+            tagsTextField.backgroundColor = invalidFieldColor
+            tagsTextField.text = ""
+            tagsTextField.placeholder = "Make at least one tag"
+            areValid = false
+        }
+        //if(countElements(descriptionTextArea.text) < 80) {
+        //    descriptionTextArea.backgroundColor = invalidFieldColor
+        //    descriptionTextArea.text = "Must enter a description of at least 80 characters."
+        //}
+    
+        return areValid
+        
+    }
+    
+    /* ********************************* TEST BUTTON ***/
+    
+    
+    @IBAction func hitTestEntry(sender : AnyObject) {
+        
+        let numberModifier = Int(NSDate.timeIntervalSinceReferenceDate() % 100000)
+        eventNameField.text = "Test Event #\(numberModifier)"
+        
+        locationAddressField.text = "33 colchester ave."
+        locationCityField.text = "Burlington"
+        locationZipField.text = "05401"
+        locationStateField.text = "VT"
+        
+        forwardGeocode(locationAddressField.text + ", " + locationZipField.text)
         
         eventRecord = databaseWork.uploadEvent(eventCapacity, eventDescript: eventDescription, eventEndtime: eventEndTimeObject, eventStartTime: eventStartTimeObject, eventName: eventName, hostID: CurrentUserData.getSharedInstanceOfUserData().getFacebookID(), eventTags: eventTags, photoList: eventImages, eventLocation: eventLocation, writtenLocation: eventLocationWritten)
         
+        capacityTextField.text = "10"
+        tagsTextField.text = "Test01, test02, test03"
+        descriptionTextArea.text = "This is a test event."
     }
     
-    func doneUploading(eventID: String) {
-        println("the thing work so well #######################")
-    }
     
-    
+    /* *************************************************/
+
     
     func dateFromString(date : String, time : String) -> NSDate {
         var string : NSString =  NSString(string: (date + " " + time)) as NSString
@@ -499,9 +583,6 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
         locationCityField.text = ""
         locationZipField.text = ""
         locationStateField.text = ""
-        locationZipField.enabled = false
-        locationStateField.enabled = false
-        locationCityField.enabled = false
         locationAddressField.placeholder = "Address"
         locationCityField.placeholder = "City"
         locationZipField.placeholder = "Zip"
@@ -510,7 +591,31 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
     
     
 }
-    
+
+
+//
+//    /*
+//    createTagLabel function creates a label programmatically using the a certain position on the screen
+//    it allows from multiple instances of itself to be called so a counter is passed and shifter constant
+//    is used to push over the text so no overlap occurs.
+//    */
+//    func createTagLabel(tagName : String, tagNumber : Int) -> UILabel{
+//        let screenSize : CGRect = UIScreen.mainScreen().bounds
+//        var label = UILabel(frame: CGRectMake(0, 0, 200, 21))
+//        var shiftAmount : CGFloat = 190 - CGFloat(AddTagsShifter*addTagsCounter)
+//        let screenWidth = screenSize.width - shiftAmount;
+//        let screenHeight = screenSize.height - 230;
+//        label.center = CGPointMake(screenWidth,screenHeight)
+//        label.textAlignment = NSTextAlignment.Center
+//        label.text = tagName
+//        label.font = UIFont(name : label.font.fontName, size : 14)
+//        return label
+//
+//    }
+//
+//
+
+
     /*
     THE SET OF FUNCTIONS DEAL WITH PICKERVIEW DELEGATES AND DATA SOURCES
     */

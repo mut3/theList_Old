@@ -55,7 +55,7 @@ class CreateUserViewController: UIViewController, FBLoginViewDelegate, GetUserWi
         
         
         userDescriptionOutlet.text = ""
-        println(userFBID)
+//        println(userFBID)
         
         
         // Do any additional setup after loading the view.
@@ -77,7 +77,7 @@ class CreateUserViewController: UIViewController, FBLoginViewDelegate, GetUserWi
     }
     
     @IBAction func testUserInfo(sender : AnyObject){
-        println("end of button press")
+//        println("end of button press")
         /*
         if(true){
             performSegueWithIdentifier("moveToHomeScreenSegue", sender: self)
@@ -87,10 +87,10 @@ class CreateUserViewController: UIViewController, FBLoginViewDelegate, GetUserWi
     }
     /*  Current User Delegates */
     func retreivedUserWithID(currentUser: User) {
-        println(currentUser.firstName)
+//        println(currentUser.firstName)
     }
     func failedToRetreiveUser(error: NSError) {
-        println(error)
+//        println(error)
     }
     
     func dateFromString(date : String) -> NSDate {
@@ -111,7 +111,7 @@ class CreateUserViewController: UIViewController, FBLoginViewDelegate, GetUserWi
         userAgeOutlet.text = "\(userAgeInt)"
         userFBID = user.objectID
         //databaseDevil.checkToSeeIfUserExist(userFBID)
-        println(userFBID)
+//        println(userFBID)
         profilePic.profileID = userFBID
         
     }

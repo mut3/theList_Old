@@ -46,7 +46,7 @@ class InputValidator {
         var isCorrectFormat = true
         let addressTokens = address.componentsSeparatedByString(" ")
         
-        if(!isDigit(addressTokens[0])){
+        if(!isDigit(addressTokens[0]) && addressTokens[0].toInt() > 0){
             isCorrectFormat = false
         }
         
@@ -60,6 +60,7 @@ class InputValidator {
     
     func isValidState(state : String) -> Bool {
         let isState = states.containsObject(state)
+        println("\(state) is a state? \(isState)")
         return isState
     }
     
@@ -73,11 +74,10 @@ class InputValidator {
     }
 
     
-    
     func isValidMonth(value : String) -> Bool {
         var isMonth = false
         if(isDigit(value)) {
-            if(value.toInt() <= 12) {
+            if(value.toInt() <= 12 && value.toInt() > 0) {
                 isMonth = true
             }
         }
@@ -87,8 +87,7 @@ class InputValidator {
     func isValidDay(day : String, month : String) -> Bool {
         var isDay : Bool = false
         let shortMonths : NSArray = ["04", "4", "06", "6", "09", "9", "11"]
-        if(isDigit(day) && isDigit(month)) {
-            println(month)
+        if(isDigit(day) && isDigit(month) && day.toInt() > 0) {
             if(month.toInt() == 2) {
                 if(day.toInt() <= 29) {
                     isDay = true
@@ -116,7 +115,7 @@ class InputValidator {
         
         let valuesTokens = date.componentsSeparatedByString("/")
         
-        if(valuesTokens.count < 3 || !areAllDigits(valuesTokens)) {
+        if(valuesTokens.count != 3 || !areAllDigits(valuesTokens) || containsNegative(valuesTokens)) {
             isDate = false
         }
         else if(!isValidMonth(valuesTokens[0]) || !isValidDay(valuesTokens[1], month: valuesTokens[0]) || valuesTokens[2].toInt() < 2014) {
@@ -125,6 +124,30 @@ class InputValidator {
         
         return isDate
     
+    }
+    
+    func isTimeFormat(time : String) -> Bool {
+        var isTime = true
+        let valuesTokens = time.componentsSeparatedByString(":")
+        
+        if(valuesTokens.count != 2 || !(areAllDigits(valuesTokens)) || containsNegative(valuesTokens)) {
+            isTime = false
+        }
+        else if(valuesTokens[0].toInt() > 12  || valuesTokens[1].toInt() > 59) {
+            isTime = false
+        }
+        return isTime
+    }
+    
+    func containsNegative(values : [String]) -> Bool {
+        var containsNegative = false
+        for item in values {
+            if(isDigit(item) && item.toInt() < 0) {
+                containsNegative = true
+            }
+            
+        }
+        return containsNegative
     }
 
 }

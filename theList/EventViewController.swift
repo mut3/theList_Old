@@ -37,7 +37,7 @@ class EventViewController: UIViewController, MadeEventDelegate{
     
     var searchData = Dictionary<String, [String]>()
 
-    override func viewDidLoad() {
+    override func viewDidLoad() { 
         super.viewDidLoad()
         
 //        sleep(1)
@@ -48,13 +48,13 @@ class EventViewController: UIViewController, MadeEventDelegate{
             sharedEvent.getEventWithID(eventID)
         }else if (segueIdentity == "fromSearch" || segueIdentity == "popEvent"){
             var eventsList = searchData["eventIDs"]!
-            println(searchData)
+//            println(searchData)
             let recordName = eventsList.removeAtIndex(0)
-            println("##############################################")
+//            println("##############################################")
             //println(eventsList)
             searchData["eventIDs"] = eventsList
             sharedEvent.getEventWithID(recordName)
-            println(searchData)
+//            println(searchData)
         }
         
 
@@ -62,12 +62,12 @@ class EventViewController: UIViewController, MadeEventDelegate{
     }
 
     func showLoadedEvent(){
-        print("EVENT: ")
-        println(event)
+//        print("EVENT: ")
+//        println(event)
         if(event.photos.count != 0) {
             var photoAssetURL = event.photos[0].fileURL
-            println(" IMAGE FILES IN THE THINg ------------- ")
-            println(photoAssetURL)
+//            println(" IMAGE FILES IN THE THINg ------------- ")
+//            println(photoAssetURL)
             
             var imageData = NSData(contentsOfURL: photoAssetURL)
             photoImage = UIImage(data: imageData!)
@@ -83,14 +83,14 @@ class EventViewController: UIViewController, MadeEventDelegate{
         capacityLabel.text = "0 / \(event.capacity)"
         for tag in event.tags {
             eventTagsField.text = "\(eventTagsField.text) \(tag)\n"
-            println(tag)
+//            println(tag)
         }
         eventDescriptionText.text = event.descript
     }
     
  
     @IBAction func testingForImage() {
-        println(photoImage)
+//        println(photoImage)
     }
     
     override func didReceiveMemoryWarning() {
@@ -133,8 +133,8 @@ class EventViewController: UIViewController, MadeEventDelegate{
     func madeEventsUpdated(event : Event) {
         self.event = event
         showLoadedEvent()
-        print("FIRST EVEN TEST:")
-        println(event)
+//        print("FIRST EVEN TEST:")
+//        println(event)
     }
     
     func errorMadeUpdate(error: NSError) {

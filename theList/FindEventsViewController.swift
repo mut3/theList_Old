@@ -46,7 +46,7 @@ class FindEventsViewController: UIViewController, FoundEventsDelegate /*FoundEve
     @IBAction func sliderMoved(sender: AnyObject) {
         
         sliderValue = Int(distanceSlider.value)
-        println(sliderValue)
+//        println(sliderValue)
         distanceLabel.text = ("\(sliderValue) mi")
     
     }
@@ -54,7 +54,7 @@ class FindEventsViewController: UIViewController, FoundEventsDelegate /*FoundEve
     
     @IBAction func searchPressed(sender : AnyObject) {
         let searchRadius : CLLocationDistance = Double(sliderValue)
-        println(searchRadius)
+//        println(searchRadius)
         eventFoundIDs = []
         let searchRadiusMeters = searchRadius * 1609.34
         databaseWork.fetchEventsWithRadius(currentLocation, setRadius: searchRadiusMeters)
@@ -69,7 +69,7 @@ class FindEventsViewController: UIViewController, FoundEventsDelegate /*FoundEve
             var distanceFromSelf : Double = (currentLocation.distanceFromLocation(event.location)/1609.34)
 //            println("\(event.record.recordID.recordName)")
             if(distanceFromSelf <= Double(distanceSlider.value)) {
-                println("EVENT WITHIN DISTANCE: \(event.name)")
+//                println("EVENT WITHIN DISTANCE: \(event.name)")
                 eventFoundIDs.append(event.record.recordID.recordName)
             }
 
@@ -105,7 +105,7 @@ class FindEventsViewController: UIViewController, FoundEventsDelegate /*FoundEve
     
     
     func errorFindingEvents(error: NSError){
-        println(error)
+//        println(error)
     }
 }
 
