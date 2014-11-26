@@ -557,8 +557,7 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
         
         forwardGeocode(locationAddressField.text + ", " + locationZipField.text)
         
-        eventRecord = databaseWork.uploadEvent(eventCapacity, eventDescript: eventDescription, eventEndtime: eventEndTimeObject, eventStartTime: eventStartTimeObject, eventName: eventName, hostID: CurrentUserData.getSharedInstanceOfUserData().getFacebookID(), eventTags: eventTags, photoList: eventImages, eventLocation: eventLocation, writtenLocation: eventLocationWritten)
-        
+
         capacityTextField.text = "10"
         tagsTextField.text = "Test01, test02, test03"
         descriptionTextArea.text = "This is a test event."
