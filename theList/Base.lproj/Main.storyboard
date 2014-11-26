@@ -48,13 +48,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="28O-jV-fym">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="VoD-aZ-CZx">
-                            <connections>
-                                <segue destination="scs-RN-GTC" kind="push" identifier="mySegue" id="gG2-ac-fEf"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="28O-jV-fym"/>
                     <connections>
                         <outlet property="fbLoginView" destination="dx9-7i-YhW" id="bv2-0i-IvX"/>
                         <outlet property="profilePic" destination="fmI-9e-JcJ" id="fLM-Sg-GvP"/>
@@ -892,7 +886,6 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="GQM-fk-Hkj"/>
-        <segue reference="gG2-ac-fEf"/>
         <segue reference="GEe-Be-QQh"/>
     </inferredMetricsTieBreakers>
 </document>

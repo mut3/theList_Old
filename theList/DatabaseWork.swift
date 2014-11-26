@@ -381,6 +381,13 @@ class DatabaseWork {
         }
     
     }
-
+    /*
+        this next function addes a user to the pending guast "list" in the database
+    */
+    /*
+    func addUserToPending(userID : String, eventID : CKRecord.recordID.recordName){
+        
+    }
+    */
 }
 let databaseWork = DatabaseWork()
