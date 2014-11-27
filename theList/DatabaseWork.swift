@@ -104,7 +104,7 @@ class DatabaseWork {
             })
     }
     
-    func uploadEvent(cap : Int,eventDescript:String,eventEndtime : NSDate, eventStartTime: NSDate, eventName : String, hostID : String, eventTags : [String], photoList : [CKAsset],eventLocation : CLLocation, writtenLocation : String)-> CKRecord{
+    func uploadEvent(cap : Int,eventDescript:String,eventEndtime : NSDate, eventStartTime: NSDate, eventName : String, hostID : String, hostName : String, eventTags : [String], photoList : [CKAsset],eventLocation : CLLocation, writtenLocation : String)-> CKRecord{
         let eventRecord = CKRecord(recordType: "Event")
         
         eventRecord.setValue(cap, forKey: "EventCapacity")
@@ -113,6 +113,7 @@ class DatabaseWork {
         eventRecord.setValue(eventEndtime, forKey: "EventEndTime")
         eventRecord.setValue(eventStartTime, forKey: "EventStartTime")
         eventRecord.setValue(hostID, forKey: "HostID")
+        eventRecord.setValue(hostName, forKey: "hostName")
         eventRecord.setValue(photoList, forKey: "Photos")
         eventRecord.setValue(eventTags, forKey: "tags")
         eventRecord.setValue(eventLocation, forKey: "EventLocation")
@@ -384,10 +385,45 @@ class DatabaseWork {
     /*
         this next function addes a user to the pending guast "list" in the database
     */
+    func addUserToPending(userID : String, eventRecord : CKRecord){
+        var currentPendingUsers : [String] = []
+        if (eventRecord.objectForKey("pendingGuests") as [String]! != nil ){
+            currentPendingUsers = eventRecord.objectForKey("pendingGuests") as [String]
+        }else {println("nil")}
+        currentPendingUsers.insert(userID, atIndex: 0)
+        eventRecord.setObject(currentPendingUsers, forKey:"pendingGuests")
+        
+        publicDB.saveRecord(eventRecord, completionHandler: {(record, error)-> Void in
+            if error != nil {
+                println("\(error)")
+            }
+            NSLog("We are saving stuff")
+        })
+    }
+    
     /*
-    func addUserToPending(userID : String, eventID : CKRecord.recordID.recordName){
+        addUserToAccepted(userID : String, eventRecord : CKRecord)
+            adds the user to the accepted list and removes the user from the pending list.
+    */
+    func addUserToAccepted(userID : String, eventRecord : CKRecord){
+        var currentAcceptedUsers : [String] = []
+        if (eventRecord.objectForKey("acceptedGuests") as [String]! != nil ){
+            currentAcceptedUsers = eventRecord.objectForKey("acceptedGuests") as [String]
+        }else {println("nil")}
+        currentAcceptedUsers.insert(userID, atIndex:0)
+        eventRecord.setObject(currentAcceptedUsers, forKey:"acceptedGuests")
+        
+        var currentPendingUsers = eventRecord.objectForKey("pendingGuests") as [String]
+        let updatedPendingUsers = currentPendingUsers.filter{$0 != userID}
+        eventRecord.setObject(updatedPendingUsers, forKey:"pendingGuests")
+        
+        publicDB.saveRecord(eventRecord, completionHandler: {(record, error)-> Void in
+            if error != nil {
+                println("\(error)")
+            }
+            NSLog("We are saving stuff")
+        })
         
     }
-    */
 }
 let databaseWork = DatabaseWork()

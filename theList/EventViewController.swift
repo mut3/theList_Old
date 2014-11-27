@@ -112,6 +112,8 @@ class EventViewController: UIViewController, MadeEventDelegate{
 
     
     @IBAction func goPressed(sender: AnyObject) {
+        sharedEvent.addUserToPending(CurrentUserData.getSharedInstanceOfUserData().getFacebookID(), eventRecord : self.event.record)
+        
         performSegueWithIdentifier("popEvent", sender: self)
     }
     
@@ -132,6 +134,7 @@ class EventViewController: UIViewController, MadeEventDelegate{
     /* Events Delegate */
     func madeEventsUpdated(event : Event) {
         self.event = event
+        self.hostNameButton.setTitle(event.hostName, forState: .Normal)
         showLoadedEvent()
 //        print("FIRST EVEN TEST:")
 //        println(event)
@@ -142,6 +145,17 @@ class EventViewController: UIViewController, MadeEventDelegate{
         let alert = UIAlertView(title: "error loading created event", message: message, delegate: nil, cancelButtonTitle: "ok")
         alert.show()
     }
+    
+    
+    @IBAction func checkPendingUsers(sender: AnyObject) {
+        println(self.event.pendingGuests)
+    }
+    
+    @IBAction func acceptScott(sender: AnyObject) {
+        sharedEvent.addUserToAccepted("10204435702066817", eventRecord: self.event.record)
+        println("accepted")
+    }
+    
     
     /* tag table view */
     
