@@ -243,12 +243,17 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
     @IBAction func locationTypeSwitched(sender : AnyObject) {
         //locationTypeSwitch.setOn(!locationTypeSwitch.on, animated: true)
         locationTypeLabel.text = locationTypeSwitch.on ? "Current Location" : "Enter location"
-        locationAddressField.enabled = !locationTypeSwitch.on
         if(locationTypeSwitch.on) {
             getCurrentLocation(locationManager)
+            locationStateField.enabled = false
+            locationZipField.enabled = false
+            locationCityField.enabled = false
         }
         else {
             clearAllAddressFields()
+            locationStateField.enabled = true
+            locationZipField.enabled = true
+            locationCityField.enabled = true
         }
     }
     
@@ -457,14 +462,24 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
         println(enteredLocation)
         
         if(locationTypeSwitch.on) {
-            println("Current Location: ")
-            println(currentLocation)
-            let distance = currentLocation.distanceFromLocation(enteredLocation)
-            println(distance)
-            if(!(distance < 100)) {
+            if(currentLocation == nil || enteredLocation == nil){
                 isConsistent = false
-                
             }
+            else {
+                println("Current Location: ")
+                println(currentLocation)
+                let distance = currentLocation.distanceFromLocation(enteredLocation)
+                println(distance)
+                if(!(distance < 100)) {
+                    isConsistent = false
+                
+                }
+            }
+        }
+        if(!isConsistent) {
+            locationAddressField.placeholder = "Invalid address"
+            locationAddressField.text = ""
+            locationAddressField.backgroundColor = invalidFieldColor
         }
         return isConsistent
     }

@@ -32,6 +32,7 @@
 		D14F5D901A0EC49A0037FF78 /* DatabaseWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14F5D8F1A0EC49A0037FF78 /* DatabaseWork.swift */; };
 		D1C1FA5F1A19287500B80F6B /* FindEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C1FA5E1A19287500B80F6B /* FindEventsViewController.swift */; };
 		D1E697EF1A1D33FF00CBA46C /* InputValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E697EE1A1D33FF00CBA46C /* InputValidator.swift */; };
+		D1FBE14B1A26BB15002F2C7F /* SearchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1FBE14A1A26BB15002F2C7F /* SearchData.swift */; };
 		D1FFBFBE1A1FF42A00C248F7 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1FFBFBD1A1FF42A00C248F7 /* FacebookSDK.framework */; };
 /* End PBXBuildFile section */
 
@@ -77,6 +78,7 @@
 		D14F5D8F1A0EC49A0037FF78 /* DatabaseWork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseWork.swift; sourceTree = "<group>"; };
 		D1C1FA5E1A19287500B80F6B /* FindEventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindEventsViewController.swift; sourceTree = "<group>"; };
 		D1E697EE1A1D33FF00CBA46C /* InputValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputValidator.swift; sourceTree = "<group>"; };
+		D1FBE14A1A26BB15002F2C7F /* SearchData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchData.swift; sourceTree = "<group>"; };
 		D1FFBFBD1A1FF42A00C248F7 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,7 +129,7 @@
 			children = (
 				D1E697EE1A1D33FF00CBA46C /* InputValidator.swift */,
 				D14F5D921A0EC4BB0037FF78 /* View Controllers */,
-				D14F5D911A0EC4AB0037FF78 /* Database Classes */,
+				D14F5D911A0EC4AB0037FF78 /* Data Classes */,
 				ACC499C71A0C30E5000E5073 /* theList.entitlements */,
 				ACC499A41A0C3055000E5073 /* AppDelegate.swift */,
 				ACF384431A0C3554006CE905 /* Bridge-Header.h */,
@@ -166,15 +168,16 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		D14F5D911A0EC4AB0037FF78 /* Database Classes */ = {
+		D14F5D911A0EC4AB0037FF78 /* Data Classes */ = {
 			isa = PBXGroup;
 			children = (
+				D1FBE14A1A26BB15002F2C7F /* SearchData.swift */,
 				42161F3B1A1FDFAE001235B6 /* CurrentUserData.swift */,
 				42255F171A10003800567334 /* Event.swift */,
 				429984D91A0C7A1700B4FD7D /* User.swift */,
 				D14F5D8F1A0EC49A0037FF78 /* DatabaseWork.swift */,
 			);
-			name = "Database Classes";
+			name = "Data Classes";
 			sourceTree = "<group>";
 		};
 		D14F5D921A0EC4BB0037FF78 /* View Controllers */ = {
@@ -314,6 +317,7 @@
 				ACC499A81A0C3055000E5073 /* theList.xcdatamodeld in Sources */,
 				429984DC1A0C7F8A00B4FD7D /* createUser.swift in Sources */,
 				D1E697EF1A1D33FF00CBA46C /* InputValidator.swift in Sources */,
+				D1FBE14B1A26BB15002F2C7F /* SearchData.swift in Sources */,
 				D1C1FA5F1A19287500B80F6B /* FindEventsViewController.swift in Sources */,
 				429984DA1A0C7A1700B4FD7D /* User.swift in Sources */,
 				424E4D021A1662D00066032E /* CorrectEventsViewController.swift in Sources */,

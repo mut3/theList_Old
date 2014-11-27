@@ -35,26 +35,29 @@ class EventViewController: UIViewController, MadeEventDelegate{
     
     var segueIdentity : String!
     
-    var searchData = Dictionary<String, [String]>()
+    var searchData : SearchData!
+//    var eventsList : [String]!
 
     override func viewDidLoad() { 
         super.viewDidLoad()
         
-//        sleep(1)
         sharedEvent.madeEventDelegate = self;
         
+
         if(segueIdentity == "fromCreate"){
-            sleep(1)
             sharedEvent.getEventWithID(eventID)
+
         }else if (segueIdentity == "fromSearch" || segueIdentity == "popEvent"){
-            var eventsList = searchData["eventIDs"]!
-//            println(searchData)
-            let recordName = eventsList.removeAtIndex(0)
-//            println("##############################################")
-            //println(eventsList)
-            searchData["eventIDs"] = eventsList
-            sharedEvent.getEventWithID(recordName)
-//            println(searchData)
+//            eventsList = searchData["eventIDs"]!
+            
+            if(searchData.eventIDs.count > 0) {
+                eventID = searchData.eventIDs.removeAtIndex(0)
+
+//                searchData["eventIDs"] = eventsList
+                sharedEvent.getEventWithID(eventID)
+                //            println(searchData)
+                
+            }
         }
         
 
@@ -111,9 +114,26 @@ class EventViewController: UIViewController, MadeEventDelegate{
     }
 
     
-    @IBAction func goPressed(sender: AnyObject) {
-        performSegueWithIdentifier("popEvent", sender: self)
+    @IBAction func decisionButtonPressed(sender: UIButton) {
+        if(searchData.eventIDs.count > 0) {
+            performSegueWithIdentifier("popEvent", sender: self)
+        }
+        else {
+            performSegueWithIdentifier("noEvents", sender: self)
+        }
+        if(sender == goButton) {
+            
+            
+            // perform go functionality            
+        }
+        else if(sender == noGoButton) {
+            // perform no go functionality
+        }
+        println(searchData)
+        
     }
+    
+
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

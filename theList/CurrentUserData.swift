@@ -11,7 +11,7 @@ import Foundation
 
 class CurrentUserData : NSObject {
     
-    var facebookID : String = ""
+    var facebookID : String = "123" ///////////////////////////////////////
     
     class func getSharedInstanceOfUserData() -> CurrentUserData{
         return currentUserData
@@ -24,7 +24,7 @@ class CurrentUserData : NSObject {
     
     
     func setFacebookID(idNumber : String) {
-        self.facebookID = idNumber
+//        self.facebookID = idNumber //////////////////////////////////////
     }
     
     func getFacebookID() -> String {
