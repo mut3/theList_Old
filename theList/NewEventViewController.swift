@@ -406,7 +406,7 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
 
     @IBAction func createEventButtonPressed(sender : AnyObject) {
         
-        if(haveConsistentLocation() && areAllValidFields()) {
+        if(areAllValidFields() && haveConsistentLocation()) {
             
             if(locationTypeSwitch.on) {
                 eventLocation = currentLocation
@@ -422,7 +422,6 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
             eventTimeStart = timeStartTextField.text
             eventTimeEnd = timeEndTextField.text
             eventDate = dateTextField.text
-            //eventTag = tagsTextField.text
             eventCapacity = capacityTextField.text.toInt()
             eventDescription = descriptionTextArea.text
             
@@ -434,7 +433,7 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
             
             eventRecord = databaseWork.uploadEvent(eventCapacity, eventDescript: eventDescription, eventEndtime: eventEndTimeObject, eventStartTime: eventStartTimeObject, eventName: eventName, hostID: hostID, eventTags: eventTags, photoList: eventImages, eventLocation: eventLocation, writtenLocation: eventLocationWritten)
     
-            performSegueWithIdentifier("fromCreate", sender : self)
+            
         }
 //        
 //        eventName = eventNameField.text
@@ -486,7 +485,7 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
     
         
     func doneUploading(eventID: String) {
-        println("the things work so well #######################")
+        performSegueWithIdentifier("fromCreate", sender : self)
     }
     
     

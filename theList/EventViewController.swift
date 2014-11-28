@@ -27,7 +27,8 @@ class EventViewController: UIViewController, MadeEventDelegate{
     @IBOutlet var eventDescriptionText : UITextView!
     @IBOutlet var goButton : UIButton!
     @IBOutlet var noGoButton : UIButton!
-    
+    @IBOutlet var returnButton : UIButton!
+
     
     var photoImage : UIImage!
     
@@ -46,10 +47,16 @@ class EventViewController: UIViewController, MadeEventDelegate{
 
         if(segueIdentity == "fromCreate"){
             sharedEvent.getEventWithID(eventID)
+            goButton.hidden = true
+            goButton.enabled = false
+            noGoButton.hidden = true
+            noGoButton.enabled = false
+            returnButton.setTitle("Home", forState : .Normal)
 
         }else if (segueIdentity == "fromSearch" || segueIdentity == "popEvent"){
 //            eventsList = searchData["eventIDs"]!
-            
+            returnButton.setTitle("Search", forState : .Normal)
+            println(searchData.toString())
             if(searchData.eventIDs.count > 0) {
                 eventID = searchData.eventIDs.removeAtIndex(0)
 
@@ -63,6 +70,8 @@ class EventViewController: UIViewController, MadeEventDelegate{
 
         // Do any additional setup after loading the view.
     }
+    
+
 
     func showLoadedEvent(){
 //        print("EVENT: ")
@@ -70,19 +79,18 @@ class EventViewController: UIViewController, MadeEventDelegate{
         if(event.photos.count != 0) {
             var photoAssetURL = event.photos[0].fileURL
 //            println(" IMAGE FILES IN THE THINg ------------- ")
-            println(photoAssetURL)
+//            println(photoAssetURL)
             
             var imageData = NSData(contentsOfURL: photoAssetURL)
             photoImage = UIImage(data: imageData!)
             eventImageView.image = photoImage
         }
-    
-        
-        eventNameLabel.text = event.name
-        
-        
-        hostNameButton.titleLabel!.text = " "
+        setEventName(event.name)
+                
         hostRatingLabel.text = "★★★☆☆"
+        
+        hostNameButton.setTitle("Host!", forState: .Normal)
+
         capacityLabel.text = "0 / \(event.capacity)"
         for tag in event.tags {
             eventTagsField.text = "\(eventTagsField.text) \(tag)\n"
@@ -91,7 +99,19 @@ class EventViewController: UIViewController, MadeEventDelegate{
         eventDescriptionText.text = event.descript
     }
     
- 
+    func setEventName(name : String) {
+        
+        let nameLength = countElements(name)
+        if(nameLength > 20) {
+            let sizeMod : CGFloat = CGFloat(nameLength) - 18.0
+            
+            let fontSize : CGFloat = (16.0 - sizeMod/2.0)
+            
+            eventNameLabel.font = UIFont.systemFontOfSize(fontSize)
+        }
+        eventNameLabel.text = name
+    }
+    
     @IBAction func testingForImage() {
 //        println(photoImage)
     }
@@ -102,15 +122,19 @@ class EventViewController: UIViewController, MadeEventDelegate{
     }
     
     
+    @IBAction func returnButtonPressed(sender: UIButton) {
+        if(segueIdentity == "fromCreate") {
+            performSegueWithIdentifier("toHome", sender: self)
+        }
+        else if(segueIdentity == "fromSearch" || segueIdentity == "popEvent"){
+            performSegueWithIdentifier("toSearch", sender: self)
+        }
+        
+    }
     
     
     @IBAction func goToHostScreen(sender: AnyObject) {
-    }
-
     
-    
-    @IBAction func noGoPressed(sender: AnyObject) {
-        
     }
 
     
@@ -122,11 +146,11 @@ class EventViewController: UIViewController, MadeEventDelegate{
             performSegueWithIdentifier("noEvents", sender: self)
         }
         if(sender == goButton) {
-            
-            
+            searchData.goEvents.append(eventID)
             // perform go functionality            
         }
         else if(sender == noGoButton) {
+            searchData.rejectedEvents.append(eventID)
             // perform no go functionality
         }
         println(searchData)

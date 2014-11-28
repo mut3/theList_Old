@@ -82,23 +82,35 @@ class FindEventsViewController: UIViewController, FoundEventsDelegate /*FoundEve
 
         }
         
-        
-        searchData = SearchData(eventIDs: eventFoundIDs, tags: searchTags, radius: sliderValue, fromLocation: currentLocation)
-        
-        //println(searchData)
+        if(CurrentUserData.getSharedInstanceOfUserData().searchData == nil) {
+            searchData = SearchData(eventIDs: eventFoundIDs, tags: searchTags, radius: sliderValue, fromLocation: currentLocation)
+        }
+        else {
+            searchData = CurrentUserData.getSharedInstanceOfUserData().searchData
+            for event in eventFoundIDs {
+                if (!searchData.alreadySawEvent(event)) {
+                    searchData.eventIDs.append(event)
+                }
+            }
+        }
+        println(searchData.toString())
 /*
         let foundEventsVC : EventViewController = EventViewController()
         foundEventsVC.searchData = searchData
         foundEventsVC.segueIdentity = "foundEvent"
         navigationController?.pushViewController(foundEventsVC, animated: true)
   */
-        
-        performSegueWithIdentifier("fromSearch", sender : self)
+        if(searchData.eventIDs.count > 0) {
+            performSegueWithIdentifier("fromSearch", sender : self)
+        }
+        else{
+            performSegueWithIdentifier("noEvents", sender: self)
+        }
     }
     
     func filterByTags(eventTags : NSArray) -> Bool {
         var tagMatch = true
-        println(searchTags)
+//        println(searchTags)
         if(searchTags.count > 0) {
             for tag in searchTags{
                 if(!eventTags.containsObject(tag)) {
@@ -106,7 +118,7 @@ class FindEventsViewController: UIViewController, FoundEventsDelegate /*FoundEve
                 }
             }
         }
-        println(tagMatch)
+//        println(tagMatch)
         return tagMatch
     }
     
