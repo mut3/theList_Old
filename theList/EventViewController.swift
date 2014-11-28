@@ -107,7 +107,7 @@ class EventViewController: UIViewController, MadeEventDelegate{
     
     
     @IBAction func noGoPressed(sender: AnyObject) {
-        
+        performSegueWithIdentifier("popEvent", sender: self)
     }
 
     

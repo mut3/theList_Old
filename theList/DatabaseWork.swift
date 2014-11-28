@@ -389,7 +389,7 @@ class DatabaseWork {
         var currentPendingUsers : [String] = []
         if (eventRecord.objectForKey("pendingGuests") as [String]! != nil ){
             currentPendingUsers = eventRecord.objectForKey("pendingGuests") as [String]
-        }else {println("nil")}
+        }else {println("no one on the pending list yet")}
         currentPendingUsers.insert(userID, atIndex: 0)
         eventRecord.setObject(currentPendingUsers, forKey:"pendingGuests")
         
@@ -409,7 +409,7 @@ class DatabaseWork {
         var currentAcceptedUsers : [String] = []
         if (eventRecord.objectForKey("acceptedGuests") as [String]! != nil ){
             currentAcceptedUsers = eventRecord.objectForKey("acceptedGuests") as [String]
-        }else {println("nil")}
+        }else {println("no one on the accepted list yet")}
         currentAcceptedUsers.insert(userID, atIndex:0)
         eventRecord.setObject(currentAcceptedUsers, forKey:"acceptedGuests")
         
@@ -424,6 +424,71 @@ class DatabaseWork {
             NSLog("We are saving stuff")
         })
         
+    }
+    
+    /*
+        func addUserToConfirmed() will add the user to the confirmed list and remove them from the 
+        accepted list and save it to the cloudkit database.
+        pre: userID as a string and eventRecord as a CKRecord
+        post: none
+    */
+    func addUserToConfirmed(userID : String, eventRecord : CKRecord){
+        var currentConfirmedUsers : [String] = []
+        if (eventRecord.objectForKey("") as [String]! != nil){
+            currentConfirmedUsers = eventRecord.objectForKey("confirmedGuests") as [String]
+        }else { println("no one on the confirmed list yet")}
+        currentConfirmedUsers.insert(userID, atIndex: 0)
+        eventRecord.setObject(currentConfirmedUsers, forKey: "confirmedGuests")
+        
+        var currentAcceptedUsers = eventRecord.objectForKey("pendingGuests") as [String]
+        let updatedAcceptedUsers = currentAcceptedUsers.filter{$0 != userID}
+        eventRecord.setObject(updatedAcceptedUsers, forKey: "acceptedGuests")
+        
+        publicDB.saveRecord(eventRecord, completionHandler: {(record,error)-> Void in
+            if error != nil {
+                println()
+            }
+            NSLog("we are changing the user from accepted to confirmed")
+        })
+    }
+    
+    ////// the Guest List creator from the database
+    /*
+        generate the list of "the pending guest" 
+        pre: the eventRecord
+        post: [string] of the pending guests
+    */
+    func getPendingGuests(eventRecord : CKRecord)->[string]{
+        var pendingGuests = eventRecord.objectForKey("pendingGuests") as [String]
+        if (pendingGuests.count < 1){
+            pendingGuests = []
+        }
+        return pendingGuests
+    }
+    /*
+        generate the list of accepted guests
+        pre: the eventRecord
+        post: [string] of the accepted guests
+    */
+    
+    func getAcceptedGuests(eventRecord : CKRecord)->[string]{
+        var acceptedGuests = eventRecord.objectForKey("acceptedGuests") as [String]
+        if (acceptedGuests.count < 1){
+            acceptedGuests = []
+        }
+        return acceptedGuests
+    }
+    /*
+        generate the list of confirmed guests
+        pre: the eventRecord
+        post: [string] of the confirmed guests
+    */
+    func getConfirmedGuests(eventRecord : CKRecord)->[string]{
+        var confirmedGuests = eventRecord.objectForKey("confirmedGuests") as [String]
+        if (confirmedGuests.count < 1){
+            confirmedGuests = []
+        }
+        return confirmedGuests
     }
 }
 let databaseWork = DatabaseWork()
