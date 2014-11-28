@@ -458,7 +458,7 @@ class DatabaseWork {
         pre: the eventRecord
         post: [string] of the pending guests
     */
-    func getPendingGuests(eventRecord : CKRecord)->[string]{
+    func getPendingGuests(eventRecord : CKRecord)->[String]{
         var pendingGuests = eventRecord.objectForKey("pendingGuests") as [String]
         if (pendingGuests.count < 1){
             pendingGuests = []
@@ -471,7 +471,7 @@ class DatabaseWork {
         post: [string] of the accepted guests
     */
     
-    func getAcceptedGuests(eventRecord : CKRecord)->[string]{
+    func getAcceptedGuests(eventRecord : CKRecord)->[String]{
         var acceptedGuests = eventRecord.objectForKey("acceptedGuests") as [String]
         if (acceptedGuests.count < 1){
             acceptedGuests = []
@@ -483,7 +483,7 @@ class DatabaseWork {
         pre: the eventRecord
         post: [string] of the confirmed guests
     */
-    func getConfirmedGuests(eventRecord : CKRecord)->[string]{
+    func getConfirmedGuests(eventRecord : CKRecord)->[String]{
         var confirmedGuests = eventRecord.objectForKey("confirmedGuests") as [String]
         if (confirmedGuests.count < 1){
             confirmedGuests = []
