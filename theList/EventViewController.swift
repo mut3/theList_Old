@@ -126,6 +126,9 @@ class EventViewController: UIViewController, MadeEventDelegate{
         }else if (segue.identifier == "goToHostProfile"){
             let hostProfileVC : ProfileViewController = segue.destinationViewController as ProfileViewController
             hostProfileVC.userID = event.hostID
+        }else if (segue.identifier == "goToGuestManagement"){
+            let guestManagementVC : GuestListViewController = segue.destinationViewController as GuestListViewController
+            guestManagementVC.event = event
         }
     }
     
