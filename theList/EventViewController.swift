@@ -102,6 +102,7 @@ class EventViewController: UIViewController, MadeEventDelegate{
     
     
     @IBAction func goToHostScreen(sender: AnyObject) {
+        performSegueWithIdentifier("goToGuestManagement", sender: self)
     }
 
     
@@ -128,7 +129,10 @@ class EventViewController: UIViewController, MadeEventDelegate{
             hostProfileVC.userID = event.hostID
         }else if (segue.identifier == "goToGuestManagement"){
             let guestManagementVC : GuestListViewController = segue.destinationViewController as GuestListViewController
-            guestManagementVC.event = event
+            guestManagementVC.pendingGuests = event.pendingGuests
+            guestManagementVC.confirmedGuests = event.confirmedGuests
+            guestManagementVC.acceptedGuests = event.acceptedGuests
+            println("Holy shit you did it")
         }
     }
     
