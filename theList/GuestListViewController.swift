@@ -8,16 +8,24 @@
 
 import UIKit
 
-class GuestListViewController: UITableViewController {
+class GuestListViewController: UITableViewController, BatchGetUserNamesDelegate {
+    
+    let database : DatabaseWork = DatabaseWork.sharedInstanceOfDatabase()
     
     var pendingGuests : [String]!
     var acceptedGuests : [String]!
     var confirmedGuests : [String]!
     
+    var pendingGuestNames : [String]!
+    var acceptedGuestNames : [String]!
+    var confirmedGuestNames : [String]!
+    //ic
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        database.batchGetUserNamesDelegate = self
+        gatherListNames()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -29,20 +37,42 @@ class GuestListViewController: UITableViewController {
         //should make three sections of table
     }
     
+    func batchNameResults(nameResults : [String], listType : String) {
+        if(listType == "pending") {
+            pendingGuestNames = nameResults
+        }
+        else if(listType == "accepted") {
+            acceptedGuestNames = nameResults
+        }
+        else if(listType == "confirmed") {
+            confirmedGuestNames = nameResults
+        }
+        populateLists()
+        //do stuff with name results!
+    }
+    
+    func errorGettingNames(error : NSError) {
+        //error handling
+    }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = self.tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
-        var givenUser = [indexPath.row]
-        var eventName = givenEvent[1]
+//        var givenUser = database[indexPath.row] wtf :P
+//        var guestName = database.givenUser[1]
         //        println(eventName)
-        cell.textLabel.text = eventName
+//        cell.textLabel.text = eventName
         return cell
     }
     
-    func populateLists
-    {
-        //This needs to iterate through each of the three lists
-        //for each GuestID it will create a cell with that guests name in it
+    func gatherListNames() {
+        database.batchGetUserNamesFromIDs(pendingGuests, listType: "pending") //This needs to iterate through each of the three lists
+        database.batchGetUserNamesFromIDs(confirmedGuests, listType: "confirmed")
+        database.batchGetUserNamesFromIDs(acceptedGuests, listType: "accepted")
+        // ok now that's better.
+    }
+    
+    func populateLists() {
+
     }
     
 }

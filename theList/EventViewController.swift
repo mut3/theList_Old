@@ -132,7 +132,7 @@ class EventViewController: UIViewController, MadeEventDelegate{
             guestManagementVC.pendingGuests = event.pendingGuests
             guestManagementVC.confirmedGuests = event.confirmedGuests
             guestManagementVC.acceptedGuests = event.acceptedGuests
-            println("Holy shit you did it")
+            println("Holy shit you did it") //ok then i d to change something I did earlier!!
         }
     }
     

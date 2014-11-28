@@ -47,6 +47,11 @@ protocol PastEventsDelegate{
 
 }
 
+protocol BatchGetUserNamesDelegate {
+    func batchNameResults(nameResults : [String], listType : String)
+    func errorGettingNames(error : NSError)
+}
+
 class DatabaseWork {
     
     var delegate : EventsDelegate?
@@ -57,7 +62,7 @@ class DatabaseWork {
     var getUserWithIdDelegate : GetUserWithIdDelegate?
     var checkIfUserExistDelegate : CheckIfUserExistDelegate?
     var pastEventsDelegate : PastEventsDelegate?
-    
+    var batchGetUserNamesDelegate : BatchGetUserNamesDelegate? // ?
     var container : CKContainer
     var publicDB : CKDatabase
     let privateDB : CKDatabase
@@ -68,7 +73,7 @@ class DatabaseWork {
     }
     
     var events = [Event]()
-    
+    var guestNames = [String]()
     var madeEvents = [Event]()
     
     var retreivedUser = [User]()
@@ -355,6 +360,40 @@ class DatabaseWork {
                 }
                 return
             }
+        }
+    }
+    
+
+    func batchGetUserNamesFromIDs(userIDList : [String], listType : String){
+        //where do you distinguish between the kind of list you're getting names for?
+        for userID in userIDList
+        {
+            let eventRecord = CKRecord(recordType: "Event")
+            let getCurrentUser = NSPredicate(format: "FacebookID = %@",userID)
+            let query = CKQuery(recordType: "User", predicate: getCurrentUser)
+            publicDB.performQuery(query, inZoneWithID: nil){
+                results, error in
+                if error != nil {
+                    dispatch_async(dispatch_get_main_queue()){
+                        self.getUserWithIdDelegate?.failedToRetreiveUser(error)
+                        return
+                    }
+                }else{
+                    self.guestNames.removeAll()
+                    for record in results{
+                        let retreivedCurrentUser = User(record: record as CKRecord, database: self.publicDB)
+                        self.guestNames.append(retreivedCurrentUser.firstName)
+                    }
+                    dispatch_async(dispatch_get_main_queue()){
+                        if(self.guestNames.count > 0) {
+                            self.batchGetUserNamesDelegate?.batchNameResults(self.guestNames, listType: listType) //
+                        }
+                    }
+                }
+               
+            
+            }
+
         }
     }
     
