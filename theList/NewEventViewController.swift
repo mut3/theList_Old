@@ -430,6 +430,7 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
             let eventEndTimeObject = dateFromString(eventDate, time: eventTimeEnd)
             eventTags = (tagsTextField.text).componentsSeparatedByString(", ")
             let hostID = CurrentUserData.getSharedInstanceOfUserData().getFacebookID()
+            let hostName = CurrentUserData.getSharedInstanceOfUserData().getUserName()
             
             eventRecord = databaseWork.uploadEvent(eventCapacity, eventDescript: eventDescription, eventEndtime: eventEndTimeObject, eventStartTime: eventStartTimeObject, eventName: eventName, hostID: hostID, eventTags: eventTags, photoList: eventImages, eventLocation: eventLocation, writtenLocation: eventLocationWritten)
     

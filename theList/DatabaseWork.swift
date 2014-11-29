@@ -32,7 +32,6 @@ protocol FoundEventCondenseDelegate{
 protocol UploadingEventDelegate{
     func doneUploading(eventID : String)
 }
-
 protocol GetUserWithIdDelegate{
     func retreivedUserWithID(user : User)
     func failedToRetreiveUser(error : NSError)
@@ -46,6 +45,10 @@ protocol PastEventsDelegate{
     func errorWithPastEvents(error : NSError)
 
 }
+protocol BatchGetUserNamesDelegate {
+    func batchNameResults(nameResults : [String], listType : String)
+    func errorGettingNames(error : NSError)
+}
 
 class DatabaseWork {
     
@@ -57,7 +60,7 @@ class DatabaseWork {
     var getUserWithIdDelegate : GetUserWithIdDelegate?
     var checkIfUserExistDelegate : CheckIfUserExistDelegate?
     var pastEventsDelegate : PastEventsDelegate?
-    
+    var batchGetUserNamesDelegate : BatchGetUserNamesDelegate? // ?
     var container : CKContainer
     var publicDB : CKDatabase
     let privateDB : CKDatabase
@@ -68,7 +71,7 @@ class DatabaseWork {
     }
     
     var events = [Event]()
-    
+    var guestNames = [String]()
     var madeEvents = [Event]()
     
     var retreivedUser = [User]()
@@ -104,7 +107,7 @@ class DatabaseWork {
             })
     }
     
-    func uploadEvent(cap : Int,eventDescript:String,eventEndtime : NSDate, eventStartTime: NSDate, eventName : String, hostID : String, eventTags : [String], photoList : [CKAsset],eventLocation : CLLocation, writtenLocation : String)-> CKRecord{
+    func uploadEvent(cap : Int,eventDescript:String,eventEndtime : NSDate, eventStartTime: NSDate, eventName : String, hostID : String, hostName : String, eventTags : [String], photoList : [CKAsset],eventLocation : CLLocation, writtenLocation : String)-> CKRecord{
         let eventRecord = CKRecord(recordType: "Event")
         
         eventRecord.setValue(cap, forKey: "EventCapacity")
@@ -113,10 +116,14 @@ class DatabaseWork {
         eventRecord.setValue(eventEndtime, forKey: "EventEndTime")
         eventRecord.setValue(eventStartTime, forKey: "EventStartTime")
         eventRecord.setValue(hostID, forKey: "HostID")
+        eventRecord.setValue(hostName, forKey: "hostName")
         eventRecord.setValue(photoList, forKey: "Photos")
         eventRecord.setValue(eventTags, forKey: "tags")
         eventRecord.setValue(eventLocation, forKey: "EventLocation")
         eventRecord.setValue(writtenLocation, forKey: "EventAddress")
+        eventRecord.setValue([], forKey: "pendingGuests")
+        eventRecord.setValue([], forKey: "confirmedGuests")
+        eventRecord.setValue([], forKey: "acceptedGuests")
         println(" event ID : \(eventRecord.recordID)")
         publicDB.saveRecord(eventRecord, completionHandler: {(results,error) -> Void in
             println(eventRecord.recordID.recordName)
@@ -246,9 +253,9 @@ class DatabaseWork {
             if let records = results{
                 for record in records{
                     let eventInRadius = Event(record: record as CKRecord, database: self.publicDB)
-                    let eventRecordID = Event(record: record as CKRecord, database: self.publicDB).record.recordID.recordName
-                    let eventStartTime = Event(record: record as CKRecord, database: self.publicDB).startTime
-                    let eventTags = Event(record: record as CKRecord, database: self.publicDB).tags
+                    let eventRecordID = eventInRadius.record.recordID.recordName
+                    let eventStartTime = eventInRadius.startTime
+                    let eventTags = eventInRadius.tags
                     correctEventsDict["RecordID"]="\(eventRecordID)"
                     correctEventsDict["StartTime"]="\(eventStartTime)"
                     //correctEventsDict["eventTags"]="\"eventTags
@@ -357,6 +364,44 @@ class DatabaseWork {
         }
     }
     
+
+    func batchGetUserNamesFromIDs(userIDList : [String], listType : String){
+        //where do you distinguish between the kind of list you're getting names for?
+        for userID in userIDList
+        {
+            println("TRYING TO GET USERS")
+            let eventRecord = CKRecord(recordType: "Event")
+            let getCurrentUser = NSPredicate(format: "FacebookID = %@",userID)
+            let query = CKQuery(recordType: "User", predicate: getCurrentUser)
+            publicDB.performQuery(query, inZoneWithID: nil){
+                results, error in
+                if error != nil {
+                    dispatch_async(dispatch_get_main_queue()){
+                        println("ERROR THING?!?!?!")
+                        self.getUserWithIdDelegate?.failedToRetreiveUser(error)
+                        return
+                    }
+                }else{
+//                    self.guestNames.removeAll()
+                    for record in results{
+                        let retreivedCurrentUser = User(record: record as CKRecord, database: self.publicDB)
+                        self.guestNames.append(retreivedCurrentUser.firstName + " " + retreivedCurrentUser.lastName)
+                    }
+                }
+                
+                dispatch_async(dispatch_get_main_queue()){
+                    println("ASYNC THING IN THE DISBATCH BLEHCGH")
+                    self.batchGetUserNamesDelegate?.batchNameResults(self.guestNames, listType: listType)
+                    return
+                    
+                }
+            
+            
+            }
+
+        }
+    }
+    
     func checkToSeeIfUserExist(userID : String){
         let eventRecord = CKRecord(recordType: "Event")
         let getCurrentUser = NSPredicate(format: "FacebookID = %@",userID)
@@ -384,10 +429,110 @@ class DatabaseWork {
     /*
         this next function addes a user to the pending guast "list" in the database
     */
+    func addUserToPending(userID : String, eventRecord : CKRecord){
+        var currentPendingUsers : [String] = []
+        if (eventRecord.objectForKey("pendingGuests") as [String]! != nil ){
+            currentPendingUsers = eventRecord.objectForKey("pendingGuests") as [String]
+        }else {println("no one on the pending list yet")}
+        currentPendingUsers.insert(userID, atIndex: 0)
+        eventRecord.setObject(currentPendingUsers, forKey:"pendingGuests")
+        
+        publicDB.saveRecord(eventRecord, completionHandler: {(record, error)-> Void in
+            if error != nil {
+                println("\(error)")
+            }
+            NSLog("We are saving stuff")
+        })
+    }
+    
     /*
-    func addUserToPending(userID : String, eventID : CKRecord.recordID.recordName){
+        addUserToAccepted(userID : String, eventRecord : CKRecord)
+            adds the user to the accepted list and removes the user from the pending list.
+    */
+    func addUserToAccepted(userID : String, eventRecord : CKRecord){
+        var currentAcceptedUsers : [String] = []
+        if (eventRecord.objectForKey("acceptedGuests") as [String]! != nil ){
+            currentAcceptedUsers = eventRecord.objectForKey("acceptedGuests") as [String]
+        }else {println("no one on the accepted list yet")}
+        currentAcceptedUsers.insert(userID, atIndex:0)
+        eventRecord.setObject(currentAcceptedUsers, forKey:"acceptedGuests")
+        
+        var currentPendingUsers = eventRecord.objectForKey("pendingGuests") as [String]
+        let updatedPendingUsers = currentPendingUsers.filter{$0 != userID}
+        eventRecord.setObject(updatedPendingUsers, forKey:"pendingGuests")
+        
+        publicDB.saveRecord(eventRecord, completionHandler: {(record, error)-> Void in
+            if error != nil {
+                println("\(error)")
+            }
+            NSLog("We are saving stuff")
+        })
         
     }
+    
+    /*
+        func addUserToConfirmed() will add the user to the confirmed list and remove them from the 
+        accepted list and save it to the cloudkit database.
+        pre: userID as a string and eventRecord as a CKRecord
+        post: none
     */
+    func addUserToConfirmed(userID : String, eventRecord : CKRecord){
+        var currentConfirmedUsers : [String] = []
+        if (eventRecord.objectForKey("") as [String]! != nil){
+            currentConfirmedUsers = eventRecord.objectForKey("confirmedGuests") as [String]
+        }else { println("no one on the confirmed list yet")}
+        currentConfirmedUsers.insert(userID, atIndex: 0)
+        eventRecord.setObject(currentConfirmedUsers, forKey: "confirmedGuests")
+        
+        var currentAcceptedUsers = eventRecord.objectForKey("pendingGuests") as [String]
+        let updatedAcceptedUsers = currentAcceptedUsers.filter{$0 != userID}
+        eventRecord.setObject(updatedAcceptedUsers, forKey: "acceptedGuests")
+        
+        publicDB.saveRecord(eventRecord, completionHandler: {(record,error)-> Void in
+            if error != nil {
+                println()
+            }
+            NSLog("we are changing the user from accepted to confirmed")
+        })
+    }
+    
+    ////// the Guest List creator from the database
+    /*
+        generate the list of "the pending guest" 
+        pre: the eventRecord
+        post: [string] of the pending guests
+    */
+    func getPendingGuests(eventRecord : CKRecord)->[String]{
+        var pendingGuests = eventRecord.objectForKey("pendingGuests") as [String]
+        if (pendingGuests.count < 1){
+            pendingGuests = []
+        }
+        return pendingGuests
+    }
+    /*
+        generate the list of accepted guests
+        pre: the eventRecord
+        post: [string] of the accepted guests
+    */
+    
+    func getAcceptedGuests(eventRecord : CKRecord)->[String]{
+        var acceptedGuests = eventRecord.objectForKey("acceptedGuests") as [String]
+        if (acceptedGuests.count < 1){
+            acceptedGuests = []
+        }
+        return acceptedGuests
+    }
+    /*
+        generate the list of confirmed guests
+        pre: the eventRecord
+        post: [string] of the confirmed guests
+    */
+    func getConfirmedGuests(eventRecord : CKRecord)->[String]{
+        var confirmedGuests = eventRecord.objectForKey("confirmedGuests") as [String]
+        if (confirmedGuests.count < 1){
+            confirmedGuests = []
+        }
+        return confirmedGuests
+    }
 }
 let databaseWork = DatabaseWork()

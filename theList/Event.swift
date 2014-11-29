@@ -17,10 +17,14 @@ class Event : NSObject{
     var location : CLLocation!
     var name : String!
     var hostID : String!
+    var hostName : String!
     var photos : [CKAsset]!
     var tags : [String]!
     var capacity : Int!
     var address : String!
+    var pendingGuests : [String] = []
+    var acceptedGuests : [String] = []
+    var confirmedGuests : [String] = []
     var database : CKDatabase!
     
     
@@ -33,11 +37,16 @@ class Event : NSObject{
         self.location = record.objectForKey("EventLocation") as CLLocation!
         self.name = record.objectForKey("EventName") as String!
         self.hostID = record.objectForKey("HostID") as String!
+        self.hostName = record.objectForKey("hostName") as String!
         self.photos = record.objectForKey("Photos") as [CKAsset]!
         self.tags = record.objectForKey("tags") as [String]!
         self.capacity = record.objectForKey("EventCapacity") as Int!
         self.address  = record.objectForKey("EventAddress") as String!
+        self.pendingGuests = record.objectForKey("pendingGuests") as [String]!
+        self.acceptedGuests = record.objectForKey("acceptedGuests") as [String]!
+        self.confirmedGuests = record.objectForKey("confirmedGuests") as [String]!
         
+        println(" event named \(self.name): \(self.pendingGuests) \(self.acceptedGuests) \(self.confirmedGuests)")
     }
     
 }

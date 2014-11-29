@@ -168,6 +168,11 @@ class EventViewController: UIViewController, MadeEventDelegate{
         }else if (segue.identifier == "goToHostProfile"){
             let hostProfileVC : ProfileViewController = segue.destinationViewController as ProfileViewController
             hostProfileVC.userID = event.hostID
+        }else if (segue.identifier == "goToGuestManagement"){
+            let guestManagementVC : GuestListViewController = segue.destinationViewController as GuestListViewController
+            guestManagementVC.pendingGuests = event.pendingGuests
+            guestManagementVC.confirmedGuests = event.confirmedGuests
+            guestManagementVC.acceptedGuests = event.acceptedGuests
         }
     }
     
@@ -176,6 +181,7 @@ class EventViewController: UIViewController, MadeEventDelegate{
     /* Events Delegate */
     func madeEventsUpdated(event : Event) {
         self.event = event
+        self.hostNameButton.setTitle(event.hostName, forState: .Normal)
         showLoadedEvent()
 //        print("FIRST EVEN TEST:")
 //        println(event)
@@ -186,6 +192,17 @@ class EventViewController: UIViewController, MadeEventDelegate{
         let alert = UIAlertView(title: "error loading created event", message: message, delegate: nil, cancelButtonTitle: "ok")
         alert.show()
     }
+    
+    
+    @IBAction func checkPendingUsers(sender: AnyObject) {
+        println(self.event.pendingGuests)
+    }
+    
+    @IBAction func pendScott(sender: AnyObject) {
+        sharedEvent.addUserToPending("10204435702066817", eventRecord: self.event.record)
+        println("pended")
+    }
+    
     
     /* tag table view */
     

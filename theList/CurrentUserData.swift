@@ -36,6 +36,13 @@ class CurrentUserData : NSObject {
         
     }
     
+    func setUserName(firstName : String){
+        self.userName = firstName
+    }
+    
+    func getUserName() -> String {
+        return userName
+    }
     
 }
 
