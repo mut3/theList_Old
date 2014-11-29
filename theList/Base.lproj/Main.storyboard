@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="vNg-CW-unj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="vNg-CW-unj">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
@@ -707,6 +707,7 @@
                                 </state>
                                 <connections>
                                     <action selector="goToHostScreen:" destination="csJ-U0-C19" eventType="touchUpInside" id="mqK-1O-Ibq"/>
+                                    <segue destination="bbs-zT-X8Z" kind="push" identifier="goToGuestManagement" id="wNE-bm-cMc"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="... / ..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VGW-aI-ohM">
@@ -791,13 +792,13 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="T4p-uq-Oy9">
-                                <rect key="frame" x="179" y="518" width="91" height="30"/>
+                                <rect key="frame" x="178" y="518" width="93" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="acceptScott">
+                                <state key="normal" title="pendingScott">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="acceptScott:" destination="csJ-U0-C19" eventType="touchUpInside" id="NmS-9C-9Q2"/>
+                                    <action selector="pendScott:" destination="csJ-U0-C19" eventType="touchUpInside" id="wGZ-lh-DRL"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -820,6 +821,33 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DUw-bA-vzO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1833" y="1136"/>
+        </scene>
+        <!--Guest List View Controller-->
+        <scene sceneID="cfe-VT-7iL">
+            <objects>
+                <tableViewController id="bbs-zT-X8Z" customClass="GuestListViewController" customModule="theList" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="moq-ak-Rrp">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="nKd-P6-1Vg">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nKd-P6-1Vg" id="dAf-qX-ZEe">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="bbs-zT-X8Z" id="mgJ-Y4-jmv"/>
+                            <outlet property="delegate" destination="bbs-zT-X8Z" id="s7Y-b2-NA9"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="7yI-38-Xs7"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DaF-gw-fan" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2294" y="1136"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="H3w-WC-LaS">

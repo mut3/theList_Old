@@ -47,7 +47,8 @@ class GuestListViewController: UITableViewController, BatchGetUserNamesDelegate 
         else if(listType == "confirmed") {
             confirmedGuestNames = nameResults
         }
-        populateLists()
+        println("Got to batch name results of type \(listType) with: ")
+        println(nameResults)
         //do stuff with name results!
     }
     
@@ -65,10 +66,11 @@ class GuestListViewController: UITableViewController, BatchGetUserNamesDelegate 
     }
     
     func gatherListNames() {
+        println("GHATHERTING NAMES")
         database.batchGetUserNamesFromIDs(pendingGuests, listType: "pending") //This needs to iterate through each of the three lists
         database.batchGetUserNamesFromIDs(confirmedGuests, listType: "confirmed")
         database.batchGetUserNamesFromIDs(acceptedGuests, listType: "accepted")
-        // ok now that's better.
+        
     }
     
     func populateLists() {

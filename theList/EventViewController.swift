@@ -132,7 +132,6 @@ class EventViewController: UIViewController, MadeEventDelegate{
             guestManagementVC.pendingGuests = event.pendingGuests
             guestManagementVC.confirmedGuests = event.confirmedGuests
             guestManagementVC.acceptedGuests = event.acceptedGuests
-            println("Holy shit you did it") //ok then i d to change something I did earlier!!
         }
     }
     
@@ -158,9 +157,9 @@ class EventViewController: UIViewController, MadeEventDelegate{
         println(self.event.pendingGuests)
     }
     
-    @IBAction func acceptScott(sender: AnyObject) {
-        sharedEvent.addUserToAccepted("10204435702066817", eventRecord: self.event.record)
-        println("accepted")
+    @IBAction func pendScott(sender: AnyObject) {
+        sharedEvent.addUserToPending("10204435702066817", eventRecord: self.event.record)
+        println("pended")
     }
     
     

@@ -22,9 +22,9 @@ class Event : NSObject{
     var tags : [String]!
     var capacity : Int!
     var address : String!
-    var pendingGuests : [String]!
-    var acceptedGuests : [String]!
-    var confirmedGuests : [String]!
+    var pendingGuests : [String] = []
+    var acceptedGuests : [String] = []
+    var confirmedGuests : [String] = []
     var database : CKDatabase!
     
     
@@ -46,6 +46,7 @@ class Event : NSObject{
         self.acceptedGuests = record.objectForKey("acceptedGuests") as [String]!
         self.confirmedGuests = record.objectForKey("confirmedGuests") as [String]!
         
+        println(" event named \(self.name): \(self.pendingGuests) \(self.acceptedGuests) \(self.confirmedGuests)")
     }
     
 }
