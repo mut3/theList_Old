@@ -14,6 +14,7 @@ class CurrentUserData : NSObject {
     
     var facebookID : String = ""
     var searchData : SearchData!
+    var userName : String = ""
     
     class func getSharedInstanceOfUserData() -> CurrentUserData{
         return currentUserData

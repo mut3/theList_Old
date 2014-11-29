@@ -134,7 +134,7 @@ class EventViewController: UIViewController, MadeEventDelegate{
     
     
     @IBAction func goToHostScreen(sender: AnyObject) {
-    
+        performSegueWithIdentifier("goToGuestManagement", sender: self)
     }
 
     
@@ -159,6 +159,11 @@ class EventViewController: UIViewController, MadeEventDelegate{
     
 
     
+    @IBAction func goPressed(sender: AnyObject) {
+        sharedEvent.addUserToPending(CurrentUserData.getSharedInstanceOfUserData().getFacebookID(), eventRecord : self.event.record)
+        
+        performSegueWithIdentifier("popEvent", sender: self)
+    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(segue.identifier == "popEvent") {
