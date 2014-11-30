@@ -39,7 +39,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate,CheckIfUserExis
     var goToCreatePage : Bool = true
     
     override func viewDidLoad() {
-        super.viewDidLoad()
+//        super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
@@ -80,6 +80,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate,CheckIfUserExis
         CurrentUserData.getSharedInstanceOfUserData().setFacebookID(userFacebookID)
         
         databaseDevil.checkToSeeIfUserExist(userFacebookID)
+        
 
         //profilePic.profileID=user.objectID
         //println(userBirthday)
@@ -111,6 +112,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate,CheckIfUserExis
     func checkIfUser(checkUser: Bool) {
         if (checkUser){
             sleep(1)
+            println("going home")
             performSegueWithIdentifier("startToHome", sender: self)
         }
         else{

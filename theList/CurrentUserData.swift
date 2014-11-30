@@ -9,9 +9,11 @@
 import Foundation
 
 
+
 class CurrentUserData : NSObject {
     
     var facebookID : String = ""
+    var searchData : SearchData!
     var userName : String = ""
     
     class func getSharedInstanceOfUserData() -> CurrentUserData{
@@ -20,9 +22,11 @@ class CurrentUserData : NSObject {
     
     override init() {
         
-        
     }
     
+    func setSearchData(searchData : SearchData){
+        self.searchData = searchData
+    }
     
     func setFacebookID(idNumber : String) {
         self.facebookID = idNumber

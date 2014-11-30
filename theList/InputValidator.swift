@@ -60,7 +60,6 @@ class InputValidator {
     
     func isValidState(state : String) -> Bool {
         let isState = states.containsObject(state)
-//        println("\(state) is a state? \(isState)")
         return isState
     }
     

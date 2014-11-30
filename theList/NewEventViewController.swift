@@ -262,12 +262,17 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
     @IBAction func locationTypeSwitched(sender : AnyObject) {
         //locationTypeSwitch.setOn(!locationTypeSwitch.on, animated: true)
         locationTypeLabel.text = locationTypeSwitch.on ? "Current Location" : "Enter location"
-        locationAddressField.enabled = !locationTypeSwitch.on
         if(locationTypeSwitch.on) {
             getCurrentLocation(locationManager)
+            locationStateField.enabled = false
+            locationZipField.enabled = false
+            locationCityField.enabled = false
         }
         else {
             clearAllAddressFields()
+            locationStateField.enabled = true
+            locationZipField.enabled = true
+            locationCityField.enabled = true
         }
     }
     
@@ -420,7 +425,7 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
 
     @IBAction func createEventButtonPressed(sender : AnyObject) {
         
-        if(haveConsistentLocation() && areAllValidFields()) {
+        if(areAllValidFields() && haveConsistentLocation()) {
             
             if(locationTypeSwitch.on) {
                 eventLocation = currentLocation
@@ -447,9 +452,9 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
             let hostID = CurrentUserData.getSharedInstanceOfUserData().getFacebookID()
             let hostName = CurrentUserData.getSharedInstanceOfUserData().getUserName()
             
-            eventRecord = databaseWork.uploadEvent(eventCapacity, eventDescript: eventDescription, eventEndtime: eventEndTimeObject, eventStartTime: eventStartTimeObject, eventName: eventName, hostID: hostID, hostName : hostName, eventTags: eventTags, photoList: eventImages, eventLocation: eventLocation, writtenLocation: eventLocationWritten)
-            sleep(1)
-            performSegueWithIdentifier("fromCreate", sender : self)
+            eventRecord = databaseWork.uploadEvent(eventCapacity, eventDescript: eventDescription, eventEndtime: eventEndTimeObject, eventStartTime: eventStartTimeObject, eventName: eventName, hostID: hostID, hostName: "placeholder", eventTags: eventTags, photoList: eventImages, eventLocation: eventLocation, writtenLocation: eventLocationWritten)
+    
+            
         }
 //        
 //        eventName = eventNameField.text
@@ -477,21 +482,31 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
         println(enteredLocation)
         
         if(locationTypeSwitch.on) {
-            println("Current Location: ")
-            println(currentLocation)
-            let distance = currentLocation.distanceFromLocation(enteredLocation)
-            println(distance)
-            if(!(distance < 100)) {
+            if(currentLocation == nil || enteredLocation == nil){
                 isConsistent = false
-                
             }
+            else {
+                println("Current Location: ")
+                println(currentLocation)
+                let distance = currentLocation.distanceFromLocation(enteredLocation)
+                println(distance)
+                if(!(distance < 100)) {
+                    isConsistent = false
+                
+                }
+            }
+        }
+        if(!isConsistent) {
+            locationAddressField.placeholder = "Invalid address"
+            locationAddressField.text = ""
+            locationAddressField.backgroundColor = invalidFieldColor
         }
         return isConsistent
     }
     
         
     func doneUploading(eventID: String) {
-        println("the things work so well #######################")
+        performSegueWithIdentifier("fromCreate", sender : self)
     }
     
     
@@ -548,7 +563,8 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
             capacityTextField.placeholder = "0-200"
             areValid = false
         }
-        if(tagsTextField.text.componentsSeparatedByString(", ").count < 2) {
+        let tagsTokens = tagsTextField.text.componentsSeparatedByString(", ")
+        if(tagsTokens.count < 1 || tagsTokens[0] == "" || countElements(tagsTokens[0]) < 3) {
             tagsTextField.backgroundColor = invalidFieldColor
             tagsTextField.text = ""
             tagsTextField.placeholder = "Add at least one tag."

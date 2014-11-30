@@ -32,7 +32,6 @@ protocol FoundEventCondenseDelegate{
 protocol UploadingEventDelegate{
     func doneUploading(eventID : String)
 }
-
 protocol GetUserWithIdDelegate{
     func retreivedUserWithID(user : User)
     func failedToRetreiveUser(error : NSError)
@@ -46,6 +45,10 @@ protocol PastEventsDelegate{
     func errorWithPastEvents(error : NSError)
 
 }
+protocol BatchGetUserNamesDelegate {
+    func batchNameResults(nameResults : [String], listType : String)
+    func errorGettingNames(error : NSError)
+}
 
 class DatabaseWork {
     
@@ -57,7 +60,7 @@ class DatabaseWork {
     var getUserWithIdDelegate : GetUserWithIdDelegate?
     var checkIfUserExistDelegate : CheckIfUserExistDelegate?
     var pastEventsDelegate : PastEventsDelegate?
-    
+    var batchGetUserNamesDelegate : BatchGetUserNamesDelegate? // ?
     var container : CKContainer
     var publicDB : CKDatabase
     let privateDB : CKDatabase
@@ -68,7 +71,7 @@ class DatabaseWork {
     }
     
     var events = [Event]()
-    
+    var guestNames = [String]()
     var madeEvents = [Event]()
     
     var retreivedUser = [User]()
@@ -112,12 +115,16 @@ class DatabaseWork {
         eventRecord.setValue(eventName, forKey: "EventName")
         eventRecord.setValue(eventEndtime, forKey: "EventEndTime")
         eventRecord.setValue(eventStartTime, forKey: "EventStartTime")
-        eventRecord.setValue(hostID, forKey: "HostID")
+        eventRecord.setValue("123456789", forKey: "HostID")
         eventRecord.setValue(hostName, forKey: "hostName")
         eventRecord.setValue(photoList, forKey: "Photos")
         eventRecord.setValue(eventTags, forKey: "tags")
         eventRecord.setValue(eventLocation, forKey: "EventLocation")
         eventRecord.setValue(writtenLocation, forKey: "EventAddress")
+        eventRecord.setValue([], forKey: "pendingGuests")
+        eventRecord.setValue([], forKey: "confirmedGuests")
+        eventRecord.setValue([], forKey: "acceptedGuests")
+        eventRecord.setValue([], forKey: "rejectedGuests")
         println(" event ID : \(eventRecord.recordID)")
         publicDB.saveRecord(eventRecord, completionHandler: {(results,error) -> Void in
             println(eventRecord.recordID.recordName)
@@ -251,9 +258,9 @@ class DatabaseWork {
             if let records = results{
                 for record in records{
                     let eventInRadius = Event(record: record as CKRecord, database: self.publicDB)
-                    let eventRecordID = Event(record: record as CKRecord, database: self.publicDB).record.recordID.recordName
-                    let eventStartTime = Event(record: record as CKRecord, database: self.publicDB).startTime
-                    let eventTags = Event(record: record as CKRecord, database: self.publicDB).tags
+                    let eventRecordID = eventInRadius.record.recordID.recordName
+                    let eventStartTime = eventInRadius.startTime
+                    let eventTags = eventInRadius.tags
                     correctEventsDict["RecordID"]="\(eventRecordID)"
                     correctEventsDict["StartTime"]="\(eventStartTime)"
                     //correctEventsDict["eventTags"]="\"eventTags
@@ -362,6 +369,44 @@ class DatabaseWork {
         }
     }
     
+
+    func batchGetUserNamesFromIDs(userIDList : [String], listType : String){
+        //where do you distinguish between the kind of list you're getting names for?
+        for userID in userIDList
+        {
+            println("TRYING TO GET USERS")
+            let eventRecord = CKRecord(recordType: "Event")
+            let getCurrentUser = NSPredicate(format: "FacebookID = %@",userID)
+            let query = CKQuery(recordType: "User", predicate: getCurrentUser)
+            publicDB.performQuery(query, inZoneWithID: nil){
+                results, error in
+                if error != nil {
+                    dispatch_async(dispatch_get_main_queue()){
+                        println("ERROR THING?!?!?!")
+                        self.getUserWithIdDelegate?.failedToRetreiveUser(error)
+                        return
+                    }
+                }else{
+//                    self.guestNames.removeAll()
+                    for record in results{
+                        let retreivedCurrentUser = User(record: record as CKRecord, database: self.publicDB)
+                        self.guestNames.append(retreivedCurrentUser.firstName + " " + retreivedCurrentUser.lastName)
+                    }
+                }
+                
+                dispatch_async(dispatch_get_main_queue()){
+                    println("ASYNC THING IN THE DISBATCH BLEHCGH")
+                    self.batchGetUserNamesDelegate?.batchNameResults(self.guestNames, listType: listType)
+                    return
+                    
+                }
+            
+            
+            }
+
+        }
+    }
+    
     func checkToSeeIfUserExist(userID : String){
         let eventRecord = CKRecord(recordType: "Event")
         let getCurrentUser = NSPredicate(format: "FacebookID = %@",userID)
@@ -399,7 +444,7 @@ class DatabaseWork {
         
         publicDB.saveRecord(eventRecord, completionHandler: {(record, error)-> Void in
             if error != nil {
-                println("\(error)")
+                println("ERROR!!! \(error)")
             }
             NSLog("We are saving stuff")
         })

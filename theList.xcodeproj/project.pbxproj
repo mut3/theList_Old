@@ -26,14 +26,17 @@
 		ACC499AF1A0C3055000E5073 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACC499AE1A0C3055000E5073 /* Images.xcassets */; };
 		ACC499B21A0C3055000E5073 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACC499B01A0C3055000E5073 /* LaunchScreen.xib */; };
 		ACC499BE1A0C3056000E5073 /* theListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC499BD1A0C3056000E5073 /* theListTests.swift */; };
+		ACE97D501A28EFBC00EEBFA0 /* GuestListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE97D4F1A28EFBC00EEBFA0 /* GuestListViewController.swift */; };
 		ACF384471A0C3710006CE905 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF384461A0C3710006CE905 /* LoginViewController.swift */; };
 		ACF384491A0C3A65006CE905 /* CreateUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF384481A0C3A65006CE905 /* CreateUserViewController.swift */; };
 		C5AA584A1A0C48C000910EBD /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5AA58491A0C48C000910EBD /* FacebookSDK.framework */; };
 		D10104901A18088B004ECDA0 /* NewEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D101048F1A18088B004ECDA0 /* NewEventViewController.swift */; };
 		D125669A1A192FC500F5D2DB /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D12566991A192FC500F5D2DB /* CloudKit.framework */; };
 		D14F5D901A0EC49A0037FF78 /* DatabaseWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14F5D8F1A0EC49A0037FF78 /* DatabaseWork.swift */; };
+		D18B15B41A29658D00D44659 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D18B15B31A29658D00D44659 /* FacebookSDK.framework */; };
 		D1C1FA5F1A19287500B80F6B /* FindEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C1FA5E1A19287500B80F6B /* FindEventsViewController.swift */; };
 		D1E697EF1A1D33FF00CBA46C /* InputValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E697EE1A1D33FF00CBA46C /* InputValidator.swift */; };
+		D1FBE14B1A26BB15002F2C7F /* SearchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1FBE14A1A26BB15002F2C7F /* SearchData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +74,7 @@
 		ACC499BC1A0C3056000E5073 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ACC499BD1A0C3056000E5073 /* theListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = theListTests.swift; sourceTree = "<group>"; };
 		ACC499C71A0C30E5000E5073 /* theList.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = theList.entitlements; sourceTree = "<group>"; };
+		ACE97D4F1A28EFBC00EEBFA0 /* GuestListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuestListViewController.swift; sourceTree = "<group>"; };
 		ACF384431A0C3554006CE905 /* Bridge-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridge-Header.h"; sourceTree = "<group>"; };
 		ACF384461A0C3710006CE905 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		ACF384481A0C3A65006CE905 /* CreateUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateUserViewController.swift; sourceTree = "<group>"; };
@@ -78,8 +82,10 @@
 		D101048F1A18088B004ECDA0 /* NewEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewEventViewController.swift; sourceTree = "<group>"; };
 		D12566991A192FC500F5D2DB /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		D14F5D8F1A0EC49A0037FF78 /* DatabaseWork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseWork.swift; sourceTree = "<group>"; };
+		D18B15B31A29658D00D44659 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		D1C1FA5E1A19287500B80F6B /* FindEventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindEventsViewController.swift; sourceTree = "<group>"; };
 		D1E697EE1A1D33FF00CBA46C /* InputValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputValidator.swift; sourceTree = "<group>"; };
+		D1FBE14A1A26BB15002F2C7F /* SearchData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,7 +94,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D125669A1A192FC500F5D2DB /* CloudKit.framework in Frameworks */,
-				42F08F651A2673CF001657B8 /* FacebookSDK.framework in Frameworks */,
+				D18B15B41A29658D00D44659 /* FacebookSDK.framework in Frameworks */,
 				C5AA584A1A0C48C000910EBD /* FacebookSDK.framework in Frameworks */,
 				4260895F1A1E7BE50098BFA0 /* FacebookSDK.framework in Frameworks */,
 			);
@@ -107,7 +113,7 @@
 		ACC499961A0C3055000E5073 = {
 			isa = PBXGroup;
 			children = (
-				42F08F641A2673CF001657B8 /* FacebookSDK.framework */,
+				D18B15B31A29658D00D44659 /* FacebookSDK.framework */,
 				D12566991A192FC500F5D2DB /* CloudKit.framework */,
 				ACC499A11A0C3055000E5073 /* theList */,
 				ACC499BA1A0C3056000E5073 /* theListTests */,
@@ -129,7 +135,7 @@
 			children = (
 				D1E697EE1A1D33FF00CBA46C /* InputValidator.swift */,
 				D14F5D921A0EC4BB0037FF78 /* View Controllers */,
-				D14F5D911A0EC4AB0037FF78 /* Database Classes */,
+				D14F5D911A0EC4AB0037FF78 /* Data Classes */,
 				ACC499C71A0C30E5000E5073 /* theList.entitlements */,
 				ACC499A41A0C3055000E5073 /* AppDelegate.swift */,
 				ACF384431A0C3554006CE905 /* Bridge-Header.h */,
@@ -169,15 +175,16 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		D14F5D911A0EC4AB0037FF78 /* Database Classes */ = {
+		D14F5D911A0EC4AB0037FF78 /* Data Classes */ = {
 			isa = PBXGroup;
 			children = (
+				D1FBE14A1A26BB15002F2C7F /* SearchData.swift */,
 				42161F3B1A1FDFAE001235B6 /* CurrentUserData.swift */,
 				42255F171A10003800567334 /* Event.swift */,
 				429984D91A0C7A1700B4FD7D /* User.swift */,
 				D14F5D8F1A0EC49A0037FF78 /* DatabaseWork.swift */,
 			);
-			name = "Database Classes";
+			name = "Data Classes";
 			sourceTree = "<group>";
 		};
 		D14F5D921A0EC4BB0037FF78 /* View Controllers */ = {
@@ -191,6 +198,7 @@
 				D101048F1A18088B004ECDA0 /* NewEventViewController.swift */,
 				ACC499A91A0C3055000E5073 /* ViewController.swift */,
 				42255F211A11491000567334 /* EventViewController.swift */,
+				ACE97D4F1A28EFBC00EEBFA0 /* GuestListViewController.swift */,
 				424E4D011A1662D00066032E /* CorrectEventsViewController.swift */,
 				42EE449F1A1FD41800644A22 /* ProfileViewController.swift */,
 			);
@@ -307,6 +315,7 @@
 				ACF384491A0C3A65006CE905 /* CreateUserViewController.swift in Sources */,
 				D14F5D901A0EC49A0037FF78 /* DatabaseWork.swift in Sources */,
 				42161F3A1A1FD8AC001235B6 /* HomeViewController.swift in Sources */,
+				ACE97D501A28EFBC00EEBFA0 /* GuestListViewController.swift in Sources */,
 				42161F3C1A1FDFAE001235B6 /* CurrentUserData.swift in Sources */,
 				ACC499AA1A0C3055000E5073 /* ViewController.swift in Sources */,
 				D10104901A18088B004ECDA0 /* NewEventViewController.swift in Sources */,
@@ -318,6 +327,7 @@
 				42F08F671A293E06001657B8 /* pastEventCell.swift in Sources */,
 				429984DC1A0C7F8A00B4FD7D /* createUser.swift in Sources */,
 				D1E697EF1A1D33FF00CBA46C /* InputValidator.swift in Sources */,
+				D1FBE14B1A26BB15002F2C7F /* SearchData.swift in Sources */,
 				D1C1FA5F1A19287500B80F6B /* FindEventsViewController.swift in Sources */,
 				429984DA1A0C7A1700B4FD7D /* User.swift in Sources */,
 				424E4D021A1662D00066032E /* CorrectEventsViewController.swift in Sources */,

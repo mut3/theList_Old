@@ -27,41 +27,47 @@ class EventViewController: UIViewController, MadeEventDelegate{
     @IBOutlet var eventDescriptionText : UITextView!
     @IBOutlet var goButton : UIButton!
     @IBOutlet var noGoButton : UIButton!
-    
-    
+    @IBOutlet var returnButton : UIButton!
+
+    let database = DatabaseWork.sharedInstanceOfDatabase()
     var photoImage : UIImage!
     
     var eventID : String!
     
     var segueIdentity : String!
     
-    var searchData = Dictionary<String, [String]>()
+    var searchData : SearchData!
+//    var eventsList : [String]!
 
     override func viewDidLoad() { 
         super.viewDidLoad()
         
-//        sleep(1)
         sharedEvent.madeEventDelegate = self;
         
+
         if(segueIdentity == "fromCreate"){
-            sleep(1)
             sharedEvent.getEventWithID(eventID)
             self.goButton.hidden = true
             self.noGoButton.hidden = true
         }else if (segueIdentity == "fromSearch" || segueIdentity == "popEvent"){
-            var eventsList = searchData["eventIDs"]!
-//            println(searchData)
-            let recordName = eventsList.removeAtIndex(0)
-//            println("##############################################")
-            //println(eventsList)
-            searchData["eventIDs"] = eventsList
-            sharedEvent.getEventWithID(recordName)
-//            println(searchData)
+//            eventsList = searchData["eventIDs"]!
+            returnButton.setTitle("Search", forState : .Normal)
+            println(searchData.toString())
+            if(searchData.eventIDs.count > 0) {
+                eventID = searchData.eventIDs.removeAtIndex(0)
+
+//                searchData["eventIDs"] = eventsList
+                sharedEvent.getEventWithID(eventID)
+                //            println(searchData)
+                
+            }
         }
         
 
         // Do any additional setup after loading the view.
     }
+    
+
 
     func showLoadedEvent(){
 //        print("EVENT: ")
@@ -69,19 +75,18 @@ class EventViewController: UIViewController, MadeEventDelegate{
         if(event.photos.count != 0) {
             var photoAssetURL = event.photos[0].fileURL
 //            println(" IMAGE FILES IN THE THINg ------------- ")
-            println(photoAssetURL)
+//            println(photoAssetURL)
             
             var imageData = NSData(contentsOfURL: photoAssetURL)
             photoImage = UIImage(data: imageData!)
             eventImageView.image = photoImage
         }
-    
-        
-        eventNameLabel.text = event.name
-        
-        
-        hostNameButton.titleLabel!.text = " "
+        setEventName(event.name)
+                
         hostRatingLabel.text = "★★★☆☆"
+        
+        hostNameButton.setTitle("Host!", forState: .Normal)
+
         capacityLabel.text = "0 / \(event.capacity)"
         for tag in event.tags {
             eventTagsField.text = "\(eventTagsField.text) \(tag)\n"
@@ -90,7 +95,19 @@ class EventViewController: UIViewController, MadeEventDelegate{
         eventDescriptionText.text = event.descript
     }
     
- 
+    func setEventName(name : String) {
+        
+        let nameLength = countElements(name)
+        if(nameLength > 20) {
+            let sizeMod : CGFloat = CGFloat(nameLength) - 18.0
+            
+            let fontSize : CGFloat = (16.0 - sizeMod/2.0)
+            
+            eventNameLabel.font = UIFont.systemFontOfSize(fontSize)
+        }
+        eventNameLabel.text = name
+    }
+    
     @IBAction func testingForImage() {
 //        println(photoImage)
     }
@@ -101,22 +118,40 @@ class EventViewController: UIViewController, MadeEventDelegate{
     }
     
     
+    @IBAction func returnButtonPressed(sender: UIButton) {
+        if(segueIdentity == "fromCreate") {
+            performSegueWithIdentifier("toHome", sender: self)
+        }
+        else if(segueIdentity == "fromSearch" || segueIdentity == "popEvent"){
+            performSegueWithIdentifier("toSearch", sender: self)
+        }
+        
+    }
     
     
     @IBAction func goToHostScreen(sender: AnyObject) {
+        performSegueWithIdentifier("toHostFromEvent", sender: self)
     }
 
     
-    
-    @IBAction func noGoPressed(sender: AnyObject) {
-        performSegueWithIdentifier("popEvent", sender: self)
-    }
-
-    
-    @IBAction func goPressed(sender: AnyObject) {
-        sharedEvent.addUserToPending(CurrentUserData.getSharedInstanceOfUserData().getFacebookID(), eventRecord : self.event.record)
+    @IBAction func decisionButtonPressed(sender: UIButton) {
+        if(searchData.eventIDs.count > 0) {
+            performSegueWithIdentifier("popEvent", sender: self)
+        }
+        else {
+            performSegueWithIdentifier("noEvents", sender: self)
+        }
+        if(sender == goButton) {
+            database.addUserToPending(CurrentUserData.getSharedInstanceOfUserData().getFacebookID(), eventRecord: event.record)
+            searchData.goEvents.append(eventID)
+            // perform go functionality            
+        }
+        else if(sender == noGoButton) {
+            searchData.rejectedEvents.append(eventID)
+            // perform no go functionality
+        }
+        println(searchData)
         
-        performSegueWithIdentifier("popEvent", sender: self)
     }
     
     
@@ -125,9 +160,14 @@ class EventViewController: UIViewController, MadeEventDelegate{
             let foundEventsVC : EventViewController = segue.destinationViewController as EventViewController
             foundEventsVC.searchData = searchData
             foundEventsVC.segueIdentity = segue.identifier
-        }else if (segue.identifier == "goToHostProfile"){
+        }else if (segue.identifier == "toHostFromEvent"){
             let hostProfileVC : ProfileViewController = segue.destinationViewController as ProfileViewController
             hostProfileVC.userID = event.hostID
+        }else if (segue.identifier == "goToGuestManagement"){
+            let guestManagementVC : GuestListViewController = segue.destinationViewController as GuestListViewController
+            guestManagementVC.pendingGuests = event.pendingGuests
+            guestManagementVC.confirmedGuests = event.confirmedGuests
+            guestManagementVC.acceptedGuests = event.acceptedGuests
         }
     }
     
