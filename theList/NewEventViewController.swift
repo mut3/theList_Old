@@ -441,8 +441,7 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
             eventTimeStart = timeStartTextField.text
             eventTimeEnd = timeEndTextField.text
             eventDate = dateTextField.text
-            //eventTag = tagsTextField.text
-            eventCapacity = capacityTextField.text.toInt()!
+            eventCapacity = capacityTextField.text.toInt()
             eventDescription = descriptionTextArea.text
             
             
