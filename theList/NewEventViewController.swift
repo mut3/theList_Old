@@ -25,7 +25,7 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
     var eventTimeStart : String = ""
     var eventTimeEnd : String = ""
     var eventDate : String = ""
-    var eventCapacity : Int!
+    var eventCapacity : Int = 0
     var eventRecord : CKRecord!
     
     var eventImages : [CKAsset] = []
@@ -62,6 +62,22 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         databaseThing.uploadEventDelegate = self
+        if (eventCapacity > 0){
+            println("cap was passed")
+            self.capacityTextField.text = "\(eventCapacity)"
+            self.timeStartTextField.text = "\(eventTimeStart)"
+            self.timeEndTextField.text = "\(eventTimeEnd)"
+            //self.locationAddressField.text = "\(eventLocationWritten)"
+            self.tagsTextField.text = ""
+            for tag in eventTags{
+                if (self.tagsTextField.text == ""){
+                    self.tagsTextField.text = tag
+                }else {
+                self.tagsTextField.text = "\(self.tagsTextField.text), \(tag)"
+                }
+            }
+            self.descriptionTextArea.text = eventDescription
+        }
 //        tagsPickerOutlet.hidden = true
 //        tagsPickerOutlet.delegate = self
 //        tagsPickerOutlet.dataSource = self
@@ -421,7 +437,7 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
             eventTimeEnd = timeEndTextField.text
             eventDate = dateTextField.text
             //eventTag = tagsTextField.text
-            eventCapacity = capacityTextField.text.toInt()
+            eventCapacity = capacityTextField.text.toInt()!
             eventDescription = descriptionTextArea.text
             
             

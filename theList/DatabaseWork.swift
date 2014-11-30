@@ -42,7 +42,7 @@ protocol CheckIfUserExistDelegate{
     func checkIfUser(checkUser : Bool)
 }
 protocol PastEventsDelegate{
-    func pastEventsList(pastEvents : [[String]])
+    func pastEventsList(pastEvents : [CKRecord])
     func errorWithPastEvents(error : NSError)
 
 }
@@ -168,6 +168,7 @@ class DatabaseWork {
             results, error in
             var onePastEvent : [String] = []
             var pastEvents : [[String]] = []
+            var pastEventRecords : [CKRecord] = []
             if (error != nil) {
                 dispatch_async(dispatch_get_main_queue()){
                     self.pastEventsDelegate?.errorWithPastEvents(error)
@@ -178,14 +179,17 @@ class DatabaseWork {
                     if (onePastEvent.count > 0){
                         onePastEvent.removeAll(keepCapacity: true)
                     }
+                    /*
                     let eventName = Event(record : record as CKRecord, database: self.publicDB).name
                     let eventID = Event(record : record as CKRecord, database: self.publicDB).record.recordID.recordName
                     onePastEvent.append(eventID)
                     onePastEvent.append(eventName)
                     pastEvents.append(onePastEvent)
+                    */
+                    pastEventRecords.append(record as CKRecord)
                 }
                 dispatch_async(dispatch_get_main_queue()){
-                    self.pastEventsDelegate?.pastEventsList(pastEvents)
+                    self.pastEventsDelegate?.pastEventsList(pastEventRecords)
                     return
                 }
             }
