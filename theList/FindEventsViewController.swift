@@ -76,7 +76,8 @@ class FindEventsViewController: UIViewController, FoundEventsDelegate /*FoundEve
 //            println("\(event.record.recordID.recordName)")
             var sameHost = event.hostID == currentUser
             var tagMatch = filterByTags(event.tags as NSArray)
-            if(distanceFromSelf <= Double(distanceSlider.value) && !sameHost && tagMatch) {
+            var isOnGuestList = isUserOnEventGuestList(event)
+            if(distanceFromSelf <= Double(distanceSlider.value) && !sameHost && tagMatch && !isOnGuestList) {
                 eventFoundIDs.append(event.record.recordID.recordName)
             }
 
@@ -106,6 +107,18 @@ class FindEventsViewController: UIViewController, FoundEventsDelegate /*FoundEve
         else{
             performSegueWithIdentifier("noEvents", sender: self)
         }
+    }
+    
+    func isUserOnEventGuestList(event : Event) -> Bool {
+        let userID = CurrentUserData.getSharedInstanceOfUserData().getFacebookID()
+        let eventGuests = (event.pendingGuests + event.acceptedGuests + event.confirmedGuests) as NSArray
+        
+        var isOnGuestList = false
+        if(eventGuests.containsObject(userID)) {
+            isOnGuestList = true
+        }
+        
+        return isOnGuestList
     }
     
     func filterByTags(eventTags : NSArray) -> Bool {

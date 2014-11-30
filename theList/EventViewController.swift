@@ -29,7 +29,7 @@ class EventViewController: UIViewController, MadeEventDelegate{
     @IBOutlet var noGoButton : UIButton!
     @IBOutlet var returnButton : UIButton!
 
-    
+    let database = DatabaseWork.sharedInstanceOfDatabase()
     var photoImage : UIImage!
     
     var eventID : String!
@@ -134,7 +134,7 @@ class EventViewController: UIViewController, MadeEventDelegate{
     
     
     @IBAction func goToHostScreen(sender: AnyObject) {
-        performSegueWithIdentifier("goToGuestManagement", sender: self)
+        performSegueWithIdentifier("toHostFromEvent", sender: self)
     }
 
     
@@ -146,6 +146,7 @@ class EventViewController: UIViewController, MadeEventDelegate{
             performSegueWithIdentifier("noEvents", sender: self)
         }
         if(sender == goButton) {
+            database.addUserToPending(CurrentUserData.getSharedInstanceOfUserData().getFacebookID(), eventRecord: event.record)
             searchData.goEvents.append(eventID)
             // perform go functionality            
         }
@@ -157,20 +158,13 @@ class EventViewController: UIViewController, MadeEventDelegate{
         
     }
     
-
-    
-    @IBAction func goPressed(sender: AnyObject) {
-        sharedEvent.addUserToPending(CurrentUserData.getSharedInstanceOfUserData().getFacebookID(), eventRecord : self.event.record)
-        
-        performSegueWithIdentifier("popEvent", sender: self)
-    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(segue.identifier == "popEvent") {
             let foundEventsVC : EventViewController = segue.destinationViewController as EventViewController
             foundEventsVC.searchData = searchData
             foundEventsVC.segueIdentity = segue.identifier
-        }else if (segue.identifier == "goToHostProfile"){
+        }else if (segue.identifier == "toHostFromEvent"){
             let hostProfileVC : ProfileViewController = segue.destinationViewController as ProfileViewController
             hostProfileVC.userID = event.hostID
         }else if (segue.identifier == "goToGuestManagement"){
@@ -204,7 +198,7 @@ class EventViewController: UIViewController, MadeEventDelegate{
     }
     
     @IBAction func pendScott(sender: AnyObject) {
-        sharedEvent.addUserToPending("10204435702066817", eventRecord: self.event.record)
+        sharedEvent.addUserToAccepted("10204435702066817", eventRecord: self.event.record)
         println("pended")
     }
     

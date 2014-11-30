@@ -35,14 +35,14 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="z7T-pQ-dIN">
-                                <rect key="frame" x="205" y="372" width="99" height="30"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="iJF-l4-kKx">
+                                <rect key="frame" x="245" y="395" width="59" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Move to home">
+                                <state key="normal" title="goHome">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="sTD-Y3-VLK" kind="push" identifier="startToHome" id="GQM-fk-Hkj"/>
+                                    <segue destination="sTD-Y3-VLK" kind="push" identifier="startToHome" id="oV9-ZB-tY9"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -725,8 +725,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" title="Host"/>
                                 <connections>
-                                    <action selector="goToHostScreen:" destination="csJ-U0-C19" eventType="touchUpInside" id="Y2U-nP-FNw"/>
-                                    <segue destination="Ycg-UA-9No" kind="push" identifier="goToHostProfile" id="Te7-DU-tfT"/>
+                                    <action selector="goToHostScreen:" destination="csJ-U0-C19" eventType="touchUpInside" id="dl9-I1-tXc"/>
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.85000002384185791" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8xU-Bg-ZXK">
@@ -737,7 +736,6 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="goToHostScreen:" destination="csJ-U0-C19" eventType="touchUpInside" id="mqK-1O-Ibq"/>
                                     <segue destination="bbs-zT-X8Z" kind="push" identifier="goToGuestManagement" id="wNE-bm-cMc"/>
                                 </connections>
                             </button>
@@ -826,7 +824,7 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7uy-AT-dDd">
-                                <rect key="frame" x="111" y="5" width="82" height="30"/>
+                                <rect key="frame" x="1" y="113" width="82" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="returnHome">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -836,7 +834,7 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ICv-3B-TOb">
-                                <rect key="frame" x="-11" y="10" width="105" height="30"/>
+                                <rect key="frame" x="-11" y="142" width="105" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="returnToSearch">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -845,14 +843,24 @@
                                     <segue destination="QyU-8V-eYf" kind="push" identifier="toSearch" id="3qO-xr-CFb"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="T4p-uq-Oy9">
-                                <rect key="frame" x="178" y="518" width="93" height="30"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Obt-ca-P1I">
+                                <rect key="frame" x="5" y="177" width="66" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="pendingScott">
+                                <state key="normal" title="goToHost">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="pendScott:" destination="csJ-U0-C19" eventType="touchUpInside" id="wGZ-lh-DRL"/>
+                                    <segue destination="Ycg-UA-9No" kind="push" identifier="toHostFromEvent" id="jc5-s8-LUo"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9Hx-w8-1C3">
+                                <rect key="frame" x="104" y="494" width="125" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="add scott pending">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="pendScott:" destination="csJ-U0-C19" eventType="touchUpInside" id="kre-ow-jtG"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -915,7 +923,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DaF-gw-fan" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2294" y="1136"/>
+            <point key="canvasLocation" x="2534" y="1136"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="H3w-WC-LaS">
@@ -1034,14 +1042,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="No new events match your search criteria. Please search again later." selectable="NO" id="AIb-LM-Gd0">
-                                <rect key="frame" x="45" y="119" width="224" height="57"/>
+                                <rect key="frame" x="45" y="119" width="224" height="93"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="sTn-I1-M26">
-                                <rect key="frame" x="137" y="262" width="41" height="30"/>
+                                <rect key="frame" x="140" y="230" width="41" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Home">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1081,10 +1089,10 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="oxK-47-EC8"/>
         <segue reference="GEe-Be-QQh"/>
         <segue reference="3qO-xr-CFb"/>
+        <segue reference="oxK-47-EC8"/>
+        <segue reference="jc5-s8-LUo"/>
         <segue reference="8pb-zo-lBy"/>
-        <segue reference="Te7-DU-tfT"/>
     </inferredMetricsTieBreakers>
 </document>
