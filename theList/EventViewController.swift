@@ -154,7 +154,7 @@ class EventViewController: UIViewController, MadeEventDelegate{
     }
     
     @IBAction func acceptScott(sender: AnyObject) {
-        sharedEvent.addUserToAccepted("10204435702066817", eventRecord: self.event.record)
+        sharedEvent.addUserToAccepted(CurrentUserData.getSharedInstanceOfUserData().getFacebookID(), eventRecord: self.event.record)
         println("accepted")
     }
     
