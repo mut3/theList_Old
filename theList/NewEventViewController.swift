@@ -67,11 +67,14 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
 //        tagsPickerOutlet.dataSource = self
         
         // Do any additional setup after loading the view, typically from a nib.
-
+        
+        
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.startUpdatingLocation()
         //println((CLLocationManager.locationServicesEnabled()))
+        
+        self.eventNameField.text = eventName
         
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         getCurrentLocation(locationManager)

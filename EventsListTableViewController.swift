@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CloudKit
 
 class EventsListTableViewController: UITableViewController,PastEventsDelegate {
 
@@ -15,6 +16,12 @@ class EventsListTableViewController: UITableViewController,PastEventsDelegate {
     var localPastEvents = Dictionary<String,String>()
     
     var userID : String = ""
+    
+    
+    // review old event variables
+    var eventNameToPass = ""
+    var reviewOldEvent : Bool = false
+    var eventRecord : CKRecord!
     
     var eventsCount : Int!
     var userPastEvents = [Event]()
@@ -55,14 +62,37 @@ class EventsListTableViewController: UITableViewController,PastEventsDelegate {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = self.tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
+        var cell = self.tableView.dequeueReusableCellWithIdentifier("PastEventCell", forIndexPath: indexPath) as PastEventCell
         var givenEvent = currentUserPastEvents[indexPath.row]
+        var eventRecordID : CKRecordID = CKRecordID(recordName :givenEvent[0])
+        eventRecord = CKRecord(recordType : "Event", recordID : eventRecordID)
         var eventName = givenEvent[1]
 //        println(eventName)
-        cell.textLabel.text = eventName
+        cell.pastEventName.text = eventName
+        var cap = eventRecord.objectForKey("EventCapacity") as Int!
+        cell.pastEventCap.text = "Cap: \(cap)"
         return cell
     }
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        var pastEventList : [String] = currentUserPastEvents[indexPath.row]
+        println(eventRecord)
+        eventNameToPass = pastEventList[1]
+        reviewOldEvent = true
+        //performSegueWithIdentifier("makeNewEvent", sender : self)
+
+    }
+    /* segue prepare work */
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "makeNewEvent"){
+            if (reviewOldEvent){
+                let createEventVC : NewEventViewController = segue.destinationViewController as NewEventViewController
+                println(eventNameToPass)
+                createEventVC.eventName = eventNameToPass
+                reviewOldEvent = false
+            }
+        }
     
+    }
     
     /*
         database delegate

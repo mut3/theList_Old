@@ -46,6 +46,8 @@ class EventViewController: UIViewController, MadeEventDelegate{
         if(segueIdentity == "fromCreate"){
             sleep(1)
             sharedEvent.getEventWithID(eventID)
+            self.goButton.hidden = true
+            self.noGoButton.hidden = true
         }else if (segueIdentity == "fromSearch" || segueIdentity == "popEvent"){
             var eventsList = searchData["eventIDs"]!
 //            println(searchData)
