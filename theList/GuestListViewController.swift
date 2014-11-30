@@ -66,7 +66,6 @@ class GuestListViewController: UITableViewController, BatchGetUserNamesDelegate 
     }
     
     func gatherListNames() {
-        println("GHATHERTING NAMES")
         database.batchGetUserNamesFromIDs(pendingGuests, listType: "pending") //This needs to iterate through each of the three lists
         database.batchGetUserNamesFromIDs(confirmedGuests, listType: "confirmed")
         database.batchGetUserNamesFromIDs(acceptedGuests, listType: "accepted")

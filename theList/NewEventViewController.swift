@@ -13,6 +13,8 @@ import CloudKit
 
 class NewEventViewController: UITableViewController, CLLocationManagerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UploadingEventDelegate /*UIPickerViewDataSource,UIPickerViewDelegate*/{
     
+    var segueID : String!
+    
     var eventName : String = ""
     var eventStreetAddress : String = ""
     var eventCity : String = ""
@@ -62,11 +64,22 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         databaseThing.uploadEventDelegate = self
-        if (eventCapacity > 0){
+        
+        
+        if (segueID == "recreateOldEvent" || eventCapacity > 0){
+            locationTypeSwitch.on = false
             println("cap was passed")
             self.capacityTextField.text = "\(eventCapacity)"
             self.timeStartTextField.text = "\(eventTimeStart)"
             self.timeEndTextField.text = "\(eventTimeEnd)"
+            let addressTokens = eventLocationWritten.componentsSeparatedByString(", ")
+            self.locationAddressField.text = addressTokens[0]
+            self.locationCityField.text = addressTokens[1]
+            self.locationStateField.text = addressTokens[2].componentsSeparatedByString(" ")[0]
+            self.locationZipField.text = addressTokens[2].componentsSeparatedByString(" ")[1]
+            
+            
+            println(locationAddressField.text)
             //self.locationAddressField.text = "\(eventLocationWritten)"
             self.tagsTextField.text = ""
             for tag in eventTags{
@@ -441,7 +454,7 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
             eventTimeStart = timeStartTextField.text
             eventTimeEnd = timeEndTextField.text
             eventDate = dateTextField.text
-            eventCapacity = capacityTextField.text.toInt()
+            eventCapacity = capacityTextField.text.toInt()!
             eventDescription = descriptionTextArea.text
             
             

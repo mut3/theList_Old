@@ -115,7 +115,7 @@ class DatabaseWork {
         eventRecord.setValue(eventName, forKey: "EventName")
         eventRecord.setValue(eventEndtime, forKey: "EventEndTime")
         eventRecord.setValue(eventStartTime, forKey: "EventStartTime")
-        eventRecord.setValue("123456789", forKey: "HostID")
+        eventRecord.setValue(hostID, forKey: "HostID")
         eventRecord.setValue(hostName, forKey: "hostName")
         eventRecord.setValue(photoList, forKey: "Photos")
         eventRecord.setValue(eventTags, forKey: "tags")

@@ -76,12 +76,12 @@ class EventsListTableViewController: UITableViewController,PastEventsDelegate {
         userPastEvents.removeAll(keepCapacity: true)
         userPastEvents.append(userPastEvent)
         reviewOldEvent = true
-        performSegueWithIdentifier("makeNewEvent", sender : self)
+        performSegueWithIdentifier("recreateOldEvent", sender : self)
 
     }
     /* segue prepare work */
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if (segue.identifier == "makeNewEvent"){
+        if (segue.identifier == "recreateOldEvent"){
             if (reviewOldEvent){
                 let createEventVC : NewEventViewController = segue.destinationViewController as NewEventViewController
                 println(eventNameToPass)
@@ -92,6 +92,7 @@ class EventsListTableViewController: UITableViewController,PastEventsDelegate {
                 createEventVC.eventCapacity = userPastEvents[0].capacity
                 createEventVC.eventDescription = userPastEvents[0].descript
                 reviewOldEvent = false
+                createEventVC.segueID = segue.identifier
             }
         }
     

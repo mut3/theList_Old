@@ -212,6 +212,16 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="eKz-3M-Yq5">
+                                            <rect key="frame" x="148" y="7" width="46" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Button">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <segue destination="48W-zr-XEe" kind="push" identifier="recreateOldEvent" id="g0M-DQ-rhx"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
@@ -1109,5 +1119,6 @@
         <segue reference="GEe-Be-QQh"/>
         <segue reference="VWt-gG-i9I"/>
         <segue reference="jc5-s8-LUo"/>
+        <segue reference="g0M-DQ-rhx"/>
     </inferredMetricsTieBreakers>
 </document>
