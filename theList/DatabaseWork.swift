@@ -124,6 +124,7 @@ class DatabaseWork {
         eventRecord.setValue([], forKey: "pendingGuests")
         eventRecord.setValue([], forKey: "confirmedGuests")
         eventRecord.setValue([], forKey: "acceptedGuests")
+        eventRecord.setValue([], forKey: "rejectedGuests")
         println(" event ID : \(eventRecord.recordID)")
         publicDB.saveRecord(eventRecord, completionHandler: {(results,error) -> Void in
             println(eventRecord.recordID.recordName)
