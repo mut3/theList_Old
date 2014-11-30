@@ -1072,6 +1072,9 @@
                                 <state key="normal" title="Search">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="QyU-8V-eYf" kind="push" id="VWt-gG-i9I"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
@@ -1089,10 +1092,10 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="GEe-Be-QQh"/>
-        <segue reference="3qO-xr-CFb"/>
-        <segue reference="oxK-47-EC8"/>
-        <segue reference="jc5-s8-LUo"/>
+        <segue reference="fzL-0p-XV5"/>
         <segue reference="8pb-zo-lBy"/>
+        <segue reference="GEe-Be-QQh"/>
+        <segue reference="VWt-gG-i9I"/>
+        <segue reference="jc5-s8-LUo"/>
     </inferredMetricsTieBreakers>
 </document>

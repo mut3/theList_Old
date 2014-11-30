@@ -35,7 +35,6 @@
 		D1C1FA5F1A19287500B80F6B /* FindEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C1FA5E1A19287500B80F6B /* FindEventsViewController.swift */; };
 		D1E697EF1A1D33FF00CBA46C /* InputValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E697EE1A1D33FF00CBA46C /* InputValidator.swift */; };
 		D1FBE14B1A26BB15002F2C7F /* SearchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1FBE14A1A26BB15002F2C7F /* SearchData.swift */; };
-		D1FFBFBE1A1FF42A00C248F7 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1FFBFBD1A1FF42A00C248F7 /* FacebookSDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,7 +82,6 @@
 		D1C1FA5E1A19287500B80F6B /* FindEventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindEventsViewController.swift; sourceTree = "<group>"; };
 		D1E697EE1A1D33FF00CBA46C /* InputValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputValidator.swift; sourceTree = "<group>"; };
 		D1FBE14A1A26BB15002F2C7F /* SearchData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchData.swift; sourceTree = "<group>"; };
-		D1FFBFBD1A1FF42A00C248F7 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

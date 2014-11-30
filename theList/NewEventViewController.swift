@@ -543,7 +543,8 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
             capacityTextField.placeholder = "0-200"
             areValid = false
         }
-        if(tagsTextField.text.componentsSeparatedByString(", ").count < 2) {
+        let tagsTokens = tagsTextField.text.componentsSeparatedByString(", ")
+        if(tagsTokens.count < 1 || tagsTokens[0] == "" || countElements(tagsTokens[0]) < 3) {
             tagsTextField.backgroundColor = invalidFieldColor
             tagsTextField.text = ""
             tagsTextField.placeholder = "Add at least one tag."
