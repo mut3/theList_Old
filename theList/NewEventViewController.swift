@@ -66,7 +66,7 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
         databaseThing.uploadEventDelegate = self
         
         
-        if (segueID == "recreateOldEvent" || eventCapacity > 0){
+        if (segueID != nil && segueID == "recreateOldEvent" || eventCapacity > 0){
             locationTypeSwitch.on = false
             println("cap was passed")
             self.capacityTextField.text = "\(eventCapacity)"
@@ -140,7 +140,7 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
                 
                 let errorString = "Error" + error.localizedDescription
                 println("Error: " + error.localizedDescription)
-                self.clearAllAddressFields()
+//                self.clearAllAddressFields()
                 return
             }
             if placemarks.count > 0 {
@@ -165,7 +165,7 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
             if (error != nil) {
                 let errorString = "Error" + error.localizedDescription
                 println("Error: " + error.localizedDescription)
-                self.clearAllAddressFields()
+//                self.clearAllAddressFields()
                 return
             }
             if placemarks.count > 0 {
