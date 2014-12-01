@@ -62,7 +62,7 @@ class EventViewController: UIViewController, MadeEventDelegate, GetGuestListComp
         }else if (segueIdentity == "fromSearch" || segueIdentity == "popEvent"){
 //            eventsList = searchData["eventIDs"]!
             returnButton.setTitle("Search", forState : .Normal)
-            capacityButton.enabled = false
+//            capacityButton.enabled = false
             println(searchData.toString())
             if(searchData.eventIDs.count > 0) {
                 eventID = searchData.eventIDs.removeAtIndex(0)
@@ -81,12 +81,10 @@ class EventViewController: UIViewController, MadeEventDelegate, GetGuestListComp
 
 
     func showLoadedEvent(){
-//        print("EVENT: ")
-//        println(event)
-        if(event.photos.count != 0) {
+
+        if(event.photos != nil && event.photos.count != 0) {
             var photoAssetURL = event.photos[0].fileURL
-//            println(" IMAGE FILES IN THE THINg ------------- ")
-//            println(photoAssetURL)
+
             
             var imageData = NSData(contentsOfURL: photoAssetURL)
             photoImage = UIImage(data: imageData!)
@@ -105,7 +103,7 @@ class EventViewController: UIViewController, MadeEventDelegate, GetGuestListComp
         }
         eventDescriptionText.text = event.descript
         database.clearGuestLists()
-        if(segueIdentity == "fromCreate" || segueIdentity == "fromHost") {
+        if(segueIdentity == "fromCreate" || segueIdentity == "fromHost" || segueIdentity == "fromSearch") {
             database.loadPendingGuests(event.pendingGuests)
         }
 
@@ -181,6 +179,7 @@ class EventViewController: UIViewController, MadeEventDelegate, GetGuestListComp
             hostProfileVC.userID = event.hostID
         }else if (segue.identifier == "goToGuestManagement"){
             let guestManagementVC : GuestListViewController = segue.destinationViewController as GuestListViewController
+            println("LIST COUNTS PRE : \(pendingGuests.count + acceptedGuests.count + confirmedGuests.count)")
             guestManagementVC.pendingGuests = pendingGuests
             guestManagementVC.confirmedGuests = confirmedGuests
             guestManagementVC.acceptedGuests = acceptedGuests
@@ -233,9 +232,6 @@ class EventViewController: UIViewController, MadeEventDelegate, GetGuestListComp
     func returnConfirmedGuests(confirmedGuests : [User]) {
         self.confirmedGuests = confirmedGuests
         println("confirmed guests returned")
-        println(self.confirmedGuests)
-        println(self.acceptedGuests)
-        println(self.pendingGuests)
     }
     /* tag table view */
     
