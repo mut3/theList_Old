@@ -24,6 +24,8 @@ class ProfileViewController: UIViewController, FBLoginViewDelegate, GetUserWithI
     
     @IBOutlet var fbLogin: FBLoginView!
     
+
+    
     @IBOutlet var profilePic: FBProfilePictureView!
     
     let databaseDevil = DatabaseWork.sharedInstanceOfDatabase()
@@ -46,9 +48,10 @@ class ProfileViewController: UIViewController, FBLoginViewDelegate, GetUserWithI
     }
     
     func loginViewFetchedUserInfo(loginView: FBLoginView!, user: FBGraphUser!) {
-        println(userID)
+        
         profilePic.profileID = userID
         databaseDevil.getUserWithID(userID)
+        println("USER ID : \(userID)")
         
     }
     
@@ -62,6 +65,14 @@ class ProfileViewController: UIViewController, FBLoginViewDelegate, GetUserWithI
     func failedToRetreiveUser(error: NSError){
         println(error)
     }
+    
+    
+    func loginViewShowingLoggedOutUser(loginView : FBLoginView!) {
+        loginView.hidden = false
+        //        println("User Logged Out")
+        performSegueWithIdentifier("userLoggedOut", sender:self)
+    }
+
     
     
 

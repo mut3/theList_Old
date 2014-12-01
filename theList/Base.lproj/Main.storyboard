@@ -1028,6 +1028,11 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <view contentMode="scaleToFill" id="fip-Oo-XNm" customClass="FBLoginView">
+                                <rect key="frame" x="80" y="504" width="160" height="49"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1035,15 +1040,16 @@
                     <connections>
                         <outlet property="aboutMeOutlet" destination="VDw-sK-CVD" id="cUe-YS-cGd"/>
                         <outlet property="ageOutlet" destination="a2M-LC-Nkb" id="Xow-BY-dPL"/>
-                        <outlet property="fbLogin" destination="KcF-od-qf2" id="Kpj-RJ-83k"/>
+                        <outlet property="fbLogin" destination="fip-Oo-XNm" id="z4m-Y9-uke"/>
                         <outlet property="genderOutlet" destination="UBW-D5-cDS" id="SgL-8N-f4U"/>
                         <outlet property="profilePic" destination="GRz-Ky-H8y" id="8db-mM-DwO"/>
                         <outlet property="ratingOutlet" destination="mwf-Op-Tud" id="NaZ-7V-R9n"/>
+                        <segue destination="vXZ-lx-hvc" kind="push" identifier="userLoggedOut" id="605-ms-zk5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="axL-dL-NKV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1297" y="1893"/>
+            <point key="canvasLocation" x="1201" y="1961"/>
         </scene>
         <!--No Events Left-->
         <scene sceneID="hI7-eS-SeG">
@@ -1104,10 +1110,11 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="ofG-Bp-Rzn"/>
-        <segue reference="rW8-cX-Taj"/>
-        <segue reference="fMH-8C-Mav"/>
-        <segue reference="YF7-LC-FqT"/>
+        <segue reference="GEe-Be-QQh"/>
+        <segue reference="3qO-xr-CFb"/>
+        <segue reference="8pb-zo-lBy"/>
         <segue reference="jc5-s8-LUo"/>
+        <segue reference="605-ms-zk5"/>
+        <segue reference="oV9-ZB-tY9"/>
     </inferredMetricsTieBreakers>
 </document>
