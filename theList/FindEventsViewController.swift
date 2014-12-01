@@ -70,6 +70,7 @@ class FindEventsViewController: UIViewController, FoundEventsDelegate /*FoundEve
     
     func foundEventsUpdate(events: [Event]) {
         let currentUser = CurrentUserData.getSharedInstanceOfUserData().getFacebookID()
+        var acceptedEventIDs = [String]()
         for event in events {
 //            println("\(event.name) :: \(event.location.coordinate.latitude) :: \(event.location.coordinate.longitude)")
             var distanceFromSelf : Double = (currentLocation.distanceFromLocation(event.location)/1609.34)
@@ -79,6 +80,9 @@ class FindEventsViewController: UIViewController, FoundEventsDelegate /*FoundEve
             var isOnGuestList = isUserOnEventGuestList(event)
             if(distanceFromSelf <= Double(distanceSlider.value) && !sameHost && tagMatch && !isOnGuestList) {
                 eventFoundIDs.append(event.record.recordID.recordName)
+                if((event.acceptedGuests as NSArray).containsObject(currentUser)) {
+                    acceptedEventIDs.append(event.record.recordID.recordName)
+                }
             }
 
         }
@@ -88,11 +92,9 @@ class FindEventsViewController: UIViewController, FoundEventsDelegate /*FoundEve
         }
         else {
             searchData = CurrentUserData.getSharedInstanceOfUserData().searchData
-            for event in eventFoundIDs {
-                if (!searchData.alreadySawEvent(event)) {
-                    searchData.eventIDs.append(event)
-                }
-            }
+        }
+        for event in events {
+            isUserOnEventGuestList(event)
         }
         println(searchData.toString())
 /*
@@ -111,13 +113,13 @@ class FindEventsViewController: UIViewController, FoundEventsDelegate /*FoundEve
     
     func isUserOnEventGuestList(event : Event) -> Bool {
         let userID = CurrentUserData.getSharedInstanceOfUserData().getFacebookID()
-        let eventGuests = (event.pendingGuests + event.acceptedGuests + event.confirmedGuests) as NSArray
+        let eventGuests = (event.pendingGuests + event.confirmedGuests) as NSArray
         
         var isOnGuestList = false
+
         if(eventGuests.containsObject(userID)) {
             isOnGuestList = true
-        }
-        
+        }	
         return isOnGuestList
     }
     

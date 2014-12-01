@@ -12,6 +12,7 @@ class SearchData : NSObject {
     var time : NSDate!
     var fromLocation : CLLocation!
     var eventIDs : [String]!
+    var acceptedEventIDs : [String]!
     var rejectedEvents : [String]!
     var goEvents : [String]!
     var radius : Int!
@@ -27,6 +28,7 @@ class SearchData : NSObject {
         self.time = NSDate()
         rejectedEvents = []
         goEvents = []
+        acceptedEventIDs = []
         
         CurrentUserData.getSharedInstanceOfUserData().searchData = self
     }
@@ -40,6 +42,8 @@ class SearchData : NSObject {
         return alreadySaw
         
     }
+    
+
     
     func toString() -> String {
         let dataString = "Event IDs: \(eventIDs)\nNumber of events found: \(eventIDs.count)\nFrom Location: \(fromLocation)\nTags: \(tags)\nRadius: \(radius)\nGo events:"

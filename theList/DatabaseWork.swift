@@ -639,9 +639,7 @@ class DatabaseWork {
             if error != nil {
                 println("ERROR!!! \(error)")
             }
-            else {
-                self.moveUserFromListCompleteDelegate?.doneMovingUserFromList()
-            }
+
             NSLog("We are saving stuff")
         })
     }
@@ -695,9 +693,6 @@ class DatabaseWork {
         publicDB.saveRecord(eventRecord, completionHandler: {(record,error)-> Void in
             if error != nil {
                 println()
-            }
-            else {
-                self.moveUserFromListCompleteDelegate?.doneMovingUserFromList()
             }
             NSLog("we are changing the user from accepted to confirmed")
         })
