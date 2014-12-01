@@ -80,6 +80,12 @@ class ProfileViewController: UIViewController, FBLoginViewDelegate, GetUserWithI
     func loginViewFetchedUserInfo(loginView: FBLoginView!, user: FBGraphUser!) {
         println("USER ID : ")
         println(userID)
+        println(segueIdentity)
+        if (segueIdentity == "fromGuestListToGuestProfile"){
+            loginView.hidden = true
+        }else {
+            loginView.hidden = false
+        }
         profilePic.profileID = userID
         databaseDevil.getUserWithID(userID)
 
@@ -87,11 +93,8 @@ class ProfileViewController: UIViewController, FBLoginViewDelegate, GetUserWithI
     }
     
     func loginViewShowingLoggedOutUser(loginView : FBLoginView!) {
-        if (segueIdentity == "fromGuestListToGuestProfile"){
-            loginView.hidden = true
-        }else {
-            loginView.hidden = false
-        }
+        println(segueIdentity)
+        
         //        println("User Logged Out")
         performSegueWithIdentifier("userLoggedOut", sender:self)
         

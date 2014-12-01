@@ -1057,10 +1057,6 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" id="KcF-od-qf2" customClass="FBLoginView">
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rating" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YHT-P9-ocV">
                                 <rect key="frame" x="27" y="42" width="89" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1244,6 +1240,6 @@
         <segue reference="jc5-s8-LUo"/>
         <segue reference="rbD-CR-Vid"/>
         <segue reference="3qO-xr-CFb"/>
-        <segue reference="YF7-LC-FqT"/>
+        <segue reference="8pb-zo-lBy"/>
     </inferredMetricsTieBreakers>
 </document>
