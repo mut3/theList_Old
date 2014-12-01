@@ -9,7 +9,7 @@
 import UIKit
 import CloudKit
 
-class EventViewController: UIViewController, MadeEventDelegate{
+class EventViewController: UIViewController, MadeEventDelegate, GetGuestListCompleteDelegate{
     
     //Event checks current USER ID vs event loaded ID. If same, show host options, else show eventGoer options
     
@@ -38,11 +38,16 @@ class EventViewController: UIViewController, MadeEventDelegate{
     
     var searchData : SearchData!
 //    var eventsList : [String]!
+    
+    var pendingGuests : [User] = []
+    var acceptedGuests : [User] = []
+    var confirmedGuests : [User] = []
 
     override func viewDidLoad() { 
         super.viewDidLoad()
         
         sharedEvent.madeEventDelegate = self;
+        sharedEvent.getGuestListCompleteDelegate = self
         
 
         if(segueIdentity == "fromCreate"){
@@ -98,8 +103,11 @@ class EventViewController: UIViewController, MadeEventDelegate{
 //            println(tag)
         }
         eventDescriptionText.text = event.descript
-        
-        database.loadEventGuests(event.pendingGuests, event.acceptedGuests, event.confirmedGuests)
+        database.clearGuestLists()
+        if(segueIdentity == "fromCreate" || segueIdentity == "fromHost") {
+            database.loadPendingGuests(event.pendingGuests)
+        }
+
     }
     
     func setEventName(name : String) {
@@ -172,9 +180,9 @@ class EventViewController: UIViewController, MadeEventDelegate{
             hostProfileVC.userID = event.hostID
         }else if (segue.identifier == "goToGuestManagement"){
             let guestManagementVC : GuestListViewController = segue.destinationViewController as GuestListViewController
-            guestManagementVC.pendingGuests = event.pendingGuests
-            guestManagementVC.confirmedGuests = event.confirmedGuests
-            guestManagementVC.acceptedGuests = event.acceptedGuests
+            guestManagementVC.pendingGuests = pendingGuests
+            guestManagementVC.confirmedGuests = confirmedGuests
+            guestManagementVC.acceptedGuests = acceptedGuests
         }
     }
     
@@ -206,6 +214,28 @@ class EventViewController: UIViewController, MadeEventDelegate{
     }
     
     
+
+    func errorGettingGuests(error : NSError) {
+        println("Error getting guests: \(error)")
+    }
+    func returnPendingGuests(pendingGuests : [User]) {
+        self.pendingGuests = pendingGuests
+        println("pending guests returned")
+        database.loadAcceptedGuests(event.acceptedGuests)
+    }
+    func returnAcceptedGuests(acceptedGuests : [User]) {
+        self.acceptedGuests = acceptedGuests
+        println("accepted guests returned")
+        database.loadConfirmedGuests(event.confirmedGuests)
+        
+    }
+    func returnConfirmedGuests(confirmedGuests : [User]) {
+        self.confirmedGuests = confirmedGuests
+        println("confirmed guests returned")
+        println(self.confirmedGuests)
+        println(self.acceptedGuests)
+        println(self.pendingGuests)
+    }
     /* tag table view */
     
     

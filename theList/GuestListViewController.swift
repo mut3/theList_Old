@@ -12,9 +12,9 @@ class GuestListViewController: UITableViewController, BatchGetUserNamesDelegate 
     
     let database : DatabaseWork = DatabaseWork.sharedInstanceOfDatabase()
     
-    var pendingGuests : [String]!
-    var acceptedGuests : [String]!
-    var confirmedGuests : [String]!
+    var pendingGuests : [User]!
+    var acceptedGuests : [User]!
+    var confirmedGuests : [User]!
     
     var pendingGuestNames : [String]!
     var acceptedGuestNames : [String]!
@@ -66,10 +66,7 @@ class GuestListViewController: UITableViewController, BatchGetUserNamesDelegate 
     }
     
     func gatherListNames() {
-        database.batchGetUserNamesFromIDs(pendingGuests, listType: "pending") //This needs to iterate through each of the three lists
-        database.batchGetUserNamesFromIDs(confirmedGuests, listType: "confirmed")
-        database.batchGetUserNamesFromIDs(acceptedGuests, listType: "accepted")
-        
+
     }
     
     func populateLists() {

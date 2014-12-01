@@ -49,6 +49,12 @@ protocol BatchGetUserNamesDelegate {
     func batchNameResults(nameResults : [String], listType : String)
     func errorGettingNames(error : NSError)
 }
+protocol GetGuestListCompleteDelegate {
+    func returnPendingGuests(pendingGuests : [User])
+    func returnAcceptedGuests(acceptedGuests : [User])
+    func returnConfirmedGuests(confirmedGuests : [User])
+    func errorGettingGuests(error : NSError)
+}
 
 class DatabaseWork {
     
@@ -60,14 +66,18 @@ class DatabaseWork {
     var getUserWithIdDelegate : GetUserWithIdDelegate?
     var checkIfUserExistDelegate : CheckIfUserExistDelegate?
     var pastEventsDelegate : PastEventsDelegate?
-    var batchGetUserNamesDelegate : BatchGetUserNamesDelegate? // ?
+    var batchGetUserNamesDelegate : BatchGetUserNamesDelegate?
+    var getGuestListCompleteDelegate : GetGuestListCompleteDelegate?
     var container : CKContainer
     var publicDB : CKDatabase
     let privateDB : CKDatabase
     
-    var pendingGuests : [User]!
-    var acceptedGuests : [User]!
-    var confirmedGuests : [User]!
+    var pendingIDs : [String]!
+    var acceptedIDs : [String]!
+    var confirmedIDs : [String]!
+    var pendingGuests : [User] = []
+    var acceptedGuests : [User] = []
+    var confirmedGuests : [User] = []
     
     
     class func sharedInstanceOfDatabase() -> DatabaseWork{
@@ -378,13 +388,170 @@ class DatabaseWork {
     }
     
     func clearGuestLists() {
-        var pendingGuests = []
-        var acceptedGuests = []
-        var confirmedGuests = []
+        pendingIDs = []
+        acceptedIDs = []
+        confirmedGuests = []
+        pendingGuests = []
+        acceptedGuests = []
+        confirmedGuests = []
     }
 
+
+    
+    func loadPendingGuests(pending : [String]) {
+        
+        pendingIDs = pending
+        println(pendingIDs)
+        println(pendingGuests)
+        
+        let eventRecord = CKRecord(recordType: "Event")
+        
+        let userID = pendingIDs.count > 0 ? pendingIDs[0] : ""
+        
+        let getCurrentUser = NSPredicate(format: "FacebookID = %@",userID)
+        
+        let query = CKQuery(recordType: "User", predicate: getCurrentUser)
+        if(userID != "") {
+            publicDB.performQuery(query, inZoneWithID: nil){
+                results, error in
+                if error != nil {
+                    println("error: \(error)")
+                    dispatch_async(dispatch_get_main_queue()){
+                        return
+                    }
+                }else{
+                    if(results.count != 0) {
+                        let retreivedUser = User(record: results[0] as CKRecord, database: self.publicDB)
+                        self.pendingGuests.append(retreivedUser)
+                        if(self.pendingIDs.count > 1) {
+                            let newArray = [String](self.pendingIDs[1...(self.pendingIDs.count - 1)])
+                            self.loadPendingGuests(newArray)
+                        }
+                        else {
+                            println("RETURNING PENDING GUESTS")
+                            self.getGuestListCompleteDelegate?.returnPendingGuests(self.pendingGuests)
+                            return
+                        }
+                    }
+                }
+                dispatch_async(dispatch_get_main_queue()){
+                    if (self.retreivedUser.count > 0){
+                        self.getUserWithIdDelegate?.retreivedUserWithID(self.retreivedUser[0])
+                    }
+                    return
+                }
+            }
+            
+        }
+        else {
+            self.getGuestListCompleteDelegate?.returnPendingGuests(self.pendingGuests)
+            return
+        }
+    }
     
     
+    func loadAcceptedGuests(accepted : [String]) {
+        
+        acceptedIDs = accepted
+        println(acceptedIDs)
+        println(acceptedGuests)
+        
+        let eventRecord = CKRecord(recordType: "Event")
+        
+        let userID = acceptedIDs.count > 0 ? acceptedIDs[0] : ""
+        
+        let getCurrentUser = NSPredicate(format: "FacebookID = %@",userID)
+        
+        let query = CKQuery(recordType: "User", predicate: getCurrentUser)
+        if(userID != "") {
+            publicDB.performQuery(query, inZoneWithID: nil){
+                results, error in
+                if error != nil {
+                    println("error: \(error)")
+                    dispatch_async(dispatch_get_main_queue()){
+                        return
+                    }
+                }else{
+                    if(results.count != 0) {
+                        let retreivedUser = User(record: results[0] as CKRecord, database: self.publicDB)
+                        self.acceptedGuests.append(retreivedUser)
+                        if(self.acceptedIDs.count > 1) {
+                            let newArray = [String](self.acceptedIDs[1...(self.acceptedIDs.count - 1)])
+                            self.loadAcceptedGuests(newArray)
+                        }
+                        else {
+                            self.getGuestListCompleteDelegate?.returnAcceptedGuests(self.acceptedGuests)
+                            return
+                        }
+                    }
+                }
+                dispatch_async(dispatch_get_main_queue()){
+                    if (self.retreivedUser.count > 0){
+                        self.getUserWithIdDelegate?.retreivedUserWithID(self.retreivedUser[0])
+                    }
+                    return
+                }
+            }
+            
+        }
+        else {
+            self.getGuestListCompleteDelegate?.returnAcceptedGuests(self.acceptedGuests)
+            return
+        }
+    }
+    
+    func loadConfirmedGuests(confirmed : [String]) {
+        
+        confirmedIDs = confirmed
+        println(confirmedIDs)
+        println(confirmedGuests)
+        
+        let eventRecord = CKRecord(recordType: "Event")
+        
+        let userID = confirmedIDs.count > 0 ? confirmedIDs[0] : ""
+        
+        let getCurrentUser = NSPredicate(format: "FacebookID = %@",userID)
+        
+        let query = CKQuery(recordType: "User", predicate: getCurrentUser)
+        if(userID != "") {
+            publicDB.performQuery(query, inZoneWithID: nil){
+                results, error in
+                if error != nil {
+                    println("error: \(error)")
+                    dispatch_async(dispatch_get_main_queue()){
+                        return
+                    }
+                }else{
+                    if(results.count != 0) {
+                        let retreivedUser = User(record: results[0] as CKRecord, database: self.publicDB)
+                        self.confirmedGuests.append(retreivedUser)
+                        if(self.confirmedIDs.count > 1) {
+                            let newArray = [String](self.confirmedIDs[1...(self.confirmedIDs.count - 1)])
+                            self.loadConfirmedGuests(newArray)
+                        }
+                        else {
+                            self.getGuestListCompleteDelegate?.returnConfirmedGuests(self.confirmedGuests)
+                            return
+                        }
+                        
+
+                    }
+                }
+                dispatch_async(dispatch_get_main_queue()){
+                    if (self.retreivedUser.count > 0){
+                        self.getUserWithIdDelegate?.retreivedUserWithID(self.retreivedUser[0])
+                    }
+                    return
+                }
+            }
+            
+        }
+        else {
+            self.getGuestListCompleteDelegate?.returnConfirmedGuests(self.confirmedGuests)
+            return
+        }
+    }
+
     
 //    if placemarks.count > 0 {
 //    placemark = placemarks[0] as CLPlacemark
@@ -399,62 +566,6 @@ class DatabaseWork {
 //    
 //    
     
-    
-    func loadEventGuests(pending : [String], accepted : [String], confirmed : [String], callType : String) {
-        
-        if(callType == "initial") {
-            clearGuestLists()
-        }
-        let userID = pending.count > 0 ? pending[0] : (accepted.count > 0 ? accepted[0] : (confirmed.count > 0 ? confirmed[0] : nil))
-        
-        
-        if(userID != nil) {
-            let eventRecord = CKRecord(recordType: "Event")
-            let getCurrentUser = NSPredicate(format: "FacebookID = %@",userID)
-            let query = CKQuery(recordType: "User", predicate: getCurrentUser)
-            publicDB.performQuery(query, inZoneWithID: nil){
-                results, error in
-                if error != nil {
-                    dispatch_async(dispatch_get_main_queue()){
-                        self.getUserWithIdDelegate?.failedToRetreiveUser(error)
-                        return
-                    }
-                }else{
-                    if(results[0] != nil) {
-                        let retreivedUser = User(record: record as CKRecord, database: self.publicDB)
-                        if(callType == "pending") {
-                            pendingGuests.append(retreivedUser)
-                        }
-                        else if(callType == "accepted") {
-                            acceptedGuests.append(retreivedUser)
-                        }
-                        else if(callType == "confirmed") {
-                            confirmedGuests.append(retreivedUser)
-                        }
-                    }
-                    if(pending.count > 0) {
-                        
-                    }
-                    else if(accepted.count > 0) {
-                        
-                    }
-                    else if(confirmed.count > 0) {
-                        
-                    }
-                    
-                }
-                dispatch_async(dispatch_get_main_queue()){
-                    if (self.retreivedUser.count > 0){
-                        self.getUserWithIdDelegate?.retreivedUserWithID(self.retreivedUser[0])
-                    }
-                    return
-                }
-            }
-        }
-        else {
-            println("")
-        }
-    }
     
     
     
@@ -475,7 +586,6 @@ class DatabaseWork {
                         return
                     }
                 }else{
-//                    self.guestNames.removeAll()
                     for record in results{
                         let retreivedCurrentUser = User(record: record as CKRecord, database: self.publicDB)
                         self.guestNames.append(retreivedCurrentUser.firstName + " " + retreivedCurrentUser.lastName)
