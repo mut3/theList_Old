@@ -9,10 +9,17 @@
 import UIKit
 import Foundation
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, PastEventsDelegate{
+    
+    var currentUserPastEvents : [Event] = [Event]()
+    var upcomingEvents : [Event] = [Event]()
+    let database = DatabaseWork.sharedInstanceOfDatabase()
     
     override func viewDidLoad() {
-//        println(CurrentUserData.getSharedInstanceOfUserData().getFacebookID())
+        
+        database.pastEventsDelegate = self
+
+        // println(CurrentUserData.getSharedInstanceOfUserData().getFacebookID())
         
         
         // Do any additional setup after loading the view.
@@ -25,6 +32,55 @@ class HomeViewController: UIViewController {
     }
     
 
+    @IBAction func hostEventPressed() {
+        database.getCurrentUserPastEvents()
+    }
+    
+    
+    /*
+    database delegate
+    */
+    func pastEventsList(events: [Event]) {
+        let rightNow = NSDate()
+        for event in events {
+            if(rightNow.earlierDate(event.startTime) == rightNow) {
+                self.upcomingEvents.append(event)
+            }
+            else {
+                self.currentUserPastEvents.append(event)
+            }
+        }
+        
+        if(upcomingEvents.count > 0) {
+            performSegueWithIdentifier("fromHomeToEvent", sender: self)
+        }
+        else {
+            performSegueWithIdentifier("fromHomeToEventList", sender: self)
+        }
+    }
+    
+    func errorWithPastEvents(error: NSError){
+        let message = error.localizedDescription
+        let alert = UIAlertView(title: "error loading past events", message: message, delegate: nil, cancelButtonTitle: "ok")
+        alert.show()
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if(segue.identifier == "fromHomeToEvent") {
+            let eventVC : EventViewController = segue.destinationViewController as EventViewController
+            eventVC.eventID = upcomingEvents[0].record.recordID.recordName
+            eventVC.segueIdentity = "fromHomeToEvent"
+        }
+        else if(segue.identifier == "fromHomeToEventList") {
+            let eventListVC : EventsListTableViewController = segue.destinationViewController as EventsListTableViewController
+            eventListVC.currentUserPastEvents = currentUserPastEvents
+
+        }
+    }
+
+    
+
+    
     /*
     // MARK: - Navigation
 

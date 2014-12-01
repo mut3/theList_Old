@@ -50,7 +50,7 @@ class EventViewController: UIViewController, MadeEventDelegate, GetGuestListComp
         sharedEvent.getGuestListCompleteDelegate = self
         
 
-        if(segueIdentity == "fromCreate"){
+        if(segueIdentity == "fromCreate" || segueIdentity == "fromHomeToEvent"){
             sharedEvent.getEventWithID(eventID)
             goButton.hidden = true
             goButton.enabled = false
@@ -134,7 +134,7 @@ class EventViewController: UIViewController, MadeEventDelegate, GetGuestListComp
     
     
     @IBAction func returnButtonPressed(sender: UIButton) {
-        if(segueIdentity == "fromCreate") {
+        if(segueIdentity == "fromCreate" || segueIdentity == "fromHomeToEvent") {
             performSegueWithIdentifier("toHome", sender: self)
         }
         else if(segueIdentity == "fromSearch" || segueIdentity == "popEvent"){

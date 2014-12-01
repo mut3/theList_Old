@@ -25,7 +25,7 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
     var eventLocation : CLLocation!
     var eventLocationWritten : String = ""
     var eventTimeStart : String = ""
-    var eventTimeEnd : String = ""
+//    var eventTimeEnd : String = ""
     var eventDate : String = ""
     var eventCapacity : Int = 0
     var eventRecord : CKRecord!
@@ -71,7 +71,6 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
             println("cap was passed")
             self.capacityTextField.text = "\(eventCapacity)"
             self.timeStartTextField.text = "\(eventTimeStart)"
-            self.timeEndTextField.text = "\(eventTimeEnd)"
             let addressTokens = eventLocationWritten.componentsSeparatedByString(", ")
             self.locationAddressField.text = addressTokens[0]
             self.locationCityField.text = addressTokens[1]
@@ -261,15 +260,24 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
     @IBOutlet var locationStateField : UITextField!
     
     @IBOutlet var timeStartTextField : UITextField!
-    @IBOutlet var timeEndTextField : UITextField!
+//    @IBOutlet var timeEndTextField : UITextField!
     @IBOutlet var dateTextField : UITextField!
     
     @IBOutlet var capacityTextField : UITextField!
     @IBOutlet var tagsTextField : UITextField!
     @IBOutlet var descriptionTextArea : UITextView!
     @IBOutlet var pictureImageView : UIImageView!
+    @IBOutlet var amPmButton : UIButton!
     
     
+    @IBAction func amPmSwitched(sender : UIButton) {
+        if(sender.titleLabel!.text == "am") {
+            sender.setTitle("pm", forState: .Normal)
+        }
+        else {
+            sender.setTitle("am", forState: .Normal)
+        }
+    }
     
     
     @IBAction func locationTypeSwitched(sender : AnyObject) {
@@ -452,19 +460,18 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
             eventName = eventNameField.text
             eventLocationWritten = locationAddressField.text  + ", " + locationCityField.text + ", " + locationStateField.text + " " + locationZipField.text
             eventTimeStart = timeStartTextField.text
-            eventTimeEnd = timeEndTextField.text
             eventDate = dateTextField.text
             eventCapacity = capacityTextField.text.toInt()!
             eventDescription = descriptionTextArea.text
             
             
-            let eventStartTimeObject = dateFromString(eventDate, time: eventTimeStart)
-            let eventEndTimeObject = dateFromString(eventDate, time: eventTimeEnd)
+            let eventStartTimeObject = dateFromString(eventDate, time: eventTimeStart, amOrPm: amPmButton.titleLabel!.text!)
+//            let eventEndTimeObject = dateFromString(eventDate, time: eventTimeEnd)
             eventTags = (tagsTextField.text).componentsSeparatedByString(", ")
             let hostID = CurrentUserData.getSharedInstanceOfUserData().getFacebookID()
             let hostName = CurrentUserData.getSharedInstanceOfUserData().getUserName()
             
-            eventRecord = databaseWork.uploadEvent(eventCapacity, eventDescript: eventDescription, eventEndtime: eventEndTimeObject, eventStartTime: eventStartTimeObject, eventName: eventName, hostID: hostID, hostName: "placeholder", eventTags: eventTags, photoList: eventImages, eventLocation: eventLocation, writtenLocation: eventLocationWritten)
+            eventRecord = databaseWork.uploadEvent(eventCapacity, eventDescript: eventDescription, eventStartTime: eventStartTimeObject, eventName: eventName, hostID: hostID, hostName: "placeholder", eventTags: eventTags, photoList: eventImages, eventLocation: eventLocation, writtenLocation: eventLocationWritten)
     
             
         }
@@ -563,12 +570,6 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
             timeStartTextField.placeholder = "00:00"
             areValid = false
         }
-        if(!validator.isTimeFormat(timeEndTextField.text)) {
-            timeEndTextField.backgroundColor = invalidFieldColor
-            timeEndTextField.text = ""
-            timeEndTextField.placeholder = "00:00"
-            areValid = false
-        }
         if(!validator.isDigit(capacityTextField.text) || capacityTextField.text.toInt() < 0) {
             capacityTextField.backgroundColor = invalidFieldColor
             capacityTextField.text = ""
@@ -609,7 +610,6 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
         locationTypeSwitch.on = false
         
         timeStartTextField.text = "1:00"
-        timeEndTextField.text = "2:00"
         dateTextField.text = "05/05/2015"
 
         capacityTextField.text = "10"
@@ -624,10 +624,10 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
     /* *************************************************/
 
     
-    func dateFromString(date : String, time : String) -> NSDate {
-        var string : NSString =  NSString(string: (date + " " + time)) as NSString
+    func dateFromString(date : String, time : String, amOrPm : String) -> NSDate {
+        var string : NSString =  NSString(string: (date + " " + time + " " + amOrPm)) as NSString
         var formatter = NSDateFormatter()
-        formatter.dateFormat = "MM/dd/yyyy hh:mm"
+        formatter.dateFormat = "MM/dd/yyyy hh:mm a"
         var gmt = NSTimeZone(abbreviation: "GMT-5")
         formatter.timeZone = gmt
         var date : NSDate = formatter.dateFromString(string)!

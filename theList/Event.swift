@@ -12,7 +12,7 @@ import CloudKit
 class Event : NSObject{
     var record : CKRecord!
     var descript : String!
-    var endTime : NSDate!
+//    var endTime : NSDate!
     var startTime : NSDate!
     var location : CLLocation!
     var name : String!
@@ -34,7 +34,7 @@ class Event : NSObject{
         self.database = database
         self.descript = record.objectForKey("EventDescription") as String!
         self.startTime = record.objectForKey("EventStartTime") as NSDate!
-        self.endTime = record.objectForKey("EventEndTime") as NSDate!
+//        self.endTime = record.objectForKey("EventEndTime") as NSDate!
         self.location = record.objectForKey("EventLocation") as CLLocation!
         self.name = record.objectForKey("EventName") as String!
         self.hostID = record.objectForKey("HostID") as String!

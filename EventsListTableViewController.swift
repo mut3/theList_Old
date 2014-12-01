@@ -21,13 +21,13 @@ class EventsListTableViewController: UITableViewController,PastEventsDelegate {
     // review old event variables
     var eventNameToPass = ""
     var reviewOldEvent : Bool = false
-    var eventRecord : CKRecord!
     
     var eventsCount : Int!
     var userPastEvents = [Event]()
+    var upcomingEvents = [Event]()
     
     // database transfer over
-    var currentUserPastEvents : [CKRecord] = []
+    var currentUserPastEvents : [Event] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,18 +63,16 @@ class EventsListTableViewController: UITableViewController,PastEventsDelegate {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = self.tableView.dequeueReusableCellWithIdentifier("PastEventCell", forIndexPath: indexPath) as PastEventCell
-        var givenEventRecord = currentUserPastEvents[indexPath.row]
-        var eventName = givenEventRecord.objectForKey("EventName") as String!
-        cell.pastEventName.text = eventName
-        var cap = givenEventRecord.objectForKey("EventCapacity") as Int!
+        var cellEvent = currentUserPastEvents[indexPath.row]
+        cell.pastEventName.text = cellEvent.name
+        var cap = cellEvent.capacity
         cell.pastEventCap.text = "Cap: \(cap)"
         return cell
     }
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        var pastEventRecord : CKRecord = currentUserPastEvents[indexPath.row] as CKRecord
-        var userPastEvent = Event(record : pastEventRecord, database : givenEvents.publicDB)
+        var pastEvent : Event = currentUserPastEvents[indexPath.row] as Event
         userPastEvents.removeAll(keepCapacity: true)
-        userPastEvents.append(userPastEvent)
+        userPastEvents.append(pastEvent)
         reviewOldEvent = true
         performSegueWithIdentifier("recreateOldEvent", sender : self)
 
@@ -95,14 +93,32 @@ class EventsListTableViewController: UITableViewController,PastEventsDelegate {
                 createEventVC.segueID = segue.identifier
             }
         }
-    
+     /*   else if(segue.identifier == "fromHost") {
+            let eventVC : EventViewController = segue.destinationViewController as EventViewController
+            eventVC.eventID = upcomingEvents[0].record.recordID.recordName
+            eventVC.segueIdentity = "fromHost"
+            
+        }
+    */
     }
     
     /*
         database delegate
     */
-    func pastEventsList(pastEvents: [CKRecord]) {
-        self.currentUserPastEvents = pastEvents
+    func pastEventsList(events: [Event]) {
+        let rightNow = NSDate()
+        for event in events {
+            if(rightNow.earlierDate(event.startTime) == rightNow) {
+                self.upcomingEvents.append(event)
+            }
+            else {
+                self.currentUserPastEvents.append(event)
+            }
+            
+        }
+        if(upcomingEvents.count > 0) {
+            performSegueWithIdentifier("fromHost", sender: self)
+        }
         refreshControl?.endRefreshing()
         tableView.reloadData()
     }

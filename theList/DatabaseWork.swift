@@ -41,7 +41,7 @@ protocol CheckIfUserExistDelegate{
     func checkIfUser(checkUser : Bool)
 }
 protocol PastEventsDelegate{
-    func pastEventsList(pastEvents : [CKRecord])
+    func pastEventsList(pastEvents : [Event])
     func errorWithPastEvents(error : NSError)
 
 }
@@ -121,13 +121,12 @@ class DatabaseWork {
             })
     }
     
-    func uploadEvent(cap : Int,eventDescript:String,eventEndtime : NSDate, eventStartTime: NSDate, eventName : String, hostID : String, hostName : String, eventTags : [String], photoList : [CKAsset],eventLocation : CLLocation, writtenLocation : String)-> CKRecord{
+    func uploadEvent(cap : Int, eventDescript:String, eventStartTime: NSDate, eventName : String, hostID : String, hostName : String, eventTags : [String], photoList : [CKAsset],eventLocation : CLLocation, writtenLocation : String)-> CKRecord{
         let eventRecord = CKRecord(recordType: "Event")
         
         eventRecord.setValue(cap, forKey: "EventCapacity")
         eventRecord.setValue(eventDescript, forKey: "EventDescription")
         eventRecord.setValue(eventName, forKey: "EventName")
-        eventRecord.setValue(eventEndtime, forKey: "EventEndTime")
         eventRecord.setValue(eventStartTime, forKey: "EventStartTime")
         eventRecord.setValue(hostID, forKey: "HostID")
         eventRecord.setValue(hostName, forKey: "hostName")
@@ -187,9 +186,7 @@ class DatabaseWork {
         let query = CKQuery(recordType: "Event", predicate: currentUserPredicate)
         publicDB.performQuery(query, inZoneWithID : nil){
             results, error in
-            var onePastEvent : [String] = []
-            var pastEvents : [[String]] = []
-            var pastEventRecords : [CKRecord] = []
+            var pastEvents : [Event] = []
             if (error != nil) {
                 dispatch_async(dispatch_get_main_queue()){
                     self.pastEventsDelegate?.errorWithPastEvents(error)
@@ -197,20 +194,11 @@ class DatabaseWork {
                 }
             }else{
                 for record in results{
-                    if (onePastEvent.count > 0){
-                        onePastEvent.removeAll(keepCapacity: true)
-                    }
-                    /*
-                    let eventName = Event(record : record as CKRecord, database: self.publicDB).name
-                    let eventID = Event(record : record as CKRecord, database: self.publicDB).record.recordID.recordName
-                    onePastEvent.append(eventID)
-                    onePastEvent.append(eventName)
-                    pastEvents.append(onePastEvent)
-                    */
-                    pastEventRecords.append(record as CKRecord)
+                    let event = Event(record : record as CKRecord, database: self.publicDB)
+                    pastEvents.append(event)
                 }
                 dispatch_async(dispatch_get_main_queue()){
-                    self.pastEventsDelegate?.pastEventsList(pastEventRecords)
+                    self.pastEventsDelegate?.pastEventsList(pastEvents)
                     return
                 }
             }
