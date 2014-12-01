@@ -56,6 +56,7 @@ class EventViewController: UIViewController, MadeEventDelegate{
         }else if (segueIdentity == "fromSearch" || segueIdentity == "popEvent"){
 //            eventsList = searchData["eventIDs"]!
             returnButton.setTitle("Search", forState : .Normal)
+            capacityButton.enabled = false
             println(searchData.toString())
             if(searchData.eventIDs.count > 0) {
                 eventID = searchData.eventIDs.removeAtIndex(0)
@@ -97,6 +98,8 @@ class EventViewController: UIViewController, MadeEventDelegate{
 //            println(tag)
         }
         eventDescriptionText.text = event.descript
+        
+        database.loadEventGuests(event.pendingGuests, event.acceptedGuests, event.confirmedGuests)
     }
     
     func setEventName(name : String) {

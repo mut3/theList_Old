@@ -65,6 +65,10 @@ class DatabaseWork {
     var publicDB : CKDatabase
     let privateDB : CKDatabase
     
+    var pendingGuests : [User]!
+    var acceptedGuests : [User]!
+    var confirmedGuests : [User]!
+    
     
     class func sharedInstanceOfDatabase() -> DatabaseWork{
         return databaseWork
@@ -292,9 +296,9 @@ class DatabaseWork {
             if let records = results{
                 for record in records{
                     let eventInRadius = Event(record: record as CKRecord, database: self.publicDB)
-                    let eventRecordID = Event(record: record as CKRecord, database: self.publicDB).record.recordID.recordName
-                    let eventStartTime = Event(record: record as CKRecord, database: self.publicDB).startTime
-                    let eventTags = Event(record: record as CKRecord, database: self.publicDB).tags
+                    let eventRecordID = eventInRadius.record.recordID.recordName
+                    let eventStartTime = eventInRadius.startTime
+                    let eventTags = eventInRadius.tags
                     correctEventsDict["RecordID"]="\(eventRecordID)"
                     correctEventsDict["StartTime"]="\(eventStartTime)"
                     correctEventsDict["eventTags"]="\(eventTags)"
@@ -309,6 +313,8 @@ class DatabaseWork {
         }
         
     }
+    
+    
     
     /*
     get the created event by using the recordName from the record id
@@ -339,6 +345,8 @@ class DatabaseWork {
             }
         }
     }
+    
+    
     /*
     this function requires you to get the id of the user and to tell the function whether the user is a host or a guest
     */
@@ -369,7 +377,66 @@ class DatabaseWork {
         }
     }
     
+    func clearGuestLists() {
+        var pendingGuests = []
+        var acceptedGuests = []
+        var confirmedGuests = []
+    }
 
+    func loadEventGuests(pending : [String], accepted : [String], confirmed : [String], callType : String) {
+        
+        if(callType == "initial") {
+            clearGuestLists()
+        }
+    
+        let eventRecord = CKRecord(recordType: "Event")
+        let getCurrentUser = NSPredicate(format: "FacebookID = %@",userID)
+        let query = CKQuery(recordType: "User", predicate: getCurrentUser)
+        publicDB.performQuery(query, inZoneWithID: nil){
+            results, error in
+            if error != nil {
+                dispatch_async(dispatch_get_main_queue()){
+                    self.getUserWithIdDelegate?.failedToRetreiveUser(error)
+                    return
+                }
+            }else{
+                if(results[0] != nil) {
+                    let retreivedUser = User(record: record as CKRecord, database: self.publicDB)
+                    if(callType == "pending") {
+                        pendingGuests.append(retreivedUser)
+                    }
+                    else if(callType == "accepted") {
+                        acceptedGuests.append(retreivedUser)
+                    }
+                    else if(callType == "confirmed") {
+                        confirmedGuests.append(retreivedUser)
+                    }
+                }
+                if(pending.count > 0) {
+                    
+                    loadeventGuests(
+                }
+                else if(accepted.count > 0) {
+                    
+                }
+                else if(confirmed.count > 0) {
+                    
+                }
+
+            }
+            dispatch_async(dispatch_get_main_queue()){
+                if (self.retreivedUser.count > 0){
+                    self.getUserWithIdDelegate?.retreivedUserWithID(self.retreivedUser[0])
+                }
+                return
+            }
+        }
+
+        
+    }
+    
+    
+    
     func batchGetUserNamesFromIDs(userIDList : [String], listType : String){
         //where do you distinguish between the kind of list you're getting names for?
         for userID in userIDList
