@@ -438,6 +438,16 @@
                                     <segue destination="J8r-89-7Fy" kind="push" identifier="noEvents" id="YF7-LC-FqT"/>
                                 </connections>
                             </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="dUk-qY-1YC">
+                                <rect key="frame" x="240" y="518" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="csJ-U0-C19" kind="push" identifier="fromSearchWithNeedToConfirm" id="GFw-de-zo0"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -869,16 +879,6 @@
                                     <segue destination="J8r-89-7Fy" kind="push" identifier="noEvents" id="8pb-zo-lBy"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mCL-wp-KHE">
-                                <rect key="frame" x="41" y="542" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="csJ-U0-C19" kind="push" identifier="popEvent" id="77z-cn-QYF"/>
-                                </connections>
-                            </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7uy-AT-dDd">
                                 <rect key="frame" x="1" y="137" width="82" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -909,6 +909,33 @@
                                     <segue destination="Ycg-UA-9No" kind="push" identifier="toHostFromEvent" id="jc5-s8-LUo"/>
                                 </connections>
                             </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Sw3-Uh-1J6">
+                                <rect key="frame" x="183" y="504" width="117" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Confirm">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="decisionButtonPressed:" destination="csJ-U0-C19" eventType="touchUpInside" id="yEU-PT-cqF"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7VS-uy-1wM">
+                                <rect key="frame" x="45" y="504" width="97" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Decline">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mCL-wp-KHE">
+                                <rect key="frame" x="41" y="542" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="csJ-U0-C19" kind="push" identifier="popEvent" id="77z-cn-QYF"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -929,6 +956,8 @@
                     <connections>
                         <outlet property="capacityButton" destination="8xU-Bg-ZXK" id="q5r-3X-Pxy"/>
                         <outlet property="capacityLabel" destination="VGW-aI-ohM" id="kEA-QG-chf"/>
+                        <outlet property="confirmButton" destination="Sw3-Uh-1J6" id="9ST-UI-BC8"/>
+                        <outlet property="declineButton" destination="7VS-uy-1wM" id="ow0-2r-GJv"/>
                         <outlet property="eventDescriptionText" destination="ym8-Rp-om8" id="IEs-RC-ILB"/>
                         <outlet property="eventImageView" destination="1WN-rF-YQq" id="Szv-IU-mXm"/>
                         <outlet property="eventNameLabel" destination="vfQ-gN-QTl" id="RPa-nW-90y"/>
@@ -942,7 +971,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DUw-bA-vzO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2027" y="1136"/>
+            <point key="canvasLocation" x="2055" y="1157"/>
         </scene>
         <!--Guest List View Controller-->
         <scene sceneID="cfe-VT-7iL">
@@ -1204,10 +1233,10 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="8pb-zo-lBy"/>
-        <segue reference="aKd-Lm-l6Y"/>
-        <segue reference="jc5-s8-LUo"/>
-        <segue reference="oxK-47-EC8"/>
+        <segue reference="GFw-de-zo0"/>
         <segue reference="3qO-xr-CFb"/>
+        <segue reference="oxK-47-EC8"/>
+        <segue reference="jc5-s8-LUo"/>
         <segue reference="g0M-DQ-rhx"/>
     </inferredMetricsTieBreakers>
 </document>

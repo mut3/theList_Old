@@ -19,16 +19,17 @@ class SearchData : NSObject {
     var tags : [String]!
     
 
-    init(eventIDs : [String], tags : [String], radius : Int, fromLocation : CLLocation) {
+    init(eventIDs : [String], acceptedEventIDs : [String], tags : [String], radius : Int, fromLocation : CLLocation) {
         super.init()
         self.eventIDs = eventIDs
         self.fromLocation = fromLocation
         self.tags = tags
         self.radius = radius
         self.time = NSDate()
+    
         rejectedEvents = []
         goEvents = []
-        acceptedEventIDs = []
+        self.acceptedEventIDs = acceptedEventIDs
         
         CurrentUserData.getSharedInstanceOfUserData().searchData = self
     }

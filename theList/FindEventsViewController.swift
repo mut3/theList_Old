@@ -88,7 +88,7 @@ class FindEventsViewController: UIViewController, FoundEventsDelegate /*FoundEve
         }
         
         if(CurrentUserData.getSharedInstanceOfUserData().searchData == nil) {
-            searchData = SearchData(eventIDs: eventFoundIDs, tags: searchTags, radius: sliderValue, fromLocation: currentLocation)
+            searchData = SearchData(eventIDs: eventFoundIDs, acceptedEventIDs: acceptedEventIDs, tags: searchTags, radius: sliderValue, fromLocation: currentLocation)
         }
         else {
             searchData = CurrentUserData.getSharedInstanceOfUserData().searchData
@@ -103,7 +103,10 @@ class FindEventsViewController: UIViewController, FoundEventsDelegate /*FoundEve
         foundEventsVC.segueIdentity = "foundEvent"
         navigationController?.pushViewController(foundEventsVC, animated: true)
   */
-        if(searchData.eventIDs.count > 0 || (searchData.eventIDs.count != 0 && searchData.eventIDs[0] != "")) {
+        if(searchData.acceptedEventIDs.count > 0) {
+            performSegueWithIdentifier("fromSearchWithNeedToConfirm", sender : self)
+        }
+        else if(searchData.eventIDs.count > 0 || (searchData.eventIDs.count != 0 && searchData.eventIDs[0] != "")) {
             performSegueWithIdentifier("fromSearch", sender : self)
         }
         else{
@@ -145,6 +148,11 @@ class FindEventsViewController: UIViewController, FoundEventsDelegate /*FoundEve
             let foundEventsVC : EventViewController = segue.destinationViewController as EventViewController
             foundEventsVC.searchData = searchData
             foundEventsVC.segueIdentity = "fromSearch"
+        }
+        else if (segue.identifier == "fromSearchWithNeedToConfirm"){
+            let acceptedEventsVC : EventViewController = segue.destinationViewController as EventViewController
+            acceptedEventsVC.searchData = searchData
+            acceptedEventsVC.segueIdentity = "fromSearchWithNeedToConfirm"
         }
     }
 

@@ -29,6 +29,8 @@ class EventViewController: UIViewController, MadeEventDelegate, GetGuestListComp
     @IBOutlet var goButton : UIButton!
     @IBOutlet var noGoButton : UIButton!
     @IBOutlet var returnButton : UIButton!
+    @IBOutlet var confirmButton : UIButton!
+    @IBOutlet var declineButton : UIButton!
 
     let database = DatabaseWork.sharedInstanceOfDatabase()
     var photoImage : UIImage!
@@ -50,8 +52,18 @@ class EventViewController: UIViewController, MadeEventDelegate, GetGuestListComp
         sharedEvent.madeEventDelegate = self;
         sharedEvent.getGuestListCompleteDelegate = self
         
-
-        if(segueIdentity == "fromCreate" || segueIdentity == "fromHomeToEvent" || segueIdentity == "guestDecisionMade"){
+        if (segueIdentity == "fromSearchWithNeedToConfirm"){
+            returnButton.setTitle("Search", forState : .Normal)
+            if (searchData.acceptedEventIDs.count > 0){
+                confirmButton.hidden = false
+                noGoButton.hidden = true
+                goButton.hidden = true
+                declineButton.hidden = false
+                eventID = searchData.acceptedEventIDs.removeAtIndex(0)
+                sharedEvent.getEventWithID(eventID)
+            }
+        }
+        else if(segueIdentity == "fromCreate" || segueIdentity == "fromHomeToEvent" || segueIdentity == "guestDecisionMade"){
             println("we are inside the event page")
             sharedEvent.getEventWithID(eventID)
             goButton.hidden = true
@@ -151,13 +163,21 @@ class EventViewController: UIViewController, MadeEventDelegate, GetGuestListComp
 
     
     @IBAction func decisionButtonPressed(sender: UIButton) {
-        if(searchData.eventIDs.count > 0) {
+        /* JOEY LOOK AT THIS CODE !!!!!!!!*/
+        if(searchData.acceptedEventIDs.count > 0){
+            performSegueWithIdentifier("popEvent", sender : self)
+        }
+        else if(searchData.eventIDs.count > 0) {
             performSegueWithIdentifier("popEvent", sender: self)
         }
         else {
             performSegueWithIdentifier("noEvents", sender: self)
         }
-        if(sender == goButton) {
+        if (sender == confirmButton){
+            println("confirm button press!!!!!!!!")
+            database.addUserToConfirmed(CurrentUserData.getSharedInstanceOfUserData().getFacebookID(), eventRecord: event.record)
+        }
+        else if(sender == goButton) {
             database.addUserToPending(CurrentUserData.getSharedInstanceOfUserData().getFacebookID(), eventRecord: event.record)
             searchData.goEvents.append(eventID)
             // perform go functionality            
