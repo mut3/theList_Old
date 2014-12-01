@@ -1154,6 +1154,11 @@
                                     <segue destination="csJ-U0-C19" kind="push" identifier="guestDecisionMade" id="aKd-Lm-l6Y"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" id="4be-h4-OWB" customClass="FBLoginView">
+                                <rect key="frame" x="80" y="512" width="160" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.64907976209999996" green="0.7844553608" blue="0.84319196429999999" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -1162,11 +1167,12 @@
                         <outlet property="aboutMeOutlet" destination="VDw-sK-CVD" id="cUe-YS-cGd"/>
                         <outlet property="acceptButton" destination="NQh-jJ-bG9" id="4x2-ps-Lsl"/>
                         <outlet property="ageOutlet" destination="a2M-LC-Nkb" id="Xow-BY-dPL"/>
-                        <outlet property="fbLogin" destination="KcF-od-qf2" id="Kpj-RJ-83k"/>
+                        <outlet property="fbLogin" destination="4be-h4-OWB" id="8U1-n3-MLs"/>
                         <outlet property="genderOutlet" destination="UBW-D5-cDS" id="SgL-8N-f4U"/>
                         <outlet property="profilePic" destination="GRz-Ky-H8y" id="8db-mM-DwO"/>
                         <outlet property="ratingOutlet" destination="mwf-Op-Tud" id="NaZ-7V-R9n"/>
                         <outlet property="rejectButton" destination="jYn-IA-7Uv" id="EP0-x4-KwI"/>
+                        <segue destination="vXZ-lx-hvc" kind="push" identifier="userLoggedOut" id="rbD-CR-Vid"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="axL-dL-NKV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1232,11 +1238,12 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="8pb-zo-lBy"/>
-        <segue reference="GFw-de-zo0"/>
-        <segue reference="3qO-xr-CFb"/>
-        <segue reference="oxK-47-EC8"/>
-        <segue reference="jc5-s8-LUo"/>
         <segue reference="g0M-DQ-rhx"/>
+        <segue reference="oxK-47-EC8"/>
+        <segue reference="aKd-Lm-l6Y"/>
+        <segue reference="jc5-s8-LUo"/>
+        <segue reference="rbD-CR-Vid"/>
+        <segue reference="3qO-xr-CFb"/>
+        <segue reference="YF7-LC-FqT"/>
     </inferredMetricsTieBreakers>
 </document>
