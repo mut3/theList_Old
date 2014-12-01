@@ -32,6 +32,7 @@ class Event : NSObject{
     init(record : CKRecord, database : CKDatabase){
         self.record = record
         self.database = database
+        println(record.objectForKey("EventDescription")!)
         self.descript = record.objectForKey("EventDescription") as String!
         self.startTime = record.objectForKey("EventStartTime") as NSDate!
         self.endTime = record.objectForKey("EventEndTime") as NSDate!

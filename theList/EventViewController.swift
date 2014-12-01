@@ -16,6 +16,7 @@ class EventViewController: UIViewController, MadeEventDelegate, GetGuestListComp
     let sharedEvent : DatabaseWork = DatabaseWork.sharedInstanceOfDatabase()
     
     var event : Event!
+    var host : User!
     
     @IBOutlet var eventTagsField: UITextView!
     @IBOutlet var eventNameLabel : UILabel!
@@ -69,8 +70,8 @@ class EventViewController: UIViewController, MadeEventDelegate, GetGuestListComp
 //                searchData["eventIDs"] = eventsList
                 sharedEvent.getEventWithID(eventID)
                 //            println(searchData)
-                
             }
+
         }
         
 
