@@ -464,7 +464,7 @@ class NewEventViewController: UITableViewController, CLLocationManagerDelegate, 
             let hostID = CurrentUserData.getSharedInstanceOfUserData().getFacebookID()
             let hostName = CurrentUserData.getSharedInstanceOfUserData().getUserName()
             
-            eventRecord = databaseWork.uploadEvent(eventCapacity, eventDescript: eventDescription, eventEndtime: eventEndTimeObject, eventStartTime: eventStartTimeObject, eventName: eventName, hostID: hostID, hostName: "placeholder", eventTags: eventTags, photoList: eventImages, eventLocation: eventLocation, writtenLocation: eventLocationWritten)
+            eventRecord = databaseWork.uploadEvent(eventCapacity, eventDescript: eventDescription, eventEndtime: eventEndTimeObject, eventStartTime: eventStartTimeObject, eventName: eventName, hostID: hostID, hostName: CurrentUserData.getSharedInstanceOfUserData().getUserName(), eventTags: eventTags, photoList: eventImages, eventLocation: eventLocation, writtenLocation: eventLocationWritten)
     
             
         }

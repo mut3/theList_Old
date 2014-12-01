@@ -74,6 +74,8 @@ class LoginViewController: UIViewController, FBLoginViewDelegate,CheckIfUserExis
     func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser){
         userFirstName = user.first_name
         CurrentUserData.getSharedInstanceOfUserData().setUserName(userFirstName)
+        println("first name \(userFirstName)")
+        println("first name from data \(CurrentUserData.getSharedInstanceOfUserData().getUserName())")
         userLastName = user.last_name
         userBirthday = user.birthday
         userFacebookID = user.objectID
