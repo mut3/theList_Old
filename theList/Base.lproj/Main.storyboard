@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="vNg-CW-unj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="vNg-CW-unj">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
@@ -967,12 +967,22 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1f3-cm-B4A">
-                                            <rect key="frame" x="177" y="11" width="130" height="21"/>
+                                            <rect key="frame" x="200" y="11" width="107" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="OUq-hQ-uoO">
+                                            <rect key="frame" x="123" y="6" width="46" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Button">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <segue destination="Ycg-UA-9No" kind="push" identifier="fromGuestListToGuestProfile" id="cE0-SR-VHM"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
@@ -1018,87 +1028,112 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" id="KcF-od-qf2" customClass="FBLoginView">
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rating" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YHT-P9-ocV">
-                                <rect key="frame" x="28" y="79" width="89" height="21"/>
+                                <rect key="frame" x="27" y="42" width="89" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="★★★★☆" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mwf-Op-Tud">
-                                <rect key="frame" x="30" y="103" width="85" height="21"/>
+                                <rect key="frame" x="29" y="66" width="85" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Age:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nME-MB-wiV">
-                                <rect key="frame" x="55" y="135" width="35" height="21"/>
+                                <rect key="frame" x="54" y="98" width="35" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gender:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qpM-ja-VC0">
-                                <rect key="frame" x="41" y="197" width="62" height="21"/>
+                                <rect key="frame" x="40" y="160" width="62" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="a2M-LC-Nkb">
-                                <rect key="frame" x="62" y="161" width="20" height="21"/>
+                                <rect key="frame" x="61" y="124" width="20" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UBW-D5-cDS">
-                                <rect key="frame" x="62" y="223" width="20" height="21"/>
+                                <rect key="frame" x="61" y="186" width="20" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About me:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CAR-vD-WLY">
-                                <rect key="frame" x="28" y="273" width="80" height="21"/>
+                                <rect key="frame" x="27" y="236" width="80" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" id="KcF-od-qf2" customClass="FBLoginView">
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="VDw-sK-CVD">
-                                <rect key="frame" x="48" y="316" width="240" height="169"/>
+                                <rect key="frame" x="47" y="279" width="240" height="169"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <view contentMode="scaleToFill" id="GRz-Ky-H8y" customClass="FBProfilePictureView">
-                                <rect key="frame" x="144" y="85" width="151" height="133"/>
+                                <rect key="frame" x="151" y="48" width="143" height="133"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="jYn-IA-7Uv">
+                                <rect key="frame" x="56" y="474" width="60" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.77540153629999997" green="0.17758703209999999" blue="0.2368027056" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Reject">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="guestDecisionPressed:" destination="Ycg-UA-9No" eventType="touchUpInside" id="ipV-vz-jra"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="NQh-jJ-bG9">
+                                <rect key="frame" x="194" y="474" width="57" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.28820862791090535" green="0.72848289106145248" blue="0.50132834130681792" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Accept">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="guestDecisionPressed:" destination="Ycg-UA-9No" eventType="touchUpInside" id="qZQ-GL-K5i"/>
+                                    <segue destination="bbs-zT-X8Z" kind="push" identifier="guestDecisionMade" id="ILV-pj-1Q6"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.64907976209999996" green="0.7844553608" blue="0.84319196429999999" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" title="User's Profile" id="FQj-sO-JWm"/>
                     <connections>
                         <outlet property="aboutMeOutlet" destination="VDw-sK-CVD" id="cUe-YS-cGd"/>
+                        <outlet property="acceptButton" destination="NQh-jJ-bG9" id="4x2-ps-Lsl"/>
                         <outlet property="ageOutlet" destination="a2M-LC-Nkb" id="Xow-BY-dPL"/>
                         <outlet property="fbLogin" destination="KcF-od-qf2" id="Kpj-RJ-83k"/>
                         <outlet property="genderOutlet" destination="UBW-D5-cDS" id="SgL-8N-f4U"/>
                         <outlet property="profilePic" destination="GRz-Ky-H8y" id="8db-mM-DwO"/>
                         <outlet property="ratingOutlet" destination="mwf-Op-Tud" id="NaZ-7V-R9n"/>
+                        <outlet property="rejectButton" destination="jYn-IA-7Uv" id="EP0-x4-KwI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="axL-dL-NKV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1297" y="1893"/>
+            <point key="canvasLocation" x="1535" y="1910"/>
         </scene>
         <!--No Events Left-->
         <scene sceneID="hI7-eS-SeG">
@@ -1159,11 +1194,12 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="FpZ-0t-qkp"/>
-        <segue reference="fzL-0p-XV5"/>
         <segue reference="YF7-LC-FqT"/>
         <segue reference="fMH-8C-Mav"/>
-        <segue reference="Ni9-ab-Ohx"/>
+        <segue reference="fzL-0p-XV5"/>
+        <segue reference="FpZ-0t-qkp"/>
         <segue reference="g0M-DQ-rhx"/>
+        <segue reference="ILV-pj-1Q6"/>
+        <segue reference="cE0-SR-VHM"/>
     </inferredMetricsTieBreakers>
 </document>

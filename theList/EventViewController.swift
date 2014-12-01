@@ -103,7 +103,8 @@ class EventViewController: UIViewController, MadeEventDelegate, GetGuestListComp
         }
         eventDescriptionText.text = event.descript
         database.clearGuestLists()
-        if(segueIdentity == "fromCreate" || segueIdentity == "fromHost" || segueIdentity == "fromSearch") {
+        if(segueIdentity == "fromCreate" || segueIdentity == "fromHomeToEvent" || segueIdentity == "fromSearch") {
+            println("doing the getting of the pending thing")
             database.loadPendingGuests(event.pendingGuests)
         }
 
@@ -179,10 +180,13 @@ class EventViewController: UIViewController, MadeEventDelegate, GetGuestListComp
             hostProfileVC.userID = event.hostID
         }else if (segue.identifier == "goToGuestManagement"){
             let guestManagementVC : GuestListViewController = segue.destinationViewController as GuestListViewController
+            println("Pending guests \(pendingGuests)")
             println("LIST COUNTS PRE : \(pendingGuests.count + acceptedGuests.count + confirmedGuests.count)")
             guestManagementVC.pendingGuests = pendingGuests
             guestManagementVC.confirmedGuests = confirmedGuests
             guestManagementVC.acceptedGuests = acceptedGuests
+            guestManagementVC.event = event
+            guestManagementVC.segueIdentity = segue.identifier
         }
     }
     
