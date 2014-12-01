@@ -383,56 +383,77 @@ class DatabaseWork {
         var confirmedGuests = []
     }
 
+    
+    
+    
+//    if placemarks.count > 0 {
+//    placemark = placemarks[0] as CLPlacemark
+//    print(locs[0] + " CORRESPONDS TO: ")
+//    println(placemark.location)
+//    self.placemarkArray.append(placemark)
+//    var newArray = [String]()
+//    if(locs.count > 1) {
+//    newArray = [String](locs[1...(locs.count - 1)])
+//    self.forwardGeocodeList(newArray)
+//    }
+//    
+//    
+    
+    
     func loadEventGuests(pending : [String], accepted : [String], confirmed : [String], callType : String) {
         
         if(callType == "initial") {
             clearGuestLists()
         }
-    
-        let eventRecord = CKRecord(recordType: "Event")
-        let getCurrentUser = NSPredicate(format: "FacebookID = %@",userID)
-        let query = CKQuery(recordType: "User", predicate: getCurrentUser)
-        publicDB.performQuery(query, inZoneWithID: nil){
-            results, error in
-            if error != nil {
+        let userID = pending.count > 0 ? pending[0] : (accepted.count > 0 ? accepted[0] : (confirmed.count > 0 ? confirmed[0] : nil))
+        
+        
+        if(userID != nil) {
+            let eventRecord = CKRecord(recordType: "Event")
+            let getCurrentUser = NSPredicate(format: "FacebookID = %@",userID)
+            let query = CKQuery(recordType: "User", predicate: getCurrentUser)
+            publicDB.performQuery(query, inZoneWithID: nil){
+                results, error in
+                if error != nil {
+                    dispatch_async(dispatch_get_main_queue()){
+                        self.getUserWithIdDelegate?.failedToRetreiveUser(error)
+                        return
+                    }
+                }else{
+                    if(results[0] != nil) {
+                        let retreivedUser = User(record: record as CKRecord, database: self.publicDB)
+                        if(callType == "pending") {
+                            pendingGuests.append(retreivedUser)
+                        }
+                        else if(callType == "accepted") {
+                            acceptedGuests.append(retreivedUser)
+                        }
+                        else if(callType == "confirmed") {
+                            confirmedGuests.append(retreivedUser)
+                        }
+                    }
+                    if(pending.count > 0) {
+                        
+                    }
+                    else if(accepted.count > 0) {
+                        
+                    }
+                    else if(confirmed.count > 0) {
+                        
+                    }
+                    
+                }
                 dispatch_async(dispatch_get_main_queue()){
-                    self.getUserWithIdDelegate?.failedToRetreiveUser(error)
+                    if (self.retreivedUser.count > 0){
+                        self.getUserWithIdDelegate?.retreivedUserWithID(self.retreivedUser[0])
+                    }
                     return
                 }
-            }else{
-                if(results[0] != nil) {
-                    let retreivedUser = User(record: record as CKRecord, database: self.publicDB)
-                    if(callType == "pending") {
-                        pendingGuests.append(retreivedUser)
-                    }
-                    else if(callType == "accepted") {
-                        acceptedGuests.append(retreivedUser)
-                    }
-                    else if(callType == "confirmed") {
-                        confirmedGuests.append(retreivedUser)
-                    }
-                }
-                if(pending.count > 0) {
-                    
-                    loadeventGuests(
-                }
-                else if(accepted.count > 0) {
-                    
-                }
-                else if(confirmed.count > 0) {
-                    
-                }
-
-            }
-            dispatch_async(dispatch_get_main_queue()){
-                if (self.retreivedUser.count > 0){
-                    self.getUserWithIdDelegate?.retreivedUserWithID(self.retreivedUser[0])
-                }
-                return
             }
         }
-
-        
+        else {
+            println("")
+        }
     }
     
     
