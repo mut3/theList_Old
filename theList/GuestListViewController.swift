@@ -27,7 +27,7 @@ class GuestListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if(segueIdentity == "fromEvent") {
+        if(segueIdentity == "goToGuestManagement") {
             guestList = pendingGuests + acceptedGuests + confirmedGuests
         }
 
@@ -51,6 +51,7 @@ class GuestListViewController: UITableViewController {
         
         var cell = self.tableView.dequeueReusableCellWithIdentifier("GuestListCell", forIndexPath: indexPath) as GuestListCell
         
+        println(guestList)
         var givenGuest = guestList[indexPath.row]
         
         var guestName = givenGuest.firstName

@@ -302,7 +302,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Ycg-UA-9No" kind="push" identifier="fromHome" id="Ni9-ab-Ohx"/>
+                                    <segue destination="Ycg-UA-9No" kind="push" identifier="fromHomeToProfile" id="Ni9-ab-Ohx"/>
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="had-b9-lde">
@@ -1113,7 +1113,16 @@
                                 </state>
                                 <connections>
                                     <action selector="guestDecisionPressed:" destination="Ycg-UA-9No" eventType="touchUpInside" id="qZQ-GL-K5i"/>
-                                    <segue destination="bbs-zT-X8Z" kind="push" identifier="guestDecisionMade" id="ILV-pj-1Q6"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="L8G-tt-kRA">
+                                <rect key="frame" x="103" y="518" width="115" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="backToGuestList">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="csJ-U0-C19" kind="push" identifier="guestDecisionMade" id="aKd-Lm-l6Y"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1194,12 +1203,11 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="YF7-LC-FqT"/>
-        <segue reference="fMH-8C-Mav"/>
-        <segue reference="fzL-0p-XV5"/>
-        <segue reference="FpZ-0t-qkp"/>
+        <segue reference="8pb-zo-lBy"/>
+        <segue reference="aKd-Lm-l6Y"/>
+        <segue reference="Ni9-ab-Ohx"/>
+        <segue reference="oxK-47-EC8"/>
         <segue reference="g0M-DQ-rhx"/>
-        <segue reference="ILV-pj-1Q6"/>
-        <segue reference="cE0-SR-VHM"/>
+        <segue reference="3qO-xr-CFb"/>
     </inferredMetricsTieBreakers>
 </document>

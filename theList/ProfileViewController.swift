@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController, FBLoginViewDelegate, GetUserWithIdDelegate{
+class ProfileViewController: UIViewController, FBLoginViewDelegate, GetUserWithIdDelegate, MoveUserFromListsCompleteDelegate{
     
     
     @IBOutlet var ratingOutlet: UILabel!
@@ -36,13 +36,22 @@ class ProfileViewController: UIViewController, FBLoginViewDelegate, GetUserWithI
     var event : Event!
     
     
+    var pendingGuests : [User] = []
+    var acceptedGuests : [User] = []
+    var confirmedGuests : [User] = []
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        databaseDevil.moveUserFromListCompleteDelegate = self
+        
         if (segueIdentity == "fromGuestListToGuestProfile"){
             rejectButton.hidden = false
             acceptButton.hidden = false
         }
+    
         self.fbLogin.delegate = self
         databaseDevil.getUserWithIdDelegate = self
         
@@ -59,16 +68,17 @@ class ProfileViewController: UIViewController, FBLoginViewDelegate, GetUserWithI
     
     
     @IBAction func guestDecisionPressed(sender: UIButton) {
-        var guestDecisionSegue = "guestDecisionMade"
         if (sender == acceptButton){
-            guestAccepted = true
+            databaseDevil.addUserToAccepted(user.facebookID, eventRecord: event.record)
         }else if (sender == rejectButton){
-            guestAccepted = false
+//            databaseDevil.addUserToRejected(user.facebookID, eventRecord: event.record)
         }
-        performSegueWithIdentifier(guestDecisionSegue, sender : self)
+//        databaseDevil.loadPendingGuests(event.pendingGuests)
+
     }
     
     func loginViewFetchedUserInfo(loginView: FBLoginView!, user: FBGraphUser!) {
+        println("USER ID : ")
         println(userID)
         profilePic.profileID = userID
         databaseDevil.getUserWithID(userID)
@@ -89,26 +99,21 @@ class ProfileViewController: UIViewController, FBLoginViewDelegate, GetUserWithI
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(segue.identifier == "guestDecisionMade") {
-            let guestListVC : GuestListViewController = segue.destinationViewController as GuestListViewController
-            if(guestAccepted == true) {
-                databaseDevil.addUserToAccepted(user.facebookID, eventRecord: event.record)
-//                guestListVC.acceptedGuests.append(user)
-//                let guestIndex = find(guestListVC.pendingGuests, user)!
-//                guestListVC.pendingGuests.removeAtIndex(guestIndex)
-////                let updatedPendingGuests = guestListVC.pendingGuests.fi
-                
-            }
-            else {
-                
-            }
-            
-        
-            guestListVC.segueIdentity = segue.identifier
-           }
+            println("done adding user to accepted")
+
+            let eventVC : EventViewController = segue.destinationViewController as EventViewController
+            eventVC.segueIdentity = segue.identifier
+            eventVC.eventID = event.record.recordID.recordName
+        }
     }
 
+    func doneMovingUserFromList() {
+        performSegueWithIdentifier("guestDecisionMade", sender: self)
+    }
+    func errorMovingUserFromList(){
+        
+    }
     
-
     /*
     // MARK: - Navigation
 

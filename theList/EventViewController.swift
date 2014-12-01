@@ -51,7 +51,8 @@ class EventViewController: UIViewController, MadeEventDelegate, GetGuestListComp
         sharedEvent.getGuestListCompleteDelegate = self
         
 
-        if(segueIdentity == "fromCreate" || segueIdentity == "fromHomeToEvent"){
+        if(segueIdentity == "fromCreate" || segueIdentity == "fromHomeToEvent" || segueIdentity == "guestDecisionMade"){
+            println("we are inside the event page")
             sharedEvent.getEventWithID(eventID)
             goButton.hidden = true
             goButton.enabled = false
@@ -103,7 +104,7 @@ class EventViewController: UIViewController, MadeEventDelegate, GetGuestListComp
         }
         eventDescriptionText.text = event.descript
         database.clearGuestLists()
-        if(segueIdentity == "fromCreate" || segueIdentity == "fromHomeToEvent" || segueIdentity == "fromSearch") {
+        if(segueIdentity == "fromCreate" || segueIdentity == "fromHomeToEvent" || segueIdentity == "guestDecisionMade") {
             println("doing the getting of the pending thing")
             database.loadPendingGuests(event.pendingGuests)
         }

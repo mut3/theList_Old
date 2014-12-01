@@ -55,6 +55,10 @@ protocol GetGuestListCompleteDelegate {
     func returnConfirmedGuests(confirmedGuests : [User])
     func errorGettingGuests(error : NSError)
 }
+protocol MoveUserFromListsCompleteDelegate {
+    func doneMovingUserFromList()
+    func errorMovingUserFromList()
+}
 
 class DatabaseWork {
     
@@ -68,6 +72,7 @@ class DatabaseWork {
     var pastEventsDelegate : PastEventsDelegate?
     var batchGetUserNamesDelegate : BatchGetUserNamesDelegate?
     var getGuestListCompleteDelegate : GetGuestListCompleteDelegate?
+    var moveUserFromListCompleteDelegate : MoveUserFromListsCompleteDelegate?
     var container : CKContainer
     var publicDB : CKDatabase
     let privateDB : CKDatabase
@@ -634,6 +639,9 @@ class DatabaseWork {
             if error != nil {
                 println("ERROR!!! \(error)")
             }
+            else {
+                self.moveUserFromListCompleteDelegate?.doneMovingUserFromList()
+            }
             NSLog("We are saving stuff")
         })
     }
@@ -657,6 +665,9 @@ class DatabaseWork {
         publicDB.saveRecord(eventRecord, completionHandler: {(record, error)-> Void in
             if error != nil {
                 println("\(error)")
+            }
+            else {
+                self.moveUserFromListCompleteDelegate?.doneMovingUserFromList()
             }
             NSLog("We are saving stuff")
         })
@@ -685,10 +696,36 @@ class DatabaseWork {
             if error != nil {
                 println()
             }
+            else {
+                self.moveUserFromListCompleteDelegate?.doneMovingUserFromList()
+            }
             NSLog("we are changing the user from accepted to confirmed")
         })
     }
-    
+//    
+//
+//    func addUserToRejected(userID : String, eventRecord : CKRecord){
+//        var currentRejectedUsers : [String] = []
+//        if (eventRecord.objectForKey("") as [String]! != nil){
+//            currentRejectedUsers = eventRecord.objectForKey("rejectedGuests") as [String]
+//        }else { println("no one on the confirmed list yet")}
+//        currentConfirmedUsers.insert(userID, atIndex: 0)
+//        eventRecord.setObject(currentConfirmedUsers, forKey: "confirmedGuests")
+//        
+//        var currentAcceptedUsers = eventRecord.objectForKey("pendingGuests") as [String]
+//        let updatedAcceptedUsers = currentAcceptedUsers.filter{$0 != userID}
+//        eventRecord.setObject(updatedAcceptedUsers, forKey: "acceptedGuests")
+//        
+//        publicDB.saveRecord(eventRecord, completionHandler: {(record,error)-> Void in
+//            if error != nil {
+//                println()
+//            }
+//            else {
+//                self.moveUserFromListCompleteDelegate?.doneMovingUserFromList()
+//            }
+//            NSLog("we are changing the user from accepted to confirmed")
+//        })
+//    }
     ////// the Guest List creator from the database
     /*
         generate the list of "the pending guest" 

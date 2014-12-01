@@ -76,6 +76,10 @@ class HomeViewController: UIViewController, PastEventsDelegate{
             eventListVC.currentUserPastEvents = currentUserPastEvents
 
         }
+        else if(segue.identifier == "fromHomeToProfile") {
+            let profileVC : ProfileViewController = segue.destinationViewController as ProfileViewController
+            profileVC.userID = CurrentUserData.getSharedInstanceOfUserData().getFacebookID()
+        }
     }
 
     
