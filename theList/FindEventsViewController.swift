@@ -101,7 +101,7 @@ class FindEventsViewController: UIViewController, FoundEventsDelegate /*FoundEve
         foundEventsVC.segueIdentity = "foundEvent"
         navigationController?.pushViewController(foundEventsVC, animated: true)
   */
-        if(searchData.eventIDs.count > 0) {
+        if(searchData.eventIDs.count > 0 || (searchData.eventIDs.count != 0 && searchData.eventIDs[0] != "")) {
             performSegueWithIdentifier("fromSearch", sender : self)
         }
         else{

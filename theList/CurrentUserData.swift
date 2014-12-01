@@ -34,11 +34,13 @@ class CurrentUserData : NSObject {
     
     func getFacebookID() -> String {
         return facebookID
-        
     }
     
     func setUserName(firstName : String){
+        println("name pre assignment \(self.userName)")
         self.userName = firstName
+        println("name post assignment \(self.userName)")
+
     }
     
     func getUserName() -> String {

@@ -33,6 +33,8 @@
 		D10104901A18088B004ECDA0 /* NewEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D101048F1A18088B004ECDA0 /* NewEventViewController.swift */; };
 		D125669A1A192FC500F5D2DB /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D12566991A192FC500F5D2DB /* CloudKit.framework */; };
 		D14F5D901A0EC49A0037FF78 /* DatabaseWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14F5D8F1A0EC49A0037FF78 /* DatabaseWork.swift */; };
+		D169D82B1A2C0E84006D072E /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D169D82A1A2C0E84006D072E /* FacebookSDK.framework */; };
+		D169D82D1A2C341B006D072E /* guestListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D169D82C1A2C341B006D072E /* guestListCell.swift */; };
 		D1C1FA5F1A19287500B80F6B /* FindEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C1FA5E1A19287500B80F6B /* FindEventsViewController.swift */; };
 		D1E697EF1A1D33FF00CBA46C /* InputValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1E697EE1A1D33FF00CBA46C /* InputValidator.swift */; };
 		D1FBE14B1A26BB15002F2C7F /* SearchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1FBE14A1A26BB15002F2C7F /* SearchData.swift */; };
@@ -81,6 +83,8 @@
 		D101048F1A18088B004ECDA0 /* NewEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewEventViewController.swift; sourceTree = "<group>"; };
 		D12566991A192FC500F5D2DB /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		D14F5D8F1A0EC49A0037FF78 /* DatabaseWork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseWork.swift; sourceTree = "<group>"; };
+		D169D82A1A2C0E84006D072E /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
+		D169D82C1A2C341B006D072E /* guestListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = guestListCell.swift; sourceTree = "<group>"; };
 		D1C1FA5E1A19287500B80F6B /* FindEventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindEventsViewController.swift; sourceTree = "<group>"; };
 		D1E697EE1A1D33FF00CBA46C /* InputValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputValidator.swift; sourceTree = "<group>"; };
 		D1FBE14A1A26BB15002F2C7F /* SearchData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchData.swift; sourceTree = "<group>"; };
@@ -131,6 +135,7 @@
 		ACC499A11A0C3055000E5073 /* theList */ = {
 			isa = PBXGroup;
 			children = (
+				ACC499A21A0C3055000E5073 /* Supporting Files */,
 				D1E697EE1A1D33FF00CBA46C /* InputValidator.swift */,
 				D14F5D921A0EC4BB0037FF78 /* View Controllers */,
 				D14F5D911A0EC4AB0037FF78 /* Data Classes */,
@@ -141,8 +146,6 @@
 				ACC499AE1A0C3055000E5073 /* Images.xcassets */,
 				ACC499B01A0C3055000E5073 /* LaunchScreen.xib */,
 				ACC499A61A0C3055000E5073 /* theList.xcdatamodeld */,
-				ACC499A21A0C3055000E5073 /* Supporting Files */,
-				42F08F661A293E06001657B8 /* pastEventCell.swift */,
 			);
 			path = theList;
 			sourceTree = "<group>";
@@ -150,6 +153,8 @@
 		ACC499A21A0C3055000E5073 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D169D82C1A2C341B006D072E /* guestListCell.swift */,
+				42F08F661A293E06001657B8 /* pastEventCell.swift */,
 				ACC499A31A0C3055000E5073 /* Info.plist */,
 				429984DB1A0C7F8A00B4FD7D /* createUser.swift */,
 			);
@@ -329,6 +334,7 @@
 				D1C1FA5F1A19287500B80F6B /* FindEventsViewController.swift in Sources */,
 				429984DA1A0C7A1700B4FD7D /* User.swift in Sources */,
 				424E4D021A1662D00066032E /* CorrectEventsViewController.swift in Sources */,
+				D169D82D1A2C341B006D072E /* guestListCell.swift in Sources */,
 				42255F201A101BD100567334 /* EventsListTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

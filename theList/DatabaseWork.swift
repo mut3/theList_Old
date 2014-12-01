@@ -389,8 +389,8 @@ class DatabaseWork {
     func loadPendingGuests(pending : [String]) {
         
         pendingIDs = pending
-        println(pendingIDs)
-        println(pendingGuests)
+//        println(pendingIDs)
+//        println(pendingGuests)
         
         let eventRecord = CKRecord(recordType: "Event")
         
@@ -625,9 +625,11 @@ class DatabaseWork {
         if (eventRecord.objectForKey("pendingGuests") as [String]! != nil ){
             currentPendingUsers = eventRecord.objectForKey("pendingGuests") as [String]
         }else {println("no one on the pending list yet")}
-        currentPendingUsers.insert(userID, atIndex: 0)
+        currentPendingUsers.append(userID)
         eventRecord.setObject(currentPendingUsers, forKey:"pendingGuests")
         
+        let recordPending = (eventRecord.objectForKey("pendingGuests") as [String])
+        println("Pending guests: \(recordPending)")
         publicDB.saveRecord(eventRecord, completionHandler: {(record, error)-> Void in
             if error != nil {
                 println("ERROR!!! \(error)")
